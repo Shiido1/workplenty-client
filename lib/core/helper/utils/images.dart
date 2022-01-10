@@ -6,6 +6,9 @@ class AppImages {
   static String google = 'assets/images/google.png';
   static String meta = 'assets/images/meta.png';
   static String smiling = 'assets/images/smiling.png';
+  static String web = 'assets/images/web.png';
+  static String content = 'assets/images/content.png';
+  static String design = 'assets/images/design.png';
   static String blowWhistle = 'assets/images/blow_whistle.png';
   static String computer = 'assets/images/computer.png';
   static String imagePlaceHolder = 'assets/images/image_place_holder.png';
