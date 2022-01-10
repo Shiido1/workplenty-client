@@ -55,6 +55,11 @@ class AppImages {
   static String pen = 'assets/images/pen.png';
   static String edit_circle = 'assets/svgs/edit_circle.svg';
 
+  static String address = 'assets/svgs/address.svg';
+  static String moon = 'assets/svgs/moon.svg';
+  static String notification = 'assets/svgs/notification.svg';
+  static String security = 'assets/svgs/security.svg';
+
   
   static String bid_two = 'assets/svgs/bid_two.svg';
   static String card = 'assets/svgs/card.svg';
