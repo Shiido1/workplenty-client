@@ -2,10 +2,11 @@ import 'package:client/core/helper/routes/navigation.dart';
 import 'package:client/core/helper/utils/images.dart';
 import 'package:client/views/dashboard/profile/hire/bids.dart';
 import 'package:client/views/dashboard/profile/manage/manage.dart';
+import 'package:client/views/dashboard/profile/payout/payout_screen.dart';
 import 'package:client/views/dashboard/profile/request/requests.dart';
+import 'package:client/views/dashboard/profile/statistics/statistics.dart';
 import 'package:client/views/dashboard/profile/widget/clicks_one.dart';
 import 'package:client/views/dashboard/profile/widget/profile_image.dart';
-import 'package:client/views/dashboard/statistics/statistics.dart';
 import 'package:client/views/widgets/text_views.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -72,7 +73,8 @@ class Profile extends StatelessWidget {
                     image: AppImages.payout,
                     text: 'Payout',
                     trailing: true,
-                    onTap: () {}),
+                    onTap: () =>
+                        PageRouter.gotoWidget(PayoutScreen(), context)),
                 SizedBox(height: 16.h),
                 ClickOne(
                     image: AppImages.manage,

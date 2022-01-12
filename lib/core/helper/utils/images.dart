@@ -73,5 +73,7 @@ class AppImages {
   static String share = 'assets/svgs/share.svg';
   static String edit_two = 'assets/svgs/edit_two.svg';
   static String profile_hire = 'assets/svgs/profile-hire.svg';
+  static String master = 'assets/svgs/master_card.svg';
+  static String webgroup = 'assets/svgs/web-group.svg';
 
 }

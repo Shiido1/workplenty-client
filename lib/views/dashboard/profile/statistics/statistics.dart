@@ -1,4 +1,5 @@
 import 'package:client/core/helper/helper_handler.dart';
+import 'package:client/core/helper/routes/navigation.dart';
 import 'package:client/core/helper/utils/pallets.dart';
 import 'package:client/views/widgets/default_appbar.dart';
 import 'package:client/views/widgets/image_decoration.dart';
@@ -74,7 +75,16 @@ class _StatisticsState extends State<Statistics> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: defaultAppBar2(context,
-          centerTitle: true, textColor: Pallets.white, title: 'Statistics'),
+          showClearButton: false,
+          leadingWidget: IconButton(
+              onPressed: () => PageRouter.goBack(context),
+              icon: Icon(
+                Icons.arrow_back,
+                color: Pallets.white,
+              )),
+          centerTitle: true,
+          textColor: Pallets.white,
+          title: 'Statistics'),
       body: Padding(
         padding: EdgeInsets.all(16.w),
         child: ListView(

@@ -2,6 +2,7 @@ import 'package:client/core/helper/utils/images.dart';
 import 'package:client/core/helper/utils/pallets.dart';
 import 'package:client/views/widgets/custom_switch.dart';
 import 'package:client/views/widgets/default_appbar.dart';
+import 'package:client/views/widgets/image_loader.dart';
 import 'package:client/views/widgets/text_views.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -30,7 +31,7 @@ class _ConnectedAccountsState extends State<ConnectedAccounts> {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SvgPicture.asset(AppImages.google),
+                ImageLoader(path: AppImages.google,),
                 SizedBox(width: 10.w),
                 Expanded(
                   child: Column(
