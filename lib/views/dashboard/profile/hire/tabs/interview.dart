@@ -18,8 +18,8 @@ class InterviewTab extends StatelessWidget {
               .map((_) => ClickThree(
                   text1: 'Hired Artisan',
                   text2: 'Daniel Herman',
-                  // image: AppImages.pickie,
-                  // text: 'Need a new Landing Page for my Construc...',
+                  image: AppImages.pickie,
+                  text: 'Need a new Landing Page for my Construc...',
                   trailing: true,
                   onTap: () {}))
               .toList()

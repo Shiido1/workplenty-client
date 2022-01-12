@@ -1,4 +1,3 @@
-import 'package:client/core/helper/helper_handler.dart';
 import 'package:client/core/helper/utils/images.dart';
 import 'package:client/core/helper/utils/pallets.dart';
 import 'package:client/views/widgets/image_loader.dart';
@@ -14,7 +13,6 @@ class ProfileImageCardOne extends StatelessWidget {
     return Container(
       padding:
           EdgeInsets.only(top: 80.h, left: 16.w, right: 16.w, bottom: 16.w),
-      width: Utils.getDeviceWidth(context) * 2,
       decoration: new BoxDecoration(
           color: Pallets.primary100,
           image: new DecorationImage(

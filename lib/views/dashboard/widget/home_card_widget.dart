@@ -69,18 +69,16 @@ class HomeCard extends StatelessWidget {
             SizedBox(
               height: 16.h,
             ),
-            SingleChildScrollView(
-              child: Row(
-                children: [
-                  _buildWidget(AppImages.location, 'Nigeria'),
-                  SizedBox(width: 20.w),
-                  _buildWidget(AppImages.shield, 'Top Rated'),
-                  SizedBox(width: 20.w),
-                  _buildWidget(AppImages.emptyWallet, 'Top Earner'),
-                  SizedBox(width: 20.w),
-                  _buildWidget(AppImages.graph, '99%'),
-                ],
-              ),
+            Row(
+              children: [
+                _buildWidget(AppImages.location, 'Nigeria'),
+                SizedBox(width: 20.w),
+                _buildWidget(AppImages.shield, 'Top Rated'),
+                SizedBox(width: 20.w),
+                _buildWidget(AppImages.emptyWallet, 'Top Earner'),
+                SizedBox(width: 20.w),
+                _buildWidget(AppImages.graph, '99%'),
+              ],
             ),
             SizedBox(height: 15.h,),
             ButtonWidget(buttonText: 'Invite Artisan', onPressed: (){},height: 35.h,)

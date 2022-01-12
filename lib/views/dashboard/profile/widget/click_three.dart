@@ -1,4 +1,5 @@
 import 'package:client/core/helper/utils/pallets.dart';
+import 'package:client/views/widgets/image_loader.dart';
 import 'package:client/views/widgets/text_views.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -28,7 +29,7 @@ class ClickThree extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: 50.h,
+        margin: EdgeInsets.only(top: 10.w),
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12.r),
@@ -43,6 +44,7 @@ class ClickThree extends StatelessWidget {
           ],
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextView(
                 text: text ?? '',
@@ -52,41 +54,37 @@ class ClickThree extends StatelessWidget {
                 textOverflow: TextOverflow.ellipsis,
                 textAlign: TextAlign.left),
             SizedBox(
-              height: 5.h,
+              height: 15.h,
             ),
-            Expanded(
-              child: Row(
-                // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Expanded(
-                    child: TextView(
-                        text: text1 ?? '',
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                TextView(
+                    text: text1 ?? '',
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                    maxLines: 1,
+                    color: Pallets.grey,
+                    textOverflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.left),
+                Spacer(),
+                Row(
+                  children: [
+                    ImageLoader(
+                      path: image,
+                    ),
+                    SizedBox(width: 8.w),
+                    TextView(
+                        text: text2 ?? '',
                         fontWeight: FontWeight.w500,
                         fontSize: 16,
                         maxLines: 1,
                         color: Pallets.grey,
                         textOverflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.left),
-                  ),
-                  Spacer(),
-                  Row(
-                    children: [
-                      SvgPicture.asset(image ?? ''),
-                      SizedBox(width: 8.w),
-                      Expanded(
-                        child: TextView(
-                            text: text2 ?? '',
-                            fontWeight: FontWeight.w500,
-                            fontSize: 16,
-                            maxLines: 1,
-                            textOverflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.left),
-                      ),
-                      if (trailing!) Icon(Icons.keyboard_arrow_right)
-                    ],
-                  ),
-                ],
-              ),
+                  ],
+                ),
+              ],
             ),
           ],
         ),

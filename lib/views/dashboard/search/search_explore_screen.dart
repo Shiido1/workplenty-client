@@ -1,3 +1,4 @@
+import 'package:client/core/helper/helper_handler.dart';
 import 'package:client/core/helper/utils/images.dart';
 import 'package:client/core/helper/utils/pallets.dart';
 import 'package:client/views/dashboard/widget/home_card_widget.dart';
@@ -11,6 +12,7 @@ class SearchTab extends StatelessWidget {
   const SearchTab({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final _color = [Color(0xff11406C), Color(0xff574C6B), Color(0xffC37F6C)];
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.all(16.w),
@@ -18,18 +20,11 @@ class SearchTab extends StatelessWidget {
           children: [
             SearchAndFilter(),
             SizedBox(height: 20.h),
-            Container(
-              height: 200,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
                 children: [
-                  imageContainer(
-                      text: 'Website, IT &\n Software', image: AppImages.web),
-                  imageContainer(
-                      text: 'Designs, Media &\n Architecture',
-                      image: AppImages.design),
-                  imageContainer(
-                      text: 'Writing &\n Content', image: AppImages.content),
+                  ..._color.map((e) => imageContainer(context, e)).toList()
                 ],
               ),
             ),
@@ -54,37 +49,51 @@ class SearchTab extends StatelessWidget {
     );
   }
 
-  imageContainer({BuildContext? context, String? image, String? text}) => Card(
-        semanticContainer: true,
-        clipBehavior: Clip.antiAliasWithSaveLayer,
-        child: Stack(children: [
-          Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(image!),
-                fit: BoxFit.fill,
-                colorFilter: new ColorFilter.mode(
-                    Pallets.white.withOpacity(0.7), BlendMode.dstATop),
+  imageContainer(BuildContext context, Color e) => SizedBox(
+        width: 200.w,
+        child: Stack(
+          children: [
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  height: 148,
+                  width: Utils.getDeviceWidth(context) * .4,
+                  margin: EdgeInsets.only(right: 16.w),
+                  decoration: BoxDecoration(
+                    color: e,
+                    borderRadius: BorderRadius.all(Radius.circular(5.r)),
+                  ),
+                ),
+                SizedBox(
+                  width: Utils.getDeviceWidth(context) * .4,
+                  child: Container(
+                    height: 5.h,
+                    width: Utils.getDeviceWidth(context) * .4,
+                    margin: EdgeInsets.only(right: 20.w),
+                    decoration: BoxDecoration(
+                      color: Pallets.grey,
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(8.r),
+                          bottomRight: Radius.circular(8.r)),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Container(
+              padding: EdgeInsets.only(
+                  top: 100.h, left: 12.w, right: 16.w, bottom: 6.h),
+              child: TextView(
+                text: 'Designs, Media &\n Architecture',
+                maxLines: 2,
+                color: Pallets.white,
+                textOverflow: TextOverflow.ellipsis,
+                fontWeight: FontWeight.w700,
+                textAlign: TextAlign.left,
               ),
             ),
-            width: 170.w,
-          ),
-          Positioned(
-            bottom: 10,
-            left: 5,
-            child: TextView(
-                maxLines: 2,
-                textOverflow: TextOverflow.ellipsis,
-                fontSize: 21.sp,
-                text: text!,
-                fontWeight: FontWeight.w700,
-                color: Pallets.white),
-          )
-        ]),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
+          ],
         ),
-        elevation: 5,
-        margin: EdgeInsets.all(10),
       );
 }
