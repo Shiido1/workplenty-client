@@ -11,7 +11,6 @@ import 'package:client/views/dashboard/profile/profile.dart';
 import 'package:client/views/dashboard/saved/saved_screen.dart';
 import 'package:client/views/dashboard/search/search_explore_screen.dart';
 import 'package:client/views/dashboard/widget/custom_app_bar.dart';
-import 'package:client/views/dashboard/widget/drawer_widget.dart';
 import 'package:client/views/dashboard/widget/message_drawer.dart';
 import 'package:client/views/widgets/image_loader.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +30,6 @@ class _MainBoardState extends State<MainBoard> {
   int? index = 0;
   List<Widget> _body = [];
   List<String> _bodyTitle = [];
-  // int? _drawerIndex = 1;
 
   @override
   void initState() {
@@ -50,7 +48,6 @@ class _MainBoardState extends State<MainBoard> {
       }
       if (event is DrawerEvent) {
         eventBus.on<DrawerEvent>().listen((event) {
-          // _drawerIndex = event.value;
           setState(() {});
           if (event.open) Scaffold.of(event.context).openEndDrawer();
         });
