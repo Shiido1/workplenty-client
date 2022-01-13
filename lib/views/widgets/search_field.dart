@@ -15,6 +15,7 @@ class SearchAndFilter extends StatelessWidget {
   final bool? showFilter;
   final bool? readOnly;
   final Function()? onTap;
+  final Function()? onFilter;
   final IconData? icon;
 
   const SearchAndFilter({
@@ -26,6 +27,7 @@ class SearchAndFilter extends StatelessWidget {
     this.onSubmitted,
     this.onChanged,
     this.onTap,
+    this.onFilter,
     this.icon,
     this.showFilter = true,
     this.readOnly = false,
@@ -41,12 +43,15 @@ class SearchAndFilter extends StatelessWidget {
               suffixIcon: Icons.search),
         ),
         SizedBox(width: 5.w),
-        Container(
-          padding: EdgeInsets.all(6.w),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5.r),
-              color: Pallets.primary100),
-          child: ImageLoader(path: AppImages.filter),
+        GestureDetector(
+        onTap:onFilter,
+          child: Container(
+            padding: EdgeInsets.all(6.w),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5.r),
+                color: Pallets.primary100),
+            child: ImageLoader(path: AppImages.filter),
+          ),
         ),
       ],
     );

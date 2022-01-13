@@ -1,3 +1,4 @@
+import 'package:client/core/bus/event_bus.dart';
 import 'package:client/core/helper/helper_handler.dart';
 import 'package:client/core/helper/utils/images.dart';
 import 'package:client/core/helper/utils/pallets.dart';
@@ -18,7 +19,11 @@ class SearchTab extends StatelessWidget {
         padding: EdgeInsets.all(16.w),
         child: ListView(
           children: [
-            SearchAndFilter(),
+            SearchAndFilter(
+              onFilter: () {
+                  eventBus.fire(DrawerEvent(context, true));
+                }
+            ),
             SizedBox(height: 20.h),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,

@@ -11,6 +11,8 @@ import 'package:client/views/dashboard/profile/profile.dart';
 import 'package:client/views/dashboard/saved/saved_screen.dart';
 import 'package:client/views/dashboard/search/search_explore_screen.dart';
 import 'package:client/views/dashboard/widget/custom_app_bar.dart';
+import 'package:client/views/dashboard/widget/drawer_widget.dart';
+import 'package:client/views/dashboard/widget/message_drawer.dart';
 import 'package:client/views/widgets/image_loader.dart';
 import 'package:flutter/material.dart';
 
@@ -29,6 +31,7 @@ class _MainBoardState extends State<MainBoard> {
   int? index = 0;
   List<Widget> _body = [];
   List<String> _bodyTitle = [];
+  // int? _drawerIndex = 1;
 
   @override
   void initState() {
@@ -39,9 +42,7 @@ class _MainBoardState extends State<MainBoard> {
 
   //? listens to events when triggered
   void _eventListener() {
-
-
-eventBus.on().listen((event) async {
+    eventBus.on().listen((event) async {
       if (event is DashboardRouteEvent) {
         indexChangedSub = eventBus
             .on<DashboardRouteEvent>()
@@ -49,6 +50,8 @@ eventBus.on().listen((event) async {
       }
       if (event is DrawerEvent) {
         eventBus.on<DrawerEvent>().listen((event) {
+          // _drawerIndex = event.value;
+          setState(() {});
           if (event.open) Scaffold.of(event.context).openEndDrawer();
         });
       }
@@ -58,8 +61,7 @@ eventBus.on().listen((event) async {
         PageRouter.gotoNamed(Routes.login, context, clearStack: true);
       }
     });
-
-    }
+  }
 
   onSelectedIndexChangedEvent(DashboardRouteEvent event) async {
     if (mounted) {
@@ -75,7 +77,9 @@ eventBus.on().listen((event) async {
     _bodyTitle = ["Dashboard", "Saved", "Explore", "Profile", "Message"];
     return Scaffold(
       appBar: index == 1 || index == 3
-          ? null : getCustomAppBar(context, _bodyTitle[index!]),
+          ? null
+          : getCustomAppBar(context, _bodyTitle[index!]),
+      endDrawer: MessageDrawerWidget(),
       body: ValueListenableBuilder(
           valueListenable: indexChangedNotifier,
           builder: (context, value, child) => Stack(

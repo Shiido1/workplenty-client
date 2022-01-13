@@ -1,4 +1,5 @@
 import 'package:client/core/helper/utils/pallets.dart';
+import 'package:client/views/widgets/tab_painter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -21,31 +22,56 @@ ThemeData lightThemeData(BuildContext context) {
       scaffoldBackgroundColor: Colors.white,
       appBarTheme: appBarTheme,
       iconTheme: IconThemeData(color: Pallets.primary100),
-      textTheme: GoogleFonts.interTextTheme(Theme.of(context).textTheme)
+      textTheme: GoogleFonts.dmSansTextTheme(Theme.of(context).textTheme)
           .apply(bodyColor: Pallets.primaryText),
       colorScheme: ColorScheme.light(
-        primary: Pallets.primary100,
-        secondary: kSecondaryColor,
-        error: kErrorColor,
-      ),
+          primary: Pallets.primaryText,
+          secondary: kSecondaryColor,
+          error: kErrorColor),
+      cardTheme: CardTheme(
+          elevation: 2,
+          shadowColor: Pallets.grey.withOpacity(.4),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
+          color: Colors.white),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        backgroundColor: Colors.white,
-        selectedItemColor: Pallets.primaryText.withOpacity(0.7),
-        unselectedItemColor: Pallets.primaryText.withOpacity(0.32),
-        selectedIconTheme: IconThemeData(color: kPrimaryColor),
-        showUnselectedLabels: true,
+          type: BottomNavigationBarType.fixed,
+          elevation: 10,
+          backgroundColor: Colors.white,
+          selectedItemColor: Pallets.primary100,
+          selectedLabelStyle:
+              TextStyle(color: Pallets.primary100, fontSize: 14),
+          unselectedLabelStyle:
+              TextStyle(fontWeight: FontWeight.normal, fontSize: 14),
+          unselectedItemColor: Pallets.primary100,
+          selectedIconTheme: IconThemeData(color: kPrimaryColor),
+          showUnselectedLabels: false,
+          showSelectedLabels: false),
+      tabBarTheme: TabBarTheme(
+        labelStyle: TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.w700,
+        ),
+        unselectedLabelStyle:
+            TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
+        unselectedLabelColor: Pallets.lightShade,
+        labelColor: Pallets.white,
+        indicator: IndicatorDecoration(
+            indicatorColor: Pallets.lightShade,
+            indicatorHeight: 8,
+            indicatorSize: IndicatorSize.normal),
       ),
       inputDecorationTheme: InputDecorationTheme(
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Pallets.primary100),
+          borderSide: BorderSide(color: Pallets.primaryText),
           borderRadius: BorderRadius.circular(5.r),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Pallets.primary100),
+          borderSide: BorderSide(color: Pallets.primaryText),
           borderRadius: BorderRadius.circular(5.r),
         ),
         border: OutlineInputBorder(
-          borderSide: BorderSide(color: Pallets.primary100),
+          borderSide: BorderSide(color: Pallets.primaryText),
           borderRadius: BorderRadius.circular(5.r),
         ),
         errorBorder: OutlineInputBorder(
@@ -88,4 +114,5 @@ ThemeData darkThemeData(BuildContext context) {
   );
 }
 
-final appBarTheme = AppBarTheme(centerTitle: false, elevation: 0);
+final appBarTheme = AppBarTheme(
+    centerTitle: false, backgroundColor: Pallets.primary100, elevation: 0);

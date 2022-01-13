@@ -1,7 +1,13 @@
+import 'package:client/core/helper/helper_handler.dart';
+import 'package:client/core/helper/utils/images.dart';
 import 'package:client/core/helper/utils/pallets.dart';
+import 'package:client/views/dashboard/message/widget/receiver_msg.dart';
+import 'package:client/views/dashboard/message/widget/sender_msg.dart';
 import 'package:client/views/widgets/default_appbar.dart';
 import 'package:client/views/widgets/text_views.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import 'widget/message_box.dart';
 
@@ -62,10 +68,36 @@ class ChatsScreen extends StatelessWidget {
           actions: [
             _popMenu(),
           ]),
-      body: SafeArea(
-        child: Stack(
-          children: <Widget>[MessageBox()],
-        ),
+      body: Stack(
+        children: <Widget>[
+          ListView(
+            shrinkWrap: true,
+            children: [
+              SizedBox(height: 16.h),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SvgPicture.asset(AppImages.clock),
+                  SizedBox(width: 4.w),
+                  TextView(
+                      text: 'Yesterday',
+                      fontWeight: FontWeight.w400,
+                      maxLines: 1,
+                      textOverflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.center),
+                ],
+              ),
+              SizedBox(height: 16.h),
+              ...Chats.getMessage()
+                  .map((chat) =>
+                      chat.isMe! ? SenderSide(chat) : ReceiverSide(chat))
+                  .toList(),
+              SizedBox(height: Utils.getDeviceHeight(context) * .3)
+            ],
+          ),
+          MessageBox()
+        ],
       ),
     );
   }
@@ -106,5 +138,49 @@ class ChatsScreen extends StatelessWidget {
                 value: 6,
               )
             ]);
+  }
+}
+
+
+class Chats {
+  final String? time;
+  final bool? isMe;
+  final String? message;
+
+  Chats({this.time, this.isMe, this.message});
+
+  static List<Chats> getMessage() {
+    List<Chats> _chats = [];
+    Chats _c = Chats(
+        time: '12:36',
+        isMe: false,
+        message:
+            'Hello! Finally found the time to write. I need your help with creating interactive animations for my mobile application.');
+    _chats.add(_c);
+    _c = Chats(time: '12:36', isMe: false, message: 'Can I send yor files?');
+    _chats.add(_c);
+    _c = Chats(time: '14:03', isMe: true, message: 'Hey! Okay, send out.');
+    _chats.add(_c);
+    _c = Chats(
+        time: '12:36',
+        isMe: false,
+        message:
+            'Hello! Finally found the time to write. I need your help with creating interactive animations for my mobile application.');
+    _chats.add(_c);
+    _c = Chats(time: '12:36', isMe: false, message: 'Can I send yor files?');
+    _chats.add(_c);
+    _c = Chats(time: '14:03', isMe: true, message: 'Hey! Okay, send out.');
+    _chats.add(_c);
+    _c = Chats(
+        time: '12:36',
+        isMe: false,
+        message:
+            'Hello! Finally found the time to write. I need your help with creating interactive animations for my mobile application.');
+    _chats.add(_c);
+    _c = Chats(time: '12:36', isMe: false, message: 'Can I send yor files?');
+    _chats.add(_c);
+    _c = Chats(time: '14:03', isMe: true, message: 'Hey! Okay, send out.');
+    _chats.add(_c);
+    return _chats;
   }
 }

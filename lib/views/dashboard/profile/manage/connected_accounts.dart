@@ -6,7 +6,6 @@ import 'package:client/views/widgets/image_loader.dart';
 import 'package:client/views/widgets/text_views.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 
 class ConnectedAccounts extends StatefulWidget {
   ConnectedAccounts({Key? key}) : super(key: key);
