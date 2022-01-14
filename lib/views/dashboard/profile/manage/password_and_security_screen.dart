@@ -7,20 +7,15 @@ import 'package:client/views/widgets/edit_form_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class AccountSettings extends StatefulWidget {
-  AccountSettings({Key? key}) : super(key: key);
+class PasswordSecurityScreen extends StatelessWidget {
+  const PasswordSecurityScreen({ Key? key }) : super(key: key);
 
-  @override
-  _AccountSettingsState createState() => _AccountSettingsState();
-}
-
-class _AccountSettingsState extends State<AccountSettings> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: defaultAppBar2(context,
-          title: 'Account Settings',
+          title: 'Password & Security',
           centerTitle: true,
           showClearButton: false,
           leadingWidget: IconButton(
@@ -36,36 +31,29 @@ class _AccountSettingsState extends State<AccountSettings> {
           ListView(
             children: [
               EditFormField(
-                decoration: _getDecoration('Full Name', dropDown: false),
+                decoration: _getDecoration('Old Password'),
               ),
-              SizedBox(height: 16.h),
+              SizedBox(height: 32.h),
               EditFormField(
-                decoration: _getDecoration('Username', dropDown: false),
+                decoration: _getDecoration('New Password'),
               ),
-              SizedBox(height: 16.h),
+              SizedBox(height: 32.h),
               EditFormField(
-                decoration: _getDecoration('Email Address', dropDown: false),
-              ),
-              SizedBox(height: 16.h),
-              EditFormField(
-                decoration: _getDecoration('Phone Number', dropDown: false),
-              ),
-              SizedBox(height: 16.h),
-              EditFormField(
-                decoration: _getDecoration('User Type', dropDown: true),
+                decoration:
+                    _getDecoration('Confirm Password')
               ),
             ],
           ),
           Align(
               alignment: Alignment.bottomCenter,
               child: ButtonWidget(
-                  buttonText: 'Save Details', onPressed: () => null)),
+                  buttonText: 'Change Password', onPressed: (){})),
         ],
       )),
     );
   }
 
-  _getDecoration(String hint, {bool? dropDown}) {
+  _getDecoration(String hint) {
     return InputDecoration(
         border:
             UnderlineInputBorder(borderSide: BorderSide(color: Pallets.grey)),
@@ -77,7 +65,6 @@ class _AccountSettingsState extends State<AccountSettings> {
             UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
         disabledBorder:
             UnderlineInputBorder(borderSide: BorderSide(color: Pallets.grey)),
-        labelText: hint,
-        suffixIcon: dropDown! ? Icon(Icons.keyboard_arrow_down) : null);
+        labelText: hint,);
   }
 }

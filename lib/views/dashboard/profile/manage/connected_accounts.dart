@@ -1,3 +1,4 @@
+import 'package:client/core/helper/routes/navigation.dart';
 import 'package:client/core/helper/utils/images.dart';
 import 'package:client/core/helper/utils/pallets.dart';
 import 'package:client/views/widgets/custom_switch.dart';
@@ -22,6 +23,13 @@ class _ConnectedAccountsState extends State<ConnectedAccounts> {
       appBar: defaultAppBar2(context,
           title: 'Connected Accounts',
           centerTitle: true,
+          showClearButton: false,
+          leadingWidget: IconButton(
+              onPressed: () => PageRouter.goBack(context),
+              icon: Icon(
+                Icons.arrow_back,
+                color: Pallets.white,
+              )),
           textColor: Pallets.white),
       body: Padding(
         padding: EdgeInsets.all(16.w),
@@ -30,7 +38,9 @@ class _ConnectedAccountsState extends State<ConnectedAccounts> {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ImageLoader(path: AppImages.google,),
+                ImageLoader(
+                  path: AppImages.google,
+                ),
                 SizedBox(width: 10.w),
                 Expanded(
                   child: Column(

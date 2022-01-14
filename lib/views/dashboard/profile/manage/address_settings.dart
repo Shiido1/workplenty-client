@@ -1,3 +1,4 @@
+import 'package:client/core/helper/routes/navigation.dart';
 import 'package:client/core/helper/utils/pallets.dart';
 import 'package:client/views/widgets/body_widget.dart';
 import 'package:client/views/widgets/buttons.dart';
@@ -20,6 +21,13 @@ class _AddressSettingsState extends State<AddressSettings> {
       resizeToAvoidBottomInset: false,
       appBar: defaultAppBar2(context,
           title: 'Address Settings',
+          showClearButton: false,
+          leadingWidget: IconButton(
+              onPressed: () => PageRouter.goBack(context),
+              icon: Icon(
+                Icons.arrow_back,
+                color: Pallets.white,
+              )),
           centerTitle: true,
           textColor: Pallets.white),
       body: BodyWidget(

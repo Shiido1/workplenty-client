@@ -1,4 +1,6 @@
+import 'package:client/core/helper/routes/navigation.dart';
 import 'package:client/core/helper/utils/pallets.dart';
+import 'package:client/views/dashboard/profile/manage/payment/payment_settings2.dart';
 import 'package:client/views/widgets/body_widget.dart';
 import 'package:client/views/widgets/buttons.dart';
 import 'package:client/views/widgets/default_appbar.dart';
@@ -21,6 +23,13 @@ class _PayoutSettingsState extends State<PayoutSettings> {
       appBar: defaultAppBar2(context,
           title: 'Payout Settings',
           centerTitle: true,
+          showClearButton: false,
+          leadingWidget: IconButton(
+              onPressed: () => PageRouter.goBack(context),
+              icon: Icon(
+                Icons.arrow_back,
+                color: Pallets.white,
+              )),
           textColor: Pallets.white),
       body: BodyWidget(
           child: Stack(
@@ -53,7 +62,7 @@ class _PayoutSettingsState extends State<PayoutSettings> {
           Align(
               alignment: Alignment.bottomCenter,
               child: ButtonWidget(
-                  buttonText: 'Save Details', onPressed: () => null)),
+                  buttonText: 'Save Details', onPressed: () => PageRouter.gotoWidget(PaymentSettings2(), context))),
         ],
       )),
     );

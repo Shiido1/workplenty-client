@@ -200,7 +200,45 @@ class FreeLanceJobService extends StatelessWidget {
                   ],
                 ),
                 SizedBox(
-                  height: 20.h,
+                  height: 15.h,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Row(
+                      children: [
+                        Checkbox(value: false, onChanged: (bool? value) {}),
+                        TextView(
+                          text: 'Required',
+                          fontWeight: FontWeight.w500,
+                          textAlign: TextAlign.left,
+                        ),
+                      ],
+                    ),
+                    Row(
+                    children: [
+                      Checkbox(value: false, onChanged: (bool? value) {}),
+                      TextView(
+                        text: 'Optional',
+                        fontWeight: FontWeight.w500,
+                        textAlign: TextAlign.left,
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Checkbox(value: false, onChanged: (bool? value) {}),
+                      TextView(
+                        text: 'Not Required',
+                        fontWeight: FontWeight.w500,
+                        textAlign: TextAlign.left,
+                      ),
+                    ],
+                  ),
+                  ],
+                ),
+                SizedBox(
+                  height: 30.h,
                 ),
                 Row(
                   children: [
