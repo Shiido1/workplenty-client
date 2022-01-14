@@ -1,5 +1,6 @@
 import 'package:client/views/onboarding/screens/services/freelance_job_service.dart';
 import 'package:client/views/onboarding/screens/services/home_service.dart';
+import 'package:client/views/onboarding/screens/services/live_consultancy_service.dart';
 import 'package:flutter/cupertino.dart';
 
 BuildContext? globalContext;
@@ -28,7 +29,7 @@ class Routes {
         },
         consultancy: (BuildContext context) {
           globalContext = context;
-          return FreeLanceJobService();
+          return LiveConsultancy();
         },
       };
 }
