@@ -11,15 +11,17 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => showFloatingActionModal(context, 'Select a Service'),
-        backgroundColor: Pallets.primary100,
-        child: Icon(Icons.add,color: Pallets.white,),
-      ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => showFloatingActionModal(context, 'Select a Service'),
+          backgroundColor: Pallets.primary100,
+          child: Icon(
+            Icons.add,
+            color: Pallets.white,
+          ),
+        ),
         body: Padding(
           padding: EdgeInsets.all(16.w),
           child: ListView(children: [
-            
             Row(
               children: [
                 Expanded(
@@ -50,8 +52,7 @@ class Home extends StatelessWidget {
             SizedBox(
               height: 15.h,
             ),
-            ...[1, 2, 2, 2, 2, 2, 3].map((_) =>  HomeCard()).toList()
-           
+            ...[1, 2, 2, 2, 2, 2, 3].map((_) => HomeCard()).toList()
           ]),
         ));
   }

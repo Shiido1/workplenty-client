@@ -105,7 +105,7 @@ class ChatsScreen extends StatelessWidget {
   _popMenu() {
     return PopupMenuButton(
         icon: Icon(Icons.more_vert),
-        color: Pallets.primary100,
+        color: Pallets.white,
         itemBuilder: (context) => [
               PopupMenuItem(
                 child: Text("Start a paid session",
@@ -140,7 +140,6 @@ class ChatsScreen extends StatelessWidget {
             ]);
   }
 }
-
 
 class Chats {
   final String? time;

@@ -229,6 +229,7 @@ class _CreateProfileState extends State<CreateProfile> {
   Widget _formThree() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
       children: [
         TextView(
           text: 'Add Profile Picture',

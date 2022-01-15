@@ -1,6 +1,7 @@
 import 'package:client/core/helper/routes/navigation.dart';
 import 'package:client/core/helper/utils/images.dart';
 import 'package:client/core/helper/utils/pallets.dart';
+import 'package:client/views/dashboard/board.dart';
 import 'package:client/views/onboarding/authentication/get_started_screen.dart';
 import 'package:client/views/widgets/body_widget.dart';
 import 'package:client/views/widgets/buttons.dart';
@@ -56,7 +57,10 @@ class _WelcomeBackScreenState extends State<WelcomeBackScreen> {
                     PageRouter.gotoWidget(ForgotPasswordScreen(), context),
                 textAlign: TextAlign.right),
             SizedBox(height: 19.h),
-            ButtonWidget(buttonText: 'Sign in', onPressed: () {}),
+            ButtonWidget(
+              buttonText: 'Sign in',
+              onPressed: () => PageRouter.gotoWidget(MainBoard(), context),
+            ),
             SizedBox(height: 57.h),
             Row(
               children: [

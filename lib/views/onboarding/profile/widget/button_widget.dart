@@ -1,4 +1,3 @@
-import 'package:client/core/helper/helper_handler.dart';
 import 'package:client/core/helper/utils/pallets.dart';
 import 'package:client/views/widgets/buttons.dart';
 import 'package:client/views/widgets/text_views.dart';
@@ -10,53 +9,72 @@ class BtnWidget extends StatelessWidget {
   final Function()? goBack;
   final Function()? skip;
   final String? btnText;
+  final bool? showSkip;
+  final Widget? iconWidget;
+  final double? height;
 
   const BtnWidget(
-      {Key? key, this.callback, this.goBack, this.btnText, this.skip})
+      {Key? key,
+      this.callback,
+      this.goBack,
+      this.btnText,
+      this.skip,
+      this.showSkip = true,
+      this.height,
+      this.iconWidget})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Container(
-        padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 16.w),
-        alignment: Alignment.center,
-        color: Theme.of(context).scaffoldBackgroundColor,
-        margin: EdgeInsets.only(top: Utils.getDeviceHeight(context) * .7),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Align(
-              alignment: Alignment.bottomRight,
-              child: TextView(
-                text: 'Skip',
-                fontWeight: FontWeight.w500,
-                fontSize: 18,
-                textAlign: TextAlign.right,
-                onTap: skip,
-              ),
-            ),
-            SizedBox(height: 16.h),
-            Row(
-              children: [
-                Expanded(
-                  child: GestureDetector(
-                    onTap: goBack,
-                    child: Container(
-                      padding: EdgeInsets.all(14.w),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5.r),
-                          border: Border.all(color: Pallets.primary100)),
-                      child: Icon(Icons.keyboard_arrow_left),
-                    ),
+    return Align(
+        alignment: Alignment.bottomCenter,
+        child: Container(
+          color: Theme.of(context).cardColor,
+          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Visibility(
+                visible: showSkip!,
+                child: Align(
+                  alignment: Alignment.bottomRight,
+                  child: TextView(
+                    text: 'Skip',
+                    fontWeight: FontWeight.w500,
+                    fontSize: 18,
+                    textAlign: TextAlign.right,
+                    onTap: skip,
                   ),
                 ),
-                SizedBox(width: 11.w),
-                Expanded(
-                    flex: 6,
-                    child: ButtonWidget(
-                        buttonText: btnText ?? '', onPressed: callback)),
-              ],
-            ),
-          ],
+              ),
+              SizedBox(height: 16.h),
+              Row(
+                children: [
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: goBack,
+                      child: GestureDetector(
+                        onTap: goBack,
+                        child: Container(
+                          height: 50.h,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5.r),
+                              border: Border.all(color: Pallets.primary100)),
+                          child: iconWidget ?? Icon(Icons.keyboard_arrow_left),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 11.w),
+                  Expanded(
+                      flex: 6,
+                      child: ButtonWidget(
+                          color: Pallets.white,
+                          buttonText: btnText ?? '',
+                          onPressed: callback)),
+                ],
+              ),
+            ],
+          ),
         ));
   }
 }

@@ -53,7 +53,10 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
               suffixIcon: Icons.visibility_outlined,
             ),
             SizedBox(height: 18.h),
-            ButtonWidget(buttonText: 'Continue', onPressed: () {}),
+            ButtonWidget(
+                buttonText: 'Continue',
+                onPressed: () =>
+                    PageRouter.gotoWidget(WelcomeBackScreen(), context)),
             SizedBox(height: 57.h),
             Wrap(alignment: WrapAlignment.center, children: [
               TextView(

@@ -15,9 +15,7 @@ class RowContainer extends StatelessWidget {
       child: Row(
         children: [
           SvgPicture.asset(image!),
-          SizedBox(
-            width: 5.w,
-          ),
+          SizedBox(width: 10.w),
           TextView(
             text: text!,
             maxLines: 1,

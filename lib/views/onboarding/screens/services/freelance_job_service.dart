@@ -39,10 +39,7 @@ class FreeLanceJobService extends StatelessWidget {
             title: 'Freelance Job'),
         body: BodyWidget(
           child: ListView(children: [
-            SizedBox(
-              height: 10.h,
-            ),
-            Row(children: [
+            Row(mainAxisSize: MainAxisSize.min, children: [
               ImageLoader(
                 path: AppImages.pickie,
               ),
@@ -68,48 +65,39 @@ class FreeLanceJobService extends StatelessWidget {
                 ],
               )
             ]),
-            SizedBox(
-              height: 10.h,
-            ),
+            SizedBox(height: 23.h),
             RowContainer(
                 image: AppImages.message,
                 text: 'Private Message to Charles Damien'),
+            SizedBox(height: 10.h),
             EditFormField(
               height: 150.h,
               label: 'Type here..',
             ),
-            SizedBox(
-              height: 10.h,
-            ),
+            SizedBox(height: 23.h),
             RowContainer(image: AppImages.t_message, text: 'Project Title'),
+            SizedBox(height: 10.h),
             EditFormField(),
-            SizedBox(
-              height: 10.h,
-            ),
+            SizedBox(height: 23.h),
             RowContainer(
                 image: AppImages.brief_case,
                 text: 'Describe your project and other specific details'),
+            SizedBox(height: 10.h),
             EditFormField(
               height: 150.h,
               label: 'Type here..',
             ),
-            SizedBox(
-              height: 60.h,
-            ),
+            SizedBox(height: 50.h),
             RowContainer(image: AppImages.paper_clip, text: 'Attachment'),
+            SizedBox(height: 10.h),
             EditFormField(),
-            SizedBox(
-              height: 20.h,
-            ),
+            SizedBox(height: 23.h),
             RowContainer(image: AppImages.brief_case, text: 'Job Category'),
+            SizedBox(height: 10.h),
             EditFormField(),
-            SizedBox(
-              height: 20.h,
-            ),
+            SizedBox(height: 23.h),
             RowContainer(image: AppImages.document, text: 'Cover Letter'),
-            SizedBox(
-              height: 4.h,
-            ),
+            SizedBox(height: 4.h),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -171,40 +159,31 @@ class FreeLanceJobService extends StatelessWidget {
                 tap('+')
               ],
             ),
-            SizedBox(
-              height: 20.h,
-            ),
+            SizedBox(height: 23.h),
             RowContainer(image: AppImages.crown, text: 'Experience Level'),
+            SizedBox(height: 10.h),
             EditFormField(
                 label: 'Intermediate',
                 suffixWidget: ImageLoader(
                   path: AppImages.vector,
                 )),
-            SizedBox(
-              height: 20.h,
-            ),
+            SizedBox(height: 23.h),
             RowContainer(image: AppImages.emptyWallet, text: 'Budget'),
-            EditFormField(
-              label: 'NGN',
-            ),
-            SizedBox(
-              height: 20.h,
-            ),
+            SizedBox(height: 10.h),
+            EditFormField(label: 'NGN'),
+            SizedBox(height: 23.h),
             RowContainer(image: AppImages.clock, text: 'Timeline'),
             EditFormField(
               label: '1 Week',
               suffixWidget: ImageLoader(path: AppImages.vector),
             ),
-            SizedBox(
-              height: 50.h,
-            ),
+            SizedBox(height: 50.h),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Expanded(
-                  child: RowContainer(
-                      image: AppImages.arrange, text: 'Invite Artisan'),
-                ),
+                    child: RowContainer(
+                        image: AppImages.arrange, text: 'Invite Artisan')),
                 Expanded(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -215,9 +194,7 @@ class FreeLanceJobService extends StatelessWidget {
                         fontWeight: FontWeight.w700,
                         textAlign: TextAlign.left,
                       ),
-                      SizedBox(
-                        width: 8.w,
-                      ),
+                      SizedBox(width: 10.w),
                       Container(
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(5)),
@@ -232,11 +209,9 @@ class FreeLanceJobService extends StatelessWidget {
                 )
               ],
             ),
-            TextView(
-              text: 'Charles Damien',
-              color: Pallets.grey,
-            ),
-            SizedBox(height: 10.h),
+            SizedBox(height: 23.h),
+            TextView(text: 'Charles Damien', color: Pallets.grey),
+            SizedBox(height: 23.h),
             ButtonWidget(
               buttonText: 'Post Freelance Job & Invite',
               fontSize: 18.sp,
