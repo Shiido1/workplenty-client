@@ -48,7 +48,7 @@ class AppImages {
   static String vector= 'assets/svgs/vector.svg';
   static String clock= 'assets/svgs/clock.svg';
   static String arrange= 'assets/svgs/arrange-square.svg';
-  static String union= 'assets/svgs/union.svg';
+  static String union= 'assets/images/union.png';
   static String map= 'assets/svgs/arrange-square.svg';
   static String chat_emoji = 'assets/svgs/chat_emoji.svg';
   static String send = 'assets/svgs/send.svg';

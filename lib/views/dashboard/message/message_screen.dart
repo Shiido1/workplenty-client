@@ -1,3 +1,4 @@
+import 'package:client/core/bus/event_bus.dart';
 import 'package:client/core/helper/routes/navigation.dart';
 import 'package:client/core/helper/utils/pallets.dart';
 import 'package:client/views/dashboard/message/chats.dart';
@@ -15,7 +16,9 @@ class MessageScreen extends StatelessWidget {
       child: Column(
         children: [
           SearchAndFilter(
-            hint: 'Search for gigs, live consultancy, home',
+            onFilter: () {
+                eventBus.fire(DrawerEvent(context, true, value: 2));
+              }
           ),
           SizedBox(height: 16.h),
           Expanded(

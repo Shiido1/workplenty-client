@@ -1,6 +1,7 @@
 import 'package:client/core/helper/routes/navigation.dart';
 import 'package:client/core/helper/utils/images.dart';
 import 'package:client/views/dashboard/profile/manage/address_settings.dart';
+import 'package:client/views/dashboard/profile/manage/password_and_security_screen.dart';
 import 'package:client/views/dashboard/profile/widget/clicks_one.dart';
 import 'package:client/views/dashboard/profile/widget/profile_image_three.dart';
 import 'package:client/views/widgets/custom_switch.dart';
@@ -8,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'account_settings.dart';
 import 'connected_accounts.dart';
-import 'payout_Settings.dart';
+import 'payment/payout_settings.dart';
 
 class ManageProfile extends StatelessWidget {
   const ManageProfile({Key? key}) : super(key: key);
@@ -69,7 +70,7 @@ class ManageProfile extends StatelessWidget {
                       image: AppImages.security,
                       text: 'Password & Security',
                       trailing: true,
-                      onTap: () {}),
+                      onTap: () =>PageRouter.gotoWidget(PasswordSecurityScreen(), context)),
                 ],
               ),
             )

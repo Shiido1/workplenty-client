@@ -1,6 +1,9 @@
+import 'package:client/core/helper/helper_handler.dart';
 import 'package:client/core/helper/routes/navigation.dart';
 import 'package:client/core/helper/utils/images.dart';
 import 'package:client/core/helper/utils/pallets.dart';
+import 'package:client/views/onboarding/screens/widget/row_container_widget.dart';
+import 'package:client/views/widgets/body_widget.dart';
 import 'package:client/views/widgets/buttons.dart';
 import 'package:client/views/widgets/default_appbar.dart';
 import 'package:client/views/widgets/edit_form_widget.dart';
@@ -12,7 +15,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 // ignore: must_be_immutable
 class HomeService extends StatelessWidget {
-  HomeService({ Key? key }) : super(key: key);
+  HomeService({Key? key}) : super(key: key);
 
   List<String>? _skills = [
     'UI',
@@ -34,16 +37,14 @@ class HomeService extends StatelessWidget {
             ),
             textColor: Pallets.white,
             title: 'Home Service'),
-        body: ListView(children: [
-          SizedBox(
-            height: 10.h,
-          ),
-          Container(
-              padding: EdgeInsets.all(8.w),
+        body: BodyWidget(
+          child: ListView(children: [
+            SizedBox(
+              height: 10.h,
+            ),
+            Padding(
+              padding: EdgeInsets.only(bottom: 10.w),
               child: Row(children: [
-                SizedBox(
-                  width: 30.w,
-                ),
                 ImageLoader(
                   path: AppImages.pickie,
                 ),
@@ -68,381 +69,175 @@ class HomeService extends StatelessWidget {
                     ),
                   ],
                 )
-              ])),
-          Container(
-            padding: EdgeInsets.all(16.w),
-            child: Column(
+              ]),
+            ),
+            RowContainer(
+                image: AppImages.message,
+                text: 'Private Message to Charles Damien'),
+            EditFormField(
+              height: 150.h,
+              label: 'Type here..',
+            ),
+            SizedBox(
+              height: 10.h,
+            ),
+            RowContainer(image: AppImages.t_message, text: 'Project Title'),
+            EditFormField(),
+            SizedBox(
+              height: 10.h,
+            ),
+            RowContainer(
+                image: AppImages.t_message,
+                text: 'Describe your project and other specific details'),
+            EditFormField(
+              height: 150.h,
+              label: 'Type here..',
+            ),
+            SizedBox(
+              height: 60.h,
+            ),
+            RowContainer(
+                image: AppImages.location, text: 'Address for Home Service'),
+            EditFormField(
+              label: 'e.g. Hello World, Silicon Valley, Lagos, Nigeria',
+            ),
+            SizedBox(
+              height: 20.h,
+            ),
+            RowContainer(image: AppImages.brief_case, text: 'Job Category'),
+            EditFormField(
+              label: 'Web Development',
+            ),
+            SizedBox(
+              height: 40.h,
+            ),
+            RowContainer(image: AppImages.calender, text: 'Home Service Date'),
+            EditFormField(
+              suffixWidget: ImageLoader(
+                path: AppImages.vector,
+              ),
+              label: '11/2/2022',
+            ),
+            SizedBox(
+              height: 20.h,
+            ),
+            RowContainer(image: AppImages.clock, text: 'Home Service Date'),
+            EditFormField(
+              suffixWidget: ImageLoader(
+                path: AppImages.vector,
+              ),
+              label: '11/2/2022',
+            ),
+            SizedBox(
+              height: 20.h,
+            ),
+            RowContainer(image: AppImages.card, text: 'Payment Type'),
+            SizedBox(
+              height: 20.h,
+            ),
+            RowContainer(image: AppImages.cup, text: 'Skill'),
+            SizedBox(
+              height: 20.h,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    ImageLoader(
-                      path: AppImages.message,
-                    ),
-                    TextView(
-                      text: 'Privaite Message to Charles Damien',
-                      maxLines: 1,
-                      fontWeight: FontWeight.w700,
-                      textAlign: TextAlign.left,
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 12.w),
-                  child: EditFormField(
-                    height: 150.h,
-                    label: 'Type here..',
+                Expanded(
+                  child: Wrap(
+                    spacing: 5,
+                    runSpacing: 10,
+                    children: _skills!
+                        .map((element) => SkillsWidget(element))
+                        .toList(),
                   ),
                 ),
                 SizedBox(
-                  height: 10.h,
+                  width: 5.w,
                 ),
-                Row(
-                  children: [
-                    ImageLoader(
-                      path: AppImages.t_message,
-                    ),
-                    TextView(
-                      text: 'Project Title',
-                      maxLines: 1,
-                      fontWeight: FontWeight.w700,
-                      textAlign: TextAlign.left,
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 12.w),
-                  child: EditFormField(
-                    height: 40.h,
-                  ),
-                ),
-                SizedBox(
-                  height: 10.h,
-                ),
-                Row(
-                  children: [
-                    ImageLoader(
-                      path: AppImages.t_message,
-                    ),
-                    TextView(
-                      text: 'Describe your project and other specific details',
-                      maxLines: 1,
-                      fontWeight: FontWeight.w700,
-                      textAlign: TextAlign.left,
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 12.w),
-                  child: EditFormField(
-                    height: 150.h,
-                    label: 'Type here..',
-                  ),
-                ),
-                SizedBox(
-                  height: 60.h,
-                ),
-                Row(
-                  children: [
-                    ImageLoader(
-                      path: AppImages.location,
-                    ),
-                    TextView(
-                      text: 'Address for Home Service',
-                      maxLines: 1,
-                      fontWeight: FontWeight.w700,
-                      textAlign: TextAlign.left,
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 12.w),
-                  child: EditFormField(
-                    height: 40.h,
-                    label: 'e.g. Hello World, Silicon Valley, Lagos, Nigeria',
-                  ),
-                ),
-                SizedBox(
-                  height: 20.h,
-                ),
-                Row(
-                  children: [
-                    ImageLoader(
-                      path: AppImages.brief_case,
-                    ),
-                    TextView(
-                      text: 'Job Category',
-                      maxLines: 1,
-                      fontWeight: FontWeight.w700,
-                      textAlign: TextAlign.left,
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 12.w),
-                  child: EditFormField(
-                    height: 40.h,
-                    label: 'Web Development',
-                  ),
-                ),
-                SizedBox(
-                  height: 40.h,
-                ),
-                Row(
-                  children: [
-                    ImageLoader(
-                      path: AppImages.calender,
-                    ),
-                    TextView(
-                      text: 'Home Service Date',
-                      maxLines: 1,
-                      fontWeight: FontWeight.w700,
-                      textAlign: TextAlign.left,
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 12.w),
-                  child: EditFormField(
-                    height: 40.h,
-                    suffixWidget: ImageLoader(
-                        path: AppImages.vector,
-                      ),
-                      label: '11/2/2022',
-                  ),
-                ),
-                SizedBox(
-                  height: 20.h,
-                ),
-                Row(
-                  children: [
-                    ImageLoader(
-                      path: AppImages.clock,
-                    ),
-                    TextView(
-                      text: 'Home Service Time',
-                      maxLines: 1,
-                      fontWeight: FontWeight.w700,
-                      textAlign: TextAlign.left,
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 12.w),
-                  child: EditFormField(
-                    height: 40.h,
-                    suffixWidget: ImageLoader(
-                        path: AppImages.vector,
-                      ),
-                      label: '11/2/2022',
-                  ),
-                ),
-                SizedBox(
-                  height: 20.h,
-                ),
-                Row(
-                  children: [
-                    ImageLoader(
-                      path: AppImages.card,
-                    ),
-                    TextView(
-                      text: 'Payment Type',
-                      maxLines: 1,
-                      fontWeight: FontWeight.w700,
-                      textAlign: TextAlign.left,
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 20.h,
-                ),
-                Row(
-                  children: [
-                    ImageLoader(
-                      path: AppImages.cup,
-                    ),
-                    TextView(
-                      text: 'Skills',
-                      maxLines: 1,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 16.sp,
-                      textAlign: TextAlign.left,
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 20.h,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
+                tap('+')
+              ],
+            ),
+            SizedBox(
+              height: 20.h,
+            ),
+            RowContainer(image: AppImages.crown, text: 'Experience Level'),
+            EditFormField(
+                label: 'Intermediate',
+                suffixWidget: ImageLoader(
+                  path: AppImages.vector,
+                )),
+            SizedBox(
+              height: 20.h,
+            ),
+            RowContainer(image: AppImages.emptyWallet, text: 'Budget per hour'),
+            EditFormField(
+              label: 'NGN',
+            ),
+            SizedBox(
+              height: 20.h,
+            ),
+            RowContainer(image: AppImages.clock, text: 'Home Service Duration'),
+            EditFormField(
+              label: '1 Week',
+              suffixWidget: ImageLoader(path: AppImages.vector),
+            ),
+            SizedBox(
+              height: 50.h,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Expanded(
+                    child: RowContainer(
+                        image: AppImages.arrange, text: 'Invite Artisan')),
+                Expanded(
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Expanded(
-                        child: Wrap(
-                          spacing: 5,
-                          runSpacing: 10,
-                          children: _skills!
-                              .map((element) => SkillsWidget(element))
-                              .toList(),
-                        ),
+                      TextView(
+                        text: 'Invite',
+                        maxLines: 1,
+                        fontWeight: FontWeight.w700,
+                        textAlign: TextAlign.left,
                       ),
                       SizedBox(
-                        width: 5.w,
+                        width: 8.w,
                       ),
-                      tap('+')
+                      Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(5)),
+                            border: Border.all(color: Pallets.grey)),
+                        child: Icon(
+                          Icons.add,
+                          size: 13,
+                        ),
+                      )
                     ],
                   ),
-                ),
-                SizedBox(
-                  height: 20.h,
-                ),
-                Row(
-                  children: [
-                    ImageLoader(
-                      path: AppImages.crown,
-                    ),
-                    TextView(
-                      text: 'Experience Level',
-                      maxLines: 1,
-                      fontWeight: FontWeight.w700,
-                      textAlign: TextAlign.left,
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 12.w),
-                  child: EditFormField(
-                      height: 40.h,
-                      label: 'Intermediate',
-                      suffixWidget: ImageLoader(
-                        path: AppImages.vector,
-                      )),
-                ),
-                SizedBox(
-                  height: 20.h,
-                ),
-                SizedBox(
-                  height: 20.h,
-                ),
-                Row(
-                  children: [
-                    ImageLoader(
-                      path: AppImages.emptyWallet,
-                    ),
-                    TextView(
-                      text: 'Budget per hour',
-                      maxLines: 1,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 16.sp,
-                      textAlign: TextAlign.left,
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 12.w),
-                  child: EditFormField(
-                    height: 40.h,
-                    label: 'NGN',
-                  ),
-                ),
-                SizedBox(
-                  height: 20.h,
-                ),
-                Row(
-                  children: [
-                    ImageLoader(
-                      path: AppImages.clock,
-                    ),
-                    TextView(
-                      text: 'Home Service Duration',
-                      maxLines: 1,
-                      fontWeight: FontWeight.w700,
-                      textAlign: TextAlign.left,
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 12.w),
-                  child: EditFormField(
-                    height: 40.h,
-                    label: '1 Week',
-                    suffixWidget: ImageLoader(path: AppImages.vector),
-                  ),
-                ),
-                SizedBox(
-                  height: 50.h,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Row(
-                      children: [
-                        ImageLoader(
-                          path: AppImages.arrange,
-                        ),
-                        TextView(
-                          text: 'Invite Artisan',
-                          maxLines: 1,
-                          fontWeight: FontWeight.w700,
-                          textAlign: TextAlign.left,
-                        ),
-                      ],
-                    ),
-                    Spacer(),
-                    Row(
-                      children: [
-                        TextView(
-                          text: 'Invite',
-                          maxLines: 1,
-                          fontWeight: FontWeight.w700,
-                          textAlign: TextAlign.left,
-                        ),
-                        SizedBox(
-                          width: 8.w,
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5)),
-                              border: Border.all(color: Pallets.grey)),
-                          child: Icon(
-                            Icons.add,
-                            size: 13,
-                          ),
-                        )
-                      ],
-                    )
-                  ],
-                ),
-                Padding(
-                  padding: EdgeInsets.only(
-                    left: 40,
-                    top: 16,
-                  ),
-                  child: TextView(
-                    text: 'Charles Damien',
-                    color: Pallets.grey,
-                  ),
-                ),
-                SizedBox(
-                  height: 40.h,
-                ),
-                ButtonWidget(
-                  buttonText: 'Post Home Service & Invite',
-                  fontSize: 18.sp,
-                  fontWeight: FontWeight.w700,
-                  onPressed: () {},
-                  height: 55.h,
-                ),
-                SizedBox(
-                  height: 40,
                 )
               ],
             ),
-          ),
-        ]));
+            TextView(
+              text: 'Charles Damien',
+              color: Pallets.grey,
+            ),
+            SizedBox(
+              height: 10.h,
+            ),
+            ButtonWidget(
+              buttonText: 'Post Home Service & Invite',
+              fontSize: 18.sp,
+              fontWeight: FontWeight.w700,
+              onPressed: () {},
+              height: 55.h,
+              width: Utils.getDeviceWidth(context),
+            ),
+            SizedBox(
+              height: 40,
+            ),
+          ]),
+        ));
   }
 
   tap(String value) => Container(
