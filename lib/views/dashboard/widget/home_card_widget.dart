@@ -29,25 +29,26 @@ class HomeCard extends StatelessWidget {
                 SizedBox(
                   width: 13.w,
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    TextView(
-                      text: 'Bella Christain',
-                      maxLines: 1,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
-                      textAlign: TextAlign.left,
-                    ),
-                    TextView(
-                      text: 'Software Engineer & Website Manager',
-                      maxLines: 1,
-                      fontWeight: FontWeight.w500,
-                      textAlign: TextAlign.left,
-                    ),
-                  ],
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      TextView(
+                        text: 'Bella Christain',
+                        maxLines: 1,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                        textAlign: TextAlign.left,
+                      ),
+                      TextView(
+                        text: 'Software Engineer & Website Manager',
+                        maxLines: 1,
+                        fontWeight: FontWeight.w500,
+                        textAlign: TextAlign.left,
+                      ),
+                    ],
+                  ),
                 ),
-                Spacer(),
                 ImageLoader(
                   path: AppImages.bookmark,
                   color: Pallets.primary100,
@@ -80,9 +81,14 @@ class HomeCard extends StatelessWidget {
                 _buildWidget(AppImages.graph, '99%'),
               ],
             ),
-            SizedBox(height: 15.h,),
-            ButtonWidget(buttonText: 'Invite Artisan', onPressed: (){},height: 35.h,)
-            
+            SizedBox(
+              height: 15.h,
+            ),
+            ButtonWidget(
+              buttonText: 'Invite Artisan',
+              onPressed: () {},
+              height: 35.h,
+            )
           ],
         ),
       ),
