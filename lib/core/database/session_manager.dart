@@ -21,18 +21,28 @@ class SessionManager {
   }
 
   static const String keyAuthToken = 'auth_token';
+  static const String keyAuthBearer = 'auth_bearer';
   static const String keyUserData = 'users_data';
   static const String logginKey = 'loggin';
+  static const String userIdKey = 'userIdKey';
 
   String get authToken => sharedPreferences!.getString(keyAuthToken) ?? '';
+  String get authBearer => sharedPreferences!.getString(keyAuthBearer) ?? '';
 
   bool get isLoggedIn => sharedPreferences!.getBool(logginKey) ?? false;
+
+  int get userId => sharedPreferences!.getInt(userIdKey) ?? 0;
 
   set isLoggedIn(bool logging) =>
       sharedPreferences!.setBool(logginKey, logging);
 
   set authToken(String authToken) =>
       sharedPreferences!.setString(keyAuthToken, authToken);
+
+  set authBearer(String authBearer) =>
+      sharedPreferences!.setString(keyAuthBearer, authBearer);
+
+  set userId(int userId) => sharedPreferences!.setInt(userIdKey, userId);
 
   Map<String, dynamic> get usersData =>
       json.decode(sharedPreferences!.getString(keyUserData) ?? '');

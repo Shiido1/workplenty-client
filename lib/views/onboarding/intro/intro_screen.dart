@@ -1,8 +1,8 @@
 import 'package:client/core/helper/helper_handler.dart';
 import 'package:client/core/helper/routes/navigation.dart';
 import 'package:client/core/helper/utils/pallets.dart';
-import 'package:client/views/onboarding/authentication/get_started_screen.dart';
-import 'package:client/views/onboarding/authentication/welcom_back.dart';
+import 'package:client/views/onboarding/authentication/presentation/login/welcome_back.dart';
+import 'package:client/views/onboarding/authentication/presentation/register/get_started_screen.dart';
 import 'package:client/views/onboarding/intro/data/data_model.dart';
 import 'package:client/views/widgets/animated_container.dart';
 import 'package:client/views/widgets/buttons.dart';

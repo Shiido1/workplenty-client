@@ -1,3 +1,4 @@
+import 'package:client/views/dashboard/board.dart';
 import 'package:client/views/onboarding/screens/services/freelance_job_service.dart';
 import 'package:client/views/onboarding/screens/services/home_service.dart';
 import 'package:client/views/onboarding/screens/services/live_consultancy_service.dart';
@@ -30,6 +31,10 @@ class Routes {
         consultancy: (BuildContext context) {
           globalContext = context;
           return LiveConsultancy();
+        },
+        board: (BuildContext context) {
+          globalContext = context;
+          return MainBoard();
         },
       };
 }

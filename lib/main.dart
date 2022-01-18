@@ -1,4 +1,6 @@
+import 'package:client/core/database/session_manager.dart';
 import 'package:client/views/dashboard/board.dart';
+import 'package:client/views/onboarding/intro/intro_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -31,7 +33,9 @@ class MyApp extends StatelessWidget {
           darkTheme: darkThemeData(context),
           themeMode: ThemeMode.light,
           routes: Routes.getRoutes,
-          home:MainBoard(),
+          home: SessionManager.instance.isLoggedIn
+              ? MainBoard()
+              : IntroOneScreen(),
         ),
       ),
     );
