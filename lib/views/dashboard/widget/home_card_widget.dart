@@ -1,6 +1,5 @@
 import 'package:client/core/helper/utils/images.dart';
 import 'package:client/core/helper/utils/pallets.dart';
-import 'package:client/core/helper/utils/strings.dart';
 import 'package:client/views/widgets/buttons.dart';
 import 'package:client/views/widgets/image_loader.dart';
 import 'package:client/views/widgets/text_views.dart';

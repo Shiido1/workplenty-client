@@ -1,22 +1,31 @@
 enum Environment { development, staging, qa, production }
 
 class UrlConfig {
-  //* Auth endpoints
   static const String login = 'login';
-  static const String getLoggedInUser = 'auth/me';
-  static const String refreshToken = 'auth/refresh';
-  static const String logout = 'logout';
-  static const String changePassword = 'auth/change-password';
-  static const String forgotPassword = 'auth/forgot-password';
   static const String register = 'register';
+  static const String forgotPassword = 'forgot-password';
+  static const String resetPassword = 'reset-password';
+  static const String verificationPinRequest = 'verification-pin/request';
+  static const String verificationPinConfirm = 'verification-pin/confirm';
 
-  //* Task endpoints
-  static const String viewTask = 'task/view';
-  static const String saveReport = 'task/save/report';
+  static const String saveIndustry = 'client/industry/save';
+  static const String listIndustry = 'client/industry/list';
+  static const String deleteIndustry = 'client/industry/delete';
+  static const String overviewPayment = 'client/payment/overview';
+  static const String transactionPayment = 'client/payment/transactions';
+  static const String depositPayment = 'client/payment/deposit';
 
-  //* User endpoints
-  static const String updateUserProfile = 'user/profile-update';
-  static const String updateLocationPreference =
-      'user/location-preference-update';
-  static const String saveImage = 'user/image-save';
+  static const String listCard = 'client/card/list';
+  static const String saveCard = 'client/card/save';
+  static const String removeCard = 'client/card/remove';
+
+  static const String profileBioUpdate = 'client/profile/update-bio';
+  static const String profileLocationUpdate = 'client/profile/update-location';
+  static const String profileAvatarUpdate = 'client/profile/update-avatar';
+
+  static const String saveGig = 'client/gig/save';
+  static const String removeAttachment = 'client/attachments/remove';
+
+  static const String listBid = 'client/bids/list';
+  static const String acceptOrDeclineBid = 'client/bids/accept-or-decline';
 }
