@@ -9,7 +9,8 @@ import 'package:client/views/widgets/text_views.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-void showFloatingActionModal(BuildContext context, String title,{Function()? onPress}) {
+void showFloatingActionModal(BuildContext context, String title,
+    {Function()? onPress}) {
   showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -108,7 +109,7 @@ void showDepositToPersonalModal(BuildContext context, {Function()? onPress}) {
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Container(
-              color: Pallets.modal_colo,
+              color: Colors.white,
               padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 32.w),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -176,7 +177,8 @@ void showDepositToPersonalModal(BuildContext context, {Function()? onPress}) {
       });
 }
 
-void showPayoutModal(BuildContext context, String title,{Function()? onPress}) {
+void showPayoutModal(BuildContext context, String title,
+    {Function()? onPress}) {
   showModalBottomSheet(
       context: context,
       isScrollControlled: true,

@@ -14,7 +14,7 @@ class HomeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 23.h),
+      margin: EdgeInsets.only(bottom: 30.h),
       child: Card(
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
@@ -23,19 +23,19 @@ class HomeCard extends StatelessWidget {
           child: Column(
             children: [
               Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ImageLoader(
                     path: AppImages.pickie,
                   ),
-                  SizedBox(
-                    width: 13.w,
-                  ),
+                  SizedBox(width: 13.w),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         TextView(
-                          text: 'Bella Christain',
+                          text: 'UI Redesign for Web Application',
                           maxLines: 1,
                           fontSize: 16,
                           fontWeight: FontWeight.w700,
@@ -45,40 +45,40 @@ class HomeCard extends StatelessWidget {
                           text: 'Software Engineer & Website Manager',
                           maxLines: 1,
                           fontWeight: FontWeight.w500,
+                          fontSize: 13,
                           textAlign: TextAlign.left,
                         ),
                       ],
                     ),
                   ),
-                  ImageLoader(
-                    path: AppImages.bookmark,
-                    color: Pallets.primary100,
-                    dColor: Pallets.white,
+                  CircleAvatar(
+                    radius: 20.r,
+                    backgroundColor: Pallets.primary100,
+                    child: ImageLoader(path: AppImages.bookmark),
                   )
                 ],
               ),
-              SizedBox(
-                height: 15.h,
-              ),
+              SizedBox(height: 15.h),
               TextView(
-                text: AppString.cardText,
+                text:
+                    '''The task is to design a modern web app for a cargo portal application. Our current design features need a more modern look and better user experience, screen listing''',
                 maxLines: 3,
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
                 textAlign: TextAlign.left,
+                fontStyle: FontStyle.normal,
                 textOverflow: TextOverflow.ellipsis,
+                letterSpacing: -0.33,
               ),
-              SizedBox(
-                height: 16.h,
-              ),
+              SizedBox(height: 9.h),
               Row(
                 children: [
                   _buildWidget(AppImages.location, 'Nigeria'),
-                  SizedBox(width: 20.w),
+                  SizedBox(width: 10.w),
                   _buildWidget(AppImages.shield, 'Top Rated'),
-                  SizedBox(width: 20.w),
+                  SizedBox(width: 10.w),
                   _buildWidget(AppImages.emptyWallet, 'Top Earner'),
-                  SizedBox(width: 20.w),
+                  SizedBox(width: 10.w),
                   _buildWidget(AppImages.graph, '99%'),
                 ],
               ),
@@ -88,6 +88,8 @@ class HomeCard extends StatelessWidget {
               ButtonWidget(
                 buttonText: 'Invite Artisan',
                 onPressed: () {},
+                fontSize: 14,
+                fontWeight: FontWeight.w700,
                 height: 35.h,
               )
             ],
@@ -109,7 +111,9 @@ class HomeCard extends StatelessWidget {
             text: value,
             maxLines: 1,
             fontWeight: FontWeight.w500,
+            fontSize: 12,
             textAlign: TextAlign.left,
+            letterSpacing: -0.33,
           ),
         )
       ],

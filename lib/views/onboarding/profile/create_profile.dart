@@ -1,4 +1,6 @@
+import 'package:client/core/helper/helper_handler.dart';
 import 'package:client/core/helper/routes/navigation.dart';
+import 'package:client/core/helper/routes/routes.dart';
 import 'package:client/core/helper/utils/images.dart';
 import 'package:client/core/helper/utils/pallets.dart';
 import 'package:client/core/helper/utils/workplenty_dialog.dart';
@@ -37,6 +39,7 @@ class _CreateProfileState extends State<CreateProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: defaultAppBar2(context,
           backgroundColor: Pallets.primary100,
           leadingWidth: 70,
@@ -67,7 +70,7 @@ class _CreateProfileState extends State<CreateProfile> {
                   value: _progress / 100,
                   color: Pallets.shade100,
                 ),
-                SizedBox(height: 16.h),
+                SizedBox(height: 33.h),
                 Padding(
                     padding:
                         EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
@@ -75,7 +78,8 @@ class _CreateProfileState extends State<CreateProfile> {
               ],
             ),
             BtnWidget(
-              btnText: 'Next',
+              btnText: _index != 3 ? 'Next' : "Complete",
+              showSkip: _index != 3,
               callback: () => _increamentIndex(),
               goBack: () => _decreamentIndex(),
               skip: () {},
@@ -92,7 +96,8 @@ class _CreateProfileState extends State<CreateProfile> {
           image: AppImages.blowWhistle,
           title: 'Profile looking good',
           message: 'Guess who just completed setting up is profile? You!',
-          btnText: 'Continue');
+          btnText: 'Continue',
+          next: () => PageRouter.gotoNamed(Routes.board, context));
       return;
     }
     _index++;
@@ -124,7 +129,7 @@ class _CreateProfileState extends State<CreateProfile> {
       children: [
         TextView(
           text: 'Your Profile Bio?',
-          fontWeight: FontWeight.bold,
+          fontWeight: FontWeight.w500,
           fontSize: 18,
           textAlign: TextAlign.left,
         ),
@@ -132,8 +137,9 @@ class _CreateProfileState extends State<CreateProfile> {
         TextView(
           text:
               'Write a great profile bio, remember that’s what attracts your clients',
-          fontWeight: FontWeight.w400,
-          fontSize: 18,
+          fontWeight: FontWeight.w700,
+          fontSize: 14,
+          color: Pallets.mildGrey,
           textAlign: TextAlign.left,
         ),
         SizedBox(height: 43.h),
@@ -169,6 +175,7 @@ class _CreateProfileState extends State<CreateProfile> {
           label: '',
           suffixIcon: Icons.keyboard_arrow_down,
         ),
+        SizedBox(height: Utils.getDeviceHeight(context) * .3),
       ],
     );
   }
@@ -183,22 +190,24 @@ class _CreateProfileState extends State<CreateProfile> {
           fontSize: 18,
           textAlign: TextAlign.left,
         ),
-        SizedBox(height: 5.h),
+        SizedBox(height: 3.h),
         TextView(
           text:
               'Select 4 categories , we’ll build a custom homefeed tailored to talents',
-          fontWeight: FontWeight.w400,
-          fontSize: 18,
+          fontWeight: FontWeight.w700,
+          fontSize: 14,
+          color: Pallets.mildGrey,
           textAlign: TextAlign.left,
         ),
-        SizedBox(height: 43.h),
+        SizedBox(height: 10.h),
         Wrap(
-          spacing: 18.w,
+          spacing: 14.w,
           children: List<Widget>.generate(
             _fields.length,
             (int index) {
               final _field = _fields[index];
               return ChoiceChip(
+                backgroundColor: Color(0xffC4E2FE),
                 label: TextView(
                   text: _field,
                   fontWeight: FontWeight.w700,
@@ -221,7 +230,8 @@ class _CreateProfileState extends State<CreateProfile> {
               );
             },
           ).toList(),
-        )
+        ),
+        SizedBox(height: Utils.getDeviceHeight(context) * .3),
       ],
     );
   }
@@ -241,8 +251,9 @@ class _CreateProfileState extends State<CreateProfile> {
         TextView(
           text:
               'Please upload a professional portrait in which your face appears',
-          fontWeight: FontWeight.w400,
-          fontSize: 18,
+          fontWeight: FontWeight.w700,
+          fontSize: 14,
+          color: Pallets.mildGrey,
           textAlign: TextAlign.left,
         ),
         SizedBox(height: 43.h),
@@ -257,6 +268,7 @@ class _CreateProfileState extends State<CreateProfile> {
             primary: Colors.transparent,
             color: Pallets.primary100,
             onPressed: () {}),
+        SizedBox(height: Utils.getDeviceHeight(context) * .3),
       ],
     );
   }
@@ -275,8 +287,9 @@ class _CreateProfileState extends State<CreateProfile> {
         TextView(
           text:
               'We take your privacy seriously. Only your city and country will be visible to clients',
-          fontWeight: FontWeight.w400,
-          fontSize: 18,
+          fontWeight: FontWeight.w700,
+          fontSize: 14,
+          color: Pallets.mildGrey,
           textAlign: TextAlign.left,
         ),
         SizedBox(height: 43.h),
@@ -288,7 +301,7 @@ class _CreateProfileState extends State<CreateProfile> {
         ),
         SizedBox(height: 8.h),
         EditFormField(label: 'Nigeria', suffixIcon: Icons.keyboard_arrow_down),
-        SizedBox(height: 18.h),
+        SizedBox(height: 31.h),
         TextView(
           text: 'Street Address',
           fontWeight: FontWeight.w500,
@@ -299,7 +312,7 @@ class _CreateProfileState extends State<CreateProfile> {
         EditFormField(label: 'Ex : 123 Street Close'),
         SizedBox(height: 8.h),
         EditFormField(label: 'Apartment/Suite'),
-        SizedBox(height: 18.h),
+        SizedBox(height: 31.h),
         TextView(
           text: 'City',
           fontWeight: FontWeight.w500,
@@ -308,7 +321,7 @@ class _CreateProfileState extends State<CreateProfile> {
         ),
         SizedBox(height: 8.h),
         EditFormField(label: 'Search for your city'),
-        SizedBox(height: 18.h),
+        SizedBox(height: 31.h),
         TextView(
           text: 'ZIP/Postal Code',
           fontWeight: FontWeight.w500,
@@ -316,7 +329,8 @@ class _CreateProfileState extends State<CreateProfile> {
           textAlign: TextAlign.left,
         ),
         SizedBox(height: 8.h),
-        EditFormField(label: 'Ex: 00000')
+        EditFormField(label: 'Ex: 00000'),
+        SizedBox(height: Utils.getDeviceHeight(context) * .3),
       ],
     );
   }

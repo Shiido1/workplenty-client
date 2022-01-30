@@ -8,6 +8,7 @@ import 'package:client/views/widgets/buttons.dart';
 import 'package:client/views/widgets/default_appbar.dart';
 import 'package:client/views/widgets/edit_form_widget.dart';
 import 'package:client/views/widgets/image_loader.dart';
+import 'package:client/views/widgets/review_bg_card.dart';
 import 'package:client/views/widgets/skill_widget.dart';
 import 'package:client/views/widgets/text_views.dart';
 import 'package:flutter/material.dart';
@@ -39,58 +40,90 @@ class FreeLanceJobService extends StatelessWidget {
             title: 'Freelance Job'),
         body: BodyWidget(
           child: ListView(children: [
-            Row(mainAxisSize: MainAxisSize.min, children: [
-              ImageLoader(
-                path: AppImages.pickie,
-              ),
-              SizedBox(
-                width: 13.w,
-              ),
+            ReviewBgCard(
+                Row(mainAxisSize: MainAxisSize.min, children: [
+                  ImageLoader(
+                    path: AppImages.pickie,
+                  ),
+                  SizedBox(
+                    width: 13.w,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      TextView(
+                        text: 'Charles Damien',
+                        maxLines: 1,
+                        fontSize: 17,
+                        fontWeight: FontWeight.w800,
+                        textAlign: TextAlign.left,
+                      ),
+                      TextView(
+                        text: 'Technical Writer',
+                        maxLines: 1,
+                        fontWeight: FontWeight.w500,
+                        textAlign: TextAlign.left,
+                      ),
+                    ],
+                  )
+                ]),
+                borderRadiusGeometry: BorderRadius.zero,
+                vertical: 25.33),
+            SizedBox(height: 23.h),
+            ReviewBgCard(
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    RowContainer(
+                        image: AppImages.message,
+                        text: 'Private Message to Charles Damien'),
+                    SizedBox(height: 10.h),
+                    EditFormField(
+                      height: 150.h,
+                      label: 'Type here..',
+                    ),
+                    SizedBox(height: 23.h),
+                    RowContainer(
+                        image: AppImages.t_message, text: 'Project Title'),
+                    SizedBox(height: 10.h),
+                    EditFormField(),
+                    SizedBox(height: 23.h),
+                    RowContainer(
+                        image: AppImages.brief_case,
+                        text:
+                            'Describe your project and other specific details'),
+                    SizedBox(height: 10.h),
+                    EditFormField(
+                      height: 150.h,
+                      label: 'Type here..',
+                    ),
+                  ],
+                ),
+                borderRadiusGeometry: BorderRadius.zero,
+                vertical: 25.33),
+            SizedBox(height: 50.h),
+            ReviewBgCard(
               Column(
+                mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  TextView(
-                    text: 'Charles Damien',
-                    maxLines: 1,
-                    fontSize: 17,
-                    fontWeight: FontWeight.w800,
-                    textAlign: TextAlign.left,
-                  ),
-                  TextView(
-                    text: 'Technical Writer',
-                    maxLines: 1,
-                    fontWeight: FontWeight.w500,
-                    textAlign: TextAlign.left,
-                  ),
+                  RowContainer(image: AppImages.paper_clip, text: 'Attachment'),
+                  SizedBox(height: 10.h),
+                  ButtonWidget(
+                      height: 28.h,
+                      radius: 10,
+                      buttonStyle: true,
+                      fontSize: 14,
+                      color: Pallets.grey,
+                      fontWeight: FontWeight.w400,
+                      primary: Colors.transparent,
+                      buttonText: 'Add Attachment',
+                      onPressed: () => null),
                 ],
-              )
-            ]),
-            SizedBox(height: 23.h),
-            RowContainer(
-                image: AppImages.message,
-                text: 'Private Message to Charles Damien'),
-            SizedBox(height: 10.h),
-            EditFormField(
-              height: 150.h,
-              label: 'Type here..',
+              ),
+              borderRadiusGeometry: BorderRadius.zero,
+              vertical: 25.33,
             ),
-            SizedBox(height: 23.h),
-            RowContainer(image: AppImages.t_message, text: 'Project Title'),
-            SizedBox(height: 10.h),
-            EditFormField(),
-            SizedBox(height: 23.h),
-            RowContainer(
-                image: AppImages.brief_case,
-                text: 'Describe your project and other specific details'),
-            SizedBox(height: 10.h),
-            EditFormField(
-              height: 150.h,
-              label: 'Type here..',
-            ),
-            SizedBox(height: 50.h),
-            RowContainer(image: AppImages.paper_clip, text: 'Attachment'),
-            SizedBox(height: 10.h),
-            EditFormField(),
             SizedBox(height: 23.h),
             RowContainer(image: AppImages.brief_case, text: 'Job Category'),
             SizedBox(height: 10.h),
@@ -98,6 +131,7 @@ class FreeLanceJobService extends StatelessWidget {
             SizedBox(height: 23.h),
             RowContainer(image: AppImages.document, text: 'Cover Letter'),
             SizedBox(height: 4.h),
+            /// TODO: complete the UI designs from there
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [

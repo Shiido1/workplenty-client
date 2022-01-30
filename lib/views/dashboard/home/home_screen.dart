@@ -22,11 +22,12 @@ class Home extends StatelessWidget {
         body: Padding(
           padding: EdgeInsets.all(16.w),
           child: ListView(children: [
+            SizedBox(height: 34.h),
             Row(
               children: [
                 Expanded(
                   child: TextView(
-                      text: '4500 Artisan Found',
+                      text: '4500 Jobs Found',
                       maxLines: 1,
                       textAlign: TextAlign.left,
                       fontWeight: FontWeight.w500),

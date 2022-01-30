@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
       designSize: const Size(414, 896),
       builder: () => OverlaySupport.global(
         child: MaterialApp(
-          title: 'Artisan',
+          title: 'Client',
           debugShowCheckedModeBanner: false,
           theme: lightThemeData(context),
           darkTheme: darkThemeData(context),
