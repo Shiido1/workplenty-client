@@ -8,6 +8,7 @@ import 'package:client/views/widgets/buttons.dart';
 import 'package:client/views/widgets/default_appbar.dart';
 import 'package:client/views/widgets/edit_form_widget.dart';
 import 'package:client/views/widgets/image_loader.dart';
+import 'package:client/views/widgets/review_bg_card.dart';
 import 'package:client/views/widgets/skill_widget.dart';
 import 'package:client/views/widgets/text_views.dart';
 import 'package:flutter/material.dart';
@@ -42,9 +43,8 @@ class HomeService extends StatelessWidget {
             SizedBox(
               height: 10.h,
             ),
-            Padding(
-              padding: EdgeInsets.only(bottom: 10.w),
-              child: Row(children: [
+            ReviewBgCard(
+              Row(children: [
                 ImageLoader(
                   path: AppImages.pickie,
                 ),
@@ -71,156 +71,240 @@ class HomeService extends StatelessWidget {
                 )
               ]),
             ),
-            RowContainer(
-                image: AppImages.message,
-                text: 'Private Message to Charles Damien'),
-            EditFormField(
-              height: 150.h,
-              label: 'Type here..',
-            ),
-            SizedBox(
-              height: 10.h,
-            ),
-            RowContainer(image: AppImages.t_message, text: 'Project Title'),
-            EditFormField(),
-            SizedBox(
-              height: 10.h,
-            ),
-            RowContainer(
-                image: AppImages.t_message,
-                text: 'Describe your project and other specific details'),
-            EditFormField(
-              height: 150.h,
-              label: 'Type here..',
+            ReviewBgCard(
+              Column(
+                children: [
+                  RowContainer(
+                      image: AppImages.message,
+                      text: 'Private Message to Charles Damien'),
+                  EditFormField(
+                    height: 150.h,
+                    label: 'Type here..',
+                  ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  RowContainer(
+                      image: AppImages.t_message, text: 'Project Title'),
+                  EditFormField(),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  RowContainer(
+                      image: AppImages.t_message,
+                      text: 'Describe your project and other specific details'),
+                  EditFormField(
+                    height: 150.h,
+                    label: 'Type here..',
+                  ),
+                ],
+              ),
             ),
             SizedBox(
               height: 60.h,
             ),
-            RowContainer(
-                image: AppImages.location, text: 'Address for Home Service'),
-            EditFormField(
-              label: 'e.g. Hello World, Silicon Valley, Lagos, Nigeria',
-            ),
+            ReviewBgCard(Column(
+              children: [
+                RowContainer(
+                    image: AppImages.location,
+                    text: 'Address for Home Service'),
+                EditFormField(
+                  label: 'e.g. Hello World, Silicon Valley, Lagos, Nigeria',
+                ),
+              ],
+            )),
             SizedBox(
               height: 20.h,
             ),
-            RowContainer(image: AppImages.brief_case, text: 'Job Category'),
-            EditFormField(
-              label: 'Web Development',
-            ),
+            ReviewBgCard(Column(
+              children: [
+                RowContainer(image: AppImages.brief_case, text: 'Job Category'),
+                EditFormField(
+                  label: 'Web Development',
+                ),
+              ],
+            )),
             SizedBox(
               height: 40.h,
             ),
-            RowContainer(image: AppImages.calender, text: 'Home Service Date'),
-            EditFormField(
-              suffixWidget: ImageLoader(
-                path: AppImages.vector,
-              ),
-              label: '11/2/2022',
-            ),
-            SizedBox(
-              height: 20.h,
-            ),
-            RowContainer(image: AppImages.clock, text: 'Home Service Date'),
-            EditFormField(
-              suffixWidget: ImageLoader(
-                path: AppImages.vector,
-              ),
-              label: '11/2/2022',
-            ),
-            SizedBox(
-              height: 20.h,
-            ),
-            RowContainer(image: AppImages.card, text: 'Payment Type'),
-            SizedBox(
-              height: 20.h,
-            ),
-            RowContainer(image: AppImages.cup, text: 'Skill'),
-            SizedBox(
-              height: 20.h,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
+            ReviewBgCard(Column(
               children: [
-                Expanded(
-                  child: Wrap(
-                    spacing: 5,
-                    runSpacing: 10,
-                    children: _skills!
-                        .map((element) => SkillsWidget(element))
-                        .toList(),
+                RowContainer(
+                    image: AppImages.calender, text: 'Home Service Date'),
+                EditFormField(
+                  suffixWidget: ImageLoader(
+                    path: AppImages.vector,
                   ),
+                  label: '11/2/2022',
                 ),
                 SizedBox(
-                  width: 5.w,
+                  height: 20.h,
                 ),
-                tap('+')
+                RowContainer(image: AppImages.clock, text: 'Home Service Date'),
+                EditFormField(
+                  suffixWidget: ImageLoader(
+                    path: AppImages.vector,
+                  ),
+                  label: '11/2/2022',
+                ),
               ],
+            )),
+            SizedBox(
+              height: 20.h,
+            ),
+            ReviewBgCard(
+              Column(
+                children: [
+                  RowContainer(image: AppImages.card, text: 'Payment Type'),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      Row(
+                        children: [
+                          Checkbox(value: false, onChanged: (bool? value) {}),
+                          TextView(
+                            text: 'cash',
+                            fontWeight: FontWeight.w500,
+                            textAlign: TextAlign.left,
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        width: 10.w,
+                      ),
+                      Row(
+                        children: [
+                          Checkbox(value: false, onChanged: (bool? value) {}),
+                          TextView(
+                            text: 'card',
+                            fontWeight: FontWeight.w500,
+                            textAlign: TextAlign.left,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
             SizedBox(
               height: 20.h,
             ),
-            RowContainer(image: AppImages.crown, text: 'Experience Level'),
-            EditFormField(
-                label: 'Intermediate',
-                suffixWidget: ImageLoader(
-                  path: AppImages.vector,
-                )),
+            ReviewBgCard(
+              Column(
+                children: [
+                  RowContainer(image: AppImages.cup, text: 'Skill'),
+                  SizedBox(
+                    height: 20.h,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Wrap(
+                          spacing: 5,
+                          runSpacing: 10,
+                          children: _skills!
+                              .map((element) => SkillsWidget(element))
+                              .toList(),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 5.w,
+                      ),
+                      tap('+')
+                    ],
+                  ),
+                ],
+              ),
+            ),
             SizedBox(
               height: 20.h,
             ),
-            RowContainer(image: AppImages.emptyWallet, text: 'Budget per hour'),
-            EditFormField(
-              label: 'NGN',
-            ),
+            ReviewBgCard(Column(
+              children: [
+                RowContainer(image: AppImages.crown, text: 'Experience Level'),
+                EditFormField(
+                    label: 'Intermediate',
+                    suffixWidget: ImageLoader(
+                      path: AppImages.vector,
+                    )),
+              ],
+            )),
             SizedBox(
               height: 20.h,
             ),
-            RowContainer(image: AppImages.clock, text: 'Home Service Duration'),
-            EditFormField(
-              label: '1 Week',
-              suffixWidget: ImageLoader(path: AppImages.vector),
+            ReviewBgCard(
+              Column(
+                children: [
+                  RowContainer(
+                      image: AppImages.emptyWallet, text: 'Budget per hour'),
+                  EditFormField(
+                    label: 'NGN',
+                  ),
+                  SizedBox(
+                    height: 20.h,
+                  ),
+                  RowContainer(
+                      image: AppImages.clock, text: 'Home Service Duration'),
+                  EditFormField(
+                    label: '1 Week',
+                    suffixWidget: ImageLoader(path: AppImages.vector),
+                  ),
+                ],
+              ),
             ),
             SizedBox(
               height: 50.h,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Expanded(
-                    child: RowContainer(
-                        image: AppImages.arrange, text: 'Invite Artisan')),
-                Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+            ReviewBgCard(
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      TextView(
-                        text: 'Invite',
-                        maxLines: 1,
-                        fontWeight: FontWeight.w700,
-                        textAlign: TextAlign.left,
-                      ),
-                      SizedBox(
-                        width: 8.w,
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(5)),
-                            border: Border.all(color: Pallets.grey)),
-                        child: Icon(
-                          Icons.add,
-                          size: 13,
+                      Expanded(
+                          child: RowContainer(
+                              image: AppImages.arrange,
+                              text: 'Invite Artisan')),
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            TextView(
+                              text: 'Invite',
+                              maxLines: 1,
+                              fontWeight: FontWeight.w700,
+                              textAlign: TextAlign.left,
+                            ),
+                            SizedBox(
+                              width: 8.w,
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(5)),
+                                  border: Border.all(color: Pallets.grey)),
+                              child: Icon(
+                                Icons.add,
+                                size: 13,
+                              ),
+                            )
+                          ],
                         ),
                       )
                     ],
                   ),
-                )
-              ],
-            ),
-            TextView(
-              text: 'Charles Damien',
-              color: Pallets.grey,
+                  TextView(
+                    text: 'Charles Damien',
+                    color: Pallets.grey,
+                  ),
+                ],
+              ),
             ),
             SizedBox(
               height: 10.h,
@@ -230,7 +314,7 @@ class HomeService extends StatelessWidget {
               fontSize: 18.sp,
               fontWeight: FontWeight.w700,
               onPressed: () {},
-              height: 55.h,
+              height: 50.h,
               width: Utils.getDeviceWidth(context),
             ),
             SizedBox(

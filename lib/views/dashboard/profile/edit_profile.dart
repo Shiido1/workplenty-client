@@ -25,38 +25,6 @@ class EditProfile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: 32.h),
-                  // ClickTwo(
-                  //     image: AppImages.edit_circle,
-                  //     text: 'Profile Bio',
-                  //     widget: TextView(
-                  //         textAlign: TextAlign.left,
-                  //         text:
-                  //             '''Web Developer & Mobile Developer\nLorem ipsum dolor sit amet, consectetur adipiscing\nelit. Euismod eu eu erat nisl consectetur adipiscing.'''),
-                  //     onTap: () {}),
-                  // SizedBox(height: 16.h),
-                  // ClickTwo(
-                  //     image: AppImages.edit_circle,
-                  //     text: 'Skils',
-                  //     widget: Wrap(
-                  //         runAlignment: WrapAlignment.spaceBetween,
-                  //         spacing: 10,
-                  //         runSpacing: 10,
-                  //         children: ["Vue Js", "MySQL"]
-                  //             .map((e) => Container(
-                  //                   padding: EdgeInsets.symmetric(
-                  //                       horizontal: 23.w, vertical: 6.h),
-                  //                   decoration: BoxDecoration(
-                  //                     borderRadius: BorderRadius.circular(5.r),
-                  //                     color: Pallets.primary100,
-                  //                   ),
-                  //                   child: TextView(
-                  //                       textAlign: TextAlign.left,
-                  //                       text: e,
-                  //                       color: Pallets.white),
-                  //                 ))
-                  //             .toList()),
-                  //     onTap: () {}),
-                  // SizedBox(height: 16.h),
                   ClickTwo(
                       image: AppImages.edit_circle,
                       text: 'Company Bio',
@@ -66,7 +34,7 @@ class EditProfile extends StatelessWidget {
                               '''WorkPlenty Inc\nLorem ipsum dolor sit amet, consectetur adipiscing 
 elit. Euismod eu eu erat nisl consectetur adipiscing.'''),
                       onTap: () {}),
-                  SizedBox(height: 16.h),
+                  SizedBox(height: 32.h),
                   ClickTwo(
                       image: AppImages.edit_circle,
                       text: 'Average Pay Rate',
@@ -75,42 +43,7 @@ elit. Euismod eu eu erat nisl consectetur adipiscing.'''),
                           text:
                               '''Home Service : NGN3000/hr\nLive Consultancy : NGN1500/5min'''),
                       onTap: () {}),
-//                   SizedBox(height: 16.h),
-//                   ClickTwo(
-//                       image: AppImages.edit_circle,
-//                       text: 'Projects',
-//                       widget: Row(
-//                         children: [
-//                           Container(
-//                             height: 60.h,
-//                             width: 60.w,
-//                             decoration: BoxDecoration(
-//                                 borderRadius: BorderRadius.circular(5.r),
-//                                 color: Pallets.black),
-//                           ),
-//                           SizedBox(width: 10.w),
-//                           Expanded(
-//                             child: TextView(
-//                                 textAlign: TextAlign.left,
-//                                 maxLines: 3,
-//                                 textOverflow: TextOverflow.ellipsis,
-//                                 text:
-//                                     '''WorkPlenty\nLorem ipsum dolor sit amet consectetur
-// adipiscing elit euismod eu eu erat..... more'''),
-//                           ),
-//                         ],
-//                       ),
-//                       onTap: () {}),
-                  SizedBox(height: 16.h),
-                  // ClickTwo(
-                  //     image: AppImages.edit_circle,
-                  //     text: 'Availability & Rate',
-                  //     widget: TextView(
-                  //         textAlign: TextAlign.left,
-                  //         text:
-                  //             '''Home Service:  NGN3000/hr\nLive Consultancy:  NGN1500/5min'''),
-                  //     onTap: () {}),
-                  // SizedBox(height: 16.h),
+                  SizedBox(height: 32.h),
                   ClickTwo(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       text: 'Ratings',
@@ -119,7 +52,7 @@ elit. Euismod eu eu erat nisl consectetur adipiscing.'''),
                           text:
                               '''Average Rating:  4.7\nTotal Rating:  231\nJobs Completed:  190'''),
                       onTap: () {}),
-                  SizedBox(height: 16.h),
+                  SizedBox(height: 32.h),
                   ClickTwo(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       text: 'Reviews',

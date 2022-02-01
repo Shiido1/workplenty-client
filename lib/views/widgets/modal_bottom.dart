@@ -113,12 +113,13 @@ void showDepositToPersonalModal(BuildContext context, {Function()? onPress}) {
               padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 32.w),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ImageLoader(
                     path: AppImages.master,
                   ),
                   SizedBox(
-                    width: 10.w,
+                    width: 15.w,
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

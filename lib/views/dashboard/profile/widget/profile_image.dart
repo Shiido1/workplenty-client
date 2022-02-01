@@ -66,6 +66,7 @@ class ProfileImageCardOne extends StatelessWidget {
                     text: 'Client',
                     fontWeight: FontWeight.w400,
                     color: Pallets.white,
+                    fontSize: 10,
                     textAlign: TextAlign.center),
               )
             ],
@@ -82,7 +83,7 @@ class ProfileImageCardOne extends StatelessWidget {
               TextView(
                   text: 'Abuja, Nigeria',
                   fontWeight: FontWeight.w700,
-                  fontSize: 18,
+                  fontSize: 16,
                   color: Pallets.grey100,
                   maxLines: 1,
                   textOverflow: TextOverflow.ellipsis,

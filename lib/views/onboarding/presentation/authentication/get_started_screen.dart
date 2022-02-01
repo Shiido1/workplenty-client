@@ -18,7 +18,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'bloc/authbloc_bloc.dart';
-import 'email_verification.dart';
 import 'welcom_back.dart';
 
 class GetStartedScreen extends StatefulWidget {

@@ -1,7 +1,6 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:client/core/entity/default_response.dart';
-import 'package:equatable/equatable.dart';
 
 class AuthEntity extends DefaultResponse {
   final String? email;

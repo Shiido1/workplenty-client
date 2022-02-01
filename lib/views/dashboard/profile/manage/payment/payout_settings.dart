@@ -34,30 +34,33 @@ class _PayoutSettingsState extends State<PayoutSettings> {
       body: BodyWidget(
           child: Stack(
         children: [
-          ListView(
-            children: [
-              EditFormField(
-                decoration: _getDecoration('Country', dropDown: true),
-              ),
-              SizedBox(height: 16.h),
-              EditFormField(
-                decoration: _getDecoration('Bank', dropDown: true),
-              ),
-              SizedBox(height: 16.h),
-              EditFormField(
-                decoration:
-                    _getDecoration('Bank Account Name', dropDown: false),
-              ),
-              SizedBox(height: 16.h),
-              EditFormField(
-                decoration:
-                    _getDecoration('Bank Account Number', dropDown: false),
-              ),
-              SizedBox(height: 16.h),
-              EditFormField(
-                decoration: _getDecoration('BVN', dropDown: false),
-              ),
-            ],
+          Padding(
+            padding: EdgeInsets.all(16.w),
+            child: ListView(
+              children: [
+                EditFormField(
+                  decoration: _getDecoration('Country', dropDown: true),
+                ),
+                SizedBox(height: 32.h),
+                EditFormField(
+                  decoration: _getDecoration('Bank', dropDown: true),
+                ),
+                SizedBox(height: 32.h),
+                EditFormField(
+                  decoration:
+                      _getDecoration('Bank Account Name', dropDown: false),
+                ),
+                SizedBox(height: 32.h),
+                EditFormField(
+                  decoration:
+                      _getDecoration('Bank Account Number', dropDown: false),
+                ),
+                SizedBox(height: 32.h),
+                EditFormField(
+                  decoration: _getDecoration('BVN', dropDown: false),
+                ),
+              ],
+            ),
           ),
           Align(
               alignment: Alignment.bottomCenter,

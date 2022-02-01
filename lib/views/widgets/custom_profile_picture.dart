@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:client/core/helper/utils/pallets.dart';
-import 'package:client/core/network/app_config.dart';
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

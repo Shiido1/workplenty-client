@@ -1,5 +1,6 @@
 import 'package:client/core/helper/routes/navigation.dart';
 import 'package:client/core/helper/utils/images.dart';
+import 'package:client/core/helper/utils/pallets.dart';
 import 'package:client/views/dashboard/profile/hire/bids.dart';
 import 'package:client/views/dashboard/profile/manage/manage.dart';
 import 'package:client/views/dashboard/profile/payout/payout_screen.dart';
@@ -33,12 +34,16 @@ class Profile extends StatelessWidget {
                       child: ClickOne(
                           image: AppImages.edit_profile,
                           text: 'Edit Profile',
+                          color: Pallets.primary100,
                           onTap: () =>
                               PageRouter.gotoWidget(EditProfile(), context)),
                     ),
                     SizedBox(width: 44.w),
                     Expanded(
-                      child: ClickOne(image: AppImages.share, text: 'Share'),
+                      child: ClickOne(
+                          image: AppImages.share,
+                          color: Pallets.primary100,
+                          text: 'Share'),
                     ),
                   ],
                 ),

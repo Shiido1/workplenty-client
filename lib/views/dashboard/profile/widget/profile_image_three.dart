@@ -65,7 +65,8 @@ class ProfileImageCardThree extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10.r),
                     border: Border.all(color: Pallets.orange600)),
                 child: TextView(
-                    text: 'Artisan',
+                    text: 'Client',
+                    fontSize: 10,
                     fontWeight: FontWeight.w400,
                     color: Pallets.white,
                     textAlign: TextAlign.center),
@@ -84,7 +85,7 @@ class ProfileImageCardThree extends StatelessWidget {
               TextView(
                   text: 'Abuja, Nigeria',
                   fontWeight: FontWeight.w700,
-                  fontSize: 18,
+                  fontSize: 16,
                   color: Pallets.grey100,
                   maxLines: 1,
                   textOverflow: TextOverflow.ellipsis,
