@@ -16,7 +16,7 @@ class CardContractImpl implements CardContract {
       final _response = await _impl.listCard();
       return Right(_response);
     } catch (e) {
-      return Left(ServerFailure(e.toString()));
+      return Left(AppFailure(e.toString()));
     }
   }
 
@@ -26,7 +26,7 @@ class CardContractImpl implements CardContract {
       final _response = await _impl.removeCard(entity);
       return Right(_response);
     } catch (e) {
-      return Left(ServerFailure(e.toString()));
+      return Left(AppFailure(e.toString()));
     }
   }
 
@@ -36,7 +36,7 @@ class CardContractImpl implements CardContract {
       final _response = await _impl.saveCard(entity);
       return Right(_response);
     } catch (e) {
-      return Left(ServerFailure(e.toString()));
+      return Left(AppFailure(e.toString()));
     }
   }
 }

@@ -83,7 +83,6 @@ class _PaymentSettings2State extends State<PaymentSettings2> {
                   ],
                 ),
               ),
-              
               IconButton(
                   onPressed: () {},
                   icon: Icon(

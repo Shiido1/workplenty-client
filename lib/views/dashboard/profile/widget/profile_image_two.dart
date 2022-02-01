@@ -111,6 +111,5 @@ class ProfileImageCardTwo extends StatelessWidget {
         ],
       ),
     );
-    
   }
 }

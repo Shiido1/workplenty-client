@@ -4,7 +4,10 @@ import 'package:client/views/onboarding/domain/entity/profile/profile_entity.dar
 import 'package:dartz/dartz.dart';
 
 abstract class ProfileContract {
-  Future<Either<Failure, ProfileUpdateResponse>> profileBioUpdate(ProfileEntity entity);
-  Future<Either<Failure, ProfileUpdateResponse>> profileLocationUpdate(ProfileEntity entity);
-  Future<Either<Failure, ProfileUpdateResponse>> profileAvatarUpdate(ProfileEntity entity);
+  Future<Either<Failure, ProfileUpdateResponse>> profileBioUpdate(
+      ProfileEntity entity);
+  Future<Either<Failure, ProfileUpdateResponse>> profileLocationUpdate(
+      ProfileEntity entity);
+  Future<Either<Failure, ProfileUpdateResponse>> profileAvatarUpdate(
+      ProfileEntity entity);
 }

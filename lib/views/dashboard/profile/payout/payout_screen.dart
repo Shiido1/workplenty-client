@@ -204,7 +204,9 @@ class PayoutScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              ...[1, 2, 3, 4, 5, 5, 6, 7, 78, 8].map((e) => textBody(context)).toList()
+              ...[1, 2, 3, 4, 5, 5, 6, 7, 78, 8]
+                  .map((e) => textBody(context))
+                  .toList()
             ],
           ),
         ),
@@ -213,8 +215,8 @@ class PayoutScreen extends StatelessWidget {
   }
 
   textBody(BuildContext context) => GestureDetector(
-    onTap: ()=>showPayoutModal(context, 'Accept Payment'),
-    child: Container(
+        onTap: () => showPayoutModal(context, 'Accept Payment'),
+        child: Container(
           margin: EdgeInsets.all(8.w),
           padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
           decoration: BoxDecoration(
@@ -237,5 +239,5 @@ class PayoutScreen extends StatelessWidget {
             color: Pallets.grey,
           ),
         ),
-  );
+      );
 }

@@ -19,11 +19,9 @@ class SearchTab extends StatelessWidget {
         padding: EdgeInsets.all(16.w),
         child: ListView(
           children: [
-            SearchAndFilter(
-              onFilter: () {
-                  eventBus.fire(DrawerEvent(context, true));
-                }
-            ),
+            SearchAndFilter(onFilter: () {
+              eventBus.fire(DrawerEvent(context, true));
+            }),
             SizedBox(height: 20.h),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,

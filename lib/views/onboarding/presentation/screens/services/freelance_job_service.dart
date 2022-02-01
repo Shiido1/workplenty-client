@@ -131,6 +131,7 @@ class FreeLanceJobService extends StatelessWidget {
             SizedBox(height: 23.h),
             RowContainer(image: AppImages.document, text: 'Cover Letter'),
             SizedBox(height: 4.h),
+
             /// TODO: complete the UI designs from there
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,

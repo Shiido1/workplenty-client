@@ -20,11 +20,9 @@ getCustomAppBar(BuildContext context, String title,
     actions: [
       Container(
           margin: EdgeInsets.only(right: 16.w),
-          child: ImageLoader(
-            path: AppImages.bell,
-            onTap: () {}
-            //  PageRouter.gotoWidget(NotificationScreen(), context),
-          ))
+          child: ImageLoader(path: AppImages.bell, onTap: () {}
+              //  PageRouter.gotoWidget(NotificationScreen(), context),
+              ))
     ],
   );
 }

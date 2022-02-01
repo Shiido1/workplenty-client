@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SavedScreen extends StatefulWidget {
   final Widget? widget;
-  const SavedScreen({ Key? key, this.widget }) : super(key: key);
+  const SavedScreen({Key? key, this.widget}) : super(key: key);
 
   @override
   _SavedScreenState createState() => _SavedScreenState();

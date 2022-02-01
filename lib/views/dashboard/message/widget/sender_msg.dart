@@ -1,4 +1,3 @@
-
 import 'package:client/core/helper/utils/pallets.dart';
 import 'package:client/views/widgets/text_views.dart';
 import 'package:flutter/material.dart';

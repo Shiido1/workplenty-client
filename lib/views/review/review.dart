@@ -1,4 +1,3 @@
-
 import 'package:client/core/helper/routes/navigation.dart';
 import 'package:client/core/helper/utils/pallets.dart';
 import 'package:client/views/widgets/default_appbar.dart';

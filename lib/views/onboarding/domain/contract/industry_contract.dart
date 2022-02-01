@@ -6,7 +6,9 @@ import 'package:client/views/onboarding/domain/entity/industry/industry_entity.d
 import 'package:dartz/dartz.dart';
 
 abstract class IndustryContract {
-  Future<Either<Failure, SaveIndustryResponse>> saveIndustry(IndustryEntity entity);
+  Future<Either<Failure, SaveIndustryResponse>> saveIndustry(
+      IndustryEntity entity);
   Future<Either<Failure, ListIndustryResponse>> listIndustry();
-  Future<Either<Failure, DeleteIndustryResponse>> deleteIndustry(IndustryEntity entity);
+  Future<Either<Failure, DeleteIndustryResponse>> deleteIndustry(
+      IndustryEntity entity);
 }

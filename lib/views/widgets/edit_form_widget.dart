@@ -294,4 +294,3 @@ class EditFormField extends StatelessWidget {
     );
   }
 }
-

@@ -15,11 +15,9 @@ class MessageScreen extends StatelessWidget {
       padding: EdgeInsets.all(16.w),
       child: Column(
         children: [
-          SearchAndFilter(
-            onFilter: () {
-                eventBus.fire(DrawerEvent(context, true, value: 2));
-              }
-          ),
+          SearchAndFilter(onFilter: () {
+            eventBus.fire(DrawerEvent(context, true, value: 2));
+          }),
           SizedBox(height: 16.h),
           Expanded(
               child: ListView(

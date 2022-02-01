@@ -62,7 +62,9 @@ class _PayoutSettingsState extends State<PayoutSettings> {
           Align(
               alignment: Alignment.bottomCenter,
               child: ButtonWidget(
-                  buttonText: 'Save Details', onPressed: () => PageRouter.gotoWidget(PaymentSettings2(), context))),
+                  buttonText: 'Save Details',
+                  onPressed: () =>
+                      PageRouter.gotoWidget(PaymentSettings2(), context))),
         ],
       )),
     );

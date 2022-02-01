@@ -1,4 +1,10 @@
+import 'package:client/core/api/auth/auth_api.dart';
 import 'package:client/core/database/hive_database.dart';
+import 'package:client/core/network/network_service.dart';
+import 'package:client/views/onboarding/data/contractImpl/authContractImpl.dart';
+import 'package:client/views/onboarding/data/sourceImpl/authSourceImpl.dart';
+import 'package:client/views/onboarding/domain/usecases/auth_usecases.dart';
+import 'package:client/views/onboarding/presentation/authentication/bloc/authbloc_bloc.dart';
 import 'package:get_it/get_it.dart';
 import '../network/app_config.dart';
 import '../database/session_manager.dart';
@@ -14,7 +20,7 @@ Future<void> initializeCore({required Environment environment}) async {
   _initProviders();
   _initBloc();
   _initDataSources();
-  _initDataRepositories();
+  _initDataContracts();
   _initializeUsecase();
 }
 
@@ -30,16 +36,31 @@ Future<void> _initializeCore() async {
 void _initProviders() {}
 
 /// Initialize bloc's here
-void _initBloc() {}
+void _initBloc() {
+  inject.registerLazySingleton<AuthblocBloc>(() => AuthblocBloc(inject()));
+}
 
 /// Initialize data sources implementations
-void _initDataSources() {}
+void _initDataSources() {
+  inject.registerLazySingleton<AuthSourceImpl>(
+      () => AuthSourceImpl(api: inject()));
+}
 
 /// Initialize data repositories implementations
-void _initDataRepositories() {}
+void _initDataContracts() {
+  inject.registerLazySingleton<AuthContractImpl>(
+      () => AuthContractImpl(inject()));
+}
 
 /// Initialize services's here
-void _initServices() {}
+void _initServices() {
+  inject.registerLazySingleton<NetworkService>(
+      () => NetworkService(baseUrl: AppConfig.coreBaseUrl));
+  inject
+      .registerLazySingleton<AuthApi>(() => AuthApi(networkService: inject()));
+}
 
 /// Initialize usecases here
-void _initializeUsecase() {}
+void _initializeUsecase() {
+  inject.registerLazySingleton<AuthUsesCases>(() => AuthUsesCases(inject()));
+}

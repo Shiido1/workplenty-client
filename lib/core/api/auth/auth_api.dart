@@ -1,9 +1,9 @@
 import 'package:client/core/network/network_service.dart';
 import 'package:client/core/network/url_config.dart';
+import 'package:client/views/onboarding/data/model/auth/auth_response/auth_response.dart';
 import 'package:client/views/onboarding/domain/entity/auth/forgot_password_entity.dart';
-import 'package:client/views/onboarding/domain/entity/auth/login_entity.dart';
+import 'package:client/views/onboarding/domain/entity/auth/auth_entity.dart';
 import 'package:client/views/onboarding/domain/entity/auth/pin_entity.dart';
-import 'package:client/views/onboarding/domain/entity/auth/register_entity.dart';
 import 'package:client/views/onboarding/domain/entity/auth/reset_password_entity.dart';
 
 class AuthApi {
@@ -12,21 +12,22 @@ class AuthApi {
   AuthApi({required NetworkService networkService})
       : _networkService = networkService;
 
-  Future<dynamic> login(LoginEntity entity) async {
+  Future<AuthResponse> login(AuthEntity entity) async {
     try {
-      await _networkService.call(UrlConfig.login, RequestMethod.post,
-          data: entity.toJson());
-      return;
+      final _response = await _networkService
+          .call(UrlConfig.login, RequestMethod.post, data: entity.toLogin());
+      return AuthResponse.fromJson(_response.data);
     } catch (e) {
       rethrow;
     }
   }
 
-  Future<dynamic> register(RegisterEntity entity) async {
+  Future<AuthResponse> register(AuthEntity entity) async {
     try {
-      await _networkService.call(UrlConfig.register, RequestMethod.post,
-          data: entity.toMap());
-      return;
+      final _response = await _networkService.call(
+          UrlConfig.register, RequestMethod.post,
+          data: entity.toRegister());
+      return AuthResponse.fromJson(_response.data);
     } catch (e) {
       rethrow;
     }

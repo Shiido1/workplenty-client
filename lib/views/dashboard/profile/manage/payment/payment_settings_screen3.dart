@@ -36,7 +36,9 @@ class _PaymentSetting3State extends State<PaymentSetting3> {
         children: [
           ListView(
             children: [
-              SizedBox(height: 30.h,),
+              SizedBox(
+                height: 30.h,
+              ),
               TextView(
                 text: 'Card Number',
                 fontWeight: FontWeight.w400,
@@ -54,7 +56,7 @@ class _PaymentSetting3State extends State<PaymentSetting3> {
                 fontSize: 16,
               ),
               Padding(
-                padding: EdgeInsets.only(right:100.w),
+                padding: EdgeInsets.only(right: 100.w),
                 child: Row(
                   children: [
                     Expanded(
@@ -62,7 +64,9 @@ class _PaymentSetting3State extends State<PaymentSetting3> {
                         decoration: _getDecoration('Month', dropDown: true),
                       ),
                     ),
-                    SizedBox(width: 30.w,),
+                    SizedBox(
+                      width: 30.w,
+                    ),
                     Expanded(
                       child: EditFormField(
                         decoration: _getDecoration('Year', dropDown: true),

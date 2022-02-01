@@ -70,7 +70,8 @@ class ManageProfile extends StatelessWidget {
                       image: AppImages.security,
                       text: 'Password & Security',
                       trailing: true,
-                      onTap: () =>PageRouter.gotoWidget(PasswordSecurityScreen(), context)),
+                      onTap: () => PageRouter.gotoWidget(
+                          PasswordSecurityScreen(), context)),
                 ],
               ),
             )

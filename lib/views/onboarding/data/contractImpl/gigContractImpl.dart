@@ -17,7 +17,7 @@ class GigContractImpl implements GigContract {
       final _response = await _impl.removeAttachment(entity);
       return Right(_response);
     } catch (e) {
-      return Left(ServerFailure(e.toString()));
+      return Left(AppFailure(e.toString()));
     }
   }
 
@@ -27,7 +27,7 @@ class GigContractImpl implements GigContract {
       final _response = await _impl.saveGig(entity);
       return Right(_response);
     } catch (e) {
-      return Left(ServerFailure(e.toString()));
+      return Left(AppFailure(e.toString()));
     }
   }
 }

@@ -17,7 +17,7 @@ class IndustryContractImpl implements IndustryContract {
       final _response = await _impl.deleteIndustry(entity);
       return Right(_response);
     } catch (e) {
-      return Left(ServerFailure(e.toString()));
+      return Left(AppFailure(e.toString()));
     }
   }
 
@@ -27,7 +27,7 @@ class IndustryContractImpl implements IndustryContract {
       final _response = await _impl.listIndustry();
       return Right(_response);
     } catch (e) {
-      return Left(ServerFailure(e.toString()));
+      return Left(AppFailure(e.toString()));
     }
   }
 
@@ -37,7 +37,7 @@ class IndustryContractImpl implements IndustryContract {
       final _response = await _impl.saveIndustry(entity);
       return Right(_response);
     } catch (e) {
-      return Left(ServerFailure(e.toString()));
+      return Left(AppFailure(e.toString()));
     }
   }
 }

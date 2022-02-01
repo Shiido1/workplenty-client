@@ -17,7 +17,7 @@ class BidsContractImpl implements BidsContract {
       final _response = await _impl.acceptOrDeclineBid(entity);
       return Right(_response);
     } catch (e) {
-      return Left(ServerFailure(e.toString()));
+      return Left(AppFailure(e.toString()));
     }
   }
 
@@ -27,7 +27,7 @@ class BidsContractImpl implements BidsContract {
       final _response = await _impl.listBid();
       return Right(_response);
     } catch (e) {
-      return Left(ServerFailure(e.toString()));
+      return Left(AppFailure(e.toString()));
     }
   }
 }

@@ -16,7 +16,7 @@ class ProfileContractImpl implements ProfileContract {
       final _response = await _impl.profileAvatarUpdate(entity);
       return Right(_response);
     } catch (e) {
-      return Left(ServerFailure(e.toString()));
+      return Left(AppFailure(e.toString()));
     }
   }
 
@@ -27,7 +27,7 @@ class ProfileContractImpl implements ProfileContract {
       final _response = await _impl.profileBioUpdate(entity);
       return Right(_response);
     } catch (e) {
-      return Left(ServerFailure(e.toString()));
+      return Left(AppFailure(e.toString()));
     }
   }
 
@@ -38,7 +38,7 @@ class ProfileContractImpl implements ProfileContract {
       final _response = await _impl.profileLocationUpdate(entity);
       return Right(_response);
     } catch (e) {
-      return Left(ServerFailure(e.toString()));
+      return Left(AppFailure(e.toString()));
     }
   }
 }

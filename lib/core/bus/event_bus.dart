@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 EventBus eventBus = EventBus();
 
-class DashboardRouteEvent{
+class DashboardRouteEvent {
   int index;
   DashboardRouteEvent(this.index);
 }
@@ -11,13 +11,11 @@ class DashboardRouteEvent{
 class DrawerEvent {
   BuildContext context;
   bool open;
-  
+
   int? value;
   DrawerEvent(this.context, this.open, {this.value = 1});
-
 }
 
 class UserLoggedInEvent {
   UserLoggedInEvent();
 }
-

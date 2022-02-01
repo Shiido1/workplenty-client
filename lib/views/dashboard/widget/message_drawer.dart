@@ -1,4 +1,3 @@
-
 import 'package:client/core/helper/utils/pallets.dart';
 import 'package:client/views/widgets/body_widget.dart';
 import 'package:client/views/widgets/text_views.dart';

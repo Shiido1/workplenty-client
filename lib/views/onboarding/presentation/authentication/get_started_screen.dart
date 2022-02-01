@@ -227,7 +227,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
         EmailVerificationScreen(_emailController.text), context);
     // if (_globalFormKey.currentState!.validate()) {
     //   // _bloc.add(RegisteringEvent(
-    //   //     entity: RegisterEntity(
+    //   //     entity: AuthEntity(
     //   //         email: _emailController.text,
     //   //         fname: _fnController.text,
     //   //         lname: _lnController.text,

@@ -17,7 +17,7 @@ class PaymentContractImpl implements PaymentContract {
       final _response = await _impl.depositPayment(entity);
       return Right(_response);
     } catch (e) {
-      return Left(ServerFailure(e.toString()));
+      return Left(AppFailure(e.toString()));
     }
   }
 
@@ -27,7 +27,7 @@ class PaymentContractImpl implements PaymentContract {
       final _response = await _impl.overviewPayment();
       return Right(_response);
     } catch (e) {
-      return Left(ServerFailure(e.toString()));
+      return Left(AppFailure(e.toString()));
     }
   }
 
@@ -37,7 +37,7 @@ class PaymentContractImpl implements PaymentContract {
       final _response = await _impl.transactionPayment();
       return Right(_response);
     } catch (e) {
-      return Left(ServerFailure(e.toString()));
+      return Left(AppFailure(e.toString()));
     }
   }
 }

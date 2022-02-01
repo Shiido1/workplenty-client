@@ -76,7 +76,10 @@ class ProfileImageCardThree extends StatelessWidget {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              SvgPicture.asset(AppImages.location,color: Pallets.white,),
+              SvgPicture.asset(
+                AppImages.location,
+                color: Pallets.white,
+              ),
               SizedBox(width: 4.w),
               TextView(
                   text: 'Abuja, Nigeria',

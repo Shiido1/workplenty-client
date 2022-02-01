@@ -13,7 +13,6 @@ class Hire extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: getCustomAppBar(context, 'Hire',
-        
             bottom: TabBar(
               tabs: [
                 Container(

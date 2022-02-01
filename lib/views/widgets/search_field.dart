@@ -44,7 +44,7 @@ class SearchAndFilter extends StatelessWidget {
         ),
         SizedBox(width: 5.w),
         GestureDetector(
-        onTap:onFilter,
+          onTap: onFilter,
           child: Container(
             padding: EdgeInsets.all(6.w),
             decoration: BoxDecoration(
