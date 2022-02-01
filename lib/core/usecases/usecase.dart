@@ -12,6 +12,9 @@ class UseCase<Type, Params> {
   Future<Either<Failure, Type>>? resetPasswordUseCase(Params params) {}
   Future<Either<Failure, Type>>? requestVerificationPinUseCase(Params params) {}
   Future<Either<Failure, Type>>? pinVerificationConfirmation(Params params) {}
+  Future<Either<Failure, Type>>? updateProfileBio(Params params) {}
+  Future<Either<Failure, Type>>? updateLocationBio(Params params) {}
+  Future<Either<Failure, Type>>? updateAvatarBio(Params params) {}
 }
 
 class NoParams extends Equatable {

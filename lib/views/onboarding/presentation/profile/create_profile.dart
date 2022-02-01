@@ -171,10 +171,7 @@ class _CreateProfileState extends State<CreateProfile> {
           textAlign: TextAlign.left,
         ),
         SizedBox(height: 8.h),
-        EditFormField(
-          label: '',
-          suffixIcon: Icons.keyboard_arrow_down,
-        ),
+        EditFormField(label: '', suffixIcon: Icons.keyboard_arrow_down),
         SizedBox(height: Utils.getDeviceHeight(context) * .3),
       ],
     );
