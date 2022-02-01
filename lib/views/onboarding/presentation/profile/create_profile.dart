@@ -1,17 +1,28 @@
+import 'dart:io';
+
+import 'package:client/core/di/injector.dart';
+import 'package:client/core/helper/configs/instances.dart';
 import 'package:client/core/helper/helper_handler.dart';
 import 'package:client/core/helper/routes/navigation.dart';
 import 'package:client/core/helper/routes/routes.dart';
+import 'package:client/core/helper/utils/image_picker.dart';
 import 'package:client/core/helper/utils/images.dart';
 import 'package:client/core/helper/utils/pallets.dart';
+import 'package:client/core/helper/utils/validators.dart';
 import 'package:client/core/helper/utils/workplenty_dialog.dart';
+import 'package:client/views/onboarding/domain/entity/profile/profile_entity.dart';
+import 'package:client/views/onboarding/presentation/profile/bloc/profile_bloc.dart';
 import 'package:client/views/onboarding/presentation/profile/widget/button_widget.dart';
 import 'package:client/views/widgets/body_widget.dart';
 import 'package:client/views/widgets/buttons.dart';
+import 'package:client/views/widgets/custom_profile_picture.dart';
 import 'package:client/views/widgets/default_appbar.dart';
 import 'package:client/views/widgets/edit_form_widget.dart';
+import 'package:client/views/widgets/global_dialog.dart';
 import 'package:client/views/widgets/image_loader.dart';
 import 'package:client/views/widgets/text_views.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CreateProfile extends StatefulWidget {
@@ -25,16 +36,22 @@ class _CreateProfileState extends State<CreateProfile> {
   double _progress = 70;
   int _index = 0;
   final _loadingKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
 
-  List<String> _fields = [
-    "UI/UX Development",
-    "Marketing",
-    "Writing",
-    "Mobile",
-    "Customer Support"
-  ];
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
+  final TextEditingController _genderController = TextEditingController();
 
-  List<String> _selectedFields = [];
+  final TextEditingController _countryController = TextEditingController();
+  final TextEditingController _stateController = TextEditingController();
+  final TextEditingController _cityController = TextEditingController();
+  final TextEditingController _zipcodeController = TextEditingController();
+  final TextEditingController _addressController = TextEditingController();
+  final TextEditingController _apartmentController = TextEditingController();
+
+  final _bloc = ProfileBloc(inject());
+  final _pickImage = ImagePickerHandler();
+  File? _imageFile;
 
   @override
   Widget build(BuildContext context) {
@@ -56,53 +73,100 @@ class _CreateProfileState extends State<CreateProfile> {
               fontSize: 22,
               color: Pallets.white,
               textAlign: TextAlign.center)),
-      body: BodyWidget(
-        height: 0,
-        width: 0,
-        child: Stack(
-          children: [
-            ListView(
-              shrinkWrap: true,
+      body: BlocListener<ProfileBloc, ProfileState>(
+        bloc: _bloc,
+        listener: (context, state) {
+          if (state is ProfileLoading) {
+            WorkPlenty.showLoading(context, _loadingKey, '');
+          }
+          if (state is ProfileSuccess) {
+            WorkPlenty.hideLoading(_loadingKey);
+            _increamentIndex();
+          }
+          if (state is ProfileFailed) {
+            WorkPlenty.hideLoading(_loadingKey);
+            WorkPlenty.error(state.message);
+          }
+        },
+        child: BodyWidget(
+          height: 0,
+          width: 0,
+          child: Form(
+            key: _formKey,
+            child: Stack(
               children: [
-                LinearProgressIndicator(
-                  minHeight: 12.h,
-                  backgroundColor: Pallets.shade,
-                  value: _progress / 100,
-                  color: Pallets.shade100,
+                ListView(
+                  shrinkWrap: true,
+                  children: [
+                    LinearProgressIndicator(
+                      minHeight: 12.h,
+                      backgroundColor: Pallets.shade,
+                      value: _progress / 100,
+                      color: Pallets.shade100,
+                    ),
+                    SizedBox(height: 33.h),
+                    Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 16.w, vertical: 16.h),
+                        child: _bodySelect())
+                  ],
                 ),
-                SizedBox(height: 33.h),
-                Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
-                    child: _bodySelect())
+                BtnWidget(
+                  btnText: _index != 3 ? 'Next' : "Complete",
+                  showSkip: _index != 3,
+                  callback: () => _whenFormIsField(),
+                  goBack: () => _decreamentIndex(),
+                  skip: () {},
+                )
               ],
             ),
-            BtnWidget(
-              btnText: _index != 3 ? 'Next' : "Complete",
-              showSkip: _index != 3,
-              callback: () => _increamentIndex(),
-              goBack: () => _decreamentIndex(),
-              skip: () {},
-            )
-          ],
+          ),
         ),
       ),
     );
   }
 
   void _increamentIndex() {
-    if (_index == 3) {
+    if (_index == 2) {
       WorkPlenty.showSuccessDialog(context, _loadingKey,
           image: AppImages.blowWhistle,
           title: 'Profile looking good',
           message: 'Guess who just completed setting up is profile? You!',
-          btnText: 'Continue',
-          next: () => PageRouter.gotoNamed(Routes.board, context));
+          btnText: 'Continue', next: () {
+        PageRouter.goBack(context);
+        PageRouter.gotoNamed(Routes.board, context, clearStack: true);
+      });
       return;
     }
     _index++;
     _progress += 10;
     setState(() {});
+  }
+
+  void _whenFormIsField() {
+    if (_formKey.currentState!.validate()) {
+      if (_index == 0) {
+        _bloc.add(BioProfileUpdate(ProfileEntity(
+            title: _titleController.text,
+            description: _descriptionController.text,
+            gender: _genderController.text)));
+      }
+
+      if (_index == 1) {
+        _bloc.add(AvatarProfileUpdate(
+            ProfileEntity(avatar: _pickImage.multiPathFile(_imageFile!))));
+      }
+
+      if (_index == 2) {
+        _bloc.add(LocationProfileUpdate(ProfileEntity(
+            countryID: 160,
+            stateID: 435,
+            cityID: 123,
+            zipcode: '105101',
+            address: 'My address',
+            appartment: 'House 1')));
+      }
+    }
   }
 
   void _decreamentIndex() {
@@ -116,11 +180,23 @@ class _CreateProfileState extends State<CreateProfile> {
     setState(() {});
   }
 
+  Future<void> _getImage() async {
+    try {
+      await _pickImage.pickImage(
+          context: context,
+          file: (file) {
+            _imageFile = file;
+            setState(() {});
+          });
+    } catch (e) {
+      logger.e(e);
+    }
+  }
+
   Widget _bodySelect() {
     if (_index == 0) return _formOne();
     if (_index == 1) return _formTwo();
-    if (_index == 2) return _formThree();
-    return _formFour();
+    return _formThree();
   }
 
   Widget _formOne() {
@@ -150,7 +226,11 @@ class _CreateProfileState extends State<CreateProfile> {
           textAlign: TextAlign.left,
         ),
         SizedBox(height: 8.h),
-        EditFormField(label: 'Ex: Web Developer & Designer'),
+        EditFormField(
+          label: 'Ex: Web Developer & Designer',
+          controller: _titleController,
+          validator: _index == 0 ? Validators.validateString() : null,
+        ),
         SizedBox(height: 26.h),
         TextView(
           text: 'Description',
@@ -160,9 +240,12 @@ class _CreateProfileState extends State<CreateProfile> {
         ),
         SizedBox(height: 8.h),
         EditFormField(
-            height: 224.h,
-            label:
-                'Highlight your top skills, experience and interests. Lorem impsum lorem ipsum lorem ipsum'),
+          height: 224.h,
+          label:
+              'Highlight your top skills, experience and interests. Lorem impsum lorem ipsum lorem ipsum',
+          controller: _descriptionController,
+          validator: _index == 0 ? Validators.validateString() : null,
+        ),
         SizedBox(height: 26.h),
         TextView(
           text: 'Gender',
@@ -171,69 +254,28 @@ class _CreateProfileState extends State<CreateProfile> {
           textAlign: TextAlign.left,
         ),
         SizedBox(height: 8.h),
-        EditFormField(label: '', suffixIcon: Icons.keyboard_arrow_down),
+        EditFormField(
+          label: '',
+          suffixIcon: Icons.keyboard_arrow_down,
+          validator: _index == 0 ? Validators.validateString() : null,
+          controller: _genderController,
+          readOnly: true,
+          onTapped: () => globalDialog(
+              showRadioButton: false,
+              question: 'Gender',
+              context: context,
+              list: ['Male', "Female"],
+              picked: (v) {
+                _genderController.text = v;
+                setState(() {});
+              }),
+        ),
         SizedBox(height: Utils.getDeviceHeight(context) * .3),
       ],
     );
   }
 
   Widget _formTwo() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        TextView(
-          text: 'Select talents category?',
-          fontWeight: FontWeight.bold,
-          fontSize: 18,
-          textAlign: TextAlign.left,
-        ),
-        SizedBox(height: 3.h),
-        TextView(
-          text:
-              'Select 4 categories , we’ll build a custom homefeed tailored to talents',
-          fontWeight: FontWeight.w700,
-          fontSize: 14,
-          color: Pallets.mildGrey,
-          textAlign: TextAlign.left,
-        ),
-        SizedBox(height: 10.h),
-        Wrap(
-          spacing: 14.w,
-          children: List<Widget>.generate(
-            _fields.length,
-            (int index) {
-              final _field = _fields[index];
-              return ChoiceChip(
-                backgroundColor: Color(0xffC4E2FE),
-                label: TextView(
-                  text: _field,
-                  fontWeight: FontWeight.w700,
-                  fontSize: 14,
-                  color: _selectedFields.contains(_field)
-                      ? Pallets.white
-                      : Pallets.shade100,
-                ),
-                selected: _selectedFields.contains(_field),
-                selectedColor: _selectedFields.contains(_field)
-                    ? Pallets.primary100
-                    : Pallets.chipBackground,
-                onSelected: (bool selected) {
-                  setState(() {
-                    _selectedFields.contains(_field)
-                        ? _selectedFields.remove(_field)
-                        : _selectedFields.add(_field);
-                  });
-                },
-              );
-            },
-          ).toList(),
-        ),
-        SizedBox(height: Utils.getDeviceHeight(context) * .3),
-      ],
-    );
-  }
-
-  Widget _formThree() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
@@ -255,8 +297,12 @@ class _CreateProfileState extends State<CreateProfile> {
         ),
         SizedBox(height: 43.h),
         Center(
-          child: ImageLoader(
-              width: 238.w, height: 238.h, path: AppImages.imagePlaceHolder),
+          child: CustomProfilePicture(
+            file: _imageFile,
+            image: '',
+            initals: '',
+            radius: 100.r,
+          ),
         ),
         SizedBox(height: 43.h),
         ButtonWidget(
@@ -264,13 +310,13 @@ class _CreateProfileState extends State<CreateProfile> {
             buttonStyle: true,
             primary: Colors.transparent,
             color: Pallets.primary100,
-            onPressed: () {}),
+            onPressed: () => _getImage()),
         SizedBox(height: Utils.getDeviceHeight(context) * .3),
       ],
     );
   }
 
-  Widget _formFour() {
+  Widget _formThree() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -297,7 +343,11 @@ class _CreateProfileState extends State<CreateProfile> {
           textAlign: TextAlign.left,
         ),
         SizedBox(height: 8.h),
-        EditFormField(label: 'Nigeria', suffixIcon: Icons.keyboard_arrow_down),
+        EditFormField(
+            label: 'Nigeria',
+            suffixIcon: Icons.keyboard_arrow_down,
+            controller: _countryController,
+            validator: Validators.validateString()),
         SizedBox(height: 31.h),
         TextView(
           text: 'Street Address',
@@ -306,9 +356,15 @@ class _CreateProfileState extends State<CreateProfile> {
           textAlign: TextAlign.left,
         ),
         SizedBox(height: 8.h),
-        EditFormField(label: 'Ex : 123 Street Close'),
+        EditFormField(
+            label: 'Ex : 123 Street Close',
+            controller: _stateController,
+            validator: Validators.validateString()),
         SizedBox(height: 8.h),
-        EditFormField(label: 'Apartment/Suite'),
+        EditFormField(
+            label: 'Apartment/Suite',
+            controller: _apartmentController,
+            validator: Validators.validateString()),
         SizedBox(height: 31.h),
         TextView(
           text: 'City',
@@ -317,7 +373,10 @@ class _CreateProfileState extends State<CreateProfile> {
           textAlign: TextAlign.left,
         ),
         SizedBox(height: 8.h),
-        EditFormField(label: 'Search for your city'),
+        EditFormField(
+            label: 'Search for your city',
+            controller: _cityController,
+            validator: Validators.validateString()),
         SizedBox(height: 31.h),
         TextView(
           text: 'ZIP/Postal Code',
@@ -326,7 +385,10 @@ class _CreateProfileState extends State<CreateProfile> {
           textAlign: TextAlign.left,
         ),
         SizedBox(height: 8.h),
-        EditFormField(label: 'Ex: 00000'),
+        EditFormField(
+            label: 'Ex: 00000',
+            controller: _zipcodeController,
+            validator: Validators.validateString()),
         SizedBox(height: Utils.getDeviceHeight(context) * .3),
       ],
     );

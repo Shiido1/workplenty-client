@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'package:client/core/database/session_manager.dart';
+import 'package:client/core/helper/configs/instances.dart';
 import 'package:dio/dio.dart';
 
 import 'api_error.dart';
@@ -72,20 +73,20 @@ class NetworkService {
       switch (method) {
         case RequestMethod.post:
           response = await dio!.post(path,
-              queryParameters: params, data: data, options: await _getOption());
+              queryParameters: params, data: data, options: options);
           break;
         case RequestMethod.get:
-          response = await dio!
-              .get(path, queryParameters: params, options: await _getOption());
+          response =
+              await dio!.get(path, queryParameters: params, options: options);
 
           break;
         case RequestMethod.put:
-          response = await dio!.put(path,
-              queryParameters: params, data: data, options: await _getOption());
+          response = await dio!
+              .put(path, queryParameters: params, data: data, options: options);
           break;
         case RequestMethod.delete:
           response = await dio!.delete(path,
-              queryParameters: params, data: data, options: await _getOption());
+              queryParameters: params, data: data, options: options);
           break;
         case RequestMethod.upload:
           response = await dio!.post(path,
@@ -115,12 +116,12 @@ class NetworkService {
     }
   }
 
-  Future<Options> _getOption() async {
-    return Options(headers: {
-      "Authorization": "Bearer " + SessionManager.instance.authToken,
-      'Accept': 'application/json'
-    });
-  }
+  // Future<Options> _getOption() async {
+  //   return Options(headers: {
+  //     "Authorization": "Bearer " + SessionManager.instance.authToken,
+  //     'Accept': 'application/json'
+  //   });
+  // }
 }
 
 enum RequestMethod { post, get, put, delete, upload }

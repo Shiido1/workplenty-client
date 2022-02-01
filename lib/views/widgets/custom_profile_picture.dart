@@ -13,30 +13,44 @@ class CustomProfilePicture extends StatelessWidget {
   final double? radius;
   final String? image;
   final String? initals;
+  final Function()? tapImage;
+
   const CustomProfilePicture(
-      {this.file, this.radius, this.image = '', this.initals = '', Key? key})
+      {this.file,
+      this.radius,
+      this.tapImage,
+      this.image = '',
+      this.initals = '',
+      Key? key})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
     if (file != null) {
-      return CircleAvatar(
-        backgroundColor: Pallets.primary50,
-        radius: radius?.r,
-        backgroundImage: FileImage(file!),
+      return GestureDetector(
+        onTap: tapImage,
+        child: CircleAvatar(
+          backgroundColor: Pallets.primary50,
+          radius: radius?.r,
+          backgroundImage: FileImage(file!),
+        ),
       );
     }
     if (image!.isEmpty) {
-      return CircleAvatar(
-        backgroundColor: Pallets.primary50,
-        radius: radius?.r,
-        child: TextView(
-          text: initals ?? '',
-          fontSize: 24,
-          fontWeight: FontWeight.w500,
+      return GestureDetector(
+        onTap: tapImage,
+        child: CircleAvatar(
+          backgroundColor: Pallets.primary50,
+          radius: radius?.r,
+          child: TextView(
+            text: initals ?? '',
+            fontSize: 24,
+            fontWeight: FontWeight.w500,
+          ),
         ),
       );
     }
     return CircularProfileAvatar(image!,
+        onTap: tapImage,
         radius: radius!.r,
         backgroundColor: Colors.transparent,
         placeHolder: (c, url) => CircleAvatar(

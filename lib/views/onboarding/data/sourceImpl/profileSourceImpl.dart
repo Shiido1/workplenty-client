@@ -1,4 +1,5 @@
 import 'package:client/core/api/profile/profile_api.dart';
+import 'package:client/core/entity/default_response.dart';
 import 'package:client/views/onboarding/data/model/profile_update_response/profile_update_response.dart';
 import 'package:client/views/onboarding/domain/entity/profile/profile_entity.dart';
 import 'package:client/views/onboarding/domain/source/profile_source.dart';
@@ -9,18 +10,18 @@ class ProfileSourceImpl implements ProfileSource {
   ProfileSourceImpl({required ProfileApi api}) : _api = api;
 
   @override
-  Future<ProfileUpdateResponse> profileAvatarUpdate(
+  Future<DefaultResponse> profileAvatarUpdate(
       ProfileEntity entity) async {
     return await _api.profileAvatarUpdate(entity);
   }
 
   @override
-  Future<ProfileUpdateResponse> profileBioUpdate(ProfileEntity entity) async {
+  Future<DefaultResponse> profileBioUpdate(ProfileEntity entity) async {
     return await _api.profileBioUpdate(entity);
   }
 
   @override
-  Future<ProfileUpdateResponse> profileLocationUpdate(
+  Future<DefaultResponse> profileLocationUpdate(
       ProfileEntity entity) async {
     return await _api.profileLocationUpdate(entity);
   }

@@ -53,10 +53,9 @@ class Errors {
       picture =
           json["picture"] == null ? [] : List<String>.from(json["picture"]);
     }
-    if (json["receiver_phone_no"] is List) {
-      receiverPhoneNo = json["receiver_phone_no"] == null
-          ? []
-          : List<String>.from(json["receiver_phone_no"]);
+    if (json["phone"] is List) {
+      receiverPhoneNo =
+          json["phone"] == null ? [] : List<String>.from(json["phone"]);
     }
   }
 

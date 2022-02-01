@@ -21,9 +21,12 @@ class SessionManager {
   }
 
   static const String keyAuthToken = 'auth_token';
+  static const String keyAuthTokenType = 'token_type';
   static const String keyUserData = 'users_data';
   static const String logginKey = 'loggin';
 
+  String get authTokenType =>
+      sharedPreferences!.getString(keyAuthTokenType) ?? '';
   String get authToken => sharedPreferences!.getString(keyAuthToken) ?? '';
 
   bool get isLoggedIn => sharedPreferences!.getBool(logginKey) ?? false;
@@ -33,6 +36,9 @@ class SessionManager {
 
   set authToken(String authToken) =>
       sharedPreferences!.setString(keyAuthToken, authToken);
+
+  set authTokenType(String authTokenType) =>
+      sharedPreferences!.setString(keyAuthTokenType, authTokenType);
 
   Map<String, dynamic> get usersData =>
       json.decode(sharedPreferences!.getString(keyUserData) ?? '');

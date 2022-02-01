@@ -1,3 +1,4 @@
+import 'package:client/core/database/session_manager.dart';
 import 'package:client/core/error/failures.dart';
 import 'package:client/views/onboarding/data/model/auth/auth_response/auth_response.dart';
 import 'package:client/views/onboarding/data/model/auth/forgot_password_response/forgot_password_response.dart';
@@ -36,6 +37,8 @@ class AuthContractImpl implements AuthContract {
   Future<Either<Failure, AuthResponse>> register(entity) async {
     try {
       final _response = await _impl.register(entity);
+      SessionManager.instance.authTokenType = _response.data?.tokenType ?? '';
+      SessionManager.instance.authToken = _response.data?.token ?? '';
       return Right(_response);
     } catch (e) {
       return Left(AppFailure(e.toString()));

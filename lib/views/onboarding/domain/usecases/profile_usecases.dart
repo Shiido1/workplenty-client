@@ -1,3 +1,4 @@
+import 'package:client/core/entity/default_response.dart';
 import 'package:client/core/error/failures.dart';
 import 'package:client/core/usecases/usecase.dart';
 import 'package:client/views/onboarding/data/contractImpl/profileContractImpl.dart';
@@ -5,25 +6,26 @@ import 'package:client/views/onboarding/domain/entity/profile/profile_entity.dar
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 
-class ProfileUseCases extends UseCase<ProfileEntity, Params> {
+class ProfileUseCases extends UseCase<DefaultResponse, Params> {
   final ProfileContractImpl _repository;
 
   ProfileUseCases(this._repository);
 
   @override
-  Future<Either<Failure, ProfileEntity>>? updateProfileBio(
+  Future<Either<Failure, DefaultResponse>>? updateProfileBio(
       Params params) async {
     return await _repository.profileBioUpdate(params.entity!);
   }
 
   @override
-  Future<Either<Failure, ProfileEntity>>? updateLocationBio(
+  Future<Either<Failure, DefaultResponse>>? updateLocationBio(
       Params params) async {
     return await _repository.profileLocationUpdate(params.entity!);
   }
 
   @override
-  Future<Either<Failure, ProfileEntity>>? updateAvatarBio(Params params) async {
+  Future<Either<Failure, DefaultResponse>>? updateAvatarBio(
+      Params params) async {
     return await _repository.profileAvatarUpdate(params.entity!);
   }
 }

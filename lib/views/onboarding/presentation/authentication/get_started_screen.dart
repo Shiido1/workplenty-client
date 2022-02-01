@@ -56,8 +56,9 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
             }
             if (state is AuthblocSuccess) {
               WorkPlenty.hideLoading(_loadingKey);
-              PageRouter.gotoNamed(Routes.verifyPin, context,
-                  args: _emailController.text);
+              // PageRouter.gotoNamed(Routes.verifyPin, context,
+              //     args: _emailController.text);
+              PageRouter.gotoWidget(SetUpProfile(), context);
             }
             if (state is AuthblocFailed) {
               WorkPlenty.hideLoading(_loadingKey);
@@ -254,7 +255,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
           firstName: _fnController.text,
           lastName: _lnController.text,
           username: _usernameController.text,
-          phone: '${_country?.phoneCode ?? '+234'}${_phoneController.text}',
+          phone: '+${_country?.phoneCode ?? '234'}${_phoneController.text}',
           password: _passwordController.text)));
     }
   }

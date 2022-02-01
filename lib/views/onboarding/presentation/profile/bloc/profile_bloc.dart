@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:client/core/helper/configs/instances.dart';
 import 'package:client/views/onboarding/domain/entity/profile/profile_entity.dart';
 import 'package:client/views/onboarding/domain/usecases/profile_usecases.dart';
 import 'package:equatable/equatable.dart';
@@ -18,8 +19,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
           final _response =
               await _useCase.updateProfileBio(Params(entity: event.entity));
           _response!.fold(
-              (l) => emit(ProfileFailed(message: l.errorMessage(l)!)),
-              (r) => emit(ProfileSuccess(response: r)));
+              (l) => logger.e(l), (r) => emit(ProfileSuccess(response: r)));
         } catch (e) {
           emit(ProfileFailed(message: e.toString()));
         }
