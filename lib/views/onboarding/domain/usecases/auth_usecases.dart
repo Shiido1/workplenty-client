@@ -6,7 +6,7 @@ import 'package:client/views/onboarding/domain/entity/auth/auth_entity.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 
- class AuthUsesCases extends UseCase<AuthEntity, Params> {
+class AuthUsesCases extends UseCase<AuthEntity, Params> {
   final AuthContractImpl _repository;
 
   AuthUsesCases(this._repository);

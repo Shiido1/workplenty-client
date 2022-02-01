@@ -38,6 +38,20 @@ class AuthblocBloc extends Bloc<AuthblocEvent, AuthblocState> {
           emit(AuthblocFailed(message: e.toString()));
         }
       }
+
+      /// Verify PIN Event
+      if (event is VerifyPinEvent) {
+        try {
+          emit(AuthblocLoading());
+          final _response =
+              await _useCase.loginUseCase(Params(entity: event.entity));
+          _response.fold(
+              (l) => emit(AuthblocFailed(message: l.errorMessage(l)!)),
+              (r) => emit(AuthblocSuccess(response: r)));
+        } catch (e) {
+          emit(AuthblocFailed(message: e.toString()));
+        }
+      }
     });
   }
 }

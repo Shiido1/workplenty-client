@@ -18,3 +18,9 @@ class LoginEvent extends AuthblocEvent {
 
   const LoginEvent(this.entity);
 }
+
+class VerifyPinEvent extends AuthblocEvent {
+  final AuthEntity entity;
+
+  const VerifyPinEvent(this.entity);
+}
