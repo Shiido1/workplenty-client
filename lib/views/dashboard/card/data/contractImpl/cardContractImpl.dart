@@ -1,7 +1,7 @@
 import 'package:client/core/error/failures.dart';
-import 'package:client/views/onboarding/data/model/card_response/card_response.dart';
-import 'package:client/views/onboarding/data/sourceImpl/cardSourceImpl.dart';
-import 'package:client/views/onboarding/domain/contract/card_contract.dart';
+import 'package:client/views/dashboard/card/data/model/card_response/card_response.dart';
+import 'package:client/views/dashboard/card/data/sourceImpl/cardSourceImpl.dart';
+import 'package:client/views/dashboard/card/domain/contract/card_contract.dart';
 import 'package:client/views/onboarding/domain/entity/card/card_entity.dart';
 import 'package:dartz/dartz.dart';
 

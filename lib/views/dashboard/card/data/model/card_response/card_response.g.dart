@@ -1,25 +1,24 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'auth_response.dart';
+part of 'card_response.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-AuthResponse _$AuthResponseFromJson(Map<String, dynamic> json) => AuthResponse(
+CardResponse _$CardResponseFromJson(Map<String, dynamic> json) => CardResponse(
       msg: json['msg'] as String?,
-      data: json['data'] == null
-          ? null
-          : Data.fromJson(json['data'] as Map<String, dynamic>),
+      data: (json['data'] as List<dynamic>?)
+          ?.map((e) => Datum.fromJson(e as Map<String, dynamic>))
+          .toList(),
       success: json['success'] as bool?,
       code: json['code'] as int?,
-    )..errorDebug = json['errorDebug'];
+    );
 
-Map<String, dynamic> _$AuthResponseToJson(AuthResponse instance) =>
+Map<String, dynamic> _$CardResponseToJson(CardResponse instance) =>
     <String, dynamic>{
-      'errorDebug': instance.errorDebug,
       'msg': instance.msg,
-      'data': instance.data?.toJson(),
+      'data': instance.data,
       'success': instance.success,
       'code': instance.code,
     };

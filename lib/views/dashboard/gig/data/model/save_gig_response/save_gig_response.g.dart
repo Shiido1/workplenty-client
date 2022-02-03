@@ -1,12 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'auth_response.dart';
+part of 'save_gig_response.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-AuthResponse _$AuthResponseFromJson(Map<String, dynamic> json) => AuthResponse(
+SaveGigResponse _$SaveGigResponseFromJson(Map<String, dynamic> json) =>
+    SaveGigResponse(
       msg: json['msg'] as String?,
       data: json['data'] == null
           ? null
@@ -15,7 +16,7 @@ AuthResponse _$AuthResponseFromJson(Map<String, dynamic> json) => AuthResponse(
       code: json['code'] as int?,
     )..errorDebug = json['errorDebug'];
 
-Map<String, dynamic> _$AuthResponseToJson(AuthResponse instance) =>
+Map<String, dynamic> _$SaveGigResponseToJson(SaveGigResponse instance) =>
     <String, dynamic>{
       'errorDebug': instance.errorDebug,
       'msg': instance.msg,

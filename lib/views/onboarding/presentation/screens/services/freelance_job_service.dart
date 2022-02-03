@@ -142,8 +142,6 @@ class FreeLanceJobService extends StatelessWidget {
               vertical: 25.33,
             ),
             SizedBox(height: 23.h),
-
-            /// TODO: complete the UI designs from there
             ReviewBgCard(
               Column(
                 mainAxisSize: MainAxisSize.min,

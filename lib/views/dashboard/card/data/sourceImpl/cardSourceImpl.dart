@@ -1,7 +1,7 @@
 import 'package:client/core/api/card/card_api.dart';
-import 'package:client/views/onboarding/data/model/card_response/card_response.dart';
+import 'package:client/views/dashboard/card/data/model/card_response/card_response.dart';
 import 'package:client/views/onboarding/domain/entity/card/card_entity.dart';
-import 'package:client/views/onboarding/domain/source/card_source.dart';
+import 'package:client/views/dashboard/card/domain/source/card_source.dart';
 
 class CardScourceImpl implements CardScource {
   final CardApi _api;
