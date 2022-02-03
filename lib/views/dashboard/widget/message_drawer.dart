@@ -33,62 +33,59 @@ class MessageDrawerWidget extends StatelessWidget {
               ),
             ),
             SizedBox(height: 16.h),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  TextView(
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(left: 12.w),
+                  child: TextView(
                     text: 'Message',
                     fontWeight: FontWeight.w500,
                     textAlign: TextAlign.left,
                   ),
-                  SizedBox(height: 20.h),
-                  Row(
-                    children: [
-                      Checkbox(value: false, onChanged: (bool? value) {}),
-                      TextView(
-                        text: 'All',
-                        fontWeight: FontWeight.w500,
-                        textAlign: TextAlign.left,
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 16.h),
-                  Row(
-                    children: [
-                      Checkbox(value: false, onChanged: (bool? value) {}),
-                      TextView(
-                        text: 'Unread',
-                        fontWeight: FontWeight.w500,
-                        textAlign: TextAlign.left,
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 16.h),
-                  Row(
-                    children: [
-                      Checkbox(value: false, onChanged: (bool? value) {}),
-                      TextView(
-                        text: 'Archived',
-                        fontWeight: FontWeight.w500,
-                        textAlign: TextAlign.left,
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 16.h),
-                  Row(
-                    children: [
-                      Checkbox(value: false, onChanged: (bool? value) {}),
-                      TextView(
-                        text: 'Spam',
-                        fontWeight: FontWeight.w500,
-                        textAlign: TextAlign.left,
-                      ),
-                    ],
-                  )
-                ],
-              ),
+                ),
+                SizedBox(height: 20.h),
+                Row(
+                  children: [
+                    Checkbox(value: false, onChanged: (bool? value) {}),
+                    TextView(
+                      text: 'All',
+                      fontWeight: FontWeight.w500,
+                      textAlign: TextAlign.left,
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Checkbox(value: false, onChanged: (bool? value) {}),
+                    TextView(
+                      text: 'Unread',
+                      fontWeight: FontWeight.w500,
+                      textAlign: TextAlign.left,
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Checkbox(value: false, onChanged: (bool? value) {}),
+                    TextView(
+                      text: 'Archived',
+                      fontWeight: FontWeight.w500,
+                      textAlign: TextAlign.left,
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Checkbox(value: false, onChanged: (bool? value) {}),
+                    TextView(
+                      text: 'Spam',
+                      fontWeight: FontWeight.w500,
+                      textAlign: TextAlign.left,
+                    ),
+                  ],
+                )
+              ],
             ),
           ],
         ),

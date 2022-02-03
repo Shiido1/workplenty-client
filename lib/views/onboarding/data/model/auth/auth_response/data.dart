@@ -1,6 +1,5 @@
+import 'package:client/core/entity/user/user.dart';
 import 'package:json_annotation/json_annotation.dart';
-
-import 'user.dart';
 
 part 'data.g.dart';
 

@@ -38,10 +38,6 @@ class ProfileImageCardTwo extends StatelessWidget {
                   fontSize: 22,
                   color: Pallets.white,
                   textAlign: TextAlign.center),
-              // SizedBox(
-              //   height: 50.h,
-              //   width: 50.w,
-              // )
               ImageLoader(
                 path: AppImages.bell,
                 // onTap: () =>
@@ -83,6 +79,7 @@ class ProfileImageCardTwo extends StatelessWidget {
                     border: Border.all(color: Pallets.orange600)),
                 child: TextView(
                     text: 'Client',
+                    fontSize: 10,
                     fontWeight: FontWeight.w400,
                     color: Pallets.white,
                     textAlign: TextAlign.center),
@@ -101,7 +98,7 @@ class ProfileImageCardTwo extends StatelessWidget {
               TextView(
                   text: 'Abuja, Nigeria',
                   fontWeight: FontWeight.w700,
-                  fontSize: 18,
+                  fontSize: 16,
                   color: Pallets.grey100,
                   maxLines: 1,
                   textOverflow: TextOverflow.ellipsis,

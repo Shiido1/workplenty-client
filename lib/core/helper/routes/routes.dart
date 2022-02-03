@@ -1,6 +1,4 @@
-import 'package:client/core/helper/configs/instances.dart';
 import 'package:client/views/dashboard/board.dart';
-import 'package:client/views/onboarding/data/model/auth/verification_pin_request_response/verification_pin_request_response.dart';
 import 'package:client/views/onboarding/presentation/authentication/email_verification.dart';
 import 'package:client/views/onboarding/presentation/screens/services/freelance_job_service.dart';
 import 'package:client/views/onboarding/presentation/screens/services/home_service.dart';

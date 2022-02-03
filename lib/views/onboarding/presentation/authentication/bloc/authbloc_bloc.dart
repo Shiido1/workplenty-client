@@ -11,7 +11,7 @@ class AuthblocBloc extends Bloc<AuthblocEvent, AuthblocState> {
 
   AuthblocBloc(this._useCase) : super(AuthblocInitial()) {
     on<AuthblocEvent>((event, emit) async {
-      /// Register Event
+      // / Register Event
       if (event is RegisterEvent) {
         try {
           emit(AuthblocLoading());

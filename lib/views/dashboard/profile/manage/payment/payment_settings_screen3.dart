@@ -34,97 +34,100 @@ class _PaymentSetting3State extends State<PaymentSetting3> {
       body: BodyWidget(
           child: Stack(
         children: [
-          ListView(
-            children: [
-              SizedBox(
-                height: 30.h,
-              ),
-              TextView(
-                text: 'Card Number',
-                fontWeight: FontWeight.w400,
-                fontSize: 16,
-              ),
-              EditFormField(
-                decoration: _getDecoration('', dropDown: false),
-              ),
-              SizedBox(
-                height: 35.h,
-              ),
-              TextView(
-                text: 'Expiry Date',
-                fontWeight: FontWeight.w400,
-                fontSize: 16,
-              ),
-              Padding(
-                padding: EdgeInsets.only(right: 100.w),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: EditFormField(
-                        decoration: _getDecoration('Month', dropDown: true),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 30.w,
-                    ),
-                    Expanded(
-                      child: EditFormField(
-                        decoration: _getDecoration('Year', dropDown: true),
-                      ),
-                    ),
-                  ],
+          Padding(
+            padding: EdgeInsets.all(8.w),
+            child: ListView(
+              children: [
+                SizedBox(
+                  height: 30.h,
                 ),
-              ),
-              SizedBox(
-                height: 35.h,
-              ),
-              TextView(
-                text: 'Name on Card',
-                fontWeight: FontWeight.w400,
-                fontSize: 16,
-              ),
-              EditFormField(
-                decoration: _getDecoration('', dropDown: false),
-              ),
-              SizedBox(
-                height: 35.h,
-              ),
-              TextView(
-                text: 'CVV',
-                fontWeight: FontWeight.w400,
-                fontSize: 16,
-              ),
-              Padding(
-                padding: EdgeInsets.only(right: 200.w),
-                child: EditFormField(
+                TextView(
+                  text: 'Card Number',
+                  fontWeight: FontWeight.w400,
+                  fontSize: 16,
+                ),
+                EditFormField(
                   decoration: _getDecoration('', dropDown: false),
                 ),
-              ),
-              SizedBox(height: 16.h),
-              EditFormField(
-                decoration:
-                    _getDecoration('Bank Account Number', dropDown: false),
-              ),
-              SizedBox(
-                height: 60.h,
-              ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Row(
-                  children: [
-                    Checkbox(value: false, onChanged: (bool? value) {}),
-                    TextView(
-                      text: 'Make this your default payment method',
-                      fontWeight: FontWeight.w500,
-                      textAlign: TextAlign.left,
-                    ),
-                  ],
+                SizedBox(
+                  height: 35.h,
                 ),
-              ),
-              SizedBox(
-                height: 30.h,
-              ),
-            ],
+                TextView(
+                  text: 'Expiry Date',
+                  fontWeight: FontWeight.w400,
+                  fontSize: 16,
+                ),
+                Padding(
+                  padding: EdgeInsets.only(right: 100.w),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: EditFormField(
+                          decoration: _getDecoration('Month', dropDown: true),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 30.w,
+                      ),
+                      Expanded(
+                        child: EditFormField(
+                          decoration: _getDecoration('Year', dropDown: true),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 35.h,
+                ),
+                TextView(
+                  text: 'Name on Card',
+                  fontWeight: FontWeight.w400,
+                  fontSize: 16,
+                ),
+                EditFormField(
+                  decoration: _getDecoration('', dropDown: false),
+                ),
+                SizedBox(
+                  height: 35.h,
+                ),
+                TextView(
+                  text: 'CVV',
+                  fontWeight: FontWeight.w400,
+                  fontSize: 16,
+                ),
+                Padding(
+                  padding: EdgeInsets.only(right: 200.w),
+                  child: EditFormField(
+                    decoration: _getDecoration('', dropDown: false),
+                  ),
+                ),
+                SizedBox(height: 16.h),
+                EditFormField(
+                  decoration:
+                      _getDecoration('Bank Account Number', dropDown: false),
+                ),
+                SizedBox(
+                  height: 60.h,
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Row(
+                    children: [
+                      Checkbox(value: false, onChanged: (bool? value) {}),
+                      TextView(
+                        text: 'Make this your default payment method',
+                        fontWeight: FontWeight.w500,
+                        textAlign: TextAlign.left,
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 30.h,
+                ),
+              ],
+            ),
           ),
           Align(
               alignment: Alignment.bottomCenter,

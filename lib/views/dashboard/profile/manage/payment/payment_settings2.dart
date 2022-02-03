@@ -5,6 +5,7 @@ import 'package:client/views/dashboard/profile/manage/payment/payment_settings_s
 import 'package:client/views/widgets/body_widget.dart';
 import 'package:client/views/widgets/default_appbar.dart';
 import 'package:client/views/widgets/image_loader.dart';
+import 'package:client/views/widgets/review_bg_card.dart';
 import 'package:client/views/widgets/text_views.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -48,48 +49,53 @@ class _PaymentSettings2State extends State<PaymentSettings2> {
 
   widgetContainer() => GestureDetector(
         onTap: () => PageRouter.gotoWidget(PaymentSetting3(), context),
-        child: Container(
-          padding: EdgeInsets.all(16.w),
-          color: Pallets.white,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              ImageLoader(
-                path: AppImages.master,
-              ),
-              SizedBox(
-                width: 20.w,
-              ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    TextView(
-                      text: 'Master Card Debit (5432)',
-                      fontWeight: FontWeight.w400,
-                      fontSize: 16,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ReviewBgCard(
+            Container(
+              padding: EdgeInsets.all(16.w),
+              color: Pallets.white,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ImageLoader(
+                    path: AppImages.master,
+                  ),
+                  SizedBox(
+                    width: 20.w,
+                  ),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        TextView(
+                          text: 'Master Card Debit (5432)',
+                          fontWeight: FontWeight.w400,
+                          fontSize: 16,
+                        ),
+                        TextView(
+                          text: '02 / 2023',
+                          fontWeight: FontWeight.w400,
+                          fontSize: 16,
+                        ),
+                        TextView(
+                          text: 'Oluwafemi Allen',
+                          fontWeight: FontWeight.w400,
+                          fontSize: 16,
+                        ),
+                      ],
                     ),
-                    TextView(
-                      text: '02 / 2023',
-                      fontWeight: FontWeight.w400,
-                      fontSize: 16,
-                    ),
-                    TextView(
-                      text: 'Oluwafemi Allen',
-                      fontWeight: FontWeight.w400,
-                      fontSize: 16,
-                    ),
-                  ],
-                ),
+                  ),
+                  IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.delete_outline,
+                        color: Pallets.red600,
+                      ))
+                ],
               ),
-              IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.delete_outline,
-                    color: Pallets.red600,
-                  ))
-            ],
+            ),
           ),
         ),
       );

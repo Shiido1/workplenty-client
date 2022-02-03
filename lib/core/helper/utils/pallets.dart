@@ -82,4 +82,6 @@ class Pallets {
   static Color lime700 = const Color(0xff4D7C0F);
   static Color transparent = const Color(0x00000000);
   static Color borderStroke = const Color(0xffD0D5DD);
+
+  static Color drawerColor = const Color(0xffF3F3F3);
 }

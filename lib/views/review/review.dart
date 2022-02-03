@@ -30,7 +30,7 @@ class Review extends StatelessWidget {
                 starCount: 5,
                 rating: 4,
               ),
-              SizedBox(height: 16.h),
+              SizedBox(height: 32.h),
               TextView(
                   text: '4.7',
                   fontWeight: FontWeight.w700,

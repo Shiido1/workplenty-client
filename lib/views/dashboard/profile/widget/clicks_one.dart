@@ -8,6 +8,7 @@ class ClickOne extends StatelessWidget {
   final String? image;
   final String? text;
   final Widget? widget;
+  final Color? color;
 
   final bool? trailing;
   final MainAxisAlignment? mainAxisAlignment;
@@ -18,7 +19,8 @@ class ClickOne extends StatelessWidget {
       this.widget,
       this.mainAxisAlignment,
       this.trailing = false,
-      Key? key})
+      Key? key,
+      this.color})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -48,10 +50,12 @@ class ClickOne extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                   fontSize: 16,
                   maxLines: 1,
+                  color: color,
                   textOverflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.left),
             ),
-            if (trailing!) Icon(Icons.keyboard_arrow_right)
+            if (trailing!) Icon(Icons.keyboard_arrow_right),
+            if (widget != null) widget!,
           ],
         ),
       ),

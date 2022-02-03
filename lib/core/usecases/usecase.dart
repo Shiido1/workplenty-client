@@ -15,6 +15,8 @@ class UseCase<Type, Params> {
   Future<Either<Failure, Type>>? updateProfileBio(Params params) {}
   Future<Either<Failure, Type>>? updateLocationBio(Params params) {}
   Future<Either<Failure, Type>>? updateAvatarBio(Params params) {}
+  Future<Either<Failure, Type>>? saveGigUseCase(Params params) {}
+  Future<Either<Failure, Type>>? getAllCardUseCase() {}
 }
 
 class NoParams extends Equatable {

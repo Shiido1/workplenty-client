@@ -1,8 +1,8 @@
 import 'package:client/core/error/failures.dart';
-import 'package:client/views/onboarding/data/model/gig/remove_attachment_response/remove_attachment_response.dart';
-import 'package:client/views/onboarding/data/model/gig/save_gig_response/save_gig_response.dart';
-import 'package:client/views/onboarding/data/sourceImpl/gigSourceImpl.dart';
-import 'package:client/views/onboarding/domain/contract/gig_contract.dart';
+import 'package:client/views/dashboard/gig/data/model/remove_attachment_response/remove_attachment_response.dart';
+import 'package:client/views/dashboard/gig/data/model/save_gig_response/save_gig_response.dart';
+import 'package:client/views/dashboard/gig/data/sourceImpl/gigSourceImpl.dart';
+import 'package:client/views/dashboard/gig/domain/contract/gig_contract.dart';
 import 'package:dartz/dartz.dart';
 
 class GigContractImpl implements GigContract {

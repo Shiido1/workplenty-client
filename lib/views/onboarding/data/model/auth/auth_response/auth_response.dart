@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:client/views/onboarding/domain/entity/auth/auth_entity.dart';
 import 'package:json_annotation/json_annotation.dart';
 

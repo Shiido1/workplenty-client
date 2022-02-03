@@ -1,3 +1,5 @@
+// ignore_for_file: unused_field
+
 import 'package:client/core/helper/routes/navigation.dart';
 import 'package:client/core/helper/utils/pallets.dart';
 import 'package:client/core/helper/utils/validators.dart';
