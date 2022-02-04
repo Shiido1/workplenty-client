@@ -1,10 +1,15 @@
+import 'package:client/core/helper/configs/instances.dart';
 import 'package:client/core/network/network_service.dart';
 import 'package:client/core/network/url_config.dart';
 import 'package:client/views/onboarding/data/model/auth/auth_response/auth_response.dart';
-import 'package:client/views/onboarding/domain/entity/auth/forgot_password_entity.dart';
+import 'package:client/views/onboarding/data/model/auth/verification_pin_request_response/verification_pin_request_response.dart';
 import 'package:client/views/onboarding/domain/entity/auth/auth_entity.dart';
+import 'package:client/views/onboarding/domain/entity/auth/forgot_password_entity.dart';
 import 'package:client/views/onboarding/domain/entity/auth/pin_entity.dart';
 import 'package:client/views/onboarding/domain/entity/auth/reset_password_entity.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+
+GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
 
 class AuthApi {
   final NetworkService _networkService;
@@ -22,6 +27,16 @@ class AuthApi {
     }
   }
 
+  Future<AuthResponse> socialAuthentication(AuthEntity entity) async {
+    try {
+      final _response = await _googleSignIn.signIn();
+      logger.d(_response?.email);
+      return AuthResponse();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<AuthResponse> register(AuthEntity entity) async {
     try {
       final _response = await _networkService.call(
@@ -33,42 +48,44 @@ class AuthApi {
     }
   }
 
-  Future<dynamic> forgotPassword(ForgotPasswordEntity entity) async {
+  Future<AuthResponse> forgotPassword(ForgotPasswordEntity entity) async {
     try {
-      await _networkService.call(UrlConfig.forgotPassword, RequestMethod.post,
+      final _response = await _networkService.call(
+          UrlConfig.forgotPassword, RequestMethod.post,
           data: entity.toMap());
-      return;
+      return AuthResponse.fromJson(_response.data);
     } catch (e) {
       rethrow;
     }
   }
 
-  Future<dynamic> resetPassword(ResetPasswordEntity entity) async {
+  Future<AuthResponse> resetPassword(ResetPasswordEntity entity) async {
     try {
-      await _networkService.call(UrlConfig.resetPassword, RequestMethod.post,
+      final _response = await _networkService.call(
+          UrlConfig.resetPassword, RequestMethod.post,
           data: entity.toMap());
-      return;
+      return AuthResponse.fromJson(_response.data);
     } catch (e) {
       rethrow;
     }
   }
 
-  Future<dynamic> verificationPinRequest() async {
+  Future<AuthResponse> verificationPinRequest() async {
     try {
-      await _networkService.call(
+      final _response = await _networkService.call(
           UrlConfig.verificationPinRequest, RequestMethod.get);
-      return;
+      return AuthResponse.fromJson(_response.data);
     } catch (e) {
       rethrow;
     }
   }
 
-  Future<dynamic> verificationPinConfirm(PinEntity entity) async {
+  Future<AuthResponse> verificationPinConfirm(PinEntity entity) async {
     try {
-      await _networkService.call(
+      final _response = await _networkService.call(
           UrlConfig.verificationPinConfirm, RequestMethod.post,
           data: entity.toJson());
-      return;
+      return AuthResponse.fromJson(_response.data);
     } catch (e) {
       rethrow;
     }

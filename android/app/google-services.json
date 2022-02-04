@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "9591509910",
+    "project_id": "workplenty-43aa9",
+    "storage_bucket": "workplenty-43aa9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:9591509910:android:347e446b9a86cda0ee83b7",
+        "android_client_info": {
+          "package_name": "com.workplenty.client"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "9591509910-jbg1sjkis2c169v44nij0afcp0927rhb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.workplenty.client",
+            "certificate_hash": "4653d358fa4b598303f1b0a709497f938908b58f"
+          }
+        },
+        {
+          "client_id": "9591509910-b3j72lod75oa0od77i37pj18a9094ufl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDb_XyiNq9DDeolTkfux5v2DTFcufAA5jw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "9591509910-b3j72lod75oa0od77i37pj18a9094ufl.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "9591509910-qfpmomftf0jm70omk5a5ok1qmu7bgq49.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.workplenty.client"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

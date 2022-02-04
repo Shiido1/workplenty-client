@@ -1,8 +1,9 @@
 import 'package:client/core/helper/routes/navigation.dart';
-import 'package:client/views/dashboard/profile/hire/bid_Screen.dart';
 import 'package:client/views/dashboard/profile/widget/clicks_one.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../bid_screen.dart';
 
 class BidTab extends StatelessWidget {
   const BidTab({Key? key}) : super(key: key);

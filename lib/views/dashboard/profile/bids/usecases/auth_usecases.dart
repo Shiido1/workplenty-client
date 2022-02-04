@@ -20,12 +20,6 @@ class AuthUsesCases extends UseCase<AuthEntity, Params> {
   Future<Either<Failure, AuthResponse>> loginUseCase(Params params) async {
     return await _repository.login(params.entity!);
   }
-
-  @override
-  Future<Either<Failure, AuthResponse>>? socialAuthentication(
-      Params params) async {
-    return await _repository.socialAuthentication(params.entity!);
-  }
 }
 
 class Params extends Equatable {

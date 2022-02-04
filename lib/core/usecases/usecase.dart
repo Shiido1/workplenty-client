@@ -7,6 +7,7 @@ import 'package:equatable/equatable.dart';
 class UseCase<Type, Params> {
   Future<Either<Failure, Type>>? call(Params params) {}
   Future<Either<Failure, Type>>? registerUseCase(Params params) {}
+  Future<Either<Failure, Type>>? socialAuthentication(Params params) {}
   Future<Either<Failure, Type>>? loginUseCase(Params params) {}
   Future<Either<Failure, Type>>? forgotPasswordUseCase(Params params) {}
   Future<Either<Failure, Type>>? resetPasswordUseCase(Params params) {}

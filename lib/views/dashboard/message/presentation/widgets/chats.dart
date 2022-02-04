@@ -1,15 +1,15 @@
 import 'package:client/core/helper/helper_handler.dart';
 import 'package:client/core/helper/utils/images.dart';
 import 'package:client/core/helper/utils/pallets.dart';
-import 'package:client/views/dashboard/message/widget/receiver_msg.dart';
-import 'package:client/views/dashboard/message/widget/sender_msg.dart';
+import 'package:client/views/dashboard/message/presentation/widgets/receiver_msg.dart';
+import 'package:client/views/dashboard/message/presentation/widgets/sender_msg.dart';
 import 'package:client/views/widgets/default_appbar.dart';
 import 'package:client/views/widgets/text_views.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import 'widget/message_box.dart';
+import 'message_box.dart';
 
 class ChatsScreen extends StatelessWidget {
   const ChatsScreen({Key? key}) : super(key: key);

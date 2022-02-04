@@ -3,18 +3,18 @@ import 'package:client/views/widgets/text_views.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../chats.dart';
+import 'chats.dart';
 
-class ReceiverSide extends StatelessWidget {
+class SenderSide extends StatelessWidget {
   final Chats chats;
-  const ReceiverSide(this.chats, {Key? key}) : super(key: key);
+  const SenderSide(this.chats, {Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(16.w),
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           TextView(
             text: chats.time ?? '',
@@ -24,17 +24,17 @@ class ReceiverSide extends StatelessWidget {
           SizedBox(height: 10.h),
           Container(
             padding: EdgeInsets.all(16.w),
-            margin: EdgeInsets.only(right: 60.w),
+            margin: EdgeInsets.only(left: 60.w),
             decoration: BoxDecoration(
-                color: Pallets.primary100,
+                border: Border.all(color: Pallets.grey),
+                color: Colors.transparent,
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(16.r),
-                  bottomRight: Radius.circular(16.r),
+                  topLeft: Radius.circular(16.r),
                   topRight: Radius.circular(16.r),
                 )),
             child: TextView(
               text: chats.message ?? '',
-              color: Pallets.white,
               textAlign: TextAlign.left,
             ),
           ),

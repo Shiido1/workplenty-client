@@ -1,11 +1,12 @@
 import 'package:client/core/bus/event_bus.dart';
 import 'package:client/core/helper/routes/navigation.dart';
 import 'package:client/core/helper/utils/pallets.dart';
-import 'package:client/views/dashboard/message/chats.dart';
 import 'package:client/views/widgets/search_field.dart';
 import 'package:client/views/widgets/text_views.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'chats.dart';
 
 class MessageScreen extends StatelessWidget {
   const MessageScreen({Key? key}) : super(key: key);

@@ -11,6 +11,9 @@ class AuthblocBloc extends Bloc<AuthblocEvent, AuthblocState> {
 
   AuthblocBloc(this._useCase) : super(AuthblocInitial()) {
     on<AuthblocEvent>((event, emit) async {
+      // / Social Event
+      if (event is SocialAuthEvent) {}
+
       // / Register Event
       if (event is RegisterEvent) {
         try {

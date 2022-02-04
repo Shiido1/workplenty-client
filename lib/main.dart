@@ -1,9 +1,7 @@
-import 'package:client/core/helper/configs/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:overlay_support/overlay_support.dart';
-import 'package:provider/provider.dart';
 
 import 'core/di/injector.dart';
 import 'core/helper/routes/routes.dart';
@@ -26,17 +24,14 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize: const Size(414, 896),
       builder: () => OverlaySupport.global(
-        child: MultiProvider(
-          providers: Providers.getProviders,
-          child: MaterialApp(
-            title: 'Client',
-            debugShowCheckedModeBanner: false,
-            theme: lightThemeData(context),
-            darkTheme: darkThemeData(context),
-            themeMode: ThemeMode.light,
-            routes: Routes.getRoutes,
-            home: IntroOneScreen(),
-          ),
+        child: MaterialApp(
+          title: 'Client',
+          debugShowCheckedModeBanner: false,
+          theme: lightThemeData(context),
+          darkTheme: darkThemeData(context),
+          themeMode: ThemeMode.light,
+          routes: Routes.getRoutes,
+          home: IntroOneScreen(),
         ),
       ),
     );

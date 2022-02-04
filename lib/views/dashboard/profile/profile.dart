@@ -1,7 +1,6 @@
 import 'package:client/core/helper/routes/navigation.dart';
 import 'package:client/core/helper/utils/images.dart';
 import 'package:client/core/helper/utils/pallets.dart';
-import 'package:client/views/dashboard/profile/hire/bids.dart';
 import 'package:client/views/dashboard/profile/manage/manage.dart';
 import 'package:client/views/dashboard/profile/payout/payout_screen.dart';
 import 'package:client/views/dashboard/profile/request/requests.dart';
@@ -12,6 +11,7 @@ import 'package:client/views/widgets/text_views.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'bids/presentation/bids.dart';
 import 'edit_profile.dart';
 
 class Profile extends StatelessWidget {

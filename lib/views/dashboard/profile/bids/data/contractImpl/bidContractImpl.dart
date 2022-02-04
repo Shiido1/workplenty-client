@@ -1,8 +1,8 @@
 import 'package:client/core/error/failures.dart';
-import 'package:client/views/onboarding/data/model/bid/accept_or_decline_bid_response/accept_or_decline_bid_response.dart';
-import 'package:client/views/onboarding/data/model/bid/list_bid_response/list_bid_response.dart';
-import 'package:client/views/onboarding/data/sourceImpl/bidSourceImpl.dart';
-import 'package:client/views/onboarding/domain/contract/bids_contract.dart';
+import 'package:client/views/dashboard/profile/bids/data/model/accept_or_decline_bid_response/accept_or_decline_bid_response.dart';
+import 'package:client/views/dashboard/profile/bids/data/model/list_bid_response/list_bid_response.dart';
+import 'package:client/views/dashboard/profile/bids/data/sourceImpl/bidSourceImpl.dart';
+import 'package:client/views/dashboard/profile/bids/domain/contract/bids_contract.dart';
 import 'package:dartz/dartz.dart';
 
 class BidsContractImpl implements BidsContract {

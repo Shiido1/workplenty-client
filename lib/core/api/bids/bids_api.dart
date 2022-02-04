@@ -1,3 +1,4 @@
+import 'package:client/core/helper/configs/instances.dart';
 import 'package:client/core/network/network_service.dart';
 import 'package:client/core/network/url_config.dart';
 import 'package:client/views/onboarding/domain/entity/bids/accept_or_decline.dart';
@@ -10,7 +11,9 @@ class BidsApi {
 
   Future<dynamic> listBid() async {
     try {
-      await _networkService.call(UrlConfig.listBid, RequestMethod.get);
+      final _response =
+          await _networkService.call(UrlConfig.listBid, RequestMethod.get);
+      logger.d(_response.data);
       return;
     } catch (e) {
       rethrow;
