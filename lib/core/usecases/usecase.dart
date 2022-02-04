@@ -1,3 +1,5 @@
+// ignore_for_file: body_might_complete_normally_nullable
+
 import 'package:client/core/error/failures.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
@@ -17,6 +19,7 @@ class UseCase<Type, Params> {
   Future<Either<Failure, Type>>? updateAvatarBio(Params params) {}
   Future<Either<Failure, Type>>? saveGigUseCase(Params params) {}
   Future<Either<Failure, Type>>? getAllCardUseCase() {}
+  Future<Either<Failure, Type>>? chatListUseCase() {}
 }
 
 class NoParams extends Equatable {

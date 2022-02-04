@@ -26,6 +26,18 @@ class UrlConfig {
   static const String saveGig = 'client/gig/save';
   static const String removeAttachment = 'client/attachments/remove';
 
-  static const String listBid = 'client/bids/list';
+  static const String listBid = 'client/gig/bids/list';
   static const String acceptOrDeclineBid = 'client/bids/accept-or-decline';
+  static const String chatList = 'chat/list';
+  static const String savedGig = 'saved-gigs/list';
+  static const String savedGigSave = 'saved-gigs/save';
+
+  static const String gigList = 'gig/list';
+  static const String gigDetails = 'gig/details';
+  static const String gigCategory = 'gig/categories';
+  static const String gigSkill = 'gig/skills';
+
+  static const String industry = 'industry/fetch';
+  static const String reviewList = 'review/list';
+  static const String reviewSave = 'review/save';
 }

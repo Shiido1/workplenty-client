@@ -1,7 +1,7 @@
 import 'package:client/core/bus/event_bus.dart';
 import 'package:client/core/helper/routes/navigation.dart';
 import 'package:client/core/helper/utils/pallets.dart';
-import 'package:client/views/dashboard/message/chats.dart';
+import 'package:client/views/dashboard/chat/presentation/chats.dart';
 import 'package:client/views/widgets/search_field.dart';
 import 'package:client/views/widgets/text_views.dart';
 import 'package:flutter/material.dart';

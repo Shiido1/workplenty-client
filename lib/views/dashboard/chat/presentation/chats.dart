@@ -1,8 +1,8 @@
 import 'package:client/core/helper/helper_handler.dart';
 import 'package:client/core/helper/utils/images.dart';
 import 'package:client/core/helper/utils/pallets.dart';
-import 'package:client/views/dashboard/message/widget/receiver_msg.dart';
-import 'package:client/views/dashboard/message/widget/sender_msg.dart';
+import 'package:client/views/dashboard/chat/presentation/widget/receiver_msg.dart';
+import 'package:client/views/dashboard/chat/presentation/widget/sender_msg.dart';
 import 'package:client/views/widgets/default_appbar.dart';
 import 'package:client/views/widgets/text_views.dart';
 import 'package:flutter/material.dart';

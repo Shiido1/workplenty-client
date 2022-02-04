@@ -1,4 +1,4 @@
-import 'package:client/views/onboarding/domain/entity/card/card_entity.dart';
+import 'package:client/views/dashboard/card/domain/entity/card_entity.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'datum.dart';

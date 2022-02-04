@@ -4,6 +4,7 @@ abstract class Failure extends Equatable {
   @override
   List<Object> get props => [];
 
+  // ignore: body_might_complete_normally_nullable
   String? errorMessage(e) {
     if (e is AppFailure) {
       return e.message;
