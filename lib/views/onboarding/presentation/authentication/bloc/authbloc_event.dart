@@ -30,3 +30,9 @@ class VerifyPinEvent extends AuthblocEvent {
 
   const VerifyPinEvent(this.entity);
 }
+
+class ForgotPasswordEvent extends AuthblocEvent {
+  final AuthEntity entity;
+
+  const ForgotPasswordEvent(this.entity);
+}
