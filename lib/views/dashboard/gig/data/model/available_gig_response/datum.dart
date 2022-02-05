@@ -1,4 +1,3 @@
-import 'package:client/views/dashboard/widget/home_card_widget.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../../../../../core/entity/industry/industry.dart';
@@ -70,7 +69,7 @@ class Datum {
     this.updatedAt,
   });
 
-  factory Datum.fromJson(Map<String, dynamic> json) => _$DatumFromJson(json);
+  factory Datum.fromJson(json) => _$DatumFromJson(json);
 
   Map<String, dynamic> toJson() => _$DatumToJson(this);
 }
