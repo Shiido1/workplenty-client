@@ -43,7 +43,7 @@ class SessionManager {
   Map<String, dynamic> get usersData =>
       json.decode(sharedPreferences!.getString(keyUserData) ?? '');
 
-  set usersData(Map<String, dynamic> map) =>
+  set usersData(Map<String, dynamic>? map) =>
       sharedPreferences!.setString(keyUserData, json.encode(map));
 
   Future<bool> logOut() async {

@@ -26,6 +26,7 @@ class AuthContractImpl implements AuthContract {
   Future<Either<Failure, AuthResponse>> login(entity) async {
     try {
       final _response = await _impl.login(entity);
+      SessionManager.instance.usersData = _response.data?.user?.toJson();
       SessionManager.instance.authTokenType = _response.data?.tokenType ?? '';
       SessionManager.instance.authToken = _response.data?.token ?? '';
       SessionManager.instance.isLoggedIn = true;
@@ -39,8 +40,10 @@ class AuthContractImpl implements AuthContract {
   Future<Either<Failure, AuthResponse>> register(entity) async {
     try {
       final _response = await _impl.register(entity);
+      SessionManager.instance.usersData = _response.data?.user?.toJson();
       SessionManager.instance.authTokenType = _response.data?.tokenType ?? '';
       SessionManager.instance.authToken = _response.data?.token ?? '';
+      SessionManager.instance.isLoggedIn = true;
       return Right(_response);
     } catch (e) {
       return Left(AppFailure(e.toString()));
