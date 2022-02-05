@@ -55,9 +55,10 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
             }
             if (state is AuthblocSuccess) {
               WorkPlenty.hideLoading(_loadingKey);
-              // PageRouter.gotoNamed(Routes.verifyPin, context,
-              //     args: _emailController.text);
-              PageRouter.gotoWidget(SetUpProfile(), context);
+              PageRouter.gotoNamed(Routes.verifyPin, context, args: {
+                'email': _emailController.text,
+                'name': _fnController.text
+              });
             }
             if (state is AuthblocFailed) {
               WorkPlenty.hideLoading(_loadingKey);

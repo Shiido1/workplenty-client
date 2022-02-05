@@ -1,5 +1,6 @@
 import 'package:client/core/database/session_manager.dart';
 import 'package:client/core/error/failures.dart';
+import 'package:client/core/helper/configs/instances.dart';
 import 'package:client/views/onboarding/data/model/auth/auth_response/auth_response.dart';
 import 'package:client/views/onboarding/data/sourceImpl/authSourceImpl.dart';
 import 'package:client/views/onboarding/domain/contract/auth_contract.dart';
@@ -25,6 +26,9 @@ class AuthContractImpl implements AuthContract {
   Future<Either<Failure, AuthResponse>> login(entity) async {
     try {
       final _response = await _impl.login(entity);
+      SessionManager.instance.authTokenType = _response.data?.tokenType ?? '';
+      SessionManager.instance.authToken = _response.data?.token ?? '';
+      SessionManager.instance.isLoggedIn = true;
       return Right(_response);
     } catch (e) {
       return Left(AppFailure(e.toString()));
@@ -44,8 +48,7 @@ class AuthContractImpl implements AuthContract {
   }
 
   @override
-  Future<Either<Failure, AuthResponse>>
-      verificationPinConfirm(entity) async {
+  Future<Either<Failure, AuthResponse>> verificationPinConfirm(entity) async {
     try {
       final _response = await _impl.verificationPinConfirm(entity);
       return Right(_response);

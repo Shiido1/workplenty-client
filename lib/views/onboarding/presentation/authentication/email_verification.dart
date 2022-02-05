@@ -15,9 +15,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class EmailVerificationScreen extends StatefulWidget {
-  final String? email;
+  final Map? map;
 
-  EmailVerificationScreen(this.email, {Key? key}) : super(key: key);
+  EmailVerificationScreen(this.map, {Key? key}) : super(key: key);
 
   @override
   _EmailVerificationScreenState createState() =>
@@ -65,7 +65,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
             SizedBox(height: 4.h),
             TextView(
               text:
-                  'Hi John, check your mail. We’ve sent you the PIN at ${widget.email}',
+                  'Hi ${widget.map?['name']}, check your mail. We’ve sent you the PIN at ${widget.map?['email']}',
               fontSize: 14,
               fontWeight: FontWeight.w500,
               letterSpacing: -0.33,

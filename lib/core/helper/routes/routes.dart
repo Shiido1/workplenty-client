@@ -39,7 +39,7 @@ class Routes {
           return MainBoard();
         },
         verifyPin: (BuildContext context) {
-          final args = ModalRoute.of(context)!.settings.arguments as String;
+          final args = ModalRoute.of(context)!.settings.arguments as Map;
           return EmailVerificationScreen(args);
         }
       };
