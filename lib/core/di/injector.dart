@@ -1,18 +1,26 @@
 import 'package:client/core/api/auth/auth_api.dart';
-import 'package:client/core/api/profile/profile_api.dart';
+import 'package:client/core/api/card/card_api.dart';
+import 'package:client/core/api/chat/chat_api.dart';
+import 'package:client/core/api/gig/gig_api.dart';
 import 'package:client/core/database/hive_database.dart';
 import 'package:client/core/network/network_service.dart';
+import 'package:client/views/dashboard/card/data/contractImpl/cardContractImpl.dart';
+import 'package:client/views/dashboard/card/data/sourceImpl/cardSourceImpl.dart';
+import 'package:client/views/dashboard/card/domain/usecase/card_usecase.dart';
+import 'package:client/views/dashboard/chat/data/contractImpl/chatContractImpl.dart';
+import 'package:client/views/dashboard/chat/data/sourceImpl/chatSourceImpl.dart';
+import 'package:client/views/dashboard/chat/domain/usecase/chat_usecase.dart';
+import 'package:client/views/dashboard/gig/data/contractImpl/gigContractImpl.dart';
+import 'package:client/views/dashboard/gig/data/sourceImpl/gigSourceImpl.dart';
+import 'package:client/views/dashboard/gig/domain/usecase/gig_usecase.dart';
 import 'package:client/views/onboarding/data/contractImpl/authContractImpl.dart';
-import 'package:client/views/onboarding/data/contractImpl/profileContractImpl.dart';
 import 'package:client/views/onboarding/data/sourceImpl/authSourceImpl.dart';
-import 'package:client/views/onboarding/data/sourceImpl/profileSourceImpl.dart';
 import 'package:client/views/onboarding/domain/usecases/auth_usecases.dart';
-import 'package:client/views/onboarding/domain/usecases/profile_usecases.dart';
 import 'package:client/views/onboarding/presentation/authentication/bloc/authbloc_bloc.dart';
-import 'package:client/views/onboarding/presentation/profile/bloc/profile_bloc.dart';
 import 'package:get_it/get_it.dart';
-import '../network/app_config.dart';
+
 import '../database/session_manager.dart';
+import '../network/app_config.dart';
 
 final inject = GetIt.instance;
 final sessionManager = SessionManager();
@@ -43,23 +51,30 @@ void _initProviders() {}
 /// Initialize bloc's here
 void _initBloc() {
   inject.registerLazySingleton<AuthblocBloc>(() => AuthblocBloc(inject()));
-  inject.registerLazySingleton<ProfileBloc>(() => ProfileBloc(inject()));
 }
 
 /// Initialize data sources implementations
 void _initDataSources() {
   inject.registerLazySingleton<AuthSourceImpl>(
       () => AuthSourceImpl(api: inject()));
-  inject.registerLazySingleton<ProfileSourceImpl>(
-      () => ProfileSourceImpl(api: inject()));
+  inject
+      .registerLazySingleton<GigSourceImpl>(() => GigSourceImpl(api: inject()));
+  inject.registerLazySingleton<CardScourceImpl>(
+      () => CardScourceImpl(api: inject()));
+  inject.registerLazySingleton<ChatSourcesImpl>(
+      () => ChatSourcesImpl(api: inject()));
 }
 
 /// Initialize data repositories implementations
 void _initDataContracts() {
   inject.registerLazySingleton<AuthContractImpl>(
       () => AuthContractImpl(inject()));
-  inject.registerLazySingleton<ProfileContractImpl>(
-      () => ProfileContractImpl(inject()));
+  inject
+      .registerLazySingleton<GigContractImpl>(() => GigContractImpl(inject()));
+  inject.registerLazySingleton<CardContractImpl>(
+      () => CardContractImpl(inject()));
+  inject.registerLazySingleton<ChatContractImpl>(
+      () => ChatContractImpl(inject()));
 }
 
 /// Initialize services's here
@@ -68,13 +83,17 @@ void _initServices() {
       () => NetworkService(baseUrl: AppConfig.coreBaseUrl));
   inject
       .registerLazySingleton<AuthApi>(() => AuthApi(networkService: inject()));
-  inject.registerLazySingleton<ProfileApi>(
-      () => ProfileApi(networkService: inject()));
+  inject
+      .registerLazySingleton<CardApi>(() => CardApi(networkService: inject()));
+  inject.registerLazySingleton<GigApi>(() => GigApi(networkService: inject()));
+  inject
+      .registerLazySingleton<ChatApi>(() => ChatApi(networkService: inject()));
 }
 
 /// Initialize usecases here
 void _initializeUsecase() {
   inject.registerLazySingleton<AuthUsesCases>(() => AuthUsesCases(inject()));
-  inject
-      .registerLazySingleton<ProfileUseCases>(() => ProfileUseCases(inject()));
+  inject.registerLazySingleton<CardUseCase>(() => CardUseCase(inject()));
+  inject.registerLazySingleton<GigUseCases>(() => GigUseCases(inject()));
+  inject.registerLazySingleton<ChatUseCase>(() => ChatUseCase(inject()));
 }

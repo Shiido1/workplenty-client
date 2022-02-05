@@ -1,6 +1,6 @@
 import 'package:client/core/error/failures.dart';
 import 'package:client/views/dashboard/card/data/model/card_response/card_response.dart';
-import 'package:client/views/onboarding/domain/entity/card/card_entity.dart';
+import 'package:client/views/dashboard/card/domain/entity/card_entity.dart';
 import 'package:dartz/dartz.dart';
 
 abstract class CardContract {

@@ -1,6 +1,5 @@
 import 'package:client/core/entity/default_response.dart';
 import 'package:client/core/error/failures.dart';
-import 'package:client/views/onboarding/data/model/profile_update_response/profile_update_response.dart';
 import 'package:client/views/onboarding/data/sourceImpl/profileSourceImpl.dart';
 import 'package:client/views/onboarding/domain/contract/profile_contract.dart';
 import 'package:dartz/dartz.dart';
@@ -11,8 +10,7 @@ class ProfileContractImpl implements ProfileContract {
   ProfileContractImpl(this._impl);
 
   @override
-  Future<Either<Failure, DefaultResponse>> profileAvatarUpdate(
-      entity) async {
+  Future<Either<Failure, DefaultResponse>> profileAvatarUpdate(entity) async {
     try {
       final _response = await _impl.profileAvatarUpdate(entity);
       return Right(_response);
@@ -22,8 +20,7 @@ class ProfileContractImpl implements ProfileContract {
   }
 
   @override
-  Future<Either<Failure, DefaultResponse>> profileBioUpdate(
-      entity) async {
+  Future<Either<Failure, DefaultResponse>> profileBioUpdate(entity) async {
     try {
       final _response = await _impl.profileBioUpdate(entity);
       return Right(_response);
@@ -33,8 +30,7 @@ class ProfileContractImpl implements ProfileContract {
   }
 
   @override
-  Future<Either<Failure, DefaultResponse>> profileLocationUpdate(
-      entity) async {
+  Future<Either<Failure, DefaultResponse>> profileLocationUpdate(entity) async {
     try {
       final _response = await _impl.profileLocationUpdate(entity);
       return Right(_response);

@@ -46,7 +46,6 @@ class _CreateProfileState extends State<CreateProfile> {
   final TextEditingController _stateController = TextEditingController();
   final TextEditingController _cityController = TextEditingController();
   final TextEditingController _zipcodeController = TextEditingController();
-  final TextEditingController _addressController = TextEditingController();
   final TextEditingController _apartmentController = TextEditingController();
 
   final _bloc = ProfileBloc(inject());

@@ -13,12 +13,13 @@ CardResponse _$CardResponseFromJson(Map<String, dynamic> json) => CardResponse(
           .toList(),
       success: json['success'] as bool?,
       code: json['code'] as int?,
-    );
+    )..errorDebug = json['errorDebug'];
 
 Map<String, dynamic> _$CardResponseToJson(CardResponse instance) =>
     <String, dynamic>{
+      'errorDebug': instance.errorDebug,
       'msg': instance.msg,
-      'data': instance.data,
+      'data': instance.data?.map((e) => e.toJson()).toList(),
       'success': instance.success,
       'code': instance.code,
     };

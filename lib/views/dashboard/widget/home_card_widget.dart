@@ -1,5 +1,7 @@
+import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:client/core/helper/utils/images.dart';
 import 'package:client/core/helper/utils/pallets.dart';
+import 'package:client/views/dashboard/gig/data/model/available_gig_response/datum.dart';
 import 'package:client/views/widgets/buttons.dart';
 import 'package:client/views/widgets/image_loader.dart';
 import 'package:client/views/widgets/text_views.dart';
@@ -8,7 +10,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class HomeCard extends StatelessWidget {
-  const HomeCard({Key? key}) : super(key: key);
+  final Datum? datum;
+  const HomeCard({this.datum, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +23,12 @@ class HomeCard extends StatelessWidget {
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 13.w, vertical: 11.h),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ImageLoader(
-                    path: AppImages.pickie,
-                  ),
+                  CircularImage(path: datum?.user?.avatar ?? '', radius: 20),
                   SizedBox(width: 13.w),
                   Expanded(
                     child: Column(
@@ -34,14 +36,15 @@ class HomeCard extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         TextView(
-                          text: 'UI Redesign for Web Application',
+                          text:
+                              '${datum?.user?.firstName ?? ''} ${datum?.user?.lastName ?? ''}',
                           maxLines: 1,
                           fontSize: 16,
                           fontWeight: FontWeight.w700,
                           textAlign: TextAlign.left,
                         ),
                         TextView(
-                          text: 'Software Engineer & Website Manager',
+                          text: datum?.user?.role ?? '',
                           maxLines: 1,
                           fontWeight: FontWeight.w500,
                           fontSize: 13,
@@ -59,8 +62,7 @@ class HomeCard extends StatelessWidget {
               ),
               SizedBox(height: 15.h),
               TextView(
-                text:
-                    '''The task is to design a modern web app for a cargo portal application. Our current design features need a more modern look and better user experience, screen listing''',
+                text: datum?.description ?? '',
                 maxLines: 3,
                 fontSize: 12,
                 fontWeight: FontWeight.w500,

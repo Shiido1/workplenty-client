@@ -1,11 +1,11 @@
-import 'package:client/views/onboarding/domain/entity/card/card_entity.dart';
+import 'package:client/views/dashboard/card/domain/entity/card_entity.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'datum.dart';
 
 part 'card_response.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 // ignore: must_be_immutable
 class CardResponse extends CardEntity {
   String? msg;

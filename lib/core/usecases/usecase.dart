@@ -1,3 +1,5 @@
+// ignore_for_file: body_might_complete_normally_nullable
+
 import 'package:client/core/error/failures.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
@@ -18,6 +20,15 @@ class UseCase<Type, Params> {
   Future<Either<Failure, Type>>? updateAvatarBio(Params params) {}
   Future<Either<Failure, Type>>? saveGigUseCase(Params params) {}
   Future<Either<Failure, Type>>? getAllCardUseCase() {}
+  Future<Either<Failure, Type>>? chatListUseCase() {}
+  
+  Future<Either<Failure, Type>>? saveClientsGig(Params params) {}
+  Future<Either<Failure, Type>>? removeAttachment(Params params) {}
+  Future<Either<Failure, Type>>? savedGigsSave(Params params) {}
+  Future<Either<Failure, Type>>? getListOfAvailableGigs(Params params) {}
+  Future<Either<Failure, Type>>? getDetailsOfGig(Params params) {}
+  Future<Either<Failure, Type>>? categoriesOfGig() {}
+  Future<Either<Failure, Type>>? listOfSkills() {}
 }
 
 class NoParams extends Equatable {

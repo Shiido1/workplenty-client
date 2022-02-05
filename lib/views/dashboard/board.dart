@@ -5,7 +5,7 @@ import 'package:client/core/database/session_manager.dart';
 import 'package:client/core/helper/routes/navigation.dart';
 import 'package:client/core/helper/routes/routes.dart';
 import 'package:client/core/helper/utils/images.dart';
-import 'package:client/views/dashboard/home/home_screen.dart';
+import 'package:client/views/dashboard/chat/presentation/message_screen.dart';
 import 'package:client/views/dashboard/profile/profile.dart';
 import 'package:client/views/dashboard/saved/saved_screen.dart';
 import 'package:client/views/dashboard/search/search_explore_screen.dart';
@@ -14,7 +14,7 @@ import 'package:client/views/dashboard/widget/message_drawer.dart';
 import 'package:client/views/widgets/image_loader.dart';
 import 'package:flutter/material.dart';
 
-import 'message/presentation/widgets/message_screen.dart';
+import 'gig/presentation/home/home_screen.dart';
 
 // ignore: must_be_immutable
 class MainBoard extends StatefulWidget {

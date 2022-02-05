@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:client/views/dashboard/gig/domain/source/gig_dao.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../core/helper/configs/instances.dart';
@@ -20,9 +20,15 @@ class HiveManager {
 }
 
 class HiveBoxes {
-  static Future openAllBox() async {}
+  static const availableGigs = 'availableGigs';
 
-  static Future clearAllBox() async {}
+  static Future openAllBox() async {
+    availableGigsDao = AvailableGigsDao();
+  }
+
+  static Future clearAllBox() async {
+    await availableGigsDao!.clearDb();
+  }
 
   static Future<Box<T>> openBox<T>(String boxName) async {
     Box<T> box;
@@ -60,6 +66,4 @@ class HiveBoxes {
       logger.e('clear $name error: ${_.toString()}');
     }
   }
-
-  static logOut(BuildContext context) async {}
 }

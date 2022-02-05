@@ -2,7 +2,6 @@ import 'package:client/core/helper/configs/instances.dart';
 import 'package:client/core/network/network_service.dart';
 import 'package:client/core/network/url_config.dart';
 import 'package:client/views/onboarding/data/model/auth/auth_response/auth_response.dart';
-import 'package:client/views/onboarding/data/model/auth/verification_pin_request_response/verification_pin_request_response.dart';
 import 'package:client/views/onboarding/domain/entity/auth/auth_entity.dart';
 import 'package:client/views/onboarding/domain/entity/auth/forgot_password_entity.dart';
 import 'package:client/views/onboarding/domain/entity/auth/pin_entity.dart';

@@ -1,8 +1,5 @@
 import 'package:client/core/api/auth/auth_api.dart';
 import 'package:client/views/onboarding/data/model/auth/auth_response/auth_response.dart';
-import 'package:client/views/onboarding/data/model/auth/forgot_password_response/forgot_password_response.dart';
-import 'package:client/views/onboarding/data/model/auth/verification_pin_request_response/verification_pin_request_response.dart';
-
 import 'package:client/views/onboarding/domain/entity/auth/auth_entity.dart';
 import 'package:client/views/onboarding/domain/entity/auth/forgot_password_entity.dart';
 import 'package:client/views/onboarding/domain/source/auth_source.dart';
@@ -13,8 +10,7 @@ class AuthSourceImpl implements AuthSource {
   AuthSourceImpl({required AuthApi api}) : _authApi = api;
 
   @override
-  Future<AuthResponse> forgotPassword(
-      ForgotPasswordEntity entity) async {
+  Future<AuthResponse> forgotPassword(ForgotPasswordEntity entity) async {
     return await _authApi.forgotPassword(entity);
   }
 
@@ -37,8 +33,9 @@ class AuthSourceImpl implements AuthSource {
   Future<AuthResponse> verificationPinRequest() async {
     return await _authApi.verificationPinRequest();
   }
+
   @override
-  Future<AuthResponse> socialAuthentication(AuthEntity entity) async{
+  Future<AuthResponse> socialAuthentication(AuthEntity entity) async {
     return await _authApi.socialAuthentication(entity);
   }
 }

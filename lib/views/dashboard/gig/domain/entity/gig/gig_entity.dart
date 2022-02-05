@@ -56,4 +56,58 @@ class GigEntity extends DefaultResponse {
       'invited_artisan_ids': invited_artisan_ids,
     };
   }
+
+  Map<String, dynamic> saveGig() {
+    return {
+      'id': id,
+      'industry_id': industryId,
+      'type': type,
+      'title': title,
+      'description': description,
+      'timeline': timeline,
+      'payment_type': paymentType,
+      'is_published': isPublished,
+      'experience_level': experienceLevel,
+      'cover_letter_required': coverLetterRequired,
+      'total_budget': totalBudget,
+      'skill': skill,
+      'attachments': attachments,
+      'invited_artisan_ids': invited_artisan_ids,
+    };
+  }
+
+  Map<String, dynamic> availableListQuery() {
+    return {};
+  }
+
+  Map<String, dynamic> saveClientsGig() {
+    return {
+      'id': id,
+      'industry_id': industryId,
+      'type': type,
+      'title': title,
+      'description': description,
+      'timeline': timeline,
+      'payment_type': paymentType,
+      'is_published': isPublished,
+      'experience_level': experienceLevel,
+      'cover_letter_required': coverLetterRequired,
+      'total_budget': totalBudget,
+      'skill': skill,
+      'attachments': attachments,
+      'invited_artisan_ids': invited_artisan_ids,
+    };
+  }
+
+  Map<String, dynamic> removeAttachment() {
+    return {'id': id};
+  }
+
+  Map<String, dynamic> savedGigsSave() {
+    return {'id': id};
+  }
+
+  Map<String, dynamic> getDetailsOfGig() {
+    return {'id': id};
+  }
 }

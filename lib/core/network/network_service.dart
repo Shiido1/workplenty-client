@@ -1,7 +1,6 @@
 // ignore_for_file: avoid_print
 
 import 'package:client/core/database/session_manager.dart';
-import 'package:client/core/helper/configs/instances.dart';
 import 'package:dio/dio.dart';
 
 import 'api_error.dart';

@@ -235,10 +235,8 @@ class CircularImage extends StatelessWidget {
         radius: radius!,
         backgroundColor: Pallets.orange600,
         borderWidth: borderWidth!,
-        initialsText: Text(
-          initial ?? '',
-          style: TextStyle(fontSize: textSize, color: Colors.white),
-        ),
+        initialsText: Text(initial ?? '',
+            style: TextStyle(fontSize: textSize, color: Colors.white)),
         borderColor: borderColor != null ? borderColor! : Colors.transparent,
         elevation: elevation!,
         errorWidget: (ctx, _, __) => Icon(Icons.error),
