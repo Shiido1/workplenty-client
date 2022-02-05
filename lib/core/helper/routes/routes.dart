@@ -1,5 +1,7 @@
 import 'package:client/views/dashboard/board.dart';
 import 'package:client/views/onboarding/presentation/authentication/email_verification.dart';
+import 'package:client/views/onboarding/presentation/authentication/get_started_screen.dart';
+import 'package:client/views/onboarding/presentation/authentication/welcom_back.dart';
 import 'package:client/views/onboarding/presentation/screens/services/freelance_job_service.dart';
 import 'package:client/views/onboarding/presentation/screens/services/home_service.dart';
 import 'package:client/views/onboarding/presentation/screens/services/live_consultancy_service.dart';
@@ -41,6 +43,7 @@ class Routes {
         verifyPin: (BuildContext context) {
           final args = ModalRoute.of(context)!.settings.arguments as Map;
           return EmailVerificationScreen(args);
-        }
+        },
+        login: (BuildContext context) => WelcomeBackScreen()
       };
 }

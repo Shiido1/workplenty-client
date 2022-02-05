@@ -1,4 +1,6 @@
+import 'package:client/core/database/session_manager.dart';
 import 'package:client/core/helper/routes/navigation.dart';
+import 'package:client/core/helper/routes/routes.dart';
 import 'package:client/core/helper/utils/images.dart';
 import 'package:client/core/helper/utils/pallets.dart';
 import 'package:client/views/dashboard/profile/manage/manage.dart';
@@ -92,7 +94,10 @@ class Profile extends StatelessWidget {
                     image: AppImages.logout,
                     text: 'Logout',
                     trailing: true,
-                    onTap: () {})
+                    onTap: () async {
+                      await SessionManager.instance.logOut();
+                      PageRouter.gotoNamed(Routes.login, context);
+                    })
               ],
             ),
           )
