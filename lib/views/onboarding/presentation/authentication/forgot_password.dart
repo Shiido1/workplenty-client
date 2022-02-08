@@ -16,7 +16,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/helper/routes/routes.dart';
 import '../../../../core/helper/utils/workplenty_dialog.dart';
 import 'bloc/authbloc_bloc.dart';
-import 'reset_password.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   ForgotPasswordScreen({Key? key}) : super(key: key);

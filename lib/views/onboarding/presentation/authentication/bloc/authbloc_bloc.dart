@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:client/core/helper/configs/instances.dart';
 import 'package:client/views/onboarding/domain/entity/auth/auth_entity.dart';
 import 'package:client/views/onboarding/domain/usecases/auth_usecases.dart';
 import 'package:equatable/equatable.dart';
