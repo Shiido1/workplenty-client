@@ -1,7 +1,6 @@
 import 'package:client/core/api/auth/auth_api.dart';
 import 'package:client/views/onboarding/data/model/auth/auth_response/auth_response.dart';
 import 'package:client/views/onboarding/domain/entity/auth/auth_entity.dart';
-import 'package:client/views/onboarding/domain/entity/auth/forgot_password_entity.dart';
 import 'package:client/views/onboarding/domain/source/auth_source.dart';
 
 class AuthSourceImpl implements AuthSource {
@@ -10,7 +9,7 @@ class AuthSourceImpl implements AuthSource {
   AuthSourceImpl({required AuthApi api}) : _authApi = api;
 
   @override
-  Future<AuthResponse> forgotPassword(ForgotPasswordEntity entity) async {
+  Future<AuthResponse> forgotPassword(AuthEntity entity) async {
     return await _authApi.forgotPassword(entity);
   }
 

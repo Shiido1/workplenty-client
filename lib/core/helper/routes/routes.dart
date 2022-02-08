@@ -1,12 +1,12 @@
 import 'package:client/views/dashboard/board.dart';
 import 'package:client/views/onboarding/presentation/authentication/email_verification.dart';
-import 'package:client/views/onboarding/presentation/authentication/get_started_screen.dart';
 import 'package:client/views/onboarding/presentation/authentication/welcom_back.dart';
 import 'package:client/views/onboarding/presentation/screens/services/freelance_job_service.dart';
 import 'package:client/views/onboarding/presentation/screens/services/home_service.dart';
 import 'package:client/views/onboarding/presentation/screens/services/live_consultancy_service.dart';
-
 import 'package:flutter/cupertino.dart';
+
+import '../../../views/onboarding/presentation/authentication/reset_password.dart';
 
 BuildContext? globalContext;
 
@@ -18,6 +18,7 @@ class Routes {
   static const String home_service = '/home_service';
   static const String consultancy = '/consultancy';
   static const String verifyPin = '/verifyPin';
+  static const String forgotPassword = '/forgotPassword';
 
   static Map<String, Widget Function(BuildContext mainContext)> get getRoutes =>
       {
@@ -43,6 +44,10 @@ class Routes {
         verifyPin: (BuildContext context) {
           final args = ModalRoute.of(context)!.settings.arguments as Map;
           return EmailVerificationScreen(args);
+        },
+        forgotPassword: (BuildContext context) {
+          final args = ModalRoute.of(context)!.settings.arguments as String;
+          return ResetPasswordScreen(args);
         },
         login: (BuildContext context) => WelcomeBackScreen()
       };

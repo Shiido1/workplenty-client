@@ -102,7 +102,7 @@ class _WelcomeBackScreenState extends State<WelcomeBackScreen> {
                 ),
                 SizedBox(height: 12.h),
                 TextView(
-                    text: 'Forget Password ?',
+                    text: 'Forgot Password ?',
                     fontSize: 14,
                     fontWeight: FontWeight.w700,
                     onTap: () =>

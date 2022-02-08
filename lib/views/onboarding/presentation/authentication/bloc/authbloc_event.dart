@@ -36,3 +36,9 @@ class ForgotPasswordEvent extends AuthblocEvent {
 
   const ForgotPasswordEvent(this.entity);
 }
+
+class ResetPasswordEvent extends AuthblocEvent {
+  final AuthEntity entity;
+
+  const ResetPasswordEvent(this.entity);
+}

@@ -3,9 +3,6 @@ import 'package:client/core/network/network_service.dart';
 import 'package:client/core/network/url_config.dart';
 import 'package:client/views/onboarding/data/model/auth/auth_response/auth_response.dart';
 import 'package:client/views/onboarding/domain/entity/auth/auth_entity.dart';
-import 'package:client/views/onboarding/domain/entity/auth/forgot_password_entity.dart';
-import 'package:client/views/onboarding/domain/entity/auth/pin_entity.dart';
-import 'package:client/views/onboarding/domain/entity/auth/reset_password_entity.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
@@ -47,22 +44,22 @@ class AuthApi {
     }
   }
 
-  Future<AuthResponse> forgotPassword(ForgotPasswordEntity entity) async {
+  Future<AuthResponse> forgotPassword(AuthEntity entity) async {
     try {
       final _response = await _networkService.call(
           UrlConfig.forgotPassword, RequestMethod.post,
-          data: entity.toMap());
+          data: entity.forgotPassword());
       return AuthResponse.fromJson(_response.data);
     } catch (e) {
       rethrow;
     }
   }
 
-  Future<AuthResponse> resetPassword(ResetPasswordEntity entity) async {
+  Future<AuthResponse> resetPassword(AuthEntity entity) async {
     try {
       final _response = await _networkService.call(
           UrlConfig.resetPassword, RequestMethod.post,
-          data: entity.toMap());
+          data: entity.resetNewPassword());
       return AuthResponse.fromJson(_response.data);
     } catch (e) {
       rethrow;
@@ -79,7 +76,7 @@ class AuthApi {
     }
   }
 
-  Future<AuthResponse> verificationPinConfirm(PinEntity entity) async {
+  Future<AuthResponse> verificationPinConfirm(AuthEntity entity) async {
     try {
       final _response = await _networkService.call(
           UrlConfig.verificationPinConfirm, RequestMethod.post,

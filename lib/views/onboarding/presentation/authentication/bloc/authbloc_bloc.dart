@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:client/core/helper/configs/instances.dart';
 import 'package:client/views/onboarding/domain/entity/auth/auth_entity.dart';
 import 'package:client/views/onboarding/domain/usecases/auth_usecases.dart';
 import 'package:equatable/equatable.dart';
@@ -49,6 +50,34 @@ class AuthblocBloc extends Bloc<AuthblocEvent, AuthblocState> {
           final _response =
               await _useCase.loginUseCase(Params(entity: event.entity));
           _response.fold(
+              (l) => emit(AuthblocFailed(message: l.errorMessage(l)!)),
+              (r) => emit(AuthblocSuccess(response: r)));
+        } catch (e) {
+          emit(AuthblocFailed(message: e.toString()));
+        }
+      }
+
+      /// Forgot password Event
+      if (event is ForgotPasswordEvent) {
+        try {
+          emit(AuthblocLoading());
+          final _response = await _useCase
+              .forgotPasswordUseCase(Params(entity: event.entity));
+          _response!.fold(
+              (l) => emit(AuthblocFailed(message: l.errorMessage(l)!)),
+              (r) => emit(AuthblocSuccess(response: r)));
+        } catch (e) {
+          emit(AuthblocFailed(message: e.toString()));
+        }
+      }
+
+      /// Create new password
+      if (event is ResetPasswordEvent) {
+        try {
+          emit(AuthblocLoading());
+          final _response =
+              await _useCase.resetPasswordUseCase(Params(entity: event.entity));
+          _response!.fold(
               (l) => emit(AuthblocFailed(message: l.errorMessage(l)!)),
               (r) => emit(AuthblocSuccess(response: r)));
         } catch (e) {
