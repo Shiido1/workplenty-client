@@ -1,3 +1,4 @@
+import 'package:client/core/api/artisan/artisan_api.dart';
 import 'package:client/core/api/auth/auth_api.dart';
 import 'package:client/core/api/card/card_api.dart';
 import 'package:client/core/api/chat/chat_api.dart';
@@ -10,8 +11,11 @@ import 'package:client/views/dashboard/card/domain/usecase/card_usecase.dart';
 import 'package:client/views/dashboard/chat/data/contractImpl/chatContractImpl.dart';
 import 'package:client/views/dashboard/chat/data/sourceImpl/chatSourceImpl.dart';
 import 'package:client/views/dashboard/chat/domain/usecase/chat_usecase.dart';
+import 'package:client/views/dashboard/gig/data/contractImpl/artisanContractImpl.dart';
 import 'package:client/views/dashboard/gig/data/contractImpl/gigContractImpl.dart';
+import 'package:client/views/dashboard/gig/data/sourceImpl/artisanSourceImpl.dart';
 import 'package:client/views/dashboard/gig/data/sourceImpl/gigSourceImpl.dart';
+import 'package:client/views/dashboard/gig/domain/usecase/artisan_usecase.dart';
 import 'package:client/views/dashboard/gig/domain/usecase/gig_usecase.dart';
 import 'package:client/views/onboarding/data/contractImpl/authContractImpl.dart';
 import 'package:client/views/onboarding/data/sourceImpl/authSourceImpl.dart';
@@ -63,6 +67,8 @@ void _initDataSources() {
       () => CardScourceImpl(api: inject()));
   inject.registerLazySingleton<ChatSourcesImpl>(
       () => ChatSourcesImpl(api: inject()));
+  inject.registerLazySingleton<ArtisanSourceImpl>(
+      () => ArtisanSourceImpl(api: inject()));
 }
 
 /// Initialize data repositories implementations
@@ -75,6 +81,8 @@ void _initDataContracts() {
       () => CardContractImpl(inject()));
   inject.registerLazySingleton<ChatContractImpl>(
       () => ChatContractImpl(inject()));
+  inject.registerLazySingleton<ArtisanContractImpl>(
+      () => ArtisanContractImpl(inject()));
 }
 
 /// Initialize services's here
@@ -88,6 +96,8 @@ void _initServices() {
   inject.registerLazySingleton<GigApi>(() => GigApi(networkService: inject()));
   inject
       .registerLazySingleton<ChatApi>(() => ChatApi(networkService: inject()));
+  inject.registerLazySingleton<ArtisanApi>(
+      () => ArtisanApi(networkService: inject()));
 }
 
 /// Initialize usecases here
@@ -96,4 +106,5 @@ void _initializeUsecase() {
   inject.registerLazySingleton<CardUseCase>(() => CardUseCase(inject()));
   inject.registerLazySingleton<GigUseCases>(() => GigUseCases(inject()));
   inject.registerLazySingleton<ChatUseCase>(() => ChatUseCase(inject()));
+  inject.registerLazySingleton<ArtisanUseCase>(() => ArtisanUseCase(inject()));
 }

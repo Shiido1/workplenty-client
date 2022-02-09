@@ -1,6 +1,6 @@
 import 'package:client/core/helper/utils/images.dart';
 import 'package:client/core/helper/utils/pallets.dart';
-import 'package:client/views/dashboard/gig/data/model/available_gig_response/datum.dart';
+import 'package:client/views/dashboard/gig/data/model/list_of_artisan_response/datum.dart';
 import 'package:client/views/widgets/buttons.dart';
 import 'package:client/views/widgets/image_loader.dart';
 import 'package:client/views/widgets/text_views.dart';
@@ -61,7 +61,7 @@ class HomeCard extends StatelessWidget {
               ),
               SizedBox(height: 15.h),
               TextView(
-                text: datum?.description ?? '',
+                text: datum?.profile?.description ?? '',
                 maxLines: 3,
                 fontSize: 12,
                 fontWeight: FontWeight.w500,
@@ -73,7 +73,8 @@ class HomeCard extends StatelessWidget {
               SizedBox(height: 9.h),
               Row(
                 children: [
-                  _buildWidget(AppImages.location, 'Nigeria'),
+                  _buildWidget(
+                      AppImages.location, datum?.profile?.country ?? ''),
                   SizedBox(width: 10.w),
                   _buildWidget(AppImages.shield, 'Top Rated'),
                   SizedBox(width: 10.w),

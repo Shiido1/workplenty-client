@@ -1,7 +1,7 @@
 import 'package:client/core/helper/configs/instances.dart';
 import 'package:client/core/viewmodels/base_model.dart';
 import 'package:client/views/dashboard/gig/domain/entity/gig/gig_entity.dart';
-import 'package:client/views/dashboard/gig/domain/source/gig_dao.dart';
+import 'package:client/views/dashboard/gig/domain/source/local/gig_dao.dart';
 
 import '../../domain/usecase/gig_usecase.dart';
 

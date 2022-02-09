@@ -1,4 +1,5 @@
-import 'package:client/views/dashboard/gig/domain/source/gig_dao.dart';
+import 'package:client/views/dashboard/gig/domain/source/local/gig_dao.dart';
+import 'package:client/views/dashboard/gig/domain/source/local/list_of_artisans_dao.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../core/helper/configs/instances.dart';
@@ -21,13 +22,16 @@ class HiveManager {
 
 class HiveBoxes {
   static const availableGigs = 'availableGigs';
+  static const listOfArtisans = 'listOfArtisans';
 
   static Future openAllBox() async {
     availableGigsDao = AvailableGigsDao();
+    listOfArtisansDao = ListOfArtisansDao();
   }
 
   static Future clearAllBox() async {
     await availableGigsDao!.clearDb();
+    await listOfArtisansDao!.clearDb();
   }
 
   static Future<Box<T>> openBox<T>(String boxName) async {

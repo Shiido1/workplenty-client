@@ -1,7 +1,9 @@
 import 'package:client/core/helper/utils/pallets.dart';
-import 'package:client/views/dashboard/gig/domain/entity/gig/gig_entity.dart';
-import 'package:client/views/dashboard/gig/domain/source/gig_dao.dart';
+import 'package:client/views/dashboard/gig/domain/source/local/gig_dao.dart';
+import 'package:client/views/dashboard/gig/domain/source/local/list_of_artisans_dao.dart';
+import 'package:client/views/dashboard/gig/presentation/provider/artisan_provider.dart';
 import 'package:client/views/dashboard/widget/home_card_widget.dart';
+import 'package:client/views/widgets/body_widget.dart';
 import 'package:client/views/widgets/modal_bottom.dart';
 import 'package:client/views/widgets/text_views.dart';
 import 'package:flutter/foundation.dart';
@@ -10,15 +12,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
 
-import '../provider/gig_provider.dart';
-
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<GigProvider>(context, listen: true)
-        .getListOfAvailableGigs(entity: GigEntity());
+    Provider.of<ArtisanProvider>(context, listen: true).listOfArtisan();
     return Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () => showFloatingActionModal(context, 'Select a Service'),
@@ -28,10 +27,9 @@ class Home extends StatelessWidget {
             color: Pallets.white,
           ),
         ),
-        body: Padding(
-          padding: EdgeInsets.all(16.w),
+        body: BodyWidget(
           child: FutureBuilder(
-            future: availableGigsDao!.getListenable(),
+            future: listOfArtisansDao!.getListenable(),
             builder: (BuildContext context,
                 AsyncSnapshot<ValueListenable<Box<dynamic>>?> snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting ||
@@ -40,8 +38,8 @@ class Home extends StatelessWidget {
               return ValueListenableBuilder(
                 valueListenable: snapshot.data!,
                 builder: (_, Box<dynamic> value, __) {
-                  final _jobList = availableGigsDao!
-                      .getConvertedData(availableGigsDao!.box!)
+                  final _jobList = listOfArtisansDao!
+                      .getConvertedData(listOfArtisansDao!.box!)
                       .toList();
                   return ListView(children: [
                     SizedBox(height: 34.h),
@@ -49,7 +47,7 @@ class Home extends StatelessWidget {
                       children: [
                         Expanded(
                           child: TextView(
-                              text: '${_jobList.length} Jobs Found',
+                              text: '${_jobList.length} Artisans Found',
                               maxLines: 1,
                               textAlign: TextAlign.left,
                               fontWeight: FontWeight.w500),

@@ -38,7 +38,6 @@ class ProfileApi {
       final _response = await _networkService.call(
           UrlConfig.profileAvatarUpdate, RequestMethod.upload,
           formData: FormData.fromMap(entity.toAvatar()));
-      logger.d(_response.data);
       return DefaultResponse.fromJson(_response.data);
     } catch (e) {
       rethrow;

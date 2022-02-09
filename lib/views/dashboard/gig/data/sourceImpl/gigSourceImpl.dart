@@ -6,7 +6,7 @@ import 'package:client/views/dashboard/gig/data/model/details_of_gig_response/de
 import 'package:client/views/dashboard/gig/data/model/category_of_gig_response/category_of_gig_response.dart';
 import 'package:client/views/dashboard/gig/data/model/available_gig_response/available_gig_response.dart';
 import 'package:client/core/entity/default_response.dart';
-import 'package:client/views/dashboard/gig/domain/source/gig_source.dart';
+import 'package:client/views/dashboard/gig/domain/source/live/gig_source.dart';
 
 class GigSourceImpl implements GigSource {
   final GigApi _api;
