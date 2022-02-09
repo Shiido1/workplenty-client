@@ -3,7 +3,7 @@
 import 'package:client/core/entity/default_response.dart';
 import 'package:dio/dio.dart';
 
-enum GigType { freelance, home, live }
+import '../../../../../../core/enums/gig_type.dart';
 
 class GigEntity extends DefaultResponse {
   final String? id;
@@ -66,7 +66,7 @@ class GigEntity extends DefaultResponse {
     return {
       'id': id,
       'industry_id': industryId,
-      'type': _returnValue(type),
+      'type': returnGigType(type),
       'title': title,
       'private_message': privateMessage,
       'description': description,
@@ -90,7 +90,7 @@ class GigEntity extends DefaultResponse {
     return {
       'id': id,
       'industry_id': industryId,
-      'type': _returnValue(type),
+      'type': returnGigType(type),
       'title': title,
       'private_message': privateMessage,
       'description': description,
@@ -116,18 +116,5 @@ class GigEntity extends DefaultResponse {
 
   Map<String, dynamic> getDetailsOfGig() {
     return {'id': id};
-  }
-
-  String? _returnValue(GigType? type) {
-    switch (type) {
-      case GigType.freelance:
-        return 'FREELANCE';
-      case GigType.home:
-        return 'HOME';
-      case GigType.live:
-        return 'Live';
-      default:
-        return '';
-    }
   }
 }

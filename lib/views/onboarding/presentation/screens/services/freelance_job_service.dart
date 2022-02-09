@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:client/core/di/injector.dart';
+import 'package:client/core/enums/gig_type.dart';
 import 'package:client/core/helper/configs/instances.dart';
 import 'package:client/core/helper/helper_handler.dart';
 import 'package:client/core/helper/routes/navigation.dart';
