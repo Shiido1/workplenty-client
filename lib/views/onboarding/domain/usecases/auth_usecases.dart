@@ -1,5 +1,4 @@
 import 'package:client/core/error/failures.dart';
-import 'package:client/core/helper/configs/instances.dart';
 import 'package:client/core/usecases/usecase.dart';
 import 'package:client/views/onboarding/data/contractImpl/authContractImpl.dart';
 import 'package:client/views/onboarding/data/model/auth/auth_response/auth_response.dart';
