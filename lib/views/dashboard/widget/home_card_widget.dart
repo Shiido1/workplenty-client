@@ -1,16 +1,26 @@
+import 'package:client/core/di/injector.dart';
+import 'package:client/core/enums/gig_type.dart';
 import 'package:client/core/helper/utils/images.dart';
 import 'package:client/core/helper/utils/pallets.dart';
 import 'package:client/views/dashboard/gig/data/model/list_of_artisan_response/datum.dart';
+import 'package:client/views/dashboard/gig/presentation/provider/artisan_provider.dart';
+import 'package:client/views/dashboard/saved/domain/entity/saved_profile_entity.dart';
+import 'package:client/views/dashboard/saved/presentation/bloc/saved_profile_bloc_bloc.dart';
 import 'package:client/views/widgets/buttons.dart';
 import 'package:client/views/widgets/image_loader.dart';
+import 'package:client/views/widgets/modal_bottom.dart';
 import 'package:client/views/widgets/text_views.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 class HomeCard extends StatelessWidget {
   final Datum? datum;
-  const HomeCard({this.datum, Key? key}) : super(key: key);
+  HomeCard({this.datum, Key? key}) : super(key: key);
+  ArtisanProvider? artisanProvider;
+  final _bloc = SavedProfileBlocBloc(inject());
 
   @override
   Widget build(BuildContext context) {
@@ -52,10 +62,25 @@ class HomeCard extends StatelessWidget {
                       ],
                     ),
                   ),
-                  CircleAvatar(
-                    radius: 20.r,
-                    backgroundColor: Pallets.primary100,
-                    child: ImageLoader(path: AppImages.bookmark),
+                  BlocListener<SavedProfileBlocBloc, SavedProfileBlocState>(
+                    bloc: _bloc,
+                    listener: (context, state) {
+                      if (state is SavedProfileblocLoading) {}
+                      if (state is SavedProfileblocSuccess) {}
+                      if (state is SavedProfileblocFailed) {}
+                    },
+                    child: Consumer<ArtisanProvider>(
+                      builder: (context, value, child) {
+                        return GestureDetector(
+                          onTap: () => saveProfile(context),
+                          child: CircleAvatar(
+                            radius: 20.r,
+                            backgroundColor: Pallets.primary100,
+                            child: ImageLoader(path: AppImages.bookmark),
+                          ),
+                        );
+                      },
+                    ),
                   )
                 ],
               ),
@@ -88,7 +113,11 @@ class HomeCard extends StatelessWidget {
               ),
               ButtonWidget(
                 buttonText: 'Invite Artisan',
-                onPressed: () {},
+                onPressed: () {
+                  Provider.of<ArtisanProvider>(context, listen: false)
+                      .setArtisan(datum?.user);
+                  showFloatingActionModal(context, 'Select a Service');
+                },
                 fontSize: 14,
                 fontWeight: FontWeight.w700,
                 height: 35.h,
@@ -98,6 +127,11 @@ class HomeCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void saveProfile(BuildContext context) {
+    _bloc.add(SavedProfileEvent(SavedProfileEntity(
+        profileId: datum!.user!.id, type: GigType.freelance)));
   }
 
   Expanded _buildWidget(String image, String value) {

@@ -17,12 +17,18 @@ import 'package:client/views/dashboard/gig/data/sourceImpl/artisanSourceImpl.dar
 import 'package:client/views/dashboard/gig/data/sourceImpl/gigSourceImpl.dart';
 import 'package:client/views/dashboard/gig/domain/usecase/artisan_usecase.dart';
 import 'package:client/views/dashboard/gig/domain/usecase/gig_usecase.dart';
+import 'package:client/views/dashboard/saved/data/contractImpl/saved_profile_contract_impl.dart';
+import 'package:client/views/dashboard/saved/domain/usecase/saved_profile_list_usecase.dart';
+import 'package:client/views/dashboard/saved/presentation/bloc/saved_profile_bloc_bloc.dart';
 import 'package:client/views/onboarding/data/contractImpl/authContractImpl.dart';
 import 'package:client/views/onboarding/data/sourceImpl/authSourceImpl.dart';
 import 'package:client/views/onboarding/domain/usecases/auth_usecases.dart';
 import 'package:client/views/onboarding/presentation/authentication/bloc/authbloc_bloc.dart';
+import 'package:client/views/onboarding/presentation/screens/services/bloc/servicebloc_bloc.dart';
 import 'package:get_it/get_it.dart';
-
+import '../../views/dashboard/saved/data/sourceImpl/saved_profile_source_impl.dart';
+import '../../views/dashboard/saved/domain/usecase/saved_profile_usecase.dart';
+import '../api/saved_profile/saved_profile_api.dart';
 import '../database/session_manager.dart';
 import '../network/app_config.dart';
 
@@ -55,6 +61,10 @@ void _initProviders() {}
 /// Initialize bloc's here
 void _initBloc() {
   inject.registerLazySingleton<AuthblocBloc>(() => AuthblocBloc(inject()));
+  inject
+      .registerLazySingleton<ServiceblocBloc>(() => ServiceblocBloc(inject()));
+  inject.registerLazySingleton<SavedProfileBlocBloc>(
+      () => SavedProfileBlocBloc(inject()));
 }
 
 /// Initialize data sources implementations
@@ -69,6 +79,8 @@ void _initDataSources() {
       () => ChatSourcesImpl(api: inject()));
   inject.registerLazySingleton<ArtisanSourceImpl>(
       () => ArtisanSourceImpl(api: inject()));
+  inject.registerLazySingleton<SavedProfileSourceImpl>(
+      () => SavedProfileSourceImpl(api: inject()));
 }
 
 /// Initialize data repositories implementations
@@ -83,6 +95,8 @@ void _initDataContracts() {
       () => ChatContractImpl(inject()));
   inject.registerLazySingleton<ArtisanContractImpl>(
       () => ArtisanContractImpl(inject()));
+  inject.registerLazySingleton<SavedProfileContractImpl>(
+      () => SavedProfileContractImpl(inject()));
 }
 
 /// Initialize services's here
@@ -98,6 +112,8 @@ void _initServices() {
       .registerLazySingleton<ChatApi>(() => ChatApi(networkService: inject()));
   inject.registerLazySingleton<ArtisanApi>(
       () => ArtisanApi(networkService: inject()));
+  inject.registerLazySingleton<SavedProfileApi>(
+      () => SavedProfileApi(networkService: inject()));
 }
 
 /// Initialize usecases here
@@ -107,4 +123,8 @@ void _initializeUsecase() {
   inject.registerLazySingleton<GigUseCases>(() => GigUseCases(inject()));
   inject.registerLazySingleton<ChatUseCase>(() => ChatUseCase(inject()));
   inject.registerLazySingleton<ArtisanUseCase>(() => ArtisanUseCase(inject()));
+  inject.registerLazySingleton<SavedProfileUseCase>(
+      () => SavedProfileUseCase(inject()));
+  inject.registerLazySingleton<SavedProfileListUseCase>(
+      () => SavedProfileListUseCase(inject()));
 }
