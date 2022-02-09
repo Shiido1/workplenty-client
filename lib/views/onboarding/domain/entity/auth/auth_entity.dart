@@ -49,6 +49,10 @@ class AuthEntity extends DefaultResponse {
     return {'email': email, 'pin': pin, 'password': password};
   }
 
+  Map<String, dynamic> verifyPIN() {
+    return {'pin': pin};
+  }
+
   @override
   String toString() => 'AuthEntity(email: $email, password: $password)';
 }

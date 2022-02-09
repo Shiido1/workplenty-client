@@ -1,4 +1,5 @@
 import 'package:client/core/error/failures.dart';
+import 'package:client/core/helper/configs/instances.dart';
 import 'package:client/core/usecases/usecase.dart';
 import 'package:client/views/onboarding/data/contractImpl/authContractImpl.dart';
 import 'package:client/views/onboarding/data/model/auth/auth_response/auth_response.dart';
@@ -31,6 +32,17 @@ class AuthUsesCases extends UseCase<AuthEntity, Params> {
   Future<Either<Failure, AuthResponse>>? forgotPasswordUseCase(
       Params params) async {
     return await _repository.forgotPassword(params.entity!);
+  }
+
+  @override
+  Future<Either<Failure, AuthResponse>>? pinVerificationConfirmation(
+      Params params) async {
+    return await _repository.verificationPinConfirm(params.entity!);
+  }
+
+  @override
+  Future<Either<Failure, AuthEntity>>? requestVerificationPinUseCase() async {
+    return await _repository.verificationPinRequest();
   }
 }
 

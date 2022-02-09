@@ -80,7 +80,7 @@ class AuthApi {
     try {
       final _response = await _networkService.call(
           UrlConfig.verificationPinConfirm, RequestMethod.post,
-          data: entity.toJson());
+          data: entity.verifyPIN());
       return AuthResponse.fromJson(_response.data);
     } catch (e) {
       rethrow;

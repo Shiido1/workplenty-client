@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:client/core/helper/configs/instances.dart';
 import 'package:client/views/onboarding/domain/entity/auth/auth_entity.dart';
 import 'package:client/views/onboarding/domain/usecases/auth_usecases.dart';
 import 'package:equatable/equatable.dart';
@@ -46,11 +47,24 @@ class AuthblocBloc extends Bloc<AuthblocEvent, AuthblocState> {
       if (event is VerifyPinEvent) {
         try {
           emit(AuthblocLoading());
-          final _response =
-              await _useCase.loginUseCase(Params(entity: event.entity));
-          _response.fold(
+          final _response = await _useCase
+              .pinVerificationConfirmation(Params(entity: event.entity));
+          _response!.fold(
               (l) => emit(AuthblocFailed(message: l.errorMessage(l)!)),
               (r) => emit(AuthblocSuccess(response: r)));
+        } catch (e) {
+          emit(AuthblocFailed(message: e.toString()));
+        }
+      }
+
+      /// Resend PIN Event
+      if (event is ResendOTPEvent) {
+        try {
+          emit(AuthblocLoading());
+          final _response = await _useCase.requestVerificationPinUseCase();
+          _response!.fold(
+              (l) => emit(AuthblocFailed(message: l.errorMessage(l)!)),
+              (r) => emit(AuthblocOTPResendSuccess(response: r)));
         } catch (e) {
           emit(AuthblocFailed(message: e.toString()));
         }
