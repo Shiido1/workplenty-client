@@ -4,6 +4,7 @@ import 'package:client/core/network/url_config.dart';
 import 'package:client/views/dashboard/gig/data/model/available_gig_response/available_gig_response.dart';
 import 'package:client/views/dashboard/gig/data/model/saved_client_gig_response/saved_client_gig_response.dart';
 import 'package:client/views/dashboard/gig/domain/entity/gig/gig_entity.dart';
+import 'package:dio/dio.dart';
 
 import '../../../views/dashboard/gig/data/model/category_of_gig_response/category_of_gig_response.dart';
 import '../../../views/dashboard/gig/data/model/details_of_gig_response/details_of_gig_response.dart';
@@ -19,8 +20,8 @@ class GigApi {
   Future<SavedClientGigResponse> saveClientsGig(GigEntity entity) async {
     try {
       final _response = await _networkService.call(
-          UrlConfig.saveGig, RequestMethod.post,
-          data: entity.saveClientsGig());
+          UrlConfig.saveGig, RequestMethod.upload,
+          formData: FormData.fromMap(entity.saveClientsGig()));
       return SavedClientGigResponse.fromJson(_response.data);
     } catch (e) {
       rethrow;

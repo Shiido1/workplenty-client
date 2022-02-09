@@ -1,5 +1,4 @@
 import 'package:client/core/helper/utils/pallets.dart';
-import 'package:client/views/dashboard/gig/domain/source/local/gig_dao.dart';
 import 'package:client/views/dashboard/gig/domain/source/local/list_of_artisans_dao.dart';
 import 'package:client/views/dashboard/gig/presentation/provider/artisan_provider.dart';
 import 'package:client/views/dashboard/widget/home_card_widget.dart';

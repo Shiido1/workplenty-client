@@ -3,11 +3,14 @@
 import 'package:client/core/entity/default_response.dart';
 import 'package:dio/dio.dart';
 
+enum GigType { freelance, home, live }
+
 class GigEntity extends DefaultResponse {
   final String? id;
   final String? industryId;
-  final String? type;
+  final GigType? type;
   final String? title;
+  final String? privateMessage;
   final String? description;
   final String? timeline;
   final String? paymentType;
@@ -20,7 +23,8 @@ class GigEntity extends DefaultResponse {
   final List<String>? invited_artisan_ids;
 
   GigEntity(
-      {this.id,
+      {this.privateMessage,
+      this.id,
       this.industryId,
       this.type,
       this.title,
@@ -42,6 +46,7 @@ class GigEntity extends DefaultResponse {
     return {
       'id': id,
       'industry_id': industryId,
+      'private_message': privateMessage,
       'type': type,
       'title': title,
       'description': description,
@@ -53,7 +58,7 @@ class GigEntity extends DefaultResponse {
       'total_budget': totalBudget,
       'skill': skill,
       'attachments': attachments,
-      'invited_artisan_ids': invited_artisan_ids,
+      'invited_artisan_ids': [2]
     };
   }
 
@@ -61,8 +66,9 @@ class GigEntity extends DefaultResponse {
     return {
       'id': id,
       'industry_id': industryId,
-      'type': type,
+      'type': _returnValue(type),
       'title': title,
+      'private_message': privateMessage,
       'description': description,
       'timeline': timeline,
       'payment_type': paymentType,
@@ -84,8 +90,9 @@ class GigEntity extends DefaultResponse {
     return {
       'id': id,
       'industry_id': industryId,
-      'type': type,
+      'type': _returnValue(type),
       'title': title,
+      'private_message': privateMessage,
       'description': description,
       'timeline': timeline,
       'payment_type': paymentType,
@@ -95,7 +102,7 @@ class GigEntity extends DefaultResponse {
       'total_budget': totalBudget,
       'skill': skill,
       'attachments': attachments,
-      'invited_artisan_ids': invited_artisan_ids,
+      'invited_artisan_ids': ['2', '2']
     };
   }
 
@@ -109,5 +116,18 @@ class GigEntity extends DefaultResponse {
 
   Map<String, dynamic> getDetailsOfGig() {
     return {'id': id};
+  }
+
+  String? _returnValue(GigType? type) {
+    switch (type) {
+      case GigType.freelance:
+        return 'FREELANCE';
+      case GigType.home:
+        return 'HOME';
+      case GigType.live:
+        return 'Live';
+      default:
+        return '';
+    }
   }
 }

@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:client/core/di/injector.dart';
-import 'package:client/core/helper/configs/instances.dart';
 import 'package:client/core/helper/routes/navigation.dart';
 import 'package:client/core/helper/routes/routes.dart';
 import 'package:client/core/helper/utils/images.dart';
@@ -9,8 +8,6 @@ import 'package:client/core/helper/utils/pallets.dart';
 import 'package:client/core/helper/utils/workplenty_dialog.dart';
 import 'package:client/views/onboarding/domain/entity/auth/auth_entity.dart';
 import 'package:client/views/onboarding/presentation/authentication/bloc/authbloc_bloc.dart';
-import 'package:client/views/onboarding/presentation/profile/profile_setup.dart';
-
 import 'package:client/views/widgets/body_widget.dart';
 import 'package:client/views/widgets/buttons.dart';
 import 'package:client/views/widgets/default_appbar.dart';

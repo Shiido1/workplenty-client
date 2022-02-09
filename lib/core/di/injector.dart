@@ -21,6 +21,7 @@ import 'package:client/views/onboarding/data/contractImpl/authContractImpl.dart'
 import 'package:client/views/onboarding/data/sourceImpl/authSourceImpl.dart';
 import 'package:client/views/onboarding/domain/usecases/auth_usecases.dart';
 import 'package:client/views/onboarding/presentation/authentication/bloc/authbloc_bloc.dart';
+import 'package:client/views/onboarding/presentation/screens/services/bloc/servicebloc_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 import '../database/session_manager.dart';
@@ -55,6 +56,8 @@ void _initProviders() {}
 /// Initialize bloc's here
 void _initBloc() {
   inject.registerLazySingleton<AuthblocBloc>(() => AuthblocBloc(inject()));
+  inject
+      .registerLazySingleton<ServiceblocBloc>(() => ServiceblocBloc(inject()));
 }
 
 /// Initialize data sources implementations

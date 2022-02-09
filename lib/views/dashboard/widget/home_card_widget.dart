@@ -1,12 +1,15 @@
 import 'package:client/core/helper/utils/images.dart';
 import 'package:client/core/helper/utils/pallets.dart';
 import 'package:client/views/dashboard/gig/data/model/list_of_artisan_response/datum.dart';
+import 'package:client/views/dashboard/gig/presentation/provider/artisan_provider.dart';
 import 'package:client/views/widgets/buttons.dart';
 import 'package:client/views/widgets/image_loader.dart';
+import 'package:client/views/widgets/modal_bottom.dart';
 import 'package:client/views/widgets/text_views.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 class HomeCard extends StatelessWidget {
   final Datum? datum;
@@ -88,7 +91,11 @@ class HomeCard extends StatelessWidget {
               ),
               ButtonWidget(
                 buttonText: 'Invite Artisan',
-                onPressed: () {},
+                onPressed: () {
+                  Provider.of<ArtisanProvider>(context, listen: false)
+                      .setArtisan(datum?.user);
+                  showFloatingActionModal(context, 'Select a Service');
+                },
                 fontSize: 14,
                 fontWeight: FontWeight.w700,
                 height: 35.h,

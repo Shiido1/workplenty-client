@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_for_elements_to_map_fromiterable
 
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:client/core/database/hive_database.dart';
 import 'package:client/views/dashboard/gig/data/model/list_of_artisan_response/datum.dart';
@@ -34,7 +35,9 @@ class ListOfArtisansDao {
 
   List<Datum> getConvertedData(Box box) {
     Map<String, dynamic> raw = Map<String, dynamic>.from(box.toMap());
-    return raw.values.map((e) => Datum.fromJson(e)).toList();
+    return raw.values
+        .map((e) => Datum.fromJson(jsonDecode(jsonEncode(e))))
+        .toList();
   }
 
   Future<ValueListenable<Box>?> getListenable({List<String>? keys}) async {
