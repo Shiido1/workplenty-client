@@ -1,14 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'saved_profile_model_response.dart';
+part of 'revie_list_response_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-SavedProfileModelResponse _$SavedProfileModelResponseFromJson(
+RevieListResponseModel _$RevieListResponseModelFromJson(
         Map<String, dynamic> json) =>
-    SavedProfileModelResponse(
+    RevieListResponseModel(
       msg: json['msg'] as String?,
       data: json['data'] == null
           ? null
@@ -17,11 +17,11 @@ SavedProfileModelResponse _$SavedProfileModelResponseFromJson(
       code: json['code'] as int?,
     );
 
-Map<String, dynamic> _$SavedProfileModelResponseToJson(
-        SavedProfileModelResponse instance) =>
+Map<String, dynamic> _$RevieListResponseModelToJson(
+        RevieListResponseModel instance) =>
     <String, dynamic>{
       'msg': instance.msg,
-      'data': instance.data?.toJson(),
+      'data': instance.data,
       'success': instance.success,
       'code': instance.code,
     };

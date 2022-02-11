@@ -11,9 +11,8 @@ class SaveProfileListProvider extends BaseModel {
   Future<void> getSaveProfileList() async {
     try {
       final _response = await _useCase.savedProfileList();
-      _response!.fold(
-        (l) => logger.e(l.errorMessage(l)),
-        (r) => savedProfileListDao!.savedProfileList(r.data?.data));
+      _response!.fold((l) => logger.e(l.errorMessage(l)),
+          (r) => savedProfileListDao!.savedProfileList(r.data?.data));
     } catch (e) {
       throw (e);
     }

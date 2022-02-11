@@ -7,15 +7,17 @@ part of 'datum.dart';
 // **************************************************************************
 
 Datum _$DatumFromJson(Map<String, dynamic> json) => Datum(
-      user: json['user'] == null
+      id: json['id'] as int?,
+      name: json['name'] as String?,
+      cover: json['cover'] == null
           ? null
-          : User.fromJson(json['user'] as Map<String, dynamic>),
-      profile: json['profile'] == null
-          ? null
-          : Profile.fromJson(json['profile'] as Map<String, dynamic>),
+          : Cover.fromJson(json['cover'] as Map<String, dynamic>),
+      categoryId: json['category_id'],
     );
 
 Map<String, dynamic> _$DatumToJson(Datum instance) => <String, dynamic>{
-      'user': instance.user?.toJson(),
-      'profile': instance.profile?.toJson(),
+      'id': instance.id,
+      'name': instance.name,
+      'cover': instance.cover,
+      'category_id': instance.categoryId,
     };

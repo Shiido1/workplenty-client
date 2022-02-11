@@ -3,6 +3,8 @@ import 'package:client/core/api/auth/auth_api.dart';
 import 'package:client/core/api/card/card_api.dart';
 import 'package:client/core/api/chat/chat_api.dart';
 import 'package:client/core/api/gig/gig_api.dart';
+import 'package:client/core/api/industry/industry_api.dart';
+import 'package:client/core/api/review/review_api.dart';
 import 'package:client/core/database/hive_database.dart';
 import 'package:client/core/network/network_service.dart';
 import 'package:client/views/dashboard/card/data/contractImpl/cardContractImpl.dart';
@@ -21,10 +23,17 @@ import 'package:client/views/dashboard/saved/data/contractImpl/saved_profile_con
 import 'package:client/views/dashboard/saved/domain/usecase/saved_profile_list_usecase.dart';
 import 'package:client/views/dashboard/saved/presentation/bloc/saved_profile_bloc_bloc.dart';
 import 'package:client/views/onboarding/data/contractImpl/authContractImpl.dart';
+import 'package:client/views/onboarding/data/contractImpl/industryContractImpl.dart';
 import 'package:client/views/onboarding/data/sourceImpl/authSourceImpl.dart';
+import 'package:client/views/onboarding/data/sourceImpl/industrySourceImpl.dart';
 import 'package:client/views/onboarding/domain/usecases/auth_usecases.dart';
 import 'package:client/views/onboarding/presentation/authentication/bloc/authbloc_bloc.dart';
 import 'package:client/views/onboarding/presentation/screens/services/bloc/servicebloc_bloc.dart';
+import 'package:client/views/review/data/contractImpl/review_contract_impl.dart';
+import 'package:client/views/review/data/source/fetch_industry_source_impl.dart';
+import 'package:client/views/review/domain/usecase/review_save_usecase.dart';
+import 'package:client/views/review/domain/usecase/review_usecase.dart';
+import 'package:client/views/review/presentation/bloc/bloc/review_bloc_bloc.dart';
 import 'package:get_it/get_it.dart';
 import '../../views/dashboard/saved/data/sourceImpl/saved_profile_source_impl.dart';
 import '../../views/dashboard/saved/domain/usecase/saved_profile_usecase.dart';
@@ -65,6 +74,8 @@ void _initBloc() {
       .registerLazySingleton<ServiceblocBloc>(() => ServiceblocBloc(inject()));
   inject.registerLazySingleton<SavedProfileBlocBloc>(
       () => SavedProfileBlocBloc(inject()));
+  inject.registerLazySingleton<ReviewBlocBloc>(
+      () => ReviewBlocBloc(inject()));
 }
 
 /// Initialize data sources implementations
@@ -81,6 +92,10 @@ void _initDataSources() {
       () => ArtisanSourceImpl(api: inject()));
   inject.registerLazySingleton<SavedProfileSourceImpl>(
       () => SavedProfileSourceImpl(api: inject()));
+  inject.registerLazySingleton<IndustrySourceImpl>(
+      () => IndustrySourceImpl(api: inject()));
+  inject.registerLazySingleton<ReviewSourceImpl>(
+      () => ReviewSourceImpl(api: inject()));
 }
 
 /// Initialize data repositories implementations
@@ -97,6 +112,10 @@ void _initDataContracts() {
       () => ArtisanContractImpl(inject()));
   inject.registerLazySingleton<SavedProfileContractImpl>(
       () => SavedProfileContractImpl(inject()));
+  inject.registerLazySingleton<IndustryContractImpl>(
+      () => IndustryContractImpl(inject()));
+  inject.registerLazySingleton<ReviewContractImpl>(
+      () => ReviewContractImpl(inject()));
 }
 
 /// Initialize services's here
@@ -114,6 +133,10 @@ void _initServices() {
       () => ArtisanApi(networkService: inject()));
   inject.registerLazySingleton<SavedProfileApi>(
       () => SavedProfileApi(networkService: inject()));
+  inject.registerLazySingleton<ReviewApi>(
+      () => ReviewApi(networkService: inject()));
+  inject.registerLazySingleton<IndustryApi>(
+      () => IndustryApi(networkService: inject()));
 }
 
 /// Initialize usecases here
@@ -127,4 +150,8 @@ void _initializeUsecase() {
       () => SavedProfileUseCase(inject()));
   inject.registerLazySingleton<SavedProfileListUseCase>(
       () => SavedProfileListUseCase(inject()));
+  inject.registerLazySingleton<ReviewUsesCases>(
+      () => ReviewUsesCases(inject()));
+  inject.registerLazySingleton<SaveReviewUsesCases>(
+      () => SaveReviewUsesCases(inject()));
 }

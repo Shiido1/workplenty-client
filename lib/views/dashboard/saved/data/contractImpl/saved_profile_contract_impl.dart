@@ -23,7 +23,8 @@ class SavedProfileContractImpl implements SavedProfileContract {
   }
 
   @override
-  Future<Either<Failure, SavedProfileModelResponse>> savedProfileListContract() async {
+  Future<Either<Failure, SavedProfileModelResponse>>
+      savedProfileListContract() async {
     try {
       final _response = await _impl.savedProfileListSource();
       return Right(_response);

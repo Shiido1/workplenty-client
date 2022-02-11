@@ -14,7 +14,8 @@ class SavedProfileListDao {
     openBox().then((value) => _box = value);
   }
 
-  Future<Box<Map>> openBox() => HiveBoxes.openBox<Map>(HiveBoxes.listOfSavedProfile);
+  Future<Box<Map>> openBox() =>
+      HiveBoxes.openBox<Map>(HiveBoxes.listOfSavedProfile);
 
   Future<void> savedProfileList(List<Datum>? data) async {
     if (data!.isNotEmpty) await _box?.clear();
