@@ -1,28 +1,32 @@
+// ignore_for_file: prefer_for_elements_to_map_fromiterable
+
+import 'dart:async';
+import 'dart:convert';
+
 import 'package:client/core/database/hive_database.dart';
-import 'package:client/views/dashboard/saved/data/model/saved_profile_list_response/saved_profile_model_response/datum.dart';
+import 'package:client/views/dashboard/gig/data/model/list_of_skills_response/datum.dart';
 import 'package:flutter/foundation.dart';
-import 'package:hive_flutter/adapters.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-SavedProfileListDao? savedProfileListDao;
+SkillDao? skillDao;
 
-class SavedProfileListDao {
+class SkillDao {
   Box<Map>? _box;
 
   Box<Map>? get box => _box;
 
-  AvailableGigsDao() {
+  SkillDao() {
     openBox().then((value) => _box = value);
   }
 
-  Future<Box<Map>> openBox() =>
-      HiveBoxes.openBox<Map>(HiveBoxes.listOfSavedProfile);
+  Future<Box<Map>> openBox() => HiveBoxes.openBox<Map>(HiveBoxes.skill);
 
-  Future<void> savedProfileList(List<Datum>? data) async {
+  Future<void> saveSkills(List<Datum>? data) async {
     if (data!.isNotEmpty) await _box?.clear();
 
     final map = Map<String, Map>.fromIterable(
       data,
-      key: (g) => (g as Datum).user!.id.toString(),
+      key: (g) => (g as Datum).id.toString(),
       value: (g) => (g as Datum).toJson(),
     );
     await _box!.putAll(map);
@@ -30,11 +34,10 @@ class SavedProfileListDao {
 
   List<Datum> getConvertedData(Box box) {
     Map<String, dynamic> raw = Map<String, dynamic>.from(box.toMap());
-    return raw.values.map((e) => Datum.fromJson(e)).toList();
+    return raw.values.map((e) => Datum.fromJson(json.decode(json.encode(e)))).toList();
   }
 
-  Future<ValueListenable<Box>?> getListenable({List<String>? keys}) async {
-    await openBox();
+  ValueListenable<Box>? getListenable({List<String>? keys}) {
     return keys == null ? _box?.listenable() : _box?.listenable(keys: keys);
   }
 

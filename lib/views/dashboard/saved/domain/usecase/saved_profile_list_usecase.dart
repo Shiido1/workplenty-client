@@ -1,4 +1,4 @@
-  import 'package:client/core/error/failures.dart';
+import 'package:client/core/error/failures.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../../../../core/usecases/usecase.dart';
@@ -10,9 +10,8 @@ class SavedProfileListUseCase extends UseCase {
 
   SavedProfileListUseCase(this._contractImpl);
 
-   @override
+  @override
   Future<Either<Failure, SavedProfileModelResponse>>? savedProfileList() async {
     return await _contractImpl.savedProfileListContract();
   }
-
 }

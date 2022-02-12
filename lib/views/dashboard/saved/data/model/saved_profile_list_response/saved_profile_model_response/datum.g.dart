@@ -16,6 +16,6 @@ Datum _$DatumFromJson(Map<String, dynamic> json) => Datum(
     );
 
 Map<String, dynamic> _$DatumToJson(Datum instance) => <String, dynamic>{
-      'user': instance.user,
-      'profile': instance.profile,
+      'user': instance.user?.toJson(),
+      'profile': instance.profile?.toJson(),
     };

@@ -21,7 +21,6 @@ class SavedProfileApi {
       rethrow;
     }
   }
-  
 
   Future<SavedProfileModelResponse> savedProfileList() async {
     try {

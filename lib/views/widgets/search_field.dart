@@ -39,18 +39,22 @@ class SearchAndFilter extends StatelessWidget {
       children: [
         Expanded(
           child: EditFormField(
-              label: 'Search for gigs, live consultancy, home',
+              onChange: onChanged,
+              label: hint ?? 'Search for gigs, live consultancy, home',
               suffixIcon: Icons.search),
         ),
         SizedBox(width: 5.w),
-        GestureDetector(
-          onTap: onFilter,
-          child: Container(
-            padding: EdgeInsets.all(6.w),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5.r),
-                color: Pallets.primary100),
-            child: ImageLoader(path: AppImages.filter),
+        Visibility(
+          visible: showFilter ?? false,
+          child: GestureDetector(
+            onTap: onFilter,
+            child: Container(
+              padding: EdgeInsets.all(6.w),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5.r),
+                  color: Pallets.primary100),
+              child: ImageLoader(path: AppImages.filter),
+            ),
           ),
         ),
       ],

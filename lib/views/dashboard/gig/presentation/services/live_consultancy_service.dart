@@ -1,7 +1,7 @@
 import 'package:client/core/helper/routes/navigation.dart';
 import 'package:client/core/helper/utils/images.dart';
 import 'package:client/core/helper/utils/pallets.dart';
-import 'package:client/views/onboarding/presentation/screens/widget/row_container_widget.dart';
+import 'package:client/views/dashboard/gig/presentation/widget/row_container_widget.dart';
 import 'package:client/views/widgets/body_widget.dart';
 import 'package:client/views/widgets/buttons.dart';
 import 'package:client/views/widgets/default_appbar.dart';

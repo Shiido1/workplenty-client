@@ -16,7 +16,7 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<ArtisanProvider>(context, listen: true).listOfArtisan();
+    Provider.of<ArtisanProvider>(context, listen: false).listOfArtisan();
     return Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () => showFloatingActionModal(context, 'Select a Service'),

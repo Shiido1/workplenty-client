@@ -21,7 +21,7 @@ Map<String, dynamic> _$SavedProfileModelResponseToJson(
         SavedProfileModelResponse instance) =>
     <String, dynamic>{
       'msg': instance.msg,
-      'data': instance.data,
+      'data': instance.data?.toJson(),
       'success': instance.success,
       'code': instance.code,
     };

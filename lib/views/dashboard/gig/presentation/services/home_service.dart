@@ -2,7 +2,7 @@ import 'package:client/core/helper/helper_handler.dart';
 import 'package:client/core/helper/routes/navigation.dart';
 import 'package:client/core/helper/utils/images.dart';
 import 'package:client/core/helper/utils/pallets.dart';
-import 'package:client/views/onboarding/presentation/screens/widget/row_container_widget.dart';
+import 'package:client/views/dashboard/gig/presentation/widget/row_container_widget.dart';
 import 'package:client/views/widgets/body_widget.dart';
 import 'package:client/views/widgets/buttons.dart';
 import 'package:client/views/widgets/default_appbar.dart';
@@ -203,15 +203,15 @@ class HomeService extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(
-                        child: Wrap(
-                          spacing: 5,
-                          runSpacing: 10,
-                          children: _skills!
-                              .map((element) => SkillsWidget(element))
-                              .toList(),
-                        ),
-                      ),
+                      // Expanded(
+                      //   child: Wrap(
+                      //     spacing: 5,
+                      //     runSpacing: 10,
+                      //     children: _skills!
+                      //         .map((element) => SkillsWidget(element))
+                      //         .toList(),
+                      //   ),
+                      // ),
                       SizedBox(
                         width: 5.w,
                       ),
