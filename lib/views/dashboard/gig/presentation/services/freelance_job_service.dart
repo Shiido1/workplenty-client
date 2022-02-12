@@ -424,26 +424,7 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
     // }
   }
 
-  // Future<FormData> _getMappedData() async {
-  //   return FormData.fromMap({
-  //     'id': '1',
-  //     'industry_id': '1',
-  //     'type': 'type',
-  //     'private_message': privateMessageController,
-  //     'title': titleController.text,
-  //     'description': descriptionController.text,
-  //     'timeline': 'timeline',
-  //     'payment_type': 'paymentType',
-  //     'is_published': 'isPublished',
-  //     'experience_level': 'experienceLevel',
-  //     'cover_letter_required': 'coverLetterRequired',
-  //     'total_budget': '10000',
-  //     'skill': [],
-  //     'attachments': _returListOfParsedFiles(),
-  //     'invited_artisan_ids': [],
-  //   });
-  // }
-
+  // ignore: unused_element
   List<MultipartFile> _returListOfParsedFiles() {
     List<MultipartFile> _multiPath = [];
     logger.d(_fileList.length);

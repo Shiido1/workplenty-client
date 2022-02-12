@@ -4,6 +4,7 @@ import 'package:client/views/dashboard/chat/presentation/provider/chat_provider.
 import 'package:client/views/dashboard/gig/presentation/provider/artisan_provider.dart';
 import 'package:client/views/dashboard/gig/presentation/provider/gig_provider.dart';
 import 'package:client/views/dashboard/saved/presentation/provider/provider.dart';
+import 'package:client/views/review/presentation/provider/review_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
@@ -16,5 +17,7 @@ class Providers {
         create: (_) => ArtisanProvider(inject())),
     ChangeNotifierProvider<SaveProfileListProvider>(
         create: (_) => SaveProfileListProvider(inject())),
+    ChangeNotifierProvider<ReviewProvider>(
+        create: (_) => ReviewProvider(inject())),
   ];
 }
