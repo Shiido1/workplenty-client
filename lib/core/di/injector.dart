@@ -19,6 +19,7 @@ import 'package:client/views/dashboard/gig/data/sourceImpl/artisanSourceImpl.dar
 import 'package:client/views/dashboard/gig/data/sourceImpl/gigSourceImpl.dart';
 import 'package:client/views/dashboard/gig/domain/usecase/artisan_usecase.dart';
 import 'package:client/views/dashboard/gig/domain/usecase/gig_usecase.dart';
+import 'package:client/views/dashboard/gig/presentation/services/bloc/servicebloc_bloc.dart';
 import 'package:client/views/dashboard/saved/data/contractImpl/saved_profile_contract_impl.dart';
 import 'package:client/views/dashboard/saved/domain/usecase/saved_profile_list_usecase.dart';
 import 'package:client/views/dashboard/saved/presentation/bloc/saved_profile_bloc_bloc.dart';
@@ -28,7 +29,6 @@ import 'package:client/views/onboarding/data/sourceImpl/authSourceImpl.dart';
 import 'package:client/views/onboarding/data/sourceImpl/industrySourceImpl.dart';
 import 'package:client/views/onboarding/domain/usecases/auth_usecases.dart';
 import 'package:client/views/onboarding/presentation/authentication/bloc/authbloc_bloc.dart';
-import 'package:client/views/onboarding/presentation/screens/services/bloc/servicebloc_bloc.dart';
 import 'package:client/views/review/data/contractImpl/review_contract_impl.dart';
 import 'package:client/views/review/data/source/fetch_industry_source_impl.dart';
 import 'package:client/views/review/domain/usecase/review_save_usecase.dart';

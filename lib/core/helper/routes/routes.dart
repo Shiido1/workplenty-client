@@ -1,9 +1,9 @@
 import 'package:client/views/dashboard/board.dart';
+import 'package:client/views/dashboard/gig/presentation/services/freelance_job_service.dart';
+import 'package:client/views/dashboard/gig/presentation/services/home_service.dart';
+import 'package:client/views/dashboard/gig/presentation/services/live_consultancy_service.dart';
 import 'package:client/views/onboarding/presentation/authentication/email_verification.dart';
 import 'package:client/views/onboarding/presentation/authentication/welcom_back.dart';
-import 'package:client/views/onboarding/presentation/screens/services/freelance_job_service.dart';
-import 'package:client/views/onboarding/presentation/screens/services/home_service.dart';
-import 'package:client/views/onboarding/presentation/screens/services/live_consultancy_service.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../../views/onboarding/presentation/authentication/reset_password.dart';

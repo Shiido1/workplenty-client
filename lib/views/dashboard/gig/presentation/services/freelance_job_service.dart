@@ -9,11 +9,13 @@ import 'package:client/core/helper/utils/image_picker.dart';
 import 'package:client/core/helper/utils/images.dart';
 import 'package:client/core/helper/utils/pallets.dart';
 import 'package:client/core/helper/utils/workplenty_dialog.dart';
+import 'package:client/views/dashboard/gig/data/model/list_of_skills_response/datum.dart';
 import 'package:client/views/dashboard/gig/domain/entity/gig/gig_entity.dart';
+import 'package:client/views/dashboard/gig/presentation/modal/list_of_skills_modal.dart';
 import 'package:client/views/dashboard/gig/presentation/provider/artisan_provider.dart';
-import 'package:client/views/onboarding/presentation/screens/services/bloc/servicebloc_bloc.dart';
-import 'package:client/views/onboarding/presentation/screens/widget/row_container_widget.dart';
+import 'package:client/views/dashboard/gig/presentation/widget/row_container_widget.dart';
 import 'package:client/views/widgets/body_widget.dart';
+import 'package:client/views/widgets/bottom_sheet.dart';
 import 'package:client/views/widgets/buttons.dart';
 import 'package:client/views/widgets/default_appbar.dart';
 import 'package:client/views/widgets/edit_form_widget.dart';
@@ -26,6 +28,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+
+import 'bloc/servicebloc_bloc.dart';
 
 // ignore: must_be_immutable
 class FreeLanceJobService extends StatefulWidget {
@@ -40,14 +44,8 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
   final _globalFormKey = GlobalKey<FormState>();
   final _bloc = ServiceblocBloc(inject());
 
-  List<String>? _skills = [
-    'UI',
-    'UX',
-    'Web Design',
-    'Figma',
-    'User Research',
-    'Style Guide'
-  ];
+  List<Datum>? _skillList = [];
+
   final _image = ImagePickerHandler();
   // File? _file;
   List<File> _fileList = [];
@@ -270,7 +268,7 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
                           child: Wrap(
                             spacing: 5,
                             runSpacing: 10,
-                            children: _skills!
+                            children: _skillList!
                                 .map((element) => SkillsWidget(element))
                                 .toList(),
                           ),
@@ -278,7 +276,17 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
                         SizedBox(
                           width: 5.w,
                         ),
-                        tap('+')
+                        addSkills('+', onTap: () {
+                          BottomSheets.showSheet<String>(
+                            context,
+                            child: SkillsModal(
+                                list: _skillList,
+                                callBack: (List<Datum> l) {
+                                  _skillList = l;
+                                  setState(() {});
+                                }),
+                          );
+                        })
                       ],
                     ),
                   ],
@@ -444,15 +452,19 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
 
   String _returnLastPath(File file) => file.path.split('/').last;
 
-  tap(String value) => Container(
-        padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 7.h),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5.r),
-            color: Pallets.primary100),
-        child: TextView(
-            color: Pallets.white,
-            text: value,
-            fontWeight: FontWeight.w500,
-            textAlign: TextAlign.center),
+  GestureDetector addSkills(String value, {Function()? onTap}) =>
+      GestureDetector(
+        onTap: onTap,
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 5.h),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5.r),
+              color: Pallets.primary100),
+          child: TextView(
+              color: Pallets.white,
+              text: value,
+              fontWeight: FontWeight.w500,
+              textAlign: TextAlign.center),
+        ),
       );
 }

@@ -12,10 +12,10 @@ import 'package:client/views/widgets/body_widget.dart';
 import 'package:client/views/widgets/buttons.dart';
 import 'package:client/views/widgets/default_appbar.dart';
 import 'package:client/views/widgets/text_views.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
 
 class EmailVerificationScreen extends StatefulWidget {
   final Map? map;

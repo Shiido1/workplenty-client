@@ -1,5 +1,6 @@
 import 'package:client/views/dashboard/gig/domain/source/local/gig_dao.dart';
 import 'package:client/views/dashboard/gig/domain/source/local/list_of_artisans_dao.dart';
+import 'package:client/views/dashboard/gig/domain/source/local/skill_dao.dart';
 import 'package:client/views/dashboard/saved/domain/source/local/saved_profile_dao.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -25,17 +26,20 @@ class HiveBoxes {
   static const availableGigs = 'availableGigs';
   static const listOfArtisans = 'listOfArtisans';
   static const listOfSavedProfile = 'listOfSavedProfile';
+  static const skill = 'skill';
 
   static Future openAllBox() async {
     availableGigsDao = AvailableGigsDao();
     listOfArtisansDao = ListOfArtisansDao();
     savedProfileListDao = SavedProfileListDao();
+    skillDao = SkillDao();
   }
 
   static Future clearAllBox() async {
     await availableGigsDao!.clearDb();
     await listOfArtisansDao!.clearDb();
     await savedProfileListDao!.clearDb();
+    await skillDao!.clearDb();
   }
 
   static Future<Box<T>> openBox<T>(String boxName) async {
