@@ -25,7 +25,7 @@ class SavedProfileListDao {
       key: (g) => (g as Datum).user!.id.toString(),
       value: (g) => (g as Datum).toJson(),
     );
-    await _box!.putAll(map);
+    await _box?.putAll(map);
   }
 
   List<Datum> getConvertedData(Box box) {
