@@ -9,7 +9,6 @@ import 'package:client/views/widgets/default_appbar.dart';
 import 'package:client/views/widgets/edit_form_widget.dart';
 import 'package:client/views/widgets/image_loader.dart';
 import 'package:client/views/widgets/review_bg_card.dart';
-import 'package:client/views/widgets/skill_widget.dart';
 import 'package:client/views/widgets/text_views.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
