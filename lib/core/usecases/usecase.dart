@@ -13,7 +13,7 @@ class UseCase<Type, Params> {
   Future<Either<Failure, Type>>? loginUseCase(Params params) {}
   Future<Either<Failure, Type>>? forgotPasswordUseCase(Params params) {}
   Future<Either<Failure, Type>>? resetPasswordUseCase(Params params) {}
-  Future<Either<Failure, Type>>? requestVerificationPinUseCase(Params params) {}
+  Future<Either<Failure, Type>>? requestVerificationPinUseCase() {}
   Future<Either<Failure, Type>>? pinVerificationConfirmation(Params params) {}
   Future<Either<Failure, Type>>? updateProfileBio(Params params) {}
   Future<Either<Failure, Type>>? updateLocationBio(Params params) {}
@@ -21,7 +21,7 @@ class UseCase<Type, Params> {
   Future<Either<Failure, Type>>? saveGigUseCase(Params params) {}
   Future<Either<Failure, Type>>? getAllCardUseCase() {}
   Future<Either<Failure, Type>>? chatListUseCase() {}
-  
+
   Future<Either<Failure, Type>>? saveClientsGig(Params params) {}
   Future<Either<Failure, Type>>? removeAttachment(Params params) {}
   Future<Either<Failure, Type>>? savedGigsSave(Params params) {}
@@ -29,6 +29,12 @@ class UseCase<Type, Params> {
   Future<Either<Failure, Type>>? getDetailsOfGig(Params params) {}
   Future<Either<Failure, Type>>? categoriesOfGig() {}
   Future<Either<Failure, Type>>? listOfSkills() {}
+  Future<Either<Failure, Type>>? listOfArtisan() {}
+  Future<Either<Failure, Type>>? savedProfile(Params params) {}
+  Future<Either<Failure, Type>>? savedProfileList() {}
+  Future<Either<Failure, Type>>? reviewList(Params params) {}
+  Future<Either<Failure, Type>>? fetchIndustry(Params params) {}
+  Future<Either<Failure, Type>>? reviewSave(Params params) {}
 }
 
 class NoParams extends Equatable {

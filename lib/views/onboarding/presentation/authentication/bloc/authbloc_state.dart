@@ -21,6 +21,11 @@ class AuthblocSuccess extends AuthblocState {
   AuthblocSuccess({required this.response});
 }
 
+class AuthblocOTPResendSuccess extends AuthblocState {
+  final dynamic response;
+  AuthblocOTPResendSuccess({required this.response});
+}
+
 class AuthblocSocialSuccess extends AuthblocState {
   final dynamic response;
   AuthblocSocialSuccess({required this.response});

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:client/core/database/hive_database.dart';
 import 'package:client/core/helper/configs/instances.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:path_provider/path_provider.dart';
@@ -48,6 +49,7 @@ class SessionManager {
 
   Future<bool> logOut() async {
     await sharedPreferences!.clear();
+    await HiveBoxes.clearAllBox();
     try {
       final cacheDir = await getTemporaryDirectory();
       if (cacheDir.existsSync()) {
