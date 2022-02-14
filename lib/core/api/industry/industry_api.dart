@@ -36,4 +36,17 @@ class IndustryApi {
       rethrow;
     }
   }
+
+  Future<dynamic> fetchIndustry(IndustryEntity entity) async {
+    try {
+      await _networkService.call(
+        UrlConfig.industry,
+        RequestMethod.get,
+        queryParams: {},
+      );
+      return;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

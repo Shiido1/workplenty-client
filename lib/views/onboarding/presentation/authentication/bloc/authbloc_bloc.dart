@@ -46,9 +46,50 @@ class AuthblocBloc extends Bloc<AuthblocEvent, AuthblocState> {
       if (event is VerifyPinEvent) {
         try {
           emit(AuthblocLoading());
+          final _response = await _useCase
+              .pinVerificationConfirmation(Params(entity: event.entity));
+          _response!.fold(
+              (l) => emit(AuthblocFailed(message: l.errorMessage(l)!)),
+              (r) => emit(AuthblocSuccess(response: r)));
+        } catch (e) {
+          emit(AuthblocFailed(message: e.toString()));
+        }
+      }
+
+      /// Resend PIN Event
+      if (event is ResendOTPEvent) {
+        try {
+          emit(AuthblocLoading());
+          final _response = await _useCase.requestVerificationPinUseCase();
+          _response!.fold(
+              (l) => emit(AuthblocFailed(message: l.errorMessage(l)!)),
+              (r) => emit(AuthblocOTPResendSuccess(response: r)));
+        } catch (e) {
+          emit(AuthblocFailed(message: e.toString()));
+        }
+      }
+
+      /// Forgot password Event
+      if (event is ForgotPasswordEvent) {
+        try {
+          emit(AuthblocLoading());
+          final _response = await _useCase
+              .forgotPasswordUseCase(Params(entity: event.entity));
+          _response!.fold(
+              (l) => emit(AuthblocFailed(message: l.errorMessage(l)!)),
+              (r) => emit(AuthblocSuccess(response: r)));
+        } catch (e) {
+          emit(AuthblocFailed(message: e.toString()));
+        }
+      }
+
+      /// Create new password
+      if (event is ResetPasswordEvent) {
+        try {
+          emit(AuthblocLoading());
           final _response =
-              await _useCase.loginUseCase(Params(entity: event.entity));
-          _response.fold(
+              await _useCase.resetPasswordUseCase(Params(entity: event.entity));
+          _response!.fold(
               (l) => emit(AuthblocFailed(message: l.errorMessage(l)!)),
               (r) => emit(AuthblocSuccess(response: r)));
         } catch (e) {

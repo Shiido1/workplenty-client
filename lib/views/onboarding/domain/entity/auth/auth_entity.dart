@@ -10,16 +10,17 @@ class AuthEntity extends DefaultResponse {
   final String? phone;
   final String? role;
   final String? username;
+  final String? pin;
 
-  AuthEntity({
-    this.email,
-    this.password,
-    this.firstName,
-    this.lastName,
-    this.phone,
-    this.role,
-    this.username,
-  });
+  AuthEntity(
+      {this.email,
+      this.password,
+      this.firstName,
+      this.lastName,
+      this.phone,
+      this.role,
+      this.username,
+      this.pin});
 
   @override
   List<Object> get props => [email!, password!];
@@ -38,6 +39,18 @@ class AuthEntity extends DefaultResponse {
 
   Map<String, dynamic> toLogin() {
     return {'email': email, 'password': password};
+  }
+
+  Map<String, dynamic> forgotPassword() {
+    return {'email': email};
+  }
+
+  Map<String, dynamic> resetNewPassword() {
+    return {'email': email, 'pin': pin, 'password': password};
+  }
+
+  Map<String, dynamic> verifyPIN() {
+    return {'pin': pin};
   }
 
   @override

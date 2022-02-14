@@ -13,8 +13,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/helper/routes/routes.dart';
+import '../../../../core/helper/utils/workplenty_dialog.dart';
 import 'bloc/authbloc_bloc.dart';
-import 'reset_password.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   ForgotPasswordScreen({Key? key}) : super(key: key);
@@ -37,14 +38,27 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         appBar: defaultAppBar(context),
         body: BlocListener<AuthblocBloc, AuthblocState>(
           bloc: _bloc,
-          listener: (context, state) {},
+          listener: (context, state) {
+            if (state is AuthblocLoading) {
+              WorkPlenty.showLoading(context, _loadingKey, '');
+            }
+            if (state is AuthblocSuccess) {
+              WorkPlenty.hideLoading(_loadingKey);
+              PageRouter.gotoNamed(Routes.forgotPassword, context,
+                  args: _emailController.text);
+            }
+            if (state is AuthblocFailed) {
+              WorkPlenty.hideLoading(_loadingKey);
+              WorkPlenty.error(state.message);
+            }
+          },
           child: BodyWidget(
             child: Form(
               key: _formKey,
               child: ListView(
                 children: [
                   TextView(
-                    text: 'Forget Password',
+                    text: 'Forgot Password',
                     fontSize: 24,
                     fontWeight: FontWeight.w700,
                   ),
@@ -75,7 +89,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   }
 
   void _proceed() {
-    PageRouter.gotoWidget(ResetPasswordScreen(_emailController.text), context);
     if (_formKey.currentState!.validate()) {
       _bloc.add(ForgotPasswordEvent(AuthEntity(email: _emailController.text)));
     }

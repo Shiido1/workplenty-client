@@ -1,10 +1,11 @@
 import 'package:client/core/helper/utils/pallets.dart';
+import 'package:client/views/dashboard/gig/data/model/list_of_skills_response/datum.dart';
 import 'package:client/views/widgets/text_views.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SkillsWidget extends StatelessWidget {
-  final String value;
+  final Datum value;
   const SkillsWidget(this.value, {Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,7 @@ class SkillsWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(5.r),
           color: Pallets.grey.withOpacity(.2)),
       child: TextView(
-          text: value,
+          text: value.name ?? '',
           fontWeight: FontWeight.w500,
           textAlign: TextAlign.center),
     );

@@ -1,7 +1,7 @@
 import 'package:client/core/helper/routes/navigation.dart';
 import 'package:client/core/helper/utils/images.dart';
 import 'package:client/core/helper/utils/pallets.dart';
-import 'package:client/views/review/review.dart';
+import 'package:client/views/review/presentation/review.dart';
 import 'package:client/views/widgets/star_rating.dart';
 import 'package:client/views/widgets/text_views.dart';
 import 'package:flutter/material.dart';

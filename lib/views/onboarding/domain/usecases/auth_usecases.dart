@@ -26,6 +26,23 @@ class AuthUsesCases extends UseCase<AuthEntity, Params> {
       Params params) async {
     return await _repository.socialAuthentication(params.entity!);
   }
+
+  @override
+  Future<Either<Failure, AuthResponse>>? forgotPasswordUseCase(
+      Params params) async {
+    return await _repository.forgotPassword(params.entity!);
+  }
+
+  @override
+  Future<Either<Failure, AuthResponse>>? pinVerificationConfirmation(
+      Params params) async {
+    return await _repository.verificationPinConfirm(params.entity!);
+  }
+
+  @override
+  Future<Either<Failure, AuthEntity>>? requestVerificationPinUseCase() async {
+    return await _repository.verificationPinRequest();
+  }
 }
 
 class Params extends Equatable {

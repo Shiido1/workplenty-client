@@ -10,11 +10,14 @@ import 'package:client/views/dashboard/gig/domain/entity/gig/gig_entity.dart';
 import 'package:dartz/dartz.dart';
 
 abstract class GigContract {
-  Future<Either<Failure, SavedClientGigResponse>> saveClientsGig(GigEntity entity);
+  Future<Either<Failure, SavedClientGigResponse>> saveClientsGig(
+      GigEntity entity);
   Future<Either<Failure, DefaultResponse>> removeAttachment(GigEntity entity);
   Future<Either<Failure, DefaultResponse>> savedGigsSave(GigEntity entity);
-  Future<Either<Failure, AvailableGigResponse>> getListOfAvailableGigs(GigEntity entity);
-  Future<Either<Failure, DetailsOfGigResponse>> getDetailsOfGig(GigEntity entity);
+  Future<Either<Failure, AvailableGigResponse>> getListOfAvailableGigs(
+      GigEntity entity);
+  Future<Either<Failure, DetailsOfGigResponse>> getDetailsOfGig(
+      GigEntity entity);
   Future<Either<Failure, CategoryOfGigResponse>> categoriesOfGig();
   Future<Either<Failure, ListOfSkillsResponse>> listOfSkills();
 }

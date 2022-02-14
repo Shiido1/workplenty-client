@@ -231,9 +231,15 @@ class CircularImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (path == null) {
+      return CircleAvatar(
+        backgroundColor: Pallets.primary100,
+        radius: radius,
+      );
+    }
     return CircularProfileAvatar(path!,
         radius: radius!,
-        backgroundColor: Pallets.orange600,
+        backgroundColor: Pallets.primary100,
         borderWidth: borderWidth!,
         initialsText: Text(initial ?? '',
             style: TextStyle(fontSize: textSize, color: Colors.white)),

@@ -12,7 +12,7 @@ Data _$DataFromJson(Map<String, dynamic> json) => Data(
           : PaginationMeta.fromJson(
               json['pagination_meta'] as Map<String, dynamic>),
       data: (json['data'] as List<dynamic>?)
-          ?.map((e) => Datum.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => Datum.fromJson(e))
           .toList(),
     );
 
