@@ -384,44 +384,24 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
   }
 
   void _proceed() {
-    // final _g = GigEntity(
-    //     id: '1',
-    //     industryId: '1',
-    //     type: GigType.freelance,
-    //     privateMessage: 'hello world',
-    //     title: 'titleController.text',
-    //     description: 'descriptionController.text',
-    //     timeline: '2 weeks',
-    //     paymentType: 'Cash',
-    //     isPublished: '1',
-    //     experienceLevel: '1',
-    //     coverLetterRequired: '1',
-    //     totalBudget: '100000',
-    //     skill: ['laravel', 'flutter'],
-    //     // attachments: _returListOfParsedFiles(),
-    //     invited_artisan_ids: ['2', '2']);
-
-    // logger.d(_g.saveClientsGig());
-
-    _bloc.add(ServiceEvent(GigEntity(
-        id: '1',
-        industryId: '1',
-        type: GigType.freelance,
-        privateMessage: 'hello world',
-        title: 'titleController.text',
-        description: 'descriptionController.text',
-        timeline: '2 weeks',
-        paymentType: 'Cash',
-        isPublished: '1',
-        experienceLevel: '1',
-        coverLetterRequired: '1',
-        totalBudget: '100000',
-        skill: ['laravel', 'flutter'],
-        // attachments: _returListOfParsedFiles(),
-        invited_artisan_ids: ['2', '2'])));
-    // if (_globalFormKey.currentState!.validate()) {
-
-    // }
+    if (_globalFormKey.currentState!.validate()) {
+      _bloc.add(ServiceEvent(GigEntity(
+          id: '1',
+          industryId: '1',
+          type: GigType.freelance,
+          privateMessage: 'hello world',
+          title: 'titleController.text',
+          description: 'descriptionController.text',
+          timeline: '2 weeks',
+          paymentType: 'Cash',
+          isPublished: '1',
+          experienceLevel: '1',
+          coverLetterRequired: '1',
+          totalBudget: '100000',
+          skill: ['laravel', 'flutter'],
+          attachments: _returListOfParsedFiles(),
+          invited_artisan_ids: ['2', '2'])));
+    }
   }
 
   // ignore: unused_element

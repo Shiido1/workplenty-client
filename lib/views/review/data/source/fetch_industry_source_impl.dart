@@ -1,4 +1,3 @@
-
 import 'package:client/core/api/review/review_api.dart';
 import 'package:client/core/entity/default_response.dart';
 import 'package:client/views/review/data/model/review_list_response_model/revie_list_response_model.dart';
@@ -19,5 +18,4 @@ class ReviewSourceImpl implements ReviewSource {
   Future<DefaultResponse> reviewSave(ReviewEntity entity) async {
     return await _api.saveReview(entity);
   }
-
 }

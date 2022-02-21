@@ -1,16 +1,13 @@
-// ignore_for_file: prefer_for_elements_to_map_fromiterable
-
-import 'dart:async';
 import 'dart:convert';
 
 import 'package:client/core/database/hive_database.dart';
-import 'package:client/views/dashboard/gig/data/model/list_of_skills_response/datum.dart';
+import 'package:client/views/dashboard/gig/data/model/saved_gig_list/datum.model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-SkillDao? skillDao;
+SavedGigDao? savedGigDao;
 
-class SkillDao {
+class SavedGigDao {
   Box<Map>? _box;
 
   Box<Map>? get box => _box;
@@ -19,9 +16,9 @@ class SkillDao {
     openBox().then((value) => _box = value);
   }
 
-  Future<Box<Map>> openBox() => HiveBoxes.openBox<Map>(HiveBoxes.skill);
+  Future<Box<Map>> openBox() => HiveBoxes.openBox<Map>(HiveBoxes.availableGigs);
 
-  Future<void> saveSkills(List<Datum>? data) async {
+  Future<void> savedGigList(List<Datum>? data) async {
     if (data!.isNotEmpty) await _box?.clear();
 
     final map = Map<String, Map>.fromIterable(
@@ -39,7 +36,8 @@ class SkillDao {
         .toList();
   }
 
-  ValueListenable<Box>? getListenable({List<String>? keys}) {
+  Future<ValueListenable<Box>?> getListenable({List<String>? keys}) async {
+    await openBox();
     return keys == null ? _box?.listenable() : _box?.listenable(keys: keys);
   }
 

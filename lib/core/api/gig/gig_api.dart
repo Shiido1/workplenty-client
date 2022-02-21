@@ -3,6 +3,7 @@ import 'package:client/core/network/network_service.dart';
 import 'package:client/core/network/url_config.dart';
 import 'package:client/views/dashboard/gig/data/model/available_gig_response/available_gig_response.dart';
 import 'package:client/views/dashboard/gig/data/model/saved_client_gig_response/saved_client_gig_response.dart';
+import 'package:client/views/dashboard/gig/data/model/saved_gig_list/saved_gig_list.model.dart';
 import 'package:client/views/dashboard/gig/domain/entity/gig/gig_entity.dart';
 import 'package:dio/dio.dart';
 
@@ -47,6 +48,17 @@ class GigApi {
           UrlConfig.savedGig, RequestMethod.post,
           data: entity.savedGigsSave());
       return DefaultResponse.fromJson(_response.data);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+    /// Show saved gigs
+  Future<SavedGigList> savedGigList() async {
+    try {
+      final _response = await _networkService.call(
+          UrlConfig.savedGig, RequestMethod.get);
+      return SavedGigList.fromJson(_response.data);
     } catch (e) {
       rethrow;
     }

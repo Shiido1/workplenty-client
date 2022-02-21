@@ -44,7 +44,8 @@ class IndustryContractImpl implements IndustryContract {
   }
 
   @override
-  Future<Either<Failure, FetchIndustryResponse>> fetchIndustry(IndustryEntity entity) async {
+  Future<Either<Failure, FetchIndustryResponse>> fetchIndustry(
+      IndustryEntity entity) async {
     try {
       final _response = await _impl.fetchIndustry(entity);
       return Right(_response);

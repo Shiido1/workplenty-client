@@ -14,6 +14,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class SkillsModal extends StatefulWidget {
   final Function(List<Datum> list)? callBack;
   List<Datum>? list = [];

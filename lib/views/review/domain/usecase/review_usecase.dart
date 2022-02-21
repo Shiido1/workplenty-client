@@ -12,10 +12,10 @@ class ReviewUsesCases extends UseCase<RevieListResponseModel, Params> {
   ReviewUsesCases(this._repository);
 
   @override
-  Future<Either<Failure, RevieListResponseModel>> reviewList(Params params) async {
+  Future<Either<Failure, RevieListResponseModel>> reviewList(
+      Params params) async {
     return await _repository.reviewList(params.entity!);
   }
-
 }
 
 class Params extends Equatable {

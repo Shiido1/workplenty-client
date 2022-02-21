@@ -7,6 +7,5 @@ import 'package:dartz/dartz.dart';
 abstract class ReviewContract {
   Future<Either<Failure, RevieListResponseModel>> reviewList(
       ReviewEntity entity);
-  Future<Either<Failure, DefaultResponse>> reviewSave(
-      ReviewEntity entity);
+  Future<Either<Failure, DefaultResponse>> reviewSave(ReviewEntity entity);
 }

@@ -93,7 +93,6 @@ void showFloatingActionModal(BuildContext context, String title,
             ),
           ),
         );
-     
       });
 }
 

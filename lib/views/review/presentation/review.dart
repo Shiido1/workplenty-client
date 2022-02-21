@@ -25,7 +25,7 @@ class _ReviewState extends State<Review> {
   void initState() {
     reviewProvider = Provider.of<ReviewProvider>(context, listen: false);
     reviewProvider!.init(context);
-    reviewProvider! .listOfReview(ReviewEntity(
+    reviewProvider!.listOfReview(ReviewEntity(
       userId: 1,
       gigId: 1,
       // comments: '',
