@@ -43,7 +43,7 @@ class HiveBoxes {
     await listOfArtisansDao!.clearDb();
     await savedProfileListDao!.clearDb();
     await skillDao!.clearDb();
-    savedGigDao!.clearDb();
+    await savedGigDao!.clearDb();
   }
 
   static Future<Box<T>> openBox<T>(String boxName) async {

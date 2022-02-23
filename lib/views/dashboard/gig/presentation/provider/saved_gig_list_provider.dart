@@ -7,17 +7,18 @@ import '../../../../../core/viewmodels/base_model.dart';
 class SavedGigListProvider extends BaseModel {
   final SavedGigListUseCase _useCase;
 
-
   SavedGigListProvider(this._useCase);
 
-  void listOfArtisan() async {
+  void savedGigList() async {
     try {
-      final _response = await _useCase.listOfArtisan();
-      _response!.fold((l) => logger.e(l.errorMessage(l)),
-          (r) => savedGigDao!.savedGigList(r.data?.data ?? []));
+      final _response = await _useCase.listOfSavedGigs();
+      logger.d(_response);
+      _response!.fold((l) => logger.e(l.errorMessage(l)), (r) {
+        savedGigDao?.savedGigList(r.data?.data ?? []);
+        logger.d(' gor u messageb ${r.data?.data}');
+      });
     } catch (e) {
       logger.e('An error occured: $e');
     }
   }
-
 }

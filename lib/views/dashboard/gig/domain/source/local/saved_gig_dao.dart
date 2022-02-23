@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:client/core/database/hive_database.dart';
+import 'package:client/core/helper/configs/instances.dart';
 import 'package:client/views/dashboard/gig/data/model/saved_gig_list/datum.model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -12,14 +13,15 @@ class SavedGigDao {
 
   Box<Map>? get box => _box;
 
-  SkillDao() {
+  SavedGigDao() {
     openBox().then((value) => _box = value);
   }
 
-  Future<Box<Map>> openBox() => HiveBoxes.openBox<Map>(HiveBoxes.availableGigs);
+  Future<Box<Map>> openBox() => HiveBoxes.openBox<Map>(HiveBoxes.savedGig);
 
   Future<void> savedGigList(List<Datum>? data) async {
     if (data!.isNotEmpty) await _box?.clear();
+    logger.d('messageid dadtabase $data');
 
     final map = Map<String, Map>.fromIterable(
       data,
