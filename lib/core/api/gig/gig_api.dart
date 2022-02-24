@@ -9,6 +9,7 @@ import 'package:dio/dio.dart';
 
 import '../../../views/dashboard/gig/data/model/category_of_gig_response/category_of_gig_response.dart';
 import '../../../views/dashboard/gig/data/model/details_of_gig_response/details_of_gig_response.dart';
+import '../../../views/dashboard/gig/data/model/list_of_artisan_response/list_of_artisan_response.dart';
 import '../../../views/dashboard/gig/data/model/list_of_skills_response/list_of_skills_response.dart';
 
 class GigApi {
@@ -54,11 +55,11 @@ class GigApi {
   }
 
     /// Show saved gigs
-  Future<SavedGigList> savedGigList() async {
+  Future<ListOfArtisanResponse> savedGigList() async {
     try {
       final _response = await _networkService.call(
           UrlConfig.savedGig, RequestMethod.get);
-      return SavedGigList.fromJson(_response.data);
+      return ListOfArtisanResponse.fromJson(_response.data);
     } catch (e) {
       rethrow;
     }

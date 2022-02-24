@@ -4,13 +4,16 @@ import 'package:client/views/dashboard/gig/data/contractImpl/savedGigListContrac
 import 'package:client/views/dashboard/gig/data/model/saved_gig_list/saved_gig_list.model.dart';
 import 'package:dartz/dartz.dart';
 
-class SavedGigListUseCase extends UseCase<SavedGigList, NoParams> {
+import '../../data/model/available_gig_response/available_gig_response.dart';
+import '../../data/model/list_of_artisan_response/list_of_artisan_response.dart';
+
+class SavedGigListUseCase extends UseCase<ListOfArtisanResponse, NoParams> {
   final SavedGigListContractImpl _repository;
 
   SavedGigListUseCase(this._repository);
 
   @override
-  Future<Either<Failure, SavedGigList>>? listOfSavedGigs() async {
+  Future<Either<Failure, ListOfArtisanResponse>>? listOfSavedGigs() async {
     return await _repository.saveGigList();
   }
 }

@@ -69,9 +69,7 @@ class _SavedScreenState extends State<SavedScreen> {
                       savedGigDao!.getConvertedData(value).toList();
                   return TabBarView(
                     children: [
-                      FreelanceTab(
-                        datum: _savedGigList
-                      ),
+                      FreelanceTab(datum: _savedGigList),
                       ServiceTab(),
                       Icon(Icons.directions_bike),
                     ],

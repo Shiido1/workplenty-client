@@ -12,13 +12,12 @@ class SavedGigListProvider extends BaseModel {
   void savedGigList() async {
     try {
       final _response = await _useCase.listOfSavedGigs();
-      logger.d(_response);
       _response!.fold((l) => logger.e(l.errorMessage(l)), (r) {
+        logger.d(r.data?.data?.length);
         savedGigDao?.savedGigList(r.data?.data ?? []);
-        logger.d(' gor u messageb ${r.data?.data?.length ?? []}');
       });
     } catch (e) {
-      logger.e('An error occured: $e');
+      logger.e('An error occurred: $e');
     }
   }
 }
