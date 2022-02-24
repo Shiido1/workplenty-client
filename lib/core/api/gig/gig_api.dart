@@ -1,4 +1,6 @@
+import 'package:client/core/database/session_manager.dart';
 import 'package:client/core/entity/default_response.dart';
+import 'package:client/core/helper/configs/instances.dart';
 import 'package:client/core/network/network_service.dart';
 import 'package:client/core/network/url_config.dart';
 import 'package:client/views/dashboard/gig/data/model/available_gig_response/available_gig_response.dart';
@@ -54,11 +56,11 @@ class GigApi {
     }
   }
 
-    /// Show saved gigs
+  /// Show saved gigs
   Future<ListOfArtisanResponse> savedGigList() async {
     try {
-      final _response = await _networkService.call(
-          UrlConfig.savedGig, RequestMethod.get);
+      final _response =
+          await _networkService.call(UrlConfig.savedGig, RequestMethod.get);
       return ListOfArtisanResponse.fromJson(_response.data);
     } catch (e) {
       rethrow;

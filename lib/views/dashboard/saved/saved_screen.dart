@@ -1,3 +1,4 @@
+import 'package:client/core/helper/configs/instances.dart';
 import 'package:client/core/helper/utils/pallets.dart';
 import 'package:client/views/dashboard/gig/domain/source/local/saved_gig_dao.dart';
 import 'package:client/views/dashboard/gig/presentation/provider/saved_gig_list_provider.dart';
@@ -67,11 +68,12 @@ class _SavedScreenState extends State<SavedScreen> {
                 builder: (_, Box<dynamic> value, __) {
                   final _savedGigList =
                       savedGigDao!.getConvertedData(value).toList();
+                  logger.d(_savedGigList.length);
                   return TabBarView(
                     children: [
                       FreelanceTab(datum: _savedGigList),
                       ServiceTab(),
-                      Icon(Icons.directions_bike),
+                      ServiceTab(),
                     ],
                   );
                 },

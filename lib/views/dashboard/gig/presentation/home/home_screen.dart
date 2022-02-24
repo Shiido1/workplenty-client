@@ -11,13 +11,38 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
   @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  ArtisanProvider? _artisanProvider;
+  final RefreshController _refreshController =
+      RefreshController(initialRefresh: false);
+
+  @override
+  void initState() {
+    _artisanProvider = Provider.of<ArtisanProvider>(context, listen: false);
+    _refresh();
+    super.initState();
+  }
+
+  void _refresh() async {
+    try {
+      await _artisanProvider?.listOfArtisan();
+      _refreshController.refreshCompleted();
+    } catch (e) {
+      _refreshController.refreshFailed();
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    Provider.of<ArtisanProvider>(context, listen: false).listOfArtisan();
     return Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () => PageRouter.gotoWidget(Milestone(), context),
@@ -42,40 +67,47 @@ class Home extends StatelessWidget {
                   final _jobList = listOfArtisansDao!
                       .getConvertedData(listOfArtisansDao!.box!)
                       .toList();
-                  return ListView(children: [
-                    SizedBox(height: 34.h),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: TextView(
-                              text: '${_jobList.length} Artisans Found',
-                              maxLines: 1,
-                              textAlign: TextAlign.left,
-                              fontWeight: FontWeight.w500),
-                        ),
-                        Row(
-                          children: [
-                            TextView(
-                                text: 'Sort:',
+                  return SmartRefresher(
+                    controller: _refreshController,
+                    enablePullDown: true,
+                    enablePullUp: false,
+                    onRefresh: () => _refresh(),
+                    header: WaterDropHeader(),
+                    child: ListView(children: [
+                      SizedBox(height: 34.h),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: TextView(
+                                text: '${_jobList.length} Artisans Found',
                                 maxLines: 1,
                                 textAlign: TextAlign.left,
-                                fontWeight: FontWeight.w600),
-                            SizedBox(width: 5.w),
-                            TextView(
-                                text: 'Recent',
-                                maxLines: 1,
-                                color: Pallets.grey,
-                                textAlign: TextAlign.left,
-                                fontWeight: FontWeight.w600),
-                          ],
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: 15.h,
-                    ),
-                    ..._jobList.map((job) => HomeCard(datum: job)).toList()
-                  ]);
+                                fontWeight: FontWeight.w500),
+                          ),
+                          Row(
+                            children: [
+                              TextView(
+                                  text: 'Sort:',
+                                  maxLines: 1,
+                                  textAlign: TextAlign.left,
+                                  fontWeight: FontWeight.w600),
+                              SizedBox(width: 5.w),
+                              TextView(
+                                  text: 'Recent',
+                                  maxLines: 1,
+                                  color: Pallets.grey,
+                                  textAlign: TextAlign.left,
+                                  fontWeight: FontWeight.w600),
+                            ],
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: 15.h,
+                      ),
+                      ..._jobList.map((job) => HomeCard(datum: job)).toList()
+                    ]),
+                  );
                 },
               );
             },

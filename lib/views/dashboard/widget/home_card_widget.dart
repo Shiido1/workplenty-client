@@ -4,6 +4,7 @@ import 'package:client/core/di/injector.dart';
 import 'package:client/core/enums/gig_type.dart';
 import 'package:client/core/helper/utils/images.dart';
 import 'package:client/core/helper/utils/pallets.dart';
+import 'package:client/core/helper/utils/workplenty_dialog.dart';
 import 'package:client/views/dashboard/gig/data/model/list_of_artisan_response/datum.dart';
 import 'package:client/views/dashboard/gig/presentation/provider/artisan_provider.dart';
 import 'package:client/views/dashboard/saved/domain/entity/saved_profile_entity.dart';
@@ -17,7 +18,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-
 
 class HomeCard extends StatelessWidget {
   final Datum? datum;
@@ -111,9 +111,7 @@ class HomeCard extends StatelessWidget {
                   _buildWidget(AppImages.graph, '99%'),
                 ],
               ),
-              SizedBox(
-                height: 15.h,
-              ),
+              SizedBox(height: 16.h),
               ButtonWidget(
                 buttonText: 'Invite Artisan',
                 onPressed: () {
@@ -133,6 +131,7 @@ class HomeCard extends StatelessWidget {
   }
 
   void saveProfile(BuildContext context) {
+    WorkPlenty.success('Saved successfully');
     _bloc.add(SavedProfileEvent(SavedProfileEntity(
         profileId: datum!.user!.id, type: GigType.freelance)));
   }

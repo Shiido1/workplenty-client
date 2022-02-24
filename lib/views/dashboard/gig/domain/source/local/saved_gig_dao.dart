@@ -6,7 +6,6 @@ import 'package:client/views/dashboard/gig/data/model/list_of_artisan_response/d
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-
 SavedGigDao? savedGigDao;
 
 class SavedGigDao {
@@ -21,11 +20,8 @@ class SavedGigDao {
   Future<Box<Map>> openBox() => HiveBoxes.openBox<Map>(HiveBoxes.savedGig);
 
   Future<void> savedGigList(List<Datum>? data) async {
-    if (data!.isNotEmpty) await _box?.clear();
-    logger.d('messageid dadtabase $data');
-
     final map = Map<String, Map>.fromIterable(
-      data,
+      data!,
       key: (g) => (g as Datum).user!.id.toString(),
       value: (g) => (g as Datum).toJson(),
     );

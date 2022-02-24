@@ -7,6 +7,7 @@ part 'datum.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class Datum {
+  
   User? user;
   Profile? profile;
 
