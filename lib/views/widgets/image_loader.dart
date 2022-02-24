@@ -2,12 +2,15 @@
 
 import 'dart:io';
 
-import 'package:client/core/helper/helper_handler.dart';
-import 'package:client/core/helper/utils/pallets.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import '../../core/helper/helper_handler.dart';
+import '../../core/helper/utils/pallets.dart';
+import 'text_views.dart';
 
 // ignore: must_be_immutable
 class ImageLoader extends StatelessWidget {
@@ -114,12 +117,20 @@ class ImageLoader extends StatelessWidget {
               ),
               fadeInDuration: Duration(seconds: 1),
               placeholderFadeInDuration: Duration(seconds: 1),
-              progressIndicatorBuilder: (ctx, value, progress) => Center(
-                  child: CircularProgressIndicator(
-                value: progress.progress,
-              )),
-              errorWidget: (context, url, error) => Center(
-                  child: Image.asset('assets/images/video_placeholder.png')),
+              progressIndicatorBuilder: (ctx, value, progress) => Container(
+                width: width ?? Utils.getDeviceWidth(context),
+                height: height ?? Utils.getDeviceHeight(context),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(radius!),
+                    color: Pallets.grey),
+              ),
+              errorWidget: (context, url, error) => Container(
+                width: width ?? Utils.getDeviceWidth(context),
+                height: height ?? Utils.getDeviceHeight(context),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(radius!),
+                    color: Pallets.grey),
+              ),
             ),
           ),
         );
@@ -138,12 +149,20 @@ class ImageLoader extends StatelessWidget {
           ),
           fadeInDuration: Duration(seconds: 1),
           placeholderFadeInDuration: Duration(seconds: 1),
-          progressIndicatorBuilder: (ctx, value, progress) => Center(
-              child: CircularProgressIndicator(
-            value: progress.progress,
-          )),
-          errorWidget: (context, url, error) =>
-              Center(child: Image.asset('assets/images/video_placeholder.png')),
+          progressIndicatorBuilder: (ctx, value, progress) => Container(
+            width: width ?? Utils.getDeviceWidth(context),
+            height: height ?? Utils.getDeviceHeight(context),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(radius!),
+                color: Pallets.grey),
+          ),
+          errorWidget: (context, url, error) => Container(
+            width: width ?? Utils.getDeviceWidth(context),
+            height: height ?? Utils.getDeviceHeight(context),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(radius!),
+                color: Pallets.grey),
+          ),
         ),
       );
     } else {
@@ -231,21 +250,30 @@ class CircularImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (path == null) {
+    if (file != null) {
       return CircleAvatar(
-        backgroundColor: Pallets.primary100,
         radius: radius,
+        backgroundImage: FileImage(file!),
       );
     }
-    return CircularProfileAvatar(path!,
+    return CircularProfileAvatar(path ?? '',
         radius: radius!,
         backgroundColor: Pallets.primary100,
         borderWidth: borderWidth!,
-        initialsText: Text(initial ?? '',
-            style: TextStyle(fontSize: textSize, color: Colors.white)),
+        initialsText: Text(
+          initial ?? '',
+          style: TextStyle(fontSize: textSize, color: Colors.white),
+        ),
         borderColor: borderColor != null ? borderColor! : Colors.transparent,
         elevation: elevation!,
-        errorWidget: (ctx, _, __) => Icon(Icons.error),
+        errorWidget: (ctx, _, __r) {
+          return CircleAvatar(
+              radius: radius,
+              child: TextView(
+                  text: initial ?? '', color: Pallets.white, fontSize: 34.sp));
+        },
+        placeHolder: (_, __) => TextView(
+            text: initial ?? '', color: Pallets.white, fontSize: 34.sp),
         onTap: onTap,
         showInitialTextAbovePicture: showInitialTextAbovePicture);
   }

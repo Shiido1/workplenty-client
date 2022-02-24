@@ -10,6 +10,7 @@ import 'package:dio/dio.dart';
 
 import '../../../views/dashboard/gig/data/model/category_of_gig_response/category_of_gig_response.dart';
 import '../../../views/dashboard/gig/data/model/details_of_gig_response/details_of_gig_response.dart';
+import '../../../views/dashboard/gig/data/model/general_list_of_industry_response/general_list_of_industry_response.dart';
 import '../../../views/dashboard/gig/data/model/gigs_response/gigs_response.dart';
 import '../../../views/dashboard/gig/data/model/list_of_skills_response/list_of_skills_response.dart';
 
@@ -110,6 +111,17 @@ class GigApi {
       final _response =
           await _networkService.call(UrlConfig.gigSkill, RequestMethod.get);
       return ListOfSkillsResponse.fromJson(_response.data);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  /// Returns list of general industries
+  Future<GeneralListOfIndustryResponse> generalListOfIndustries() async {
+    try {
+      final _response = await _networkService.call(
+          UrlConfig.generalIndustryList, RequestMethod.get);
+      return GeneralListOfIndustryResponse.fromJson(_response.data);
     } catch (e) {
       rethrow;
     }

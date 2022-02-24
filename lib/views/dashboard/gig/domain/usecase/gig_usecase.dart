@@ -5,6 +5,7 @@ import 'package:client/views/dashboard/gig/data/contractImpl/gigContractImpl.dar
 import 'package:client/views/dashboard/gig/data/model/available_gig_response/available_gig_response.dart';
 import 'package:client/views/dashboard/gig/data/model/category_of_gig_response/category_of_gig_response.dart';
 import 'package:client/views/dashboard/gig/data/model/details_of_gig_response/details_of_gig_response.dart';
+import 'package:client/views/dashboard/gig/data/model/general_list_of_industry_response/general_list_of_industry_response.dart';
 import 'package:client/views/dashboard/gig/data/model/list_of_skills_response/list_of_skills_response.dart';
 import 'package:client/views/dashboard/gig/data/model/saved_client_gig_response/saved_client_gig_response.dart';
 import 'package:dartz/dartz.dart';
@@ -54,6 +55,12 @@ class GigUseCases extends UseCase<DefaultResponse, Params> {
   @override
   Future<Either<Failure, ListOfSkillsResponse>>? listOfSkills() async {
     return await _repository.listOfSkills();
+  }
+
+  @override
+  Future<Either<Failure, GeneralListOfIndustryResponse>>?
+      generalIndustryList() async {
+    return await _repository.generalIndustryList();
   }
 }
 

@@ -1,4 +1,5 @@
 import 'package:client/core/api/gig/gig_api.dart';
+import 'package:client/views/dashboard/gig/data/model/general_list_of_industry_response/general_list_of_industry_response.dart';
 import 'package:client/views/dashboard/gig/domain/entity/gig/gig_entity.dart';
 import 'package:client/views/dashboard/gig/data/model/saved_client_gig_response/saved_client_gig_response.dart';
 import 'package:client/views/dashboard/gig/data/model/list_of_skills_response/list_of_skills_response.dart';
@@ -46,5 +47,10 @@ class GigSourceImpl implements GigSource {
   @override
   Future<DefaultResponse> savedGigsSave(GigEntity entity) async {
     return await _api.savedGigsSave(entity);
+  }
+
+  @override
+  Future<GeneralListOfIndustryResponse> generalIndustryList() async {
+    return await _api.generalListOfIndustries();
   }
 }

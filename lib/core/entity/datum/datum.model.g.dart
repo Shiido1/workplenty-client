@@ -42,11 +42,16 @@ Datum _$DatumFromJson(Map<String, dynamic> json) => Datum(
       bids: json['bids'] as int?,
       interviewing: json['interviewing'] as int?,
       avgRating: json['avg_rating'] as int?,
+      name: json['name'] as String?,
+      categoryId: json['category_id'] as dynamic,
       milestones: (json['milestones'] as List<dynamic>?)
           ?.map((e) => Milestone.fromJson(e as Map<String, dynamic>))
           .toList(),
       createdAt: json['created_at'] as String?,
       updatedAt: json['updated_at'] as String?,
+      cover: json['cover'] == null
+          ? null
+          : Cover.fromJson(json['cover'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$DatumToJson(Datum instance) => <String, dynamic>{
@@ -78,6 +83,7 @@ Map<String, dynamic> _$DatumToJson(Datum instance) => <String, dynamic>{
       'milestones': instance.milestones?.map((e) => e.toJson()).toList(),
       'created_at': instance.createdAt,
       'updated_at': instance.updatedAt,
+      'cover': instance.cover,
     };
 
 const _$GigTypeEnumMap = {

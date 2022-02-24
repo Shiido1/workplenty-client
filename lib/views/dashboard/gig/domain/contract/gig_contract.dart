@@ -3,6 +3,7 @@ import 'package:client/core/error/failures.dart';
 import 'package:client/views/dashboard/gig/data/model/available_gig_response/available_gig_response.dart';
 import 'package:client/views/dashboard/gig/data/model/category_of_gig_response/category_of_gig_response.dart';
 import 'package:client/views/dashboard/gig/data/model/details_of_gig_response/details_of_gig_response.dart';
+import 'package:client/views/dashboard/gig/data/model/general_list_of_industry_response/general_list_of_industry_response.dart';
 import 'package:client/views/dashboard/gig/data/model/list_of_skills_response/list_of_skills_response.dart';
 import 'package:client/views/dashboard/gig/data/model/saved_client_gig_response/saved_client_gig_response.dart';
 
@@ -20,4 +21,5 @@ abstract class GigContract {
       GigEntity entity);
   Future<Either<Failure, CategoryOfGigResponse>> categoriesOfGig();
   Future<Either<Failure, ListOfSkillsResponse>> listOfSkills();
+  Future<Either<Failure, GeneralListOfIndustryResponse>> generalIndustryList();
 }

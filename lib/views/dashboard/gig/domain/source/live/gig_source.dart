@@ -1,3 +1,4 @@
+import 'package:client/views/dashboard/gig/data/model/general_list_of_industry_response/general_list_of_industry_response.dart';
 import 'package:client/views/dashboard/gig/domain/entity/gig/gig_entity.dart';
 
 import '../../../../../../core/entity/default_response.dart';
@@ -15,4 +16,5 @@ abstract class GigSource {
   Future<DetailsOfGigResponse> getDetailsOfGig(GigEntity entity);
   Future<CategoryOfGigResponse> categoriesOfGig();
   Future<ListOfSkillsResponse> listOfSkills();
+  Future<GeneralListOfIndustryResponse> generalIndustryList();
 }

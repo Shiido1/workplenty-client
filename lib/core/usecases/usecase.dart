@@ -36,6 +36,7 @@ class UseCase<Type, Params> {
   Future<Either<Failure, Type>>? reviewList(Params params) {}
   Future<Either<Failure, Type>>? fetchIndustry(Params params) {}
   Future<Either<Failure, Type>>? reviewSave(Params params) {}
+  Future<Either<Failure, Type>>? generalIndustryList() {}
 }
 
 class NoParams extends Equatable {

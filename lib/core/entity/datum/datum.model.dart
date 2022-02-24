@@ -1,4 +1,5 @@
 import 'package:client/core/entity/attachments/attachment.dart';
+import 'package:client/core/entity/cover/cover.model.dart';
 import 'package:client/core/entity/milestone/milestone.dart';
 import 'package:client/core/entity/profile/profile.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -84,6 +85,13 @@ class Datum {
   @HiveField(27)
   @JsonKey(name: 'updated_at')
   String? updatedAt;
+  @HiveField(27)
+  Cover? cover;
+  @HiveField(28)
+  String? name;
+  @JsonKey(name: 'category_id')
+  @HiveField(29)
+  dynamic categoryId;
 
   Datum(
       {this.id,
@@ -113,7 +121,11 @@ class Datum {
       this.avgRating,
       this.milestones,
       this.createdAt,
-      this.updatedAt});
+      this.updatedAt,
+      this.cover,
+      this.name,
+      this.categoryId
+      });
 
   factory Datum.fromJson(Map<String, dynamic> json) => _$DatumFromJson(json);
 

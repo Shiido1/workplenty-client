@@ -43,4 +43,5 @@ class UrlConfig {
   static const String reviewList = 'review/list';
   static const String saveReview = 'review/save';
   static const String listOfArtisans = 'user/artisan/list';
+  static const String generalIndustryList = 'industry/fetch';
 }

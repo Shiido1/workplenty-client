@@ -1,5 +1,6 @@
 import 'package:client/core/entity/default_response.dart';
 import 'package:client/core/error/failures.dart';
+import 'package:client/views/dashboard/gig/data/model/general_list_of_industry_response/general_list_of_industry_response.dart';
 import 'package:client/views/dashboard/gig/data/model/list_of_skills_response/list_of_skills_response.dart';
 import 'package:client/views/dashboard/gig/data/model/details_of_gig_response/details_of_gig_response.dart';
 import 'package:client/views/dashboard/gig/data/model/category_of_gig_response/category_of_gig_response.dart';
@@ -84,6 +85,17 @@ class GigContractImpl implements GigContract {
       GigEntity entity) async {
     try {
       final _response = await _impl.savedGigsSave(entity);
+      return Right(_response);
+    } catch (e) {
+      return Left(AppFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, GeneralListOfIndustryResponse>>
+      generalIndustryList() async {
+    try {
+      final _response = await _impl.generalIndustryList();
       return Right(_response);
     } catch (e) {
       return Left(AppFailure(e.toString()));
