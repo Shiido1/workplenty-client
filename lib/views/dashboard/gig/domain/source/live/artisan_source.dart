@@ -1,5 +1,5 @@
-import 'package:client/views/dashboard/gig/data/model/list_of_artisan_response/list_of_artisan_response.dart';
+import '../../../data/model/gigs_response/gigs_response.dart';
 
 abstract class ArtisanSource {
-  Future<ListOfArtisanResponse> listOfArtisans();
+  Future<GigsResponse> listOfArtisans();
 }

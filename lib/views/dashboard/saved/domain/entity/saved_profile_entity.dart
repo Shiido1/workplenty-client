@@ -15,7 +15,7 @@ class SavedProfileEntity extends DefaultResponse {
   toMap() {
     return {
       'profile_id': profileId,
-      'type': returnGigType(type),
+      'type': fromGigType(type),
     };
   }
 }

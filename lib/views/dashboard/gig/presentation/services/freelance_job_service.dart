@@ -459,7 +459,7 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
       _bloc.add(ServiceEvent(GigEntity(
           id: '1',
           industryId: '1',
-          type: GigType.freelance,
+          type: GigType.FREELANCE,
           privateMessage: 'hello world',
           title: 'titleController.text',
           description: 'descriptionController.text',

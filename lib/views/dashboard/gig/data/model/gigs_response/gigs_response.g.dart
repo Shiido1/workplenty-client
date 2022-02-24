@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'saved_gig_list.model.dart';
+part of 'gigs_response.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-SavedGigList _$SavedGigListFromJson(Map<String, dynamic> json) => SavedGigList(
+GigsResponse _$GigsResponseFromJson(Map<String, dynamic> json) => GigsResponse(
       msg: json['msg'] as String?,
       data: json['data'] == null
           ? null
@@ -15,7 +15,7 @@ SavedGigList _$SavedGigListFromJson(Map<String, dynamic> json) => SavedGigList(
       code: json['code'] as int?,
     );
 
-Map<String, dynamic> _$SavedGigListToJson(SavedGigList instance) =>
+Map<String, dynamic> _$GigsResponseToJson(GigsResponse instance) =>
     <String, dynamic>{
       'msg': instance.msg,
       'data': instance.data,

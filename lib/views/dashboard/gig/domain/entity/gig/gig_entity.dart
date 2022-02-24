@@ -66,7 +66,7 @@ class GigEntity extends DefaultResponse {
     return {
       'id': id,
       'industry_id': industryId,
-      'type': returnGigType(type),
+      'type': fromGigType(type),
       'title': title,
       'private_message': privateMessage,
       'description': description,
@@ -90,7 +90,7 @@ class GigEntity extends DefaultResponse {
     return {
       'id': id,
       'industry_id': industryId,
-      'type': returnGigType(type),
+      'type': fromGigType(type),
       'title': title,
       'private_message': privateMessage,
       'description': description,

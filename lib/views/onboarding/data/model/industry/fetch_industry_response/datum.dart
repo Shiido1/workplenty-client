@@ -2,7 +2,6 @@ import 'package:json_annotation/json_annotation.dart';
 
 import '../../../../../../core/entity/cover/cover.model.dart';
 
-
 part 'datum.g.dart';
 
 @JsonSerializable()

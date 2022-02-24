@@ -7,6 +7,7 @@ import 'package:json_annotation/json_annotation.dart';
 import '../../../../../../core/entity/industry/industry.dart';
 import '../../../../../../core/entity/skills/skill.dart';
 import '../../../../../../core/entity/user/user.dart';
+import '../../enums/gig_type.dart';
 part 'datum.model.g.dart';
 
 @JsonSerializable(explicitToJson: true)
@@ -21,7 +22,7 @@ class Datum {
   @HiveField(3)
   Industry? industry;
   @HiveField(4)
-  String? type;
+  GigType? type;
   @HiveField(5)
   String? title;
   @HiveField(6)
@@ -84,36 +85,35 @@ class Datum {
   @JsonKey(name: 'updated_at')
   String? updatedAt;
 
-  Datum({
-    this.id,
-    this.user,
-    this.profile,
-    this.industry,
-    this.type,
-    this.title,
-    this.description,
-    this.experienceLevel,
-    this.coverLetterRequired,
-    this.serviceDate,
-    this.serviceTime,
-    this.serviceAddress,
-    this.serviceDuration,
-    this.timeline,
-    this.hourlyBudget,
-    this.totalBudget,
-    this.consultancyRate,
-    this.projectType,
-    this.paymentType,
-    this.totalMilestones,
-    this.skills,
-    this.attachments,
-    this.bids,
-    this.interviewing,
-    this.avgRating,
-    this.milestones,
-    this.createdAt,
-    this.updatedAt
-  });
+  Datum(
+      {this.id,
+      this.user,
+      this.profile,
+      this.industry,
+      this.type,
+      this.title,
+      this.description,
+      this.experienceLevel,
+      this.coverLetterRequired,
+      this.serviceDate,
+      this.serviceTime,
+      this.serviceAddress,
+      this.serviceDuration,
+      this.timeline,
+      this.hourlyBudget,
+      this.totalBudget,
+      this.consultancyRate,
+      this.projectType,
+      this.paymentType,
+      this.totalMilestones,
+      this.skills,
+      this.attachments,
+      this.bids,
+      this.interviewing,
+      this.avgRating,
+      this.milestones,
+      this.createdAt,
+      this.updatedAt});
 
   factory Datum.fromJson(Map<String, dynamic> json) => _$DatumFromJson(json);
 

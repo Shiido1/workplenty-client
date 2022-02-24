@@ -18,11 +18,12 @@ Profile _$ProfileFromJson(Map<String, dynamic> json) => Profile(
       address: json['address'],
       apartment: json['apartment'],
       zipcode: json['zipcode'],
-      experienceLevel: json['experience_level'],
+      experienceLevel: json['experience_level'] as int?,
       approvalStatus: json['approval_status'] as int?,
       weeklyHours: json['weekly_hours'],
       reviews: json['reviews'] as int?,
       avgRating: json['avg_rating'] as int?,
+      jobPosted: json['job_posted'] as int?,
     );
 
 Map<String, dynamic> _$ProfileToJson(Profile instance) => <String, dynamic>{
@@ -42,4 +43,5 @@ Map<String, dynamic> _$ProfileToJson(Profile instance) => <String, dynamic>{
       'weekly_hours': instance.weeklyHours,
       'reviews': instance.reviews,
       'avg_rating': instance.avgRating,
+      'job_posted': instance.jobPosted,
     };

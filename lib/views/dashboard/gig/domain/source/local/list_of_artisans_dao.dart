@@ -4,9 +4,10 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:client/core/database/hive_database.dart';
-import 'package:client/views/dashboard/gig/data/model/list_of_artisan_response/datum.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+
+import '../../../../../../core/entity/datum/datum.model.dart';
 
 ListOfArtisansDao? listOfArtisansDao;
 

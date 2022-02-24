@@ -78,16 +78,7 @@ class _MainBoardState extends State<MainBoard> {
           ? null
           : getCustomAppBar(context, _bodyTitle[index!]),
       endDrawer: MessageDrawerWidget(),
-      body: ValueListenableBuilder(
-          valueListenable: indexChangedNotifier,
-          builder: (context, value, child) => Stack(
-                children: <Widget>[
-                  IndexedStack(
-                    index: index,
-                    children: _body,
-                  ),
-                ],
-              )),
+      body: _body[index!],
       bottomNavigationBar: _bottomNavigationBar(context),
     );
   }

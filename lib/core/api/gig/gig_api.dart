@@ -5,13 +5,12 @@ import 'package:client/core/network/network_service.dart';
 import 'package:client/core/network/url_config.dart';
 import 'package:client/views/dashboard/gig/data/model/available_gig_response/available_gig_response.dart';
 import 'package:client/views/dashboard/gig/data/model/saved_client_gig_response/saved_client_gig_response.dart';
-import 'package:client/views/dashboard/gig/data/model/saved_gig_list/saved_gig_list.model.dart';
 import 'package:client/views/dashboard/gig/domain/entity/gig/gig_entity.dart';
 import 'package:dio/dio.dart';
 
 import '../../../views/dashboard/gig/data/model/category_of_gig_response/category_of_gig_response.dart';
 import '../../../views/dashboard/gig/data/model/details_of_gig_response/details_of_gig_response.dart';
-import '../../../views/dashboard/gig/data/model/list_of_artisan_response/list_of_artisan_response.dart';
+import '../../../views/dashboard/gig/data/model/gigs_response/gigs_response.dart';
 import '../../../views/dashboard/gig/data/model/list_of_skills_response/list_of_skills_response.dart';
 
 class GigApi {
@@ -57,11 +56,11 @@ class GigApi {
   }
 
   /// Show saved gigs
-  Future<ListOfArtisanResponse> savedGigList() async {
+  Future<GigsResponse> savedGigList() async {
     try {
       final _response =
           await _networkService.call(UrlConfig.savedGig, RequestMethod.get);
-      return ListOfArtisanResponse.fromJson(_response.data);
+      return GigsResponse.fromJson(_response.data);
     } catch (e) {
       rethrow;
     }

@@ -9,7 +9,7 @@ class SavedGigListProvider extends BaseModel {
 
   SavedGigListProvider(this._useCase);
 
-  void savedGigList() async {
+  Future<void> savedGigList() async {
     try {
       final _response = await _useCase.listOfSavedGigs();
       _response!.fold((l) => logger.e(l.errorMessage(l)),

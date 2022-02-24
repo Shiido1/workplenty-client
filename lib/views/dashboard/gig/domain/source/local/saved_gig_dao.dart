@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:client/core/database/hive_database.dart';
-import 'package:client/core/helper/configs/instances.dart';
-import 'package:client/views/dashboard/gig/data/model/list_of_artisan_response/datum.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+
+import '../../../../../../core/entity/datum/datum.model.dart';
 
 SavedGigDao? savedGigDao;
 
@@ -22,7 +22,7 @@ class SavedGigDao {
   Future<void> savedGigList(List<Datum>? data) async {
     final map = Map<String, Map>.fromIterable(
       data!,
-      key: (g) => (g as Datum).user!.id.toString(),
+      key: (g) => (g as Datum).id!.toString(),
       value: (g) => (g as Datum).toJson(),
     );
     await _box!.putAll(map);

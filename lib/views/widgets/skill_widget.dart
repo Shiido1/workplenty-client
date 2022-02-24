@@ -4,7 +4,6 @@ import 'package:client/views/widgets/text_views.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
 class SkillsWidget extends StatelessWidget {
   final Skill value;
   const SkillsWidget(this.value, {Key? key}) : super(key: key);

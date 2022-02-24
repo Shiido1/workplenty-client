@@ -1,3 +1,4 @@
+import 'package:client/core/enums/gig_type.dart';
 import 'package:client/core/helper/configs/instances.dart';
 import 'package:client/core/helper/utils/pallets.dart';
 import 'package:client/views/dashboard/gig/domain/source/local/saved_gig_dao.dart';
@@ -10,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class SavedScreen extends StatefulWidget {
   final Widget? widget;
@@ -21,10 +23,28 @@ class SavedScreen extends StatefulWidget {
 
 class _SavedScreenState extends State<SavedScreen> {
   SavedGigListProvider? savedGigListProvider;
+  final RefreshController _refreshController =
+      RefreshController(initialRefresh: false);
+
+  @override
+  void initState() {
+    savedGigListProvider =
+        Provider.of<SavedGigListProvider>(context, listen: false);
+    _refresh();
+    super.initState();
+  }
+
+  void _refresh() async {
+    try {
+      await savedGigListProvider?.savedGigList();
+      _refreshController.refreshCompleted();
+    } catch (e) {
+      _refreshController.refreshFailed();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<SavedGigListProvider>(context, listen: false).savedGigList();
     return DefaultTabController(
       length: 3,
       child: Scaffold(
@@ -64,20 +84,38 @@ class _SavedScreenState extends State<SavedScreen> {
                   !snapshot.hasData) {
                 return Container();
               }
-              return ValueListenableBuilder(
-                builder: (_, Box<dynamic> value, __) {
-                  final _savedGigList =
-                      savedGigDao!.getConvertedData(value).toList();
-                  logger.d(_savedGigList.length);
-                  return TabBarView(
-                    children: [
-                      FreelanceTab(datum: _savedGigList),
-                      ServiceTab(),
-                      ServiceTab(),
-                    ],
-                  );
-                },
-                valueListenable: snapshot.data,
+              return SmartRefresher(
+                controller: _refreshController,
+                enablePullDown: true,
+                enablePullUp: false,
+                onRefresh: () => _refresh(),
+                header: WaterDropHeader(),
+                child: ValueListenableBuilder(
+                  builder: (_, Box<dynamic> value, __) {
+                    final _savedGigList =
+                        savedGigDao!.getConvertedData(value).toList();
+                    return TabBarView(
+                      children: [
+                        FreelanceTab(
+                            datum: _savedGigList
+                                .where((element) =>
+                                    element.type == GigType.FREELANCE)
+                                .toList()),
+                        FreelanceTab(
+                            datum: _savedGigList
+                                .where(
+                                    (element) => element.type == GigType.HOME)
+                                .toList()),
+                        FreelanceTab(
+                            datum: _savedGigList
+                                .where(
+                                    (element) => element.type == GigType.LIVE)
+                                .toList()),
+                      ],
+                    );
+                  },
+                  valueListenable: snapshot.data,
+                ),
               );
             }),
       ),

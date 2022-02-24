@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'profile.g.dart';
 
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable()
 class Profile {
   int? id;
   String? description;
@@ -16,7 +16,7 @@ class Profile {
   dynamic apartment;
   dynamic zipcode;
   @JsonKey(name: 'experience_level')
-  dynamic experienceLevel;
+  int? experienceLevel;
   @JsonKey(name: 'approval_status')
   int? approvalStatus;
   @JsonKey(name: 'weekly_hours')
@@ -24,6 +24,8 @@ class Profile {
   int? reviews;
   @JsonKey(name: 'avg_rating')
   int? avgRating;
+  @JsonKey(name: 'job_posted')
+  int? jobPosted;
 
   Profile({
     this.id,
@@ -42,6 +44,7 @@ class Profile {
     this.weeklyHours,
     this.reviews,
     this.avgRating,
+    this.jobPosted,
   });
 
   factory Profile.fromJson(Map<String, dynamic> json) {

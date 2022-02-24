@@ -1,6 +1,7 @@
 import 'package:client/core/network/network_service.dart';
 import 'package:client/core/network/url_config.dart';
-import 'package:client/views/dashboard/gig/data/model/list_of_artisan_response/list_of_artisan_response.dart';
+
+import '../../../views/dashboard/gig/data/model/gigs_response/gigs_response.dart';
 
 class ArtisanApi {
   final NetworkService _networkService;
@@ -8,11 +9,11 @@ class ArtisanApi {
   ArtisanApi({required NetworkService networkService})
       : _networkService = networkService;
 
-  Future<ListOfArtisanResponse> listOfArtisan() async {
+  Future<GigsResponse> listOfArtisan() async {
     try {
       final _response = await _networkService.call(
           UrlConfig.listOfArtisans, RequestMethod.get);
-      return ListOfArtisanResponse.fromJson(_response.data);
+      return GigsResponse.fromJson(_response.data);
     } catch (e) {
       rethrow;
     }

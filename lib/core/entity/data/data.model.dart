@@ -2,7 +2,6 @@ import 'package:client/core/entity/datum/datum.model.dart';
 import 'package:client/core/entity/pagination/pagination_meta.model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-
 part 'data.model.g.dart';
 
 @JsonSerializable()
