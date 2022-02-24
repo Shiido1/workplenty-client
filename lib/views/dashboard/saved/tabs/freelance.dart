@@ -1,35 +1,27 @@
-import 'package:client/views/dashboard/saved/presentation/provider/provider.dart';
+import 'package:client/core/helper/utils/images.dart';
 import 'package:client/views/dashboard/widget/home_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-class FreelanceTab extends StatefulWidget {
-  const FreelanceTab({Key? key}) : super(key: key);
+import '../../../../core/entity/datum/datum.model.dart';
 
-  @override
-  State<FreelanceTab> createState() => _FreelanceTabState();
-}
-
-class _FreelanceTabState extends State<FreelanceTab> {
-  SaveProfileListProvider? profileListProvider;
-
-  @override
-  void initState() {
-    profileListProvider =
-        Provider.of<SaveProfileListProvider>(context, listen: false);
-    profileListProvider!.getSaveProfileList();
-    super.initState();
-  }
+class FreelanceTab extends StatelessWidget {
+  final List<Datum> datum;
+  const FreelanceTab({Key? key, required this.datum}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    if (datum.isEmpty) {
+      return Center(child: SvgPicture.asset(AppImages.empty));
+    }
     return Padding(
       padding: EdgeInsets.all(16.w),
       child: ListView(
         children: [
-          ...[1, 2, 2, 2, 2, 2, 3].map((_) => HomeCard()).toList()
-        ],
+
+          SizedBox(height: 16.h),
+          ...datum.map((data) => HomeCard()).toList()],
       ),
     );
   }

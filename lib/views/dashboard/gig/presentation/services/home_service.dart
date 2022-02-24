@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable, unused_field
+
 import 'package:client/core/helper/helper_handler.dart';
 import 'package:client/core/helper/routes/navigation.dart';
 import 'package:client/core/helper/utils/images.dart';
@@ -13,18 +15,17 @@ import 'package:client/views/widgets/text_views.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-// ignore: must_be_immutable
 class HomeService extends StatelessWidget {
   HomeService({Key? key}) : super(key: key);
 
-  List<String>? _skills = [
-    'UI',
-    'UX',
-    'Web Design',
-    'Figma',
-    'User Research',
-    'Style Guide'
-  ];
+  // List<String>? _skills = [
+  //   'UI',
+  //   'UX',
+  //   'Web Design',
+  //   'Figma',
+  //   'User Research',
+  //   'Style Guide'
+  // ];
 
   @override
   Widget build(BuildContext context) {

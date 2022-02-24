@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'pagination_meta.dart';
+part of 'pagination_meta.model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -13,7 +13,7 @@ PaginationMeta _$PaginationMetaFromJson(Map<String, dynamic> json) =>
       from: json['from'] as int?,
       lastPage: json['last_page'] as int?,
       lastPageUrl: json['last_page_url'] as String?,
-      nextPageUrl: json['next_page_url'] as String?,
+      nextPageUrl: json['next_page_url'],
       path: json['path'] as String?,
       perPage: json['per_page'] as int?,
       prevPageUrl: json['prev_page_url'],

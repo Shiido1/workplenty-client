@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import 'user.dart';
+import '../../../../../../core/entity/user/user.dart';
 
 part 'last_message.g.dart';
 

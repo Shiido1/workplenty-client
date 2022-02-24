@@ -2,8 +2,8 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../../../../../core/entity/data/data.model.dart';
 import '../../../domain/entity/gig/gig_entity.dart';
-import 'data.dart';
 
 part 'list_of_skills_response.g.dart';
 

@@ -15,10 +15,13 @@ import 'package:client/views/dashboard/chat/data/sourceImpl/chatSourceImpl.dart'
 import 'package:client/views/dashboard/chat/domain/usecase/chat_usecase.dart';
 import 'package:client/views/dashboard/gig/data/contractImpl/artisanContractImpl.dart';
 import 'package:client/views/dashboard/gig/data/contractImpl/gigContractImpl.dart';
+import 'package:client/views/dashboard/gig/data/contractImpl/savedGigListContractImpl.dart';
 import 'package:client/views/dashboard/gig/data/sourceImpl/artisanSourceImpl.dart';
 import 'package:client/views/dashboard/gig/data/sourceImpl/gigSourceImpl.dart';
+import 'package:client/views/dashboard/gig/data/sourceImpl/savedSourceImpl.dart';
 import 'package:client/views/dashboard/gig/domain/usecase/artisan_usecase.dart';
 import 'package:client/views/dashboard/gig/domain/usecase/gig_usecase.dart';
+import 'package:client/views/dashboard/gig/domain/usecase/saved_gig_list_usecase.dart';
 import 'package:client/views/dashboard/gig/presentation/services/bloc/servicebloc_bloc.dart';
 import 'package:client/views/dashboard/saved/data/contractImpl/saved_profile_contract_impl.dart';
 import 'package:client/views/dashboard/saved/domain/usecase/saved_profile_list_usecase.dart';
@@ -74,8 +77,7 @@ void _initBloc() {
       .registerLazySingleton<ServiceblocBloc>(() => ServiceblocBloc(inject()));
   inject.registerLazySingleton<SavedProfileBlocBloc>(
       () => SavedProfileBlocBloc(inject()));
-  inject.registerLazySingleton<ReviewBlocBloc>(
-      () => ReviewBlocBloc(inject()));
+  inject.registerLazySingleton<ReviewBlocBloc>(() => ReviewBlocBloc(inject()));
 }
 
 /// Initialize data sources implementations
@@ -96,6 +98,8 @@ void _initDataSources() {
       () => IndustrySourceImpl(api: inject()));
   inject.registerLazySingleton<ReviewSourceImpl>(
       () => ReviewSourceImpl(api: inject()));
+  inject.registerLazySingleton<SavedGigListSourceImpl>(
+      () => SavedGigListSourceImpl(api: inject()));
 }
 
 /// Initialize data repositories implementations
@@ -116,6 +120,8 @@ void _initDataContracts() {
       () => IndustryContractImpl(inject()));
   inject.registerLazySingleton<ReviewContractImpl>(
       () => ReviewContractImpl(inject()));
+  inject.registerLazySingleton<SavedGigListContractImpl>(
+      () => SavedGigListContractImpl(inject()));
 }
 
 /// Initialize services's here
@@ -150,8 +156,10 @@ void _initializeUsecase() {
       () => SavedProfileUseCase(inject()));
   inject.registerLazySingleton<SavedProfileListUseCase>(
       () => SavedProfileListUseCase(inject()));
-  inject.registerLazySingleton<ReviewUsesCases>(
-      () => ReviewUsesCases(inject()));
+  inject
+      .registerLazySingleton<ReviewUsesCases>(() => ReviewUsesCases(inject()));
   inject.registerLazySingleton<SaveReviewUsesCases>(
       () => SaveReviewUsesCases(inject()));
+  inject.registerLazySingleton<SavedGigListUseCase>(
+      () => SavedGigListUseCase(inject()));
 }

@@ -12,5 +12,6 @@ abstract class IndustryContract {
   Future<Either<Failure, ListIndustryResponse>> listIndustry();
   Future<Either<Failure, DeleteIndustryResponse>> deleteIndustry(
       IndustryEntity entity);
-  Future<Either<Failure, FetchIndustryResponse>> fetchIndustry(IndustryEntity entity);
+  Future<Either<Failure, FetchIndustryResponse>> fetchIndustry(
+      IndustryEntity entity);
 }

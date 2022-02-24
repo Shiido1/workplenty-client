@@ -1,11 +1,11 @@
+import 'package:client/core/entity/datum/datum.model.dart';
+import 'package:client/core/entity/pagination/pagination_meta.model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import 'datum.dart';
-import 'pagination_meta.dart';
 
-part 'data.g.dart';
+part 'data.model.g.dart';
 
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable()
 class Data {
   @JsonKey(name: 'pagination_meta')
   PaginationMeta? paginationMeta;

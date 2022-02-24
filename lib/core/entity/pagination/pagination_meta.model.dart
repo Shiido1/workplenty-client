@@ -1,8 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'pagination_meta.g.dart';
+part 'pagination_meta.model.g.dart';
 
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable()
 class PaginationMeta {
   @JsonKey(name: 'current_page')
   int? currentPage;
@@ -14,7 +14,7 @@ class PaginationMeta {
   @JsonKey(name: 'last_page_url')
   String? lastPageUrl;
   @JsonKey(name: 'next_page_url')
-  String? nextPageUrl;
+  dynamic nextPageUrl;
   String? path;
   @JsonKey(name: 'per_page')
   int? perPage;

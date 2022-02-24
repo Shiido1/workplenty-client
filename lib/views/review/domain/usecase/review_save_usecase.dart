@@ -15,7 +15,6 @@ class SaveReviewUsesCases extends UseCase<DefaultResponse, Params> {
   Future<Either<Failure, DefaultResponse>> reviewSave(Params params) async {
     return await _repository.reviewSave(params.entity!);
   }
-
 }
 
 class Params extends Equatable {

@@ -22,7 +22,8 @@ class ReviewContractImpl implements ReviewContract {
   }
 
   @override
-  Future<Either<Failure, DefaultResponse>> reviewSave(ReviewEntity entity) async {
+  Future<Either<Failure, DefaultResponse>> reviewSave(
+      ReviewEntity entity) async {
     try {
       final _response = await _impl.reviewSave(entity);
       return Right(_response);
@@ -30,6 +31,4 @@ class ReviewContractImpl implements ReviewContract {
       return Left(AppFailure(e.toString()));
     }
   }
-
-
 }

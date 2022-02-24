@@ -1,8 +1,8 @@
+import 'package:client/core/entity/skills/skill.dart';
 import 'package:client/core/enums/viewstate.dart';
 import 'package:client/core/helper/helper_handler.dart';
 import 'package:client/core/helper/routes/navigation.dart';
 import 'package:client/core/helper/utils/pallets.dart';
-import 'package:client/views/dashboard/gig/data/model/list_of_skills_response/datum.dart';
 import 'package:client/views/dashboard/gig/domain/source/local/skill_dao.dart';
 import 'package:client/views/dashboard/gig/presentation/provider/gig_provider.dart';
 import 'package:client/views/widgets/buttons.dart';
@@ -14,9 +14,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
 
+
+// ignore: must_be_immutable
 class SkillsModal extends StatefulWidget {
-  final Function(List<Datum> list)? callBack;
-  List<Datum>? list = [];
+  final Function(List<Skill> list)? callBack;
+  List<Skill>? list = [];
 
   SkillsModal({Key? key, this.list, this.callBack}) : super(key: key);
 
@@ -27,7 +29,7 @@ class SkillsModal extends StatefulWidget {
 class _SkillsModalState extends State<SkillsModal> {
   GigProvider? _provider;
 
-  List<Datum> _tempList = [];
+  List<Skill> _tempList = [];
 
   String _search = '';
   @override
@@ -122,6 +124,7 @@ class _SkillsModalState extends State<SkillsModal> {
                               ),
                               Container(
                                 alignment: Alignment.bottomCenter,
+                                padding: EdgeInsets.all(16.w),
                                 child: ButtonWidget(
                                   buttonText: 'Next',
                                   fontSize: 18.sp,
@@ -148,11 +151,11 @@ class _SkillsModalState extends State<SkillsModal> {
 
   List<int> _ids = [];
 
-  bool _isSelected(Datum d) {
+  bool _isSelected(Skill d) {
     return _ids.contains(d.id);
   }
 
-  void _addItem(Datum d) {
+  void _addItem(Skill d) {
     if (_isSelected(d)) {
       _tempList.remove(d);
       _ids.remove(d.id);

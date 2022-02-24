@@ -3,9 +3,10 @@
 import 'dart:async';
 
 import 'package:client/core/database/hive_database.dart';
-import 'package:client/views/dashboard/gig/data/model/available_gig_response/datum.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+
+import '../../../../../../core/entity/datum/datum.model.dart';
 
 AvailableGigsDao? availableGigsDao;
 

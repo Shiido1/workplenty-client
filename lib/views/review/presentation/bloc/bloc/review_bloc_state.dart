@@ -2,7 +2,7 @@ part of 'review_bloc_bloc.dart';
 
 abstract class ReviewBlocState extends Equatable {
   const ReviewBlocState();
-  
+
   @override
   List<Object> get props => [];
 }

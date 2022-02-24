@@ -8,7 +8,7 @@ part 'review_bloc_state.dart';
 
 class ReviewBlocBloc extends Bloc<ReviewBlocEvent, ReviewBlocState> {
   final SaveReviewUsesCases _useCases;
-  
+
   ReviewBlocBloc(this._useCases) : super(ReviewBlocInitial()) {
     on<ReviewBlocEvent>((event, emit) async {
       if (event is SaveReviewEvent) {

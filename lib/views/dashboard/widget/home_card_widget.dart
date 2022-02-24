@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:client/core/di/injector.dart';
 import 'package:client/core/enums/gig_type.dart';
 import 'package:client/core/helper/utils/images.dart';
@@ -16,7 +18,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
-// ignore: must_be_immutable
+
 class HomeCard extends StatelessWidget {
   final Datum? datum;
   HomeCard({this.datum, Key? key}) : super(key: key);
