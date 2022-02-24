@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import 'data.model.dart';
+import '../../../../../../core/entity/data/data.model.dart';
 
 part 'saved_gig_list.model.g.dart';
 

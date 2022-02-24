@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import 'attachment.dart';
-import 'industry.dart';
-import 'skill.dart';
-import 'user.dart';
+import '../../../../../../core/entity/attachments/attachment.dart';
+import '../../../../../../core/entity/industry/industry.dart';
+import '../../../../../../core/entity/skills/skill.dart';
+import '../../../../../../core/entity/user/user.dart';
 
 part 'gig.g.dart';
 

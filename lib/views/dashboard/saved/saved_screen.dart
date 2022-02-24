@@ -1,4 +1,3 @@
-import 'package:client/core/enums/gig_type.dart';
 import 'package:client/core/helper/utils/pallets.dart';
 import 'package:client/views/dashboard/gig/domain/source/local/saved_gig_dao.dart';
 import 'package:client/views/dashboard/gig/presentation/provider/saved_gig_list_provider.dart';
@@ -72,9 +71,6 @@ class _SavedScreenState extends State<SavedScreen> {
                     children: [
                       FreelanceTab(
                         datum: _savedGigList
-                            .where(
-                                (element) => element.type == GigType.freelance)
-                            .toList(),
                       ),
                       ServiceTab(),
                       Icon(Icons.directions_bike),

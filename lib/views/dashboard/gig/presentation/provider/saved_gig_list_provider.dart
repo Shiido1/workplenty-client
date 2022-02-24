@@ -15,7 +15,7 @@ class SavedGigListProvider extends BaseModel {
       logger.d(_response);
       _response!.fold((l) => logger.e(l.errorMessage(l)), (r) {
         savedGigDao?.savedGigList(r.data?.data ?? []);
-        logger.d(' gor u messageb ${r.data?.data}');
+        logger.d(' gor u messageb ${r.data?.data?.length ?? []}');
       });
     } catch (e) {
       logger.e('An error occured: $e');

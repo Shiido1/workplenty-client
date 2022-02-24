@@ -2,9 +2,10 @@ import 'dart:convert';
 
 import 'package:client/core/database/hive_database.dart';
 import 'package:client/core/helper/configs/instances.dart';
-import 'package:client/views/dashboard/gig/data/model/saved_gig_list/datum.model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+
+import '../../../../../../core/entity/datum/datum.model.dart';
 
 SavedGigDao? savedGigDao;
 

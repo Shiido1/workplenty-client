@@ -2,8 +2,8 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../../../../../core/entity/data/data.model.dart';
 import '../../../domain/entity/gig/gig_entity.dart';
-import 'data.dart';
 
 part 'available_gig_response.g.dart';
 

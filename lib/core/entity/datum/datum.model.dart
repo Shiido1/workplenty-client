@@ -1,82 +1,93 @@
+import 'package:client/core/entity/attachments/attachment.dart';
+import 'package:client/core/entity/milestone/milestone.dart';
+import 'package:client/core/entity/profile/profile.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../../../../../core/entity/industry/industry.dart';
+import '../../../../../../core/entity/skills/skill.dart';
 import '../../../../../../core/entity/user/user.dart';
-import 'industry.model.dart';
-import 'skill.model.dart';
-
 part 'datum.model.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 @HiveType(typeId: 0)
-class Datum extends HiveObject{
+class Datum {
   @HiveField(0)
   int? id;
   @HiveField(1)
   User? user;
   @HiveField(2)
-  Industry? industry;
+  Profile? profile;
   @HiveField(3)
-  String? type;
+  Industry? industry;
   @HiveField(4)
-  String? title;
+  String? type;
   @HiveField(5)
-  String? description;
+  String? title;
   @HiveField(6)
-  @JsonKey(name: 'experience_level')
+  String? description;
   @HiveField(7)
+  @JsonKey(name: 'experience_level')
   int? experienceLevel;
   @HiveField(8)
   @JsonKey(name: 'cover_letter_required')
-  @HiveField(9)
   int? coverLetterRequired;
-  @HiveField(10)
+  @HiveField(9)
   @JsonKey(name: 'service_date')
-  @HiveField(11)
   dynamic serviceDate;
-  @HiveField(12)
+  @HiveField(10)
   @JsonKey(name: 'service_time')
   dynamic serviceTime;
-  @HiveField(13)
+  @HiveField(11)
   @JsonKey(name: 'service_address')
   dynamic serviceAddress;
-  @HiveField(14)
+  @HiveField(12)
   @JsonKey(name: 'service_duration')
   dynamic serviceDuration;
+  @HiveField(13)
   String? timeline;
-  @HiveField(15)
+  @HiveField(14)
   @JsonKey(name: 'hourly_budget')
   dynamic hourlyBudget;
-  @HiveField(16)
+  @HiveField(15)
   @JsonKey(name: 'total_budget')
   int? totalBudget;
-  @HiveField(17)
+  @HiveField(16)
   @JsonKey(name: 'consultancy_rate')
   dynamic consultancyRate;
-  @HiveField(18)
+  @HiveField(17)
   @JsonKey(name: 'project_type')
   String? projectType;
+  @HiveField(18)
   @JsonKey(name: 'payment_type')
   String? paymentType;
   @HiveField(19)
   @JsonKey(name: 'total_milestones')
-  dynamic totalMilestones;
-  List<Skill>? skills;
+  int? totalMilestones;
   @HiveField(20)
-  List<dynamic>? attachments;
+  List<Skill>? skills;
   @HiveField(21)
-  @JsonKey(name: 'is_published')
-  int? isPublished;
+  List<Attachment>? attachments;
   @HiveField(22)
+  int? bids;
+  @HiveField(23)
+  int? interviewing;
+  @HiveField(24)
+  @JsonKey(name: 'avg_rating')
+  int? avgRating;
+  @HiveField(25)
+  List<Milestone>? milestones;
+  @HiveField(26)
   @JsonKey(name: 'created_at')
   String? createdAt;
-  @HiveField(23)
+  @HiveField(27)
   @JsonKey(name: 'updated_at')
   String? updatedAt;
 
   Datum({
     this.id,
     this.user,
+    this.profile,
     this.industry,
     this.type,
     this.title,
@@ -96,9 +107,12 @@ class Datum extends HiveObject{
     this.totalMilestones,
     this.skills,
     this.attachments,
-    this.isPublished,
+    this.bids,
+    this.interviewing,
+    this.avgRating,
+    this.milestones,
     this.createdAt,
-    this.updatedAt,
+    this.updatedAt
   });
 
   factory Datum.fromJson(Map<String, dynamic> json) => _$DatumFromJson(json);

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:client/core/di/injector.dart';
+import 'package:client/core/entity/skills/skill.dart';
 import 'package:client/core/enums/gig_type.dart';
 import 'package:client/core/helper/configs/instances.dart';
 import 'package:client/core/helper/helper_handler.dart';
@@ -9,7 +10,6 @@ import 'package:client/core/helper/utils/image_picker.dart';
 import 'package:client/core/helper/utils/images.dart';
 import 'package:client/core/helper/utils/pallets.dart';
 import 'package:client/core/helper/utils/workplenty_dialog.dart';
-import 'package:client/views/dashboard/gig/data/model/list_of_skills_response/datum.dart';
 import 'package:client/views/dashboard/gig/domain/entity/gig/gig_entity.dart';
 import 'package:client/views/dashboard/gig/presentation/modal/list_of_skills_modal.dart';
 import 'package:client/views/dashboard/gig/presentation/provider/artisan_provider.dart';
@@ -44,7 +44,7 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
   final _globalFormKey = GlobalKey<FormState>();
   final _bloc = ServiceblocBloc(inject());
 
-  List<Datum>? _skillList = [];
+  List<Skill>? _skillList = [];
 
   final _image = ImagePickerHandler();
   // File? _file;
@@ -167,16 +167,6 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
                         readOnly: true,
                         onTapped: () => _pickImages(),
                       ),
-                      // ButtonWidget(
-                      //     height: 36.h,
-                      //     radius: 8,
-                      //     buttonStyle: true,
-                      //     fontSize: 14,
-                      //     color: Pallets.grey,
-                      //     fontWeight: FontWeight.w400,
-                      //     primary: Colors.transparent,
-                      //     buttonText: 'Add Attachment',
-                      //     onPressed: () => null),
                     ],
                   ),
                   borderRadiusGeometry: BorderRadius.zero,
@@ -281,7 +271,7 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
                             context,
                             child: SkillsModal(
                                 list: _skillList,
-                                callBack: (List<Datum> l) {
+                                callBack: (List<Skill> l) {
                                   _skillList = l;
                                   setState(() {});
                                 }),
@@ -291,6 +281,83 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
                     ),
                   ],
                 )),
+                SizedBox(height: 23.h),
+                ReviewBgCard(
+                  Column(
+                    children: [
+                      RowContainer(
+                          image: AppImages.wallet, text: 'Payment Type'),
+                      SizedBox(height: 10.h),
+                      Row(
+                        children: [
+                          ButtonWidget(
+                            buttonText: 'Milestone',
+                            onPressed: () {},
+                            height: 30,
+                            fontSize: 13,
+                            borderColor: Pallets.white,
+                            width: 120,
+                            color: Pallets.white,
+                            primary: Pallets.primary100,
+                          ),
+                          SizedBox(
+                            width: 20.w,
+                          ),
+                          ButtonWidget(
+                            buttonText: 'Project Completion',
+                            onPressed: () {},
+                            buttonStyle: true,
+                            height: 30,
+                            fontSize: 13,
+                            borderColor: Pallets.grey,
+                            width: 180,
+                            color: Pallets.grey,
+                            primary: Pallets.white,
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 20.w,
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 23.h),
+                ReviewBgCard(
+                  Column(
+                    children: [
+                      RowContainer(
+                          image: AppImages.milestone, text: 'Milestone'),
+                      SizedBox(height: 10.h),
+                      EditFormField(
+                        height: 30,
+                        label: 'Milestone description',
+                      ),
+                      SizedBox(
+                        height: 15.h,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: EditFormField(
+                              height: 30,
+                              label: 'Due Date',
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Expanded(
+                            child: EditFormField(
+                              height: 30,
+                              label: 'Amount (NGN)',
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
                 SizedBox(height: 23.h),
                 ReviewBgCard(
                   Column(
@@ -326,6 +393,7 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
                 SizedBox(height: 50.h),
                 ReviewBgCard(
                   Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -360,19 +428,22 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
                           )
                         ],
                       ),
-                      SizedBox(height: 23.h),
+                      SizedBox(height: 43.h),
                       TextView(text: 'Charles Damien', color: Pallets.grey),
                     ],
                   ),
                 ),
                 SizedBox(height: 23.h),
-                ButtonWidget(
-                  buttonText: 'Post Freelance Job & Invite',
-                  fontSize: 18.sp,
-                  width: Utils.getDeviceWidth(context),
-                  fontWeight: FontWeight.w700,
-                  onPressed: () => _proceed(),
-                  height: 50.h,
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: ButtonWidget(
+                    buttonText: 'Post Freelance Job & Invite',
+                    fontSize: 18.sp,
+                    width: Utils.getDeviceWidth(context),
+                    fontWeight: FontWeight.w700,
+                    onPressed: () => _proceed(),
+                    height: 50.h,
+                  ),
                 ),
                 SizedBox(
                   height: 40,

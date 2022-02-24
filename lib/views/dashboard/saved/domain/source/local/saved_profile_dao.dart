@@ -1,7 +1,8 @@
 import 'package:client/core/database/hive_database.dart';
-import 'package:client/views/dashboard/saved/data/model/saved_profile_list_response/saved_profile_model_response/datum.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/adapters.dart';
+
+import '../../../../../../core/entity/datum/datum.model.dart';
 
 SavedProfileListDao? savedProfileListDao;
 

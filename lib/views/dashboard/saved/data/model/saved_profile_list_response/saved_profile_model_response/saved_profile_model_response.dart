@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import 'data.dart';
+import '../../../../../../../core/entity/data/data.model.dart';
 
 part 'saved_profile_model_response.g.dart';
 

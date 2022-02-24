@@ -25,9 +25,11 @@ class AppImages {
   static String emoji = 'assets/svgs/emoji.svg';
   static String empty = 'assets/svgs/empty.svg';
   static String greenDot = 'assets/svgs/green_dot.svg';
+  static String milestone = 'assets/svgs/milestone.svg';
   static String greyDot = 'assets/svgs/grey_dot.svg';
   static String filter = 'assets/svgs/filter.svg';
   static String yellowDot = 'assets/svgs/yellow_dot.svg';
+  static String wallet = 'assets/svgs/wallet.svg';
 
   static String home_filled = 'assets/svgs/home_filled.svg';
   static String archive_filled = 'assets/svgs/archive_filled.svg';

@@ -1,9 +1,10 @@
+import 'package:client/core/helper/routes/navigation.dart';
 import 'package:client/core/helper/utils/pallets.dart';
 import 'package:client/views/dashboard/gig/domain/source/local/list_of_artisans_dao.dart';
 import 'package:client/views/dashboard/gig/presentation/provider/artisan_provider.dart';
+import 'package:client/views/dashboard/milestone/milestone.dart';
 import 'package:client/views/dashboard/widget/home_card_widget.dart';
 import 'package:client/views/widgets/body_widget.dart';
-import 'package:client/views/widgets/modal_bottom.dart';
 import 'package:client/views/widgets/text_views.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,8 @@ class Home extends StatelessWidget {
     Provider.of<ArtisanProvider>(context, listen: false).listOfArtisan();
     return Scaffold(
         floatingActionButton: FloatingActionButton(
-          onPressed: () => showFloatingActionModal(context, 'Select a Service'),
+          onPressed: () => PageRouter.gotoWidget(Milestone(), context),
+          // showFloatingActionModal(context, 'Select a Service'),
           backgroundColor: Pallets.primary100,
           child: Icon(
             Icons.add,

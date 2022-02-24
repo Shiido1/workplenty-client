@@ -4,9 +4,11 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:client/core/database/hive_database.dart';
-import 'package:client/views/dashboard/gig/data/model/list_of_skills_response/datum.dart';
+import 'package:client/core/entity/skills/skill.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+
+import '../../../../../../core/entity/datum/datum.model.dart';
 
 SkillDao? skillDao;
 
@@ -32,10 +34,10 @@ class SkillDao {
     await _box!.putAll(map);
   }
 
-  List<Datum> getConvertedData(Box box) {
+  List<Skill> getConvertedData(Box box) {
     Map<String, dynamic> raw = Map<String, dynamic>.from(box.toMap());
     return raw.values
-        .map((e) => Datum.fromJson(json.decode(json.encode(e))))
+        .map((e) => Skill.fromJson(json.decode(json.encode(e))))
         .toList();
   }
 

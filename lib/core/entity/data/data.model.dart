@@ -1,7 +1,7 @@
+import 'package:client/core/entity/datum/datum.model.dart';
+import 'package:client/core/entity/pagination/pagination_meta.model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import 'datum.model.dart';
-import 'pagination_meta.model.dart';
 
 part 'data.model.g.dart';
 
