@@ -124,8 +124,7 @@ class Datum {
       this.updatedAt,
       this.cover,
       this.name,
-      this.categoryId
-      });
+      this.categoryId});
 
   factory Datum.fromJson(Map<String, dynamic> json) => _$DatumFromJson(json);
 

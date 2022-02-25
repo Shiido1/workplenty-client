@@ -25,6 +25,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../widgets/bottom_sheet.dart';
+
 class CreateProfile extends StatefulWidget {
   const CreateProfile({Key? key}) : super(key: key);
 
@@ -343,10 +345,14 @@ class _CreateProfileState extends State<CreateProfile> {
         ),
         SizedBox(height: 8.h),
         EditFormField(
-            label: 'Nigeria',
-            suffixIcon: Icons.keyboard_arrow_down,
-            controller: _countryController,
-            validator: Validators.validateString()),
+          label: 'Country',
+          suffixIcon: Icons.keyboard_arrow_down,
+          controller: _countryController,
+          validator: Validators.validateString(),
+          onTapped: () {
+            BottomSheets.showSheet(context, child: Container());
+          },
+        ),
         SizedBox(height: 31.h),
         TextView(
           text: 'Street Address',

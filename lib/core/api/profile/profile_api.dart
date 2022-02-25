@@ -4,6 +4,8 @@ import 'package:client/core/network/url_config.dart';
 import 'package:client/views/onboarding/domain/entity/profile/profile_entity.dart';
 import 'package:dio/dio.dart';
 
+import '../../../views/onboarding/data/model/location_response/location_response.dart';
+
 class ProfileApi {
   final NetworkService _networkService;
 
@@ -38,6 +40,26 @@ class ProfileApi {
           UrlConfig.profileAvatarUpdate, RequestMethod.upload,
           formData: FormData.fromMap(entity.toAvatar()));
       return DefaultResponse.fromJson(_response.data);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<LocationResponse> getListOfStates(int id) async {
+    try {
+      final _response = await _networkService
+          .call(UrlConfig.states, RequestMethod.get, data: {'country_id': id});
+      return LocationResponse.fromJson(_response.data);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<LocationResponse> getListOfCountries() async {
+    try {
+      final _response =
+          await _networkService.call(UrlConfig.countries, RequestMethod.get);
+      return LocationResponse.fromJson(_response.data);
     } catch (e) {
       rethrow;
     }
