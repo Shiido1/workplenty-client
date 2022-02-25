@@ -71,7 +71,8 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                   message:
                       'You’ve successfully verified your account. Find Artisans & Clients now!',
                   btnText: 'Continue',
-                  next: () => PageRouter.gotoNamed(Routes.board, context));
+                  next: () => PageRouter.gotoNamed(Routes.board, context,
+                      clearStack: true));
             }
             if (state is AuthblocOTPResendSuccess) {
               WorkPlenty.hideLoading(_loadingKey);

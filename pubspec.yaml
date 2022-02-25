@@ -65,6 +65,8 @@ flutter_native_splash:
   color_dark: "#10375C"
   android: true
   ios: true
+  ios_content_mode: "scaleAspectFill"
+  android_gravity: "fill"
 
 jsonToDart:
   outputFolder: lib/models #default: lib/

@@ -72,20 +72,26 @@ class NetworkService {
       switch (method) {
         case RequestMethod.post:
           response = await dio!.post(path,
-              queryParameters: params, data: data, options: options);
+              queryParameters: params,
+              data: data,
+              options: options ?? await _getOption());
           break;
         case RequestMethod.get:
-          response =
-              await dio!.get(path, queryParameters: params, options: options);
+          response = await dio!.get(path,
+              queryParameters: params, options: options ?? await _getOption());
 
           break;
         case RequestMethod.put:
-          response = await dio!
-              .put(path, queryParameters: params, data: data, options: options);
+          response = await dio!.put(path,
+              queryParameters: params,
+              data: data,
+              options: options ?? await _getOption());
           break;
         case RequestMethod.delete:
           response = await dio!.delete(path,
-              queryParameters: params, data: data, options: options);
+              queryParameters: params,
+              data: data,
+              options: options ?? await _getOption());
           break;
         case RequestMethod.upload:
           response = await dio!.post(path,
@@ -115,12 +121,12 @@ class NetworkService {
     }
   }
 
-  // Future<Options> _getOption() async {
-  //   return Options(headers: {
-  //     "Authorization": "Bearer " + SessionManager.instance.authToken,
-  //     'Accept': 'application/json'
-  //   });
-  // }
+  Future<Options> _getOption() async {
+    return Options(headers: {
+      "Authorization": "Bearer " + SessionManager.instance.authToken,
+      'Accept': 'application/json'
+    });
+  }
 }
 
 enum RequestMethod { post, get, put, delete, upload }

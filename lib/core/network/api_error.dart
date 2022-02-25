@@ -81,7 +81,7 @@ class ApiError {
         }
         break;
       default:
-        message = 'An unknown error occured!';
+        message = 'An unknown error occurred!';
     }
     return message;
   }
