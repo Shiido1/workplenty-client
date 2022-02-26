@@ -76,7 +76,7 @@ class _MainBoardState extends State<MainBoard> {
     return Scaffold(
       appBar: index == 1 || index == 3
           ? null
-          : getCustomAppBar(context, _bodyTitle[index!]),
+          : getCustomAppBar(context, _bodyTitle[index!], isHome: index == 0),
       endDrawer: MessageDrawerWidget(),
       body: _body[index!],
       bottomNavigationBar: _bottomNavigationBar(context),

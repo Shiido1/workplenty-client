@@ -96,7 +96,8 @@ class Profile extends StatelessWidget {
                     trailing: true,
                     onTap: () async {
                       await SessionManager.instance.logOut();
-                      PageRouter.gotoNamed(Routes.login, context);
+                      PageRouter.gotoNamed(Routes.intro, context,
+                          clearStack: true);
                     })
               ],
             ),

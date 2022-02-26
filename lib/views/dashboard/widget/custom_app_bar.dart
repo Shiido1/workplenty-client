@@ -5,15 +5,25 @@ import 'package:client/views/widgets/image_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../core/helper/routes/navigation.dart';
+
 getCustomAppBar(BuildContext context, String title,
-    {PreferredSizeWidget? bottom}) {
+    {PreferredSizeWidget? bottom, bool isHome = false}) {
   return defaultAppBar2(
     context,
     backgroundColor: Pallets.primary100,
     bottom: bottom,
     leadingWidth: 70,
-    leadingWidget:
-        ImageLoader(path: AppImages.whiteLogo, height: 24.h, width: 24.w),
+    leadingWidget: isHome
+        ? ImageLoader(path: AppImages.whiteLogo, height: 24.h, width: 24.w)
+        : IconButton(
+            onPressed: () {
+              PageRouter.goBack(context);
+            },
+            icon: Icon(
+              Icons.arrow_back,
+              color: Pallets.white,
+            )),
     centerTitle: true,
     title: title,
     textColor: Pallets.white,

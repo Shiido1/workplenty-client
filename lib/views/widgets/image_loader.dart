@@ -269,11 +269,13 @@ class CircularImage extends StatelessWidget {
         errorWidget: (ctx, _, __r) {
           return CircleAvatar(
               radius: radius,
-              child: TextView(
-                  text: initial ?? '', color: Pallets.white, fontSize: 34.sp));
+              backgroundColor: Pallets.grey,
+              child: TextView(text: initial ?? '', color: Pallets.white));
         },
-        placeHolder: (_, __) => TextView(
-            text: initial ?? '', color: Pallets.white, fontSize: 34.sp),
+        placeHolder: (_, __) => CircleAvatar(
+            radius: radius,
+            backgroundColor: Pallets.grey,
+            child: TextView(text: initial ?? '', color: Pallets.white)),
         onTap: onTap,
         showInitialTextAbovePicture: showInitialTextAbovePicture);
   }

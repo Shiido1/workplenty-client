@@ -38,6 +38,8 @@ class ListOfArtisansDao {
     Map<String, dynamic> raw = Map<String, dynamic>.from(box.toMap());
     return raw.values
         .map((e) => Datum.fromJson(jsonDecode(jsonEncode(e))))
+        .toList()
+        .reversed
         .toList();
   }
 

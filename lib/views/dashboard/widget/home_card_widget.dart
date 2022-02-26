@@ -2,6 +2,7 @@
 
 import 'package:client/core/di/injector.dart';
 import 'package:client/core/enums/gig_type.dart';
+import 'package:client/core/helper/helper_handler.dart';
 import 'package:client/core/helper/utils/images.dart';
 import 'package:client/core/helper/utils/pallets.dart';
 import 'package:client/core/helper/utils/workplenty_dialog.dart';
@@ -41,7 +42,12 @@ class HomeCard extends StatelessWidget {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CircularImage(path: datum?.user?.avatar ?? '', radius: 20),
+                  CircularImage(
+                    path: datum?.user?.avatar ?? '',
+                    radius: 20,
+                    initial: Utils.getInitials(
+                        '${datum?.user?.firstName ?? ''} ${datum?.user?.lastName ?? ''}'),
+                  ),
                   SizedBox(width: 13.w),
                   Expanded(
                     child: Column(
