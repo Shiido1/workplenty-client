@@ -64,6 +64,7 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
               onPressed: () => PageRouter.goBack(context),
             ),
             textColor: Pallets.white,
+            centerTitle: true,
             title: 'Freelance Job'),
         body: BodyWidget(
           child: BlocListener<ServiceblocBloc, ServiceblocState>(
@@ -470,15 +471,15 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
           coverLetterRequired: '1',
           totalBudget: '100000',
           skill: ['laravel', 'flutter'],
-          attachments: _returListOfParsedFiles(),
-          invited_artisan_ids: ['2', '2'])));
+          attachments: _returnListOfParsedFiles(),
+          invited_artisan_ids: ['2', '2'],
+          projectType: 'Project-Completion')));
     }
   }
 
   // ignore: unused_element
-  List<MultipartFile> _returListOfParsedFiles() {
+  List<MultipartFile> _returnListOfParsedFiles() {
     List<MultipartFile> _multiPath = [];
-    logger.d(_fileList.length);
     _fileList.map((e) async {
       _multiPath.add(
           await MultipartFile.fromFile(e.path, filename: _returnLastPath(e)));
