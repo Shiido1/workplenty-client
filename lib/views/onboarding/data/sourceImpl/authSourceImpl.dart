@@ -14,6 +14,11 @@ class AuthSourceImpl implements AuthSource {
   }
 
   @override
+  Future<AuthResponse> resetPassword(AuthEntity entity) async {
+    return await _authApi.resetPassword(entity);
+  }
+
+  @override
   Future<AuthResponse> login(AuthEntity entity) async {
     return await _authApi.login(entity);
   }

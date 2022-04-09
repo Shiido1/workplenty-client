@@ -1,6 +1,7 @@
 // ignore_for_file: unused_field
 
 import 'package:client/core/di/injector.dart';
+import 'package:client/core/helper/configs/instances.dart';
 import 'package:client/core/helper/routes/navigation.dart';
 import 'package:client/core/helper/routes/routes.dart';
 import 'package:client/core/helper/utils/pallets.dart';
@@ -76,8 +77,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 EditFormField(
                   label: 'PIN',
                   controller: _pinController,
-                  validator: Validators.validateInt(),
-                  keyboardType: TextInputType.number,
+                  validator: Validators.validateString(),
+                  keyboardType: TextInputType.text,
                 ),
                 SizedBox(height: 18.h),
                 EditFormField(
@@ -113,7 +114,6 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   }
 
   void _proceed() {
-    // PageRouter.gotoWidget(WelcomeBackScreen(), context);
     if (_formKey.currentState!.validate()) {
       _bloc.add(ResetPasswordEvent(AuthEntity(
           email: widget.email,
