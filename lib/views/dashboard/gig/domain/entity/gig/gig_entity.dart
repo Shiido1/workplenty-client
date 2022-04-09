@@ -21,6 +21,7 @@ class GigEntity extends DefaultResponse {
   final List<String>? skill;
   final List<MultipartFile>? attachments;
   final List<String>? invited_artisan_ids;
+  final String? projectType;
 
   GigEntity(
       {this.privateMessage,
@@ -37,7 +38,8 @@ class GigEntity extends DefaultResponse {
       this.totalBudget,
       this.skill,
       this.attachments,
-      this.invited_artisan_ids});
+      this.invited_artisan_ids,
+      this.projectType});
 
   @override
   List<Object?> get props => [];
@@ -79,6 +81,7 @@ class GigEntity extends DefaultResponse {
       'skill': skill,
       'attachments': attachments,
       'invited_artisan_ids': invited_artisan_ids,
+      'project_type': projectType
     };
   }
 
@@ -102,7 +105,8 @@ class GigEntity extends DefaultResponse {
       'total_budget': totalBudget,
       'skill': skill,
       'attachments': attachments,
-      'invited_artisan_ids': ['2', '2']
+      'invited_artisan_ids[]': invited_artisan_ids,
+      'project_type': projectType
     };
   }
 
