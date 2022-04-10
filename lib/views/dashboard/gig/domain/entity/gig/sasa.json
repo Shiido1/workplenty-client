@@ -1,0 +1,20 @@
+{
+    "industry_id": 1,
+    "milestones": [
+       {
+        "description": "Ssdadadad",
+        "due_date": "2021-12-01",
+        "amount": "1000"
+       },
+       {
+        "description": "Ssdadadad",
+        "due_date": "2021-12-01",
+        "amount": "1000"
+       },
+       {
+        "description": "Ssdadadad",
+        "due_date": "2021-12-01",
+        "amount": "1000"
+       }
+    ]
+}

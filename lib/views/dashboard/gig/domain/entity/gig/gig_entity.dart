@@ -1,7 +1,10 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:client/core/entity/default_response.dart';
+import 'package:client/core/helper/configs/instances.dart';
+import 'package:client/views/dashboard/gig/presentation/services/freelance/model/milestone.dart';
 import 'package:dio/dio.dart';
+import 'package:file_picker/file_picker.dart';
 
 import '../../../../../../core/enums/gig_type.dart';
 
@@ -20,8 +23,9 @@ class GigEntity extends DefaultResponse {
   final String? totalBudget;
   final List<String>? skill;
   final List<MultipartFile>? attachments;
-  final List<String>? invited_artisan_ids;
+  final List<int>? invited_artisan_ids;
   final String? projectType;
+  final List<MilestoneModel>? milestones;
 
   GigEntity(
       {this.privateMessage,
@@ -39,7 +43,8 @@ class GigEntity extends DefaultResponse {
       this.skill,
       this.attachments,
       this.invited_artisan_ids,
-      this.projectType});
+      this.projectType,
+      this.milestones});
 
   @override
   List<Object?> get props => [];
@@ -81,7 +86,8 @@ class GigEntity extends DefaultResponse {
       'skill': skill,
       'attachments': attachments,
       'invited_artisan_ids': invited_artisan_ids,
-      'project_type': projectType
+      'project_type': projectType,
+      'milestones': milestones?.map((e) => e.toMap()).toList()
     };
   }
 
@@ -104,9 +110,11 @@ class GigEntity extends DefaultResponse {
       'cover_letter_required': coverLetterRequired,
       'total_budget': totalBudget,
       'skill': skill,
-      'attachments': attachments,
+      'attachments[]': attachments,
       'invited_artisan_ids[]': invited_artisan_ids,
-      'project_type': projectType
+      'project_type': projectType,
+      if (this.milestones != null)
+        "milestones[]": this.milestones?.map((e) => e.toMap()).toList()
     };
   }
 

@@ -43,7 +43,7 @@ class ReviewProvider extends BaseModel {
       _response.fold(
           (l) => logger.e(l.errorMessage(l)), (r) => responseModel = r);
     } catch (e) {
-      logger.e('An error occured: $e');
+      logger.e('An error occurred: $e');
     }
     hideLoading();
   }

@@ -127,7 +127,6 @@ class _SkillsModalState extends State<SkillsModal> {
                                 child: ButtonWidget(
                                   buttonText: 'Next',
                                   fontSize: 18.sp,
-                                  width: Utils.getDeviceWidth(context),
                                   fontWeight: FontWeight.w700,
                                   onPressed: () {
                                     widget.callBack!(_tempList);
