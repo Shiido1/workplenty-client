@@ -2,6 +2,7 @@
 
 import 'package:client/core/entity/default_response.dart';
 import 'package:dio/dio.dart';
+import 'package:file_picker/file_picker.dart';
 
 import '../../../../../../core/enums/gig_type.dart';
 
@@ -104,7 +105,7 @@ class GigEntity extends DefaultResponse {
       'cover_letter_required': coverLetterRequired,
       'total_budget': totalBudget,
       'skill': skill,
-      'attachments': attachments,
+      'attachments[]': attachments,
       'invited_artisan_ids[]': invited_artisan_ids,
       'project_type': projectType
     };

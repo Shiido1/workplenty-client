@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:client/core/di/injector.dart';
 import 'package:client/core/entity/skills/skill.dart';
 import 'package:client/core/entity/user/user.dart';
@@ -31,12 +29,15 @@ import 'package:client/views/widgets/review_bg_card.dart';
 import 'package:client/views/widgets/skill_widget.dart';
 import 'package:client/views/widgets/text_views.dart';
 import 'package:dio/dio.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../../core/helper/utils/file_picker.dart';
 import 'bloc/servicebloc_bloc.dart';
+import 'widgets/add_skill_widget.dart';
 
 // ignore: must_be_immutable
 class FreeLanceJobService extends StatefulWidget {
@@ -55,7 +56,7 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
 
   final _image = ImagePickerHandler();
   // File? _file;
-  List<File> _fileList = [];
+  // List<File> _fileList = [];
   List<User> _artisans = [];
 
   int _checkboxIndex = 0;
@@ -195,8 +196,26 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
                                 EditFormField(
                                   label: 'Add Attachment',
                                   readOnly: true,
-                                  onTapped: () => _pickImages(),
+                                  onTapped: () => _pickFiles(),
                                 ),
+                                ..._files
+                                    .map((f) => Row(
+                                          children: [
+                                            Expanded(
+                                              child: TextView(
+                                                  text: f.filename ?? '',
+                                                  color: Pallets.grey),
+                                            ),
+                                            IconButton(
+                                                padding: EdgeInsets.zero,
+                                                onPressed: () {
+                                                  _files.remove(f);
+                                                  setState(() {});
+                                                },
+                                                icon: Icon(Icons.clear))
+                                          ],
+                                        ))
+                                    .toList()
                               ],
                             ),
                             borderRadiusGeometry: BorderRadius.zero,
@@ -301,17 +320,19 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
                                     SizedBox(
                                       width: 5.w,
                                     ),
-                                    addSkills('+', onTap: () {
-                                      BottomSheets.showSheet<String>(
-                                        context,
-                                        child: SkillsModal(
-                                            list: _skillList,
-                                            callBack: (List<Skill> l) {
-                                              _skillList = l;
-                                              setState(() {});
-                                            }),
-                                      );
-                                    })
+                                    AddSkillWidget(
+                                        value: '+',
+                                        onTap: () {
+                                          BottomSheets.showSheet<String>(
+                                            context,
+                                            child: SkillsModal(
+                                                list: _skillList,
+                                                callBack: (List<Skill> l) {
+                                                  _skillList = l;
+                                                  setState(() {});
+                                                }),
+                                          );
+                                        })
                                   ],
                                 ),
                               ),
@@ -508,10 +529,22 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
                                   ],
                                 ),
                                 ..._artisans
-                                    .map(((user) => TextView(
-                                        text:
-                                            '${user.firstName ?? ''} ${user.lastName ?? ''}  ',
-                                        color: Pallets.grey)))
+                                    .map(((user) => Row(
+                                          children: [
+                                            Expanded(
+                                              child: TextView(
+                                                  text:
+                                                      '${user.firstName ?? ''} ${user.lastName ?? ''}  ',
+                                                  color: Pallets.grey),
+                                            ),
+                                            IconButton(
+                                                onPressed: () {
+                                                  _files.remove(user);
+                                                  setState(() {});
+                                                },
+                                                icon: Icon(Icons.clear))
+                                          ],
+                                        )))
                                     .toList()
                               ],
                             ),
@@ -575,7 +608,7 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
           coverLetterRequired: '$_checkboxIndex',
           totalBudget: _budgetController.text,
           skill: _selectedSkills,
-          attachments: _returnListOfParsedFiles(),
+          attachments: _files,
           invited_artisan_ids: _artisansId,
           projectType:
               _paymentTypeIndex == 0 ? 'Milestone' : 'Project-Completion')));
@@ -602,46 +635,15 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
     return true;
   }
 
-  // ignore: unused_element
-  List<MultipartFile> _returnListOfParsedFiles() {
-    List<MultipartFile> _multiPath = [];
-    _fileList.map((e) async {
-      _multiPath.add(
-          await MultipartFile.fromFile(e.path, filename: _returnLastPath(e)));
-      setState(() {});
-    }).toList();
-    return _multiPath;
-  }
+  List<MultipartFile> _files = [];
 
-  void _pickImages() async {
+  void _pickFiles() async {
     try {
-      _image.pickImage(
-          context: context,
-          file: (file) async {
-            // _file = file;
-            _fileList.add(file);
-            setState(() {});
-          });
+      List<String?> _f = await WorkplentyFilePicker.returnPickedFiles();
+      _files = _f.map((path) => MultipartFile.fromFileSync(path!)).toList();
+      setState(() {});
     } catch (e) {
       logger.e(e);
     }
   }
-
-  String _returnLastPath(File file) => file.path.split('/').last;
-
-  GestureDetector addSkills(String value, {Function()? onTap}) =>
-      GestureDetector(
-        onTap: onTap,
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 5.h),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5.r),
-              color: Pallets.primary100),
-          child: TextView(
-              color: Pallets.white,
-              text: value,
-              fontWeight: FontWeight.w500,
-              textAlign: TextAlign.center),
-        ),
-      );
 }
