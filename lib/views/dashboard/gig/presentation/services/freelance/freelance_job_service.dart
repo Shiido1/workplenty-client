@@ -38,6 +38,7 @@ import '../../../../../../core/helper/utils/file_picker.dart';
 import '../bloc/servicebloc_bloc.dart';
 import '../widgets/add_skill_widget.dart';
 import '../widgets/button_widget.dart';
+import 'model/milestone.dart';
 import 'widgets/first.dart';
 import 'widgets/second.dart';
 
@@ -73,7 +74,7 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
   final TextEditingController _experienceController = TextEditingController();
   final TextEditingController _budgetController = TextEditingController();
   final TextEditingController _timeController = TextEditingController();
-
+  List<MilestoneModel> _miles = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -301,7 +302,13 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
                               ],
                             ),
                           ),
-                          Third(paymentTypeIndex: _paymentTypeIndex),
+                          Third(
+                            paymentTypeIndex: _paymentTypeIndex,
+                            list: (miles, val) {
+                              _miles = miles;
+                              if (val!) setState(() {});
+                            },
+                          ),
                           SizedBox(height: 23.h),
                           ReviewBgCard(
                             Column(
@@ -472,24 +479,27 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
 
   void _proceed(ArtisanProvider artisanProvider) {
     if (_validate()) {
-      _bloc.add(ServiceEvent(GigEntity(
-          id: '${artisanProvider.datum?.id}',
-          industryId: '${artisanProvider.datum?.industry?.id}',
-          type: GigType.FREELANCE,
-          privateMessage: privateMessageController.text,
-          title: titleController.text,
-          description: descriptionController.text,
-          timeline: _timeController.text,
-          paymentType: 'Cash',
-          isPublished: '1',
-          experienceLevel: '$_experienceIndex',
-          coverLetterRequired: '$_checkboxIndex',
-          totalBudget: _budgetController.text,
-          skill: _selectedSkills,
-          attachments: _files,
-          invited_artisan_ids: _artisansId,
-          projectType:
-              _paymentTypeIndex == 0 ? 'Milestone' : 'Project-Completion')));
+      _bloc.add(ServiceEvent(
+        GigEntity(
+            id: '${artisanProvider.datum?.id}',
+            industryId: '${artisanProvider.datum?.industry?.id}',
+            type: GigType.FREELANCE,
+            privateMessage: privateMessageController.text,
+            title: titleController.text,
+            description: descriptionController.text,
+            timeline: _timeController.text,
+            paymentType: 'Cash',
+            isPublished: '1',
+            experienceLevel: '$_experienceIndex',
+            coverLetterRequired: '$_checkboxIndex',
+            totalBudget: _budgetController.text,
+            skill: _selectedSkills,
+            attachments: _files,
+            invited_artisan_ids: _artisansId,
+            milestones: _miles,
+            projectType:
+                _paymentTypeIndex == 0 ? 'Milestone' : 'Project-Completion'),
+      ));
     }
   }
 
