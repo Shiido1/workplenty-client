@@ -7,17 +7,20 @@ class ReviewBgCard extends StatelessWidget {
   final BorderRadiusGeometry? borderRadiusGeometry;
   final double? horizontal;
   final double? vertical;
+  final double? width;
 
   const ReviewBgCard(this.child,
       {Key? key,
       this.padding,
       this.borderRadiusGeometry,
-      this.horizontal = 18,
+      this.width,
+      this.horizontal = 10,
       this.vertical = 10})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: width?.w,
       padding: padding ??
           EdgeInsets.symmetric(
               horizontal: horizontal!.w, vertical: vertical!.h),

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:client/core/di/injector.dart';
 import 'package:client/core/entity/skills/skill.dart';
+import 'package:client/core/entity/user/user.dart';
 import 'package:client/core/enums/gig_type.dart';
 import 'package:client/core/helper/configs/instances.dart';
 import 'package:client/core/helper/helper_handler.dart';
@@ -9,10 +10,16 @@ import 'package:client/core/helper/routes/navigation.dart';
 import 'package:client/core/helper/utils/image_picker.dart';
 import 'package:client/core/helper/utils/images.dart';
 import 'package:client/core/helper/utils/pallets.dart';
+import 'package:client/core/helper/utils/validators.dart';
 import 'package:client/core/helper/utils/workplenty_dialog.dart';
 import 'package:client/views/dashboard/gig/domain/entity/gig/gig_entity.dart';
+import 'package:client/views/dashboard/gig/presentation/modal/experience_level_modal.dart';
+import 'package:client/views/dashboard/gig/presentation/modal/invited_artisans_list.dart.dart';
+import 'package:client/views/dashboard/gig/presentation/modal/job_category_modal.dart';
 import 'package:client/views/dashboard/gig/presentation/modal/list_of_skills_modal.dart';
+import 'package:client/views/dashboard/gig/presentation/modal/timeline_modal.dart';
 import 'package:client/views/dashboard/gig/presentation/provider/artisan_provider.dart';
+import 'package:client/views/dashboard/gig/presentation/services/model/checkbox_model.dart';
 import 'package:client/views/dashboard/gig/presentation/widget/row_container_widget.dart';
 import 'package:client/views/widgets/body_widget.dart';
 import 'package:client/views/widgets/bottom_sheet.dart';
@@ -49,10 +56,20 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
   final _image = ImagePickerHandler();
   // File? _file;
   List<File> _fileList = [];
+  List<User> _artisans = [];
 
-  TextEditingController privateMessageController = TextEditingController();
-  TextEditingController titleController = TextEditingController();
-  TextEditingController descriptionController = TextEditingController();
+  int _checkboxIndex = 0;
+  int _paymentTypeIndex = 0;
+  int? _experienceIndex;
+
+  final TextEditingController privateMessageController =
+      TextEditingController();
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController _jobCategoryController = TextEditingController();
+  final TextEditingController _experienceController = TextEditingController();
+  final TextEditingController _budgetController = TextEditingController();
+  final TextEditingController _timeController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -66,415 +83,523 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
             textColor: Pallets.white,
             centerTitle: true,
             title: 'Freelance Job'),
-        body: BodyWidget(
-          child: BlocListener<ServiceblocBloc, ServiceblocState>(
-            bloc: _bloc,
-            listener: (context, state) {
-              if (state is ServiceblocLoading) {
-                WorkPlenty.showLoading(context, _loadingKey, '');
-              }
-              if (state is ServiceblocSuccess) {
-                WorkPlenty.hideLoading(_loadingKey);
-              }
-              if (state is ServiceblocFailed) {
-                WorkPlenty.hideLoading(_loadingKey);
-                WorkPlenty.error(state.message);
-              }
-            },
-            child: Form(
-              key: _globalFormKey,
-              child: ListView(children: [
-                Consumer<ArtisanProvider>(
-                  builder: ((context, value, child) => ReviewBgCard(
-                      Row(mainAxisSize: MainAxisSize.min, children: [
-                        CircularImage(
-                          path: value.artisan?.avatar ?? '',
-                          radius: 22,
-                        ),
-                        SizedBox(
-                          width: 13.w,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            TextView(
-                              text:
-                                  '${value.artisan?.firstName ?? ''} ${value.artisan?.lastName}',
-                              maxLines: 1,
-                              fontSize: 17,
-                              fontWeight: FontWeight.w800,
-                              textAlign: TextAlign.left,
-                            ),
-                            TextView(
-                              text: 'Technical Writer',
-                              maxLines: 1,
-                              fontWeight: FontWeight.w500,
-                              textAlign: TextAlign.left,
-                            ),
-                          ],
-                        )
-                      ]),
-                      borderRadiusGeometry: BorderRadius.zero,
-                      vertical: 25.33)),
-                ),
-                SizedBox(height: 23.h),
-                ReviewBgCard(
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        RowContainer(
-                            image: AppImages.message,
-                            text: 'Private Message to Charles Damien'),
-                        SizedBox(height: 10.h),
-                        EditFormField(
-                          height: 150.h,
-                          label: 'Type here..',
-                          controller: privateMessageController,
-                        ),
-                        SizedBox(height: 23.h),
-                        RowContainer(
-                            image: AppImages.t_message, text: 'Project Title'),
-                        SizedBox(height: 10.h),
-                        EditFormField(
-                          controller: titleController,
-                        ),
-                        SizedBox(height: 23.h),
-                        RowContainer(
-                            image: AppImages.brief_case,
-                            text:
-                                'Describe your project and other specific details'),
-                        SizedBox(height: 10.h),
-                        EditFormField(
-                          height: 150.h,
-                          label: 'Type here..',
-                          controller: descriptionController,
-                        ),
-                      ],
-                    ),
-                    borderRadiusGeometry: BorderRadius.zero,
-                    vertical: 25.33),
-                SizedBox(height: 50.h),
-                ReviewBgCard(
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      RowContainer(
-                          image: AppImages.paper_clip, text: 'Attachment'),
-                      SizedBox(height: 10.h),
-                      EditFormField(
-                        height: 36.h,
-                        label: 'Add Attachment',
-                        readOnly: true,
-                        onTapped: () => _pickImages(),
-                      ),
-                    ],
-                  ),
-                  borderRadiusGeometry: BorderRadius.zero,
-                  vertical: 25.33,
-                ),
-                SizedBox(height: 23.h),
-                ReviewBgCard(
-                  Column(
-                    children: [
-                      RowContainer(
-                          image: AppImages.brief_case, text: 'Job Category'),
-                      SizedBox(height: 10.h),
-                      EditFormField(
-                          label: 'Web Development',
-                          suffixWidget: ImageLoader(
-                            path: AppImages.vector,
-                          )),
-                    ],
-                  ),
-                  borderRadiusGeometry: BorderRadius.zero,
-                  vertical: 25.33,
-                ),
-                SizedBox(height: 23.h),
-                ReviewBgCard(
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      RowContainer(
-                          image: AppImages.document, text: 'Cover Letter'),
-                      SizedBox(height: 4.h),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        body: Form(
+          key: _globalFormKey,
+          child: BodyWidget(
+            child: BlocListener<ServiceblocBloc, ServiceblocState>(
+              bloc: _bloc,
+              listener: (context, state) {
+                if (state is ServiceblocLoading) {
+                  WorkPlenty.showLoading(context, _loadingKey, '');
+                }
+                if (state is ServiceblocSuccess) {
+                  WorkPlenty.hideLoading(_loadingKey);
+                }
+                if (state is ServiceblocFailed) {
+                  WorkPlenty.hideLoading(_loadingKey);
+                  WorkPlenty.error(state.message);
+                }
+              },
+              child: Consumer<ArtisanProvider>(
+                builder: (context, value, child) {
+                  return SingleChildScrollView(
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(
-                            children: [
-                              Checkbox(
-                                  value: false, onChanged: (bool? value) {}),
-                              TextView(
-                                text: 'Required',
-                                fontWeight: FontWeight.w500,
-                                textAlign: TextAlign.left,
+                          ReviewBgCard(
+                            Row(mainAxisSize: MainAxisSize.min, children: [
+                              CircularImage(
+                                path: value.datum?.user?.avatar ?? '',
+                                radius: 22,
                               ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Checkbox(
-                                  value: false, onChanged: (bool? value) {}),
-                              TextView(
-                                text: 'Optional',
-                                fontWeight: FontWeight.w500,
-                                textAlign: TextAlign.left,
+                              SizedBox(
+                                width: 13.w,
                               ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Checkbox(
-                                  value: false, onChanged: (bool? value) {}),
-                              TextView(
-                                text: 'Not Required',
-                                fontWeight: FontWeight.w500,
-                                textAlign: TextAlign.left,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  borderRadiusGeometry: BorderRadius.zero,
-                  vertical: 25.33,
-                ),
-                SizedBox(
-                  height: 30.h,
-                ),
-                ReviewBgCard(Column(
-                  children: [
-                    RowContainer(image: AppImages.cup, text: 'Skill'),
-                    SizedBox(
-                      height: 20.h,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: Wrap(
-                            spacing: 5,
-                            runSpacing: 10,
-                            children: _skillList!
-                                .map((element) => SkillsWidget(element))
-                                .toList(),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 5.w,
-                        ),
-                        addSkills('+', onTap: () {
-                          BottomSheets.showSheet<String>(
-                            context,
-                            child: SkillsModal(
-                                list: _skillList,
-                                callBack: (List<Skill> l) {
-                                  _skillList = l;
-                                  setState(() {});
-                                }),
-                          );
-                        })
-                      ],
-                    ),
-                  ],
-                )),
-                SizedBox(height: 23.h),
-                ReviewBgCard(
-                  Column(
-                    children: [
-                      RowContainer(
-                          image: AppImages.wallet, text: 'Payment Type'),
-                      SizedBox(height: 10.h),
-                      Row(
-                        children: [
-                          ButtonWidget(
-                            buttonText: 'Milestone',
-                            onPressed: () {},
-                            height: 30,
-                            fontSize: 13,
-                            borderColor: Pallets.white,
-                            width: 120,
-                            color: Pallets.white,
-                            primary: Pallets.primary100,
-                          ),
-                          SizedBox(
-                            width: 20.w,
-                          ),
-                          ButtonWidget(
-                            buttonText: 'Project Completion',
-                            onPressed: () {},
-                            buttonStyle: true,
-                            height: 30,
-                            fontSize: 13,
-                            borderColor: Pallets.grey,
-                            width: 180,
-                            color: Pallets.grey,
-                            primary: Pallets.white,
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 20.w,
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 23.h),
-                ReviewBgCard(
-                  Column(
-                    children: [
-                      RowContainer(
-                          image: AppImages.milestone, text: 'Milestone'),
-                      SizedBox(height: 10.h),
-                      EditFormField(
-                        height: 30,
-                        label: 'Milestone description',
-                      ),
-                      SizedBox(
-                        height: 15.h,
-                      ),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: EditFormField(
-                              height: 30,
-                              label: 'Due Date',
-                            ),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Expanded(
-                            child: EditFormField(
-                              height: 30,
-                              label: 'Amount (NGN)',
-                            ),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-                SizedBox(height: 23.h),
-                ReviewBgCard(
-                  Column(
-                    children: [
-                      RowContainer(
-                          image: AppImages.crown, text: 'Experience Level'),
-                      SizedBox(height: 10.h),
-                      EditFormField(
-                          label: 'Intermediate',
-                          suffixWidget: ImageLoader(
-                            path: AppImages.vector,
-                          )),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 23.h),
-                ReviewBgCard(
-                  Column(
-                    children: [
-                      RowContainer(
-                          image: AppImages.emptyWallet, text: 'Budget'),
-                      SizedBox(height: 10.h),
-                      EditFormField(label: 'NGN'),
-                      SizedBox(height: 23.h),
-                      RowContainer(image: AppImages.clock, text: 'Timeline'),
-                      EditFormField(
-                        label: '1 Week',
-                        suffixWidget: ImageLoader(path: AppImages.vector),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 50.h),
-                ReviewBgCard(
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Expanded(
-                              child: RowContainer(
-                                  image: AppImages.arrange,
-                                  text: 'Invite Artisan')),
-                          Expanded(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                TextView(
-                                  text: 'Invite',
-                                  maxLines: 1,
-                                  fontWeight: FontWeight.w700,
-                                  textAlign: TextAlign.left,
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    TextView(
+                                      text:
+                                          '${value.datum?.user?.firstName ?? ''} ${value.datum?.user?.lastName}',
+                                      maxLines: 1,
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w800,
+                                      textAlign: TextAlign.left,
+                                    ),
+                                    TextView(
+                                      text: value.datum?.profile?.description ??
+                                          '',
+                                      maxLines: 1,
+                                      fontWeight: FontWeight.w500,
+                                      textAlign: TextAlign.left,
+                                    ),
+                                  ],
                                 ),
-                                SizedBox(width: 10.w),
-                                Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(5)),
-                                      border: Border.all(color: Pallets.grey)),
-                                  child: Icon(
-                                    Icons.add,
-                                    size: 13,
+                              )
+                            ]),
+                            borderRadiusGeometry: BorderRadius.zero,
+                            vertical: 25.33,
+                          ),
+                          SizedBox(height: 23.h),
+                          ReviewBgCard(
+                              Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  RowContainer(
+                                      image: AppImages.message,
+                                      text:
+                                          'Private Message to  ${value.datum?.user?.firstName ?? ''} ${value.datum?.user?.lastName}'),
+                                  SizedBox(height: 10.h),
+                                  EditFormField(
+                                    height: 150.h,
+                                    label: 'Type here..',
+                                    controller: privateMessageController,
+                                    validator: Validators.validateString(),
                                   ),
-                                )
+                                  SizedBox(height: 23.h),
+                                  RowContainer(
+                                      image: AppImages.t_message,
+                                      text: 'Project Title'),
+                                  SizedBox(height: 10.h),
+                                  EditFormField(
+                                    controller: titleController,
+                                    validator: Validators.validateString(),
+                                    label: 'Type here..',
+                                  ),
+                                  SizedBox(height: 23.h),
+                                  RowContainer(
+                                      image: AppImages.brief_case,
+                                      text:
+                                          'Describe your project and other specific details'),
+                                  SizedBox(height: 10.h),
+                                  EditFormField(
+                                    height: 150.h,
+                                    label: 'Type here..',
+                                    controller: descriptionController,
+                                    validator: Validators.validateString(),
+                                  ),
+                                ],
+                              ),
+                              borderRadiusGeometry: BorderRadius.zero,
+                              vertical: 25.33),
+                          ReviewBgCard(
+                            Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                RowContainer(
+                                    image: AppImages.paper_clip,
+                                    text: 'Attachment'),
+                                SizedBox(height: 10.h),
+                                EditFormField(
+                                  label: 'Add Attachment',
+                                  readOnly: true,
+                                  onTapped: () => _pickImages(),
+                                ),
                               ],
                             ),
-                          )
-                        ],
-                      ),
-                      SizedBox(height: 43.h),
-                      TextView(text: 'Charles Damien', color: Pallets.grey),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 23.h),
-                Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: ButtonWidget(
-                    buttonText: 'Post Freelance Job & Invite',
-                    fontSize: 18.sp,
-                    width: Utils.getDeviceWidth(context),
-                    fontWeight: FontWeight.w700,
-                    onPressed: () => _proceed(),
-                    height: 50.h,
-                  ),
-                ),
-                SizedBox(
-                  height: 40,
-                ),
-              ]),
+                            borderRadiusGeometry: BorderRadius.zero,
+                            vertical: 25.33,
+                          ),
+                          SizedBox(height: 23.h),
+                          ReviewBgCard(
+                            Column(
+                              children: [
+                                RowContainer(
+                                    image: AppImages.brief_case,
+                                    text: 'Job Category'),
+                                SizedBox(height: 10.h),
+                                EditFormField(
+                                  label: 'Web Development',
+                                  suffixWidget:
+                                      ImageLoader(path: AppImages.vector),
+                                  readOnly: true,
+                                  controller: _jobCategoryController,
+                                  validator: Validators.validateString(),
+                                  onTapped: () {
+                                    BottomSheets.showSheet<String>(
+                                      context,
+                                      child: JobCategoryModal(callBack: (data) {
+                                        _jobCategoryController.text =
+                                            data?.name ?? '';
+                                        setState(() {});
+                                      }),
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
+                            borderRadiusGeometry: BorderRadius.zero,
+                            vertical: 25.33,
+                          ),
+                          SizedBox(height: 23.h),
+                          ReviewBgCard(
+                            Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                RowContainer(
+                                    image: AppImages.document,
+                                    text: 'Cover Letter'),
+                                SizedBox(height: 4.h),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: List.generate(
+                                    CheckBoxModel.getCovers().length,
+                                    (index) => GestureDetector(
+                                        onTap: () => setState(
+                                            () => _checkboxIndex = index),
+                                        child: Row(
+                                          children: [
+                                            Icon(_checkboxIndex == index
+                                                ? Icons.check_box
+                                                : Icons
+                                                    .check_box_outline_blank),
+                                            SizedBox(width: 8.w),
+                                            TextView(
+                                              text: CheckBoxModel.getCovers()[
+                                                          index]
+                                                      .title ??
+                                                  '',
+                                              fontWeight: FontWeight.w500,
+                                              textAlign: TextAlign.left,
+                                            ),
+                                          ],
+                                        )),
+                                  ).toList(),
+                                ),
+                              ],
+                            ),
+                            borderRadiusGeometry: BorderRadius.zero,
+                            vertical: 25.33,
+                          ),
+                          SizedBox(
+                            height: 30.h,
+                          ),
+                          ReviewBgCard(Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              RowContainer(image: AppImages.cup, text: 'Skill'),
+                              SizedBox(
+                                height: 20.h,
+                              ),
+                              SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Wrap(
+                                      spacing: 5,
+                                      runSpacing: 10,
+                                      children: _skillList!
+                                          .map((element) =>
+                                              SkillsWidget(element))
+                                          .toList(),
+                                    ),
+                                    SizedBox(
+                                      width: 5.w,
+                                    ),
+                                    addSkills('+', onTap: () {
+                                      BottomSheets.showSheet<String>(
+                                        context,
+                                        child: SkillsModal(
+                                            list: _skillList,
+                                            callBack: (List<Skill> l) {
+                                              _skillList = l;
+                                              setState(() {});
+                                            }),
+                                      );
+                                    })
+                                  ],
+                                ),
+                              ),
+                            ],
+                          )),
+                          SizedBox(height: 23.h),
+                          ReviewBgCard(
+                            Column(
+                              children: [
+                                RowContainer(
+                                    image: AppImages.wallet,
+                                    text: 'Payment Type'),
+                                SizedBox(height: 10.h),
+                                Row(
+                                  children: [
+                                    _buttonWidget(
+                                        title: 'Milestone',
+                                        defaultValue: 0,
+                                        index: _paymentTypeIndex,
+                                        onTap: () => setState(
+                                            () => _paymentTypeIndex = 0)),
+                                    SizedBox(width: 10.w),
+                                    _buttonWidget(
+                                        title: 'Project Completion',
+                                        defaultValue: 1,
+                                        index: _paymentTypeIndex,
+                                        onTap: () => setState(
+                                            () => _paymentTypeIndex = 1)),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 20.w,
+                                ),
+                              ],
+                            ),
+                          ),
+                          Visibility(
+                            visible: _paymentTypeIndex == 0,
+                            child: ReviewBgCard(
+                              Column(
+                                children: [
+                                  SizedBox(height: 23.h),
+                                  RowContainer(
+                                      image: AppImages.milestone,
+                                      text: 'Milestone'),
+                                  SizedBox(height: 10.h),
+                                  EditFormField(
+                                    label: 'Milestone description',
+                                  ),
+                                  SizedBox(
+                                    height: 15.h,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: EditFormField(
+                                          label: 'Due Date',
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Expanded(
+                                        child: EditFormField(
+                                          label: 'Amount (NGN)',
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 23.h),
+                          ReviewBgCard(
+                            Column(
+                              children: [
+                                RowContainer(
+                                    image: AppImages.crown,
+                                    text: 'Experience Level'),
+                                SizedBox(height: 10.h),
+                                EditFormField(
+                                  label: 'Intermediate',
+                                  suffixWidget:
+                                      ImageLoader(path: AppImages.vector),
+                                  readOnly: true,
+                                  validator: Validators.validateString(),
+                                  controller: _experienceController,
+                                  onTapped: () {
+                                    BottomSheets.showSheet<String>(
+                                      context,
+                                      child: ExperienceLevelModal(
+                                          onTap: (ExperienceLevel? l) {
+                                        _experienceController.text =
+                                            l!.title ?? '';
+                                        _experienceIndex = l.value!;
+                                        setState(() {});
+                                      }),
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(height: 23.h),
+                          ReviewBgCard(
+                            Column(
+                              children: [
+                                RowContainer(
+                                    image: AppImages.emptyWallet,
+                                    text: 'Budget'),
+                                SizedBox(height: 10.h),
+                                EditFormField(
+                                  label: 'NGN',
+                                  validator: Validators.validateInt(),
+                                  controller: _budgetController,
+                                  keyboardType: TextInputType.number,
+                                ),
+                                SizedBox(height: 23.h),
+                                RowContainer(
+                                    image: AppImages.clock, text: 'Timeline'),
+                                EditFormField(
+                                  label: '1 Week',
+                                  suffixWidget:
+                                      ImageLoader(path: AppImages.vector),
+                                  readOnly: true,
+                                  controller: _timeController,
+                                  validator: Validators.validateString(),
+                                  onTapped: () {
+                                    BottomSheets.showSheet<String>(
+                                      context,
+                                      child: TimelineModal(onTap: (String? l) {
+                                        _timeController.text = l ?? '';
+                                        setState(() {});
+                                      }),
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(height: 50.h),
+                          ReviewBgCard(
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Expanded(
+                                        child: RowContainer(
+                                            image: AppImages.arrange,
+                                            text: 'Invite Artisan')),
+                                    Expanded(
+                                      child: InkWell(
+                                        onTap: () {
+                                          BottomSheets.showSheet<String>(
+                                            context,
+                                            child: InviteArtisansModal(
+                                                callBack: (l) {
+                                              _artisans = l ?? [];
+                                              setState(() {});
+                                            }),
+                                          );
+                                        },
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            TextView(
+                                              text: 'Invite',
+                                              maxLines: 1,
+                                              fontWeight: FontWeight.w700,
+                                              textAlign: TextAlign.left,
+                                            ),
+                                            SizedBox(width: 10.w),
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(5)),
+                                                  border: Border.all(
+                                                      color: Pallets.grey)),
+                                              child: Icon(
+                                                Icons.add,
+                                                size: 13,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                ..._artisans
+                                    .map(((user) => TextView(
+                                        text:
+                                            '${user.firstName ?? ''} ${user.lastName ?? ''}  ',
+                                        color: Pallets.grey)))
+                                    .toList()
+                              ],
+                            ),
+                          ),
+                          SizedBox(height: 23.h),
+                          Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: ButtonWidget(
+                              buttonText: 'Post Freelance Job & Invite',
+                              fontSize: 18.sp,
+                              fontWeight: FontWeight.w700,
+                              onPressed: () => _proceed(value),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 40,
+                          ),
+                        ]),
+                  );
+                },
+              ),
             ),
           ),
         ));
   }
 
-  void _proceed() {
-    if (_globalFormKey.currentState!.validate()) {
+  Expanded _buttonWidget(
+          {String? title,
+          int? defaultValue,
+          int? index,
+          required Function()? onTap}) =>
+      Expanded(
+        child: ButtonWidget(
+          buttonText: title!,
+          onPressed: onTap,
+          buttonStyle: true,
+          fontSize: 13,
+          borderColor: index == defaultValue ? Pallets.white : Pallets.grey,
+          width: 180,
+          color: index == defaultValue ? Pallets.white : Pallets.grey,
+          primary: index == defaultValue ? Pallets.primary100 : Pallets.white,
+        ),
+      );
+
+  List<int> _artisansId = [];
+  List<String> _selectedSkills = [];
+
+  void _proceed(ArtisanProvider artisanProvider) {
+    if (_validate()) {
       _bloc.add(ServiceEvent(GigEntity(
-          id: '1',
-          industryId: '1',
+          id: '${artisanProvider.datum?.id}',
+          industryId: '${artisanProvider.datum?.industry?.id}',
           type: GigType.FREELANCE,
-          privateMessage: 'hello world',
-          title: 'titleController.text',
-          description: 'descriptionController.text',
-          timeline: '2 weeks',
+          privateMessage: privateMessageController.text,
+          title: titleController.text,
+          description: descriptionController.text,
+          timeline: _timeController.text,
           paymentType: 'Cash',
           isPublished: '1',
-          experienceLevel: '1',
-          coverLetterRequired: '1',
-          totalBudget: '100000',
-          skill: ['laravel', 'flutter'],
+          experienceLevel: '$_experienceIndex',
+          coverLetterRequired: '$_checkboxIndex',
+          totalBudget: _budgetController.text,
+          skill: _selectedSkills,
           attachments: _returnListOfParsedFiles(),
-          invited_artisan_ids: ['2', '2'],
-          projectType: 'Project-Completion')));
+          invited_artisan_ids: _artisansId,
+          projectType:
+              _paymentTypeIndex == 0 ? 'Milestone' : 'Project-Completion')));
     }
+  }
+
+  bool _validate() {
+    if (!_globalFormKey.currentState!.validate()) {
+      return false;
+    }
+
+    if (_skillList!.isEmpty) {
+      WorkPlenty.error('Please select at least one skill');
+      return false;
+    }
+    if (_artisans.isEmpty) {
+      WorkPlenty.error('Please select at least one artisan');
+      return false;
+    }
+
+    _skillList!.map((e) => _selectedSkills.add(e.name!)).toList();
+    _artisans.map((e) => _artisansId.add(e.id!)).toList();
+    setState(() {});
+    return true;
   }
 
   // ignore: unused_element

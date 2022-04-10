@@ -20,7 +20,7 @@ class GigEntity extends DefaultResponse {
   final String? totalBudget;
   final List<String>? skill;
   final List<MultipartFile>? attachments;
-  final List<String>? invited_artisan_ids;
+  final List<int>? invited_artisan_ids;
   final String? projectType;
 
   GigEntity(

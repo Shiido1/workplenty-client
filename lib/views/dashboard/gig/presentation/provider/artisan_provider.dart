@@ -4,13 +4,13 @@ import 'package:client/core/viewmodels/base_model.dart';
 import 'package:client/views/dashboard/gig/domain/source/local/list_of_artisans_dao.dart';
 import 'package:client/views/dashboard/gig/domain/usecase/artisan_usecase.dart';
 
-import '../../../../../core/entity/user/user.dart';
+import 'package:client/core/entity/datum/datum.model.dart';
 
 class ArtisanProvider extends BaseModel {
   final ArtisanUseCase _useCase;
 
-  User? _artisan;
-  User? get artisan => _artisan;
+  Datum? _datum;
+  Datum? get datum => _datum;
 
   ArtisanProvider(this._useCase);
 
@@ -21,16 +21,15 @@ class ArtisanProvider extends BaseModel {
       final _response = await _useCase.listOfArtisan();
       _response!.fold((l) => logger.e(l.errorMessage(l)),
           (r) => listOfArtisansDao!.saveListOfArtisans(r.data?.data ?? []));
-      setState(ViewState.idle);
     } catch (e) {
       logger.e('An error occurred: $e');
-      setState(ViewState.idle);
     }
+    setState(ViewState.idle);
   }
 
   /// sets artisans data
-  void setArtisan(User? user) {
-    _artisan = user;
+  void setArtisan(Datum? d) {
+    _datum = d;
     notifyListeners();
   }
 }

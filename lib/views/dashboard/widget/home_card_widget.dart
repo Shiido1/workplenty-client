@@ -123,7 +123,7 @@ class HomeCard extends StatelessWidget {
                 buttonText: 'Invite Artisan',
                 onPressed: () {
                   Provider.of<ArtisanProvider>(context, listen: false)
-                      .setArtisan(datum?.user);
+                      .setArtisan(datum);
                   showFloatingActionModal(context, 'Select a Service');
                 },
                 fontSize: 14,
