@@ -1,5 +1,5 @@
 import 'package:client/views/dashboard/board.dart';
-import 'package:client/views/dashboard/gig/presentation/services/freelance_job_service.dart';
+import 'package:client/views/dashboard/gig/presentation/services/freelance/freelance_job_service.dart';
 import 'package:client/views/dashboard/gig/presentation/services/home_service.dart';
 import 'package:client/views/dashboard/gig/presentation/services/live_consultancy_service.dart';
 import 'package:client/views/onboarding/presentation/authentication/email_verification.dart';

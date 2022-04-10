@@ -3,7 +3,6 @@ import 'package:client/core/entity/skills/skill.dart';
 import 'package:client/core/entity/user/user.dart';
 import 'package:client/core/enums/gig_type.dart';
 import 'package:client/core/helper/configs/instances.dart';
-import 'package:client/core/helper/helper_handler.dart';
 import 'package:client/core/helper/routes/navigation.dart';
 import 'package:client/core/helper/utils/image_picker.dart';
 import 'package:client/core/helper/utils/images.dart';
@@ -17,6 +16,7 @@ import 'package:client/views/dashboard/gig/presentation/modal/job_category_modal
 import 'package:client/views/dashboard/gig/presentation/modal/list_of_skills_modal.dart';
 import 'package:client/views/dashboard/gig/presentation/modal/timeline_modal.dart';
 import 'package:client/views/dashboard/gig/presentation/provider/artisan_provider.dart';
+import 'package:client/views/dashboard/gig/presentation/services/freelance/widgets/third.dart';
 import 'package:client/views/dashboard/gig/presentation/services/model/checkbox_model.dart';
 import 'package:client/views/dashboard/gig/presentation/widget/row_container_widget.dart';
 import 'package:client/views/widgets/body_widget.dart';
@@ -29,15 +29,17 @@ import 'package:client/views/widgets/review_bg_card.dart';
 import 'package:client/views/widgets/skill_widget.dart';
 import 'package:client/views/widgets/text_views.dart';
 import 'package:dio/dio.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../core/helper/utils/file_picker.dart';
-import 'bloc/servicebloc_bloc.dart';
-import 'widgets/add_skill_widget.dart';
+import '../../../../../../core/helper/utils/file_picker.dart';
+import '../bloc/servicebloc_bloc.dart';
+import '../widgets/add_skill_widget.dart';
+import '../widgets/button_widget.dart';
+import 'widgets/first.dart';
+import 'widgets/second.dart';
 
 // ignore: must_be_immutable
 class FreeLanceJobService extends StatefulWidget {
@@ -107,83 +109,13 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          ReviewBgCard(
-                            Row(mainAxisSize: MainAxisSize.min, children: [
-                              CircularImage(
-                                path: value.datum?.user?.avatar ?? '',
-                                radius: 22,
-                              ),
-                              SizedBox(
-                                width: 13.w,
-                              ),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    TextView(
-                                      text:
-                                          '${value.datum?.user?.firstName ?? ''} ${value.datum?.user?.lastName}',
-                                      maxLines: 1,
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w800,
-                                      textAlign: TextAlign.left,
-                                    ),
-                                    TextView(
-                                      text: value.datum?.profile?.description ??
-                                          '',
-                                      maxLines: 1,
-                                      fontWeight: FontWeight.w500,
-                                      textAlign: TextAlign.left,
-                                    ),
-                                  ],
-                                ),
-                              )
-                            ]),
-                            borderRadiusGeometry: BorderRadius.zero,
-                            vertical: 25.33,
-                          ),
+                          First(),
                           SizedBox(height: 23.h),
-                          ReviewBgCard(
-                              Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  RowContainer(
-                                      image: AppImages.message,
-                                      text:
-                                          'Private Message to  ${value.datum?.user?.firstName ?? ''} ${value.datum?.user?.lastName}'),
-                                  SizedBox(height: 10.h),
-                                  EditFormField(
-                                    height: 150.h,
-                                    label: 'Type here..',
-                                    controller: privateMessageController,
-                                    validator: Validators.validateString(),
-                                  ),
-                                  SizedBox(height: 23.h),
-                                  RowContainer(
-                                      image: AppImages.t_message,
-                                      text: 'Project Title'),
-                                  SizedBox(height: 10.h),
-                                  EditFormField(
-                                    controller: titleController,
-                                    validator: Validators.validateString(),
-                                    label: 'Type here..',
-                                  ),
-                                  SizedBox(height: 23.h),
-                                  RowContainer(
-                                      image: AppImages.brief_case,
-                                      text:
-                                          'Describe your project and other specific details'),
-                                  SizedBox(height: 10.h),
-                                  EditFormField(
-                                    height: 150.h,
-                                    label: 'Type here..',
-                                    controller: descriptionController,
-                                    validator: Validators.validateString(),
-                                  ),
-                                ],
-                              ),
-                              borderRadiusGeometry: BorderRadius.zero,
-                              vertical: 25.33),
+                          SecondBadgeWidget(
+                              privateMessageController:
+                                  privateMessageController,
+                              titleController: titleController,
+                              descriptionController: descriptionController),
                           ReviewBgCard(
                             Column(
                               mainAxisSize: MainAxisSize.min,
@@ -348,14 +280,14 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
                                 SizedBox(height: 10.h),
                                 Row(
                                   children: [
-                                    _buttonWidget(
+                                    ButtonW(
                                         title: 'Milestone',
                                         defaultValue: 0,
                                         index: _paymentTypeIndex,
                                         onTap: () => setState(
                                             () => _paymentTypeIndex = 0)),
                                     SizedBox(width: 10.w),
-                                    _buttonWidget(
+                                    ButtonW(
                                         title: 'Project Completion',
                                         defaultValue: 1,
                                         index: _paymentTypeIndex,
@@ -369,43 +301,7 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
                               ],
                             ),
                           ),
-                          Visibility(
-                            visible: _paymentTypeIndex == 0,
-                            child: ReviewBgCard(
-                              Column(
-                                children: [
-                                  SizedBox(height: 23.h),
-                                  RowContainer(
-                                      image: AppImages.milestone,
-                                      text: 'Milestone'),
-                                  SizedBox(height: 10.h),
-                                  EditFormField(
-                                    label: 'Milestone description',
-                                  ),
-                                  SizedBox(
-                                    height: 15.h,
-                                  ),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: EditFormField(
-                                          label: 'Due Date',
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      Expanded(
-                                        child: EditFormField(
-                                          label: 'Amount (NGN)',
-                                        ),
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
+                          Third(paymentTypeIndex: _paymentTypeIndex),
                           SizedBox(height: 23.h),
                           ReviewBgCard(
                             Column(
@@ -570,24 +466,6 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
           ),
         ));
   }
-
-  Expanded _buttonWidget(
-          {String? title,
-          int? defaultValue,
-          int? index,
-          required Function()? onTap}) =>
-      Expanded(
-        child: ButtonWidget(
-          buttonText: title!,
-          onPressed: onTap,
-          buttonStyle: true,
-          fontSize: 13,
-          borderColor: index == defaultValue ? Pallets.white : Pallets.grey,
-          width: 180,
-          color: index == defaultValue ? Pallets.white : Pallets.grey,
-          primary: index == defaultValue ? Pallets.primary100 : Pallets.white,
-        ),
-      );
 
   List<int> _artisansId = [];
   List<String> _selectedSkills = [];
