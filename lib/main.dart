@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
     SystemChrome.setSystemUIOverlayStyle(
         const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
     return ScreenUtilInit(
-      designSize: const Size(415, 897),
+      designSize: const Size(414, 896),
       builder: () => OverlaySupport.global(
         child: MultiProvider(
             providers: Providers.getProviders,
