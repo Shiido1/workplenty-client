@@ -6,6 +6,8 @@ import 'package:client/views/onboarding/domain/entity/payment/deposit_entity.dar
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 
+import '../../data/model/payment/transaction_response/payment_transaction.dart';
+
 class PaymentDepositCases extends UseCase<DepositEntity, Params> {
   final PaymentContractImpl _paymentContractImpl;
 
@@ -14,6 +16,11 @@ class PaymentDepositCases extends UseCase<DepositEntity, Params> {
   @override
   Future<Either<Failure, DepositResponce>> depositPayment(Params params) async {
     return await _paymentContractImpl.depositPayment(params.entity!);
+  }
+
+  @override
+  Future<Either<Failure, PaymentTransaction>> transactionPayment() async {
+    return await _paymentContractImpl.transactionPayment();
   }
 }
 

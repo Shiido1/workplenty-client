@@ -1,4 +1,7 @@
-class PaymentTransaction {
+import 'package:client/views/onboarding/domain/entity/payment/deposit_entity.dart';
+
+// ignore: must_be_immutable
+class PaymentTransaction extends DepositEntity{
   String? msg;
   dynamic data;
   bool? success;
