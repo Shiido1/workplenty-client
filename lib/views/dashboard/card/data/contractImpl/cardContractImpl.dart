@@ -5,6 +5,8 @@ import 'package:client/views/dashboard/card/domain/contract/card_contract.dart';
 import 'package:client/views/dashboard/card/domain/entity/card_entity.dart';
 import 'package:dartz/dartz.dart';
 
+import '../model/save_card_response/save_and_remove_card_response.dart';
+
 class CardContractImpl implements CardContract {
   final CardScourceImpl _impl;
 
@@ -21,7 +23,7 @@ class CardContractImpl implements CardContract {
   }
 
   @override
-  Future<Either<Failure, CardResponse>> removeCard(CardEntity entity) async {
+  Future<Either<Failure, SaveAndRemoveCardResponse>> removeCard(CardEntity entity) async {
     try {
       final _response = await _impl.removeCard(entity);
       return Right(_response);
@@ -31,7 +33,7 @@ class CardContractImpl implements CardContract {
   }
 
   @override
-  Future<Either<Failure, CardResponse>> saveCard(CardEntity entity) async {
+  Future<Either<Failure, SaveAndRemoveCardResponse>> saveCard(CardEntity entity) async {
     try {
       final _response = await _impl.saveCard(entity);
       return Right(_response);

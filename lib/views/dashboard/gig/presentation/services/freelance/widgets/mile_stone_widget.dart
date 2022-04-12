@@ -1,4 +1,3 @@
-import 'package:client/core/entity/milestone/milestone.dart';
 import 'package:client/core/helper/utils/pallets.dart';
 import 'package:client/core/helper/utils/validators.dart';
 import 'package:flutter/material.dart';

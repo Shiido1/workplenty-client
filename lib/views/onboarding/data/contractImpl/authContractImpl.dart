@@ -20,6 +20,7 @@ class AuthContractImpl implements AuthContract {
       return Left(AppFailure(e.toString()));
     }
   }
+
   @override
   Future<Either<Failure, AuthResponse>> resetPassword(entity) async {
     try {

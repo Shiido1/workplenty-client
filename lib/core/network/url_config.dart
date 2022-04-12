@@ -16,8 +16,8 @@ class UrlConfig {
   static const String depositPayment = 'client/payment/deposit';
 
   static const String listCard = 'client/payment/card/list';
-  static const String saveCard = 'client/card/save';
-  static const String removeCard = 'client/card/remove';
+  static const String saveCard = 'client/payment/card/save';
+  static const String removeCard = 'client/payment/card/remove';
   static const String savedProfileList = 'saved-profiles/list';
 
   static const String profileBioUpdate = 'client/profile/update-bio';

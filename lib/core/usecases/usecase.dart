@@ -20,6 +20,8 @@ class UseCase<Type, Params> {
   Future<Either<Failure, Type>>? updateAvatarBio(Params params) {}
   Future<Either<Failure, Type>>? saveGigUseCase(Params params) {}
   Future<Either<Failure, Type>>? getAllCardUseCase() {}
+  Future<Either<Failure, Type>>? saveCardUseCase(Params params) {}
+  Future<Either<Failure, Type>>? removeCardUseCase(Params params) {}
   Future<Either<Failure, Type>>? chatListUseCase() {}
 
   Future<Either<Failure, Type>>? saveClientsGig(Params params) {}
@@ -39,6 +41,7 @@ class UseCase<Type, Params> {
   Future<Either<Failure, Type>>? generalIndustryList() {}
   Future<Either<Failure, Type>>? countries() {}
   Future<Either<Failure, Type>>? states(Params p) {}
+  Future<Either<Failure, Type>>? depositPayment(Params p) {}
 }
 
 class NoParams extends Equatable {

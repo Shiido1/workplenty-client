@@ -1,15 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:provider/provider.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-import '../../../../../core/enums/viewstate.dart';
 import '../../../core/bus/event_bus.dart';
 import '../../../core/helper/utils/images.dart';
-import '../../../core/helper/utils/pallets.dart';
 import '../../widgets/image_loader.dart';
 import '../../widgets/search_field.dart';
 import '../../widgets/text_views.dart';

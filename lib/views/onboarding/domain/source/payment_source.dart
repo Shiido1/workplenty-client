@@ -1,10 +1,11 @@
-import 'package:client/views/onboarding/data/model/payment/deposit_response/deposit_response.dart';
-import 'package:client/views/onboarding/data/model/payment/overview_payment_response/overview_payment_response.dart';
-import 'package:client/views/onboarding/data/model/payment/transaction_response/transaction_response.dart';
+import 'package:client/views/onboarding/data/model/payment/overview_payment_response/overview_model/overview_model.dart';
 import 'package:client/views/onboarding/domain/entity/payment/deposit_entity.dart';
 
+import '../../data/model/payment/deposit_response/deposit_responce.dart';
+import '../../data/model/payment/transaction_response/payment_transaction.dart';
+
 abstract class PaymentSource {
-  Future<OverViewPaymentResponse> overviewPayment();
-  Future<DepositResponse> depositPayment(DepositEntity entity);
-  Future<TransactionResponse> transactionPayment();
+  Future<OverviewModel> overviewPayment();
+  Future<DepositResponce> depositPayment(DepositEntity entity);
+  Future<PaymentTransaction> transactionPayment();
 }

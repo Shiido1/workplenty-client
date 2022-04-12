@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_if_null_operators
 
 import 'package:client/core/helper/utils/pallets.dart';
-import 'package:client/views/widgets/text_views.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

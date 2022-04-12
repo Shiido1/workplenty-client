@@ -1,10 +1,8 @@
 import 'package:client/core/enums/gig_type.dart';
-import 'package:client/core/helper/configs/instances.dart';
 import 'package:client/core/helper/utils/pallets.dart';
 import 'package:client/views/dashboard/gig/domain/source/local/saved_gig_dao.dart';
 import 'package:client/views/dashboard/gig/presentation/provider/saved_gig_list_provider.dart';
 import 'package:client/views/dashboard/saved/tabs/freelance.dart';
-import 'package:client/views/dashboard/saved/tabs/service.dart';
 import 'package:client/views/dashboard/widget/custom_app_bar.dart';
 import 'package:client/views/widgets/text_views.dart';
 import 'package:flutter/material.dart';

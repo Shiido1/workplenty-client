@@ -5,6 +5,7 @@ import 'package:client/views/dashboard/gig/presentation/provider/artisan_provide
 import 'package:client/views/dashboard/gig/presentation/provider/gig_provider.dart';
 import 'package:client/views/dashboard/gig/presentation/provider/saved_gig_list_provider.dart';
 import 'package:client/views/dashboard/saved/presentation/provider/provider.dart';
+import 'package:client/views/onboarding/presentation/payment/provider/payment.dart';
 import 'package:client/views/review/presentation/provider/review_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
@@ -22,5 +23,7 @@ class Providers {
         create: (_) => ReviewProvider(inject())),
     ChangeNotifierProvider<SavedGigListProvider>(
         create: (_) => SavedGigListProvider(inject())),
+    ChangeNotifierProvider<PaymentProvider>(
+        create: (_) => PaymentProvider(inject())),
   ];
 }
