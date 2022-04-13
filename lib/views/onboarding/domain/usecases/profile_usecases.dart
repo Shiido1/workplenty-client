@@ -3,7 +3,6 @@ import 'package:client/core/error/failures.dart';
 import 'package:client/core/usecases/usecase.dart';
 import 'package:client/views/onboarding/data/contractImpl/profileContractImpl.dart';
 import 'package:client/views/onboarding/data/model/location_response/location_response.dart';
-import 'package:client/views/onboarding/domain/entity/profile/profile_entity.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 

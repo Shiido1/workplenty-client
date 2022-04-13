@@ -1,9 +1,11 @@
 import 'package:client/core/helper/routes/navigation.dart';
 import 'package:client/core/helper/utils/pallets.dart';
+import 'package:client/views/dashboard/card/presentation/provider/card_provider.dart';
 import 'package:client/views/dashboard/gig/domain/source/local/list_of_artisans_dao.dart';
 import 'package:client/views/dashboard/gig/presentation/provider/artisan_provider.dart';
 import 'package:client/views/dashboard/milestone/milestone.dart';
 import 'package:client/views/dashboard/widget/home_card_widget.dart';
+import 'package:client/views/onboarding/presentation/payment/provider/payment.dart';
 import 'package:client/views/widgets/body_widget.dart';
 import 'package:client/views/widgets/text_views.dart';
 import 'package:flutter/foundation.dart';
@@ -25,12 +27,19 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   ArtisanProvider? _artisanProvider;
+  PaymentProvider? _paymentProvider;
+  CardProvider? _cardProvider;
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
 
   @override
   void initState() {
     _artisanProvider = Provider.of<ArtisanProvider>(context, listen: false);
+    _paymentProvider = Provider.of<PaymentProvider>(context, listen: false);
+    _cardProvider = Provider.of<CardProvider>(context, listen: false);
+    _cardProvider!.getAllCards();
+    _paymentProvider!.getOverview();
+    _paymentProvider!.getTransaction();
     super.initState();
   }
 

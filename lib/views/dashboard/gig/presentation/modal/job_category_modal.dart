@@ -1,4 +1,3 @@
-import 'package:client/core/entity/skills/skill.dart';
 import 'package:client/core/enums/viewstate.dart';
 import 'package:client/core/helper/helper_handler.dart';
 import 'package:client/core/helper/routes/navigation.dart';

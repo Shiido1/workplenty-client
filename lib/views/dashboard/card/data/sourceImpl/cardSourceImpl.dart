@@ -3,6 +3,8 @@ import 'package:client/views/dashboard/card/data/model/card_response/card_respon
 import 'package:client/views/dashboard/card/domain/entity/card_entity.dart';
 import 'package:client/views/dashboard/card/domain/source/card_source.dart';
 
+import '../model/save_card_response/save_and_remove_card_response.dart';
+
 class CardScourceImpl implements CardScource {
   final CardApi _api;
 
@@ -14,12 +16,12 @@ class CardScourceImpl implements CardScource {
   }
 
   @override
-  Future<CardResponse> removeCard(CardEntity entity) async {
+  Future<SaveAndRemoveCardResponse> removeCard(CardEntity entity) async {
     return await _api.removeCard(entity);
   }
 
   @override
-  Future<CardResponse> saveCard(CardEntity entity) async {
+  Future<SaveAndRemoveCardResponse> saveCard(CardEntity entity) async {
     return await _api.saveCard(entity);
   }
 }

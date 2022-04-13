@@ -1,13 +1,10 @@
-import 'package:client/core/helper/configs/instances.dart';
 import 'package:client/core/helper/utils/pallets.dart';
 import 'package:client/views/widgets/text_views.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../../core/helper/utils/images.dart';
-import '../../../../../../widgets/edit_form_widget.dart';
 import '../../../../../../widgets/review_bg_card.dart';
-import '../../../../../milestone/milestone.dart';
 import '../../../widget/row_container_widget.dart';
 import '../model/milestone.dart';
 import 'mile_stone_widget.dart';

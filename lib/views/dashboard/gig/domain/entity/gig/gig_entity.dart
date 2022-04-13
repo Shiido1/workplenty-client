@@ -1,10 +1,8 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:client/core/entity/default_response.dart';
-import 'package:client/core/helper/configs/instances.dart';
 import 'package:client/views/dashboard/gig/presentation/services/freelance/model/milestone.dart';
 import 'package:dio/dio.dart';
-import 'package:file_picker/file_picker.dart';
 
 import '../../../../../../core/enums/gig_type.dart';
 

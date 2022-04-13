@@ -4,7 +4,6 @@ import 'package:client/core/entity/user/user.dart';
 import 'package:client/core/enums/gig_type.dart';
 import 'package:client/core/helper/configs/instances.dart';
 import 'package:client/core/helper/routes/navigation.dart';
-import 'package:client/core/helper/utils/image_picker.dart';
 import 'package:client/core/helper/utils/images.dart';
 import 'package:client/core/helper/utils/pallets.dart';
 import 'package:client/core/helper/utils/validators.dart';
@@ -57,7 +56,7 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
 
   List<Skill>? _skillList = [];
 
-  final _image = ImagePickerHandler();
+  // final _image = ImagePickerHandler();
   // File? _file;
   // List<File> _fileList = [];
   List<User> _artisans = [];

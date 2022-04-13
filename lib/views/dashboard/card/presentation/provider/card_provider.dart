@@ -12,7 +12,8 @@ class CardProvider extends BaseModel {
       /// show loading indcator if card local database is empty
       final _response = await _useCase.getAllCardUseCase();
       _response!.fold((l) => logger.e(l.errorMessage(l)),
-          (r) => logger.i('Save Item To Local DB: ${r.data?.length}'));
+          (r) => logger.i('Save Item To Local DB: ${r.msg}'));
     } catch (e) {}
   }
+
 }

@@ -44,9 +44,9 @@ class AuthUsesCases extends UseCase<AuthEntity, Params> {
     return await _repository.verificationPinRequest();
   }
 
-
   @override
-  Future<Either<Failure, AuthEntity>>? resetPasswordUseCase(Params params) async{
+  Future<Either<Failure, AuthEntity>>? resetPasswordUseCase(
+      Params params) async {
     return await _repository.resetPassword(params.entity!);
   }
 }

@@ -1,4 +1,3 @@
-import 'package:client/core/entity/data/data.model.dart';
 import 'package:client/core/enums/viewstate.dart';
 import 'package:client/core/helper/configs/instances.dart';
 import 'package:client/core/viewmodels/base_model.dart';

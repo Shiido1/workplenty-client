@@ -6,6 +6,8 @@ import 'package:client/views/dashboard/card/domain/entity/card_entity.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 
+import '../../data/model/save_card_response/save_and_remove_card_response.dart';
+
 class CardUseCase extends UseCase<CardEntity, Params> {
   final CardContractImpl _cardContractImpl;
 
@@ -14,6 +16,14 @@ class CardUseCase extends UseCase<CardEntity, Params> {
   @override
   Future<Either<Failure, CardResponse>>? getAllCardUseCase() async {
     return await _cardContractImpl.listCard();
+  }
+  @override
+  Future<Either<Failure, SaveAndRemoveCardResponse>>? saveCardUseCase(Params params) async {
+    return await _cardContractImpl.saveCard(params.entity!);
+  }
+  @override
+  Future<Either<Failure, SaveAndRemoveCardResponse>>? removeCardUseCase(Params params) async {
+    return await _cardContractImpl.removeCard(params.entity!);
   }
 }
 
