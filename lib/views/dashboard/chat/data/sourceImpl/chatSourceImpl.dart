@@ -11,4 +11,5 @@ class ChatSourcesImpl implements ChatSource {
   Future<ChatListResponse> chatList() async {
     return await _api.chatList();
   }
+
 }

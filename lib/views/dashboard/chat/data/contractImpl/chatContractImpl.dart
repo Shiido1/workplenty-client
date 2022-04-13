@@ -1,5 +1,6 @@
 import 'package:client/views/dashboard/chat/data/model/chat_list_response/chat_list_response.dart';
 import 'package:client/core/error/failures.dart';
+import 'package:client/views/dashboard/chat/data/model/mesage_response/mesage_response.dart';
 import 'package:client/views/dashboard/chat/data/sourceImpl/chatSourceImpl.dart';
 import 'package:client/views/dashboard/chat/domain/contract/chat_contract.dart';
 import 'package:dartz/dartz.dart';
@@ -18,4 +19,6 @@ class ChatContractImpl implements ChatContract {
       return Left(AppFailure(e.toString()));
     }
   }
+
+
 }

@@ -13,6 +13,7 @@ import 'package:client/views/dashboard/card/data/sourceImpl/cardSourceImpl.dart'
 import 'package:client/views/dashboard/card/domain/usecase/card_usecase.dart';
 import 'package:client/views/dashboard/chat/data/contractImpl/chatContractImpl.dart';
 import 'package:client/views/dashboard/chat/data/sourceImpl/chatSourceImpl.dart';
+import 'package:client/views/dashboard/chat/domain/usecase/chat_message_usecase.dart';
 import 'package:client/views/dashboard/chat/domain/usecase/chat_usecase.dart';
 import 'package:client/views/dashboard/gig/data/contractImpl/artisanContractImpl.dart';
 import 'package:client/views/dashboard/gig/data/contractImpl/gigContractImpl.dart';
@@ -161,6 +162,7 @@ void _initializeUsecase() {
   inject.registerLazySingleton<CardUseCase>(() => CardUseCase(inject()));
   inject.registerLazySingleton<GigUseCases>(() => GigUseCases(inject()));
   inject.registerLazySingleton<ChatUseCase>(() => ChatUseCase(inject()));
+  inject.registerLazySingleton<ChatMessageUseCase>(() => ChatMessageUseCase(inject()));
   inject.registerLazySingleton<ArtisanUseCase>(() => ArtisanUseCase(inject()));
   inject.registerLazySingleton<SavedProfileUseCase>(
       () => SavedProfileUseCase(inject()));

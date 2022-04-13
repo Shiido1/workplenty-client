@@ -24,8 +24,9 @@ class PaymentApi {
 
   Future<DepositResponce> depositPayment(DepositEntity entity) async {
     try {
-      final _response = await _networkService
-          .call(UrlConfig.depositPayment, RequestMethod.post, data: entity.toDeposit());
+      final _response = await _networkService.call(
+          UrlConfig.depositPayment, RequestMethod.post,
+          data: entity.toDeposit());
       return DepositResponce.fromJson(_response.data);
     } catch (e) {
       rethrow;

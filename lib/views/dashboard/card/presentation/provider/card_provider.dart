@@ -15,5 +15,4 @@ class CardProvider extends BaseModel {
           (r) => logger.i('Save Item To Local DB: ${r.msg}'));
     } catch (e) {}
   }
-
 }
