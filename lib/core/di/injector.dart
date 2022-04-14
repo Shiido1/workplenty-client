@@ -43,6 +43,7 @@ import 'package:client/views/review/domain/usecase/review_usecase.dart';
 import 'package:client/views/review/presentation/bloc/bloc/review_bloc_bloc.dart';
 import 'package:get_it/get_it.dart';
 import '../../views/dashboard/chat/presentation/bloc/chat_message_send_bloc_bloc.dart';
+import '../../views/dashboard/gig/data/sourceImpl/savedSourceImpl.dart';
 import '../../views/dashboard/saved/data/sourceImpl/saved_profile_source_impl.dart';
 import '../../views/dashboard/saved/domain/usecase/saved_profile_usecase.dart';
 import '../api/saved_profile/saved_profile_api.dart';
@@ -103,6 +104,8 @@ void _initDataSources() {
       () => ArtisanSourceImpl(api: inject()));
   inject.registerLazySingleton<SavedProfileSourceImpl>(
       () => SavedProfileSourceImpl(api: inject()));
+  inject.registerLazySingleton<SavedGigListSourceImpl>(
+      () => SavedGigListSourceImpl(api: inject()));
   inject.registerLazySingleton<IndustrySourceImpl>(
       () => IndustrySourceImpl(api: inject()));
   inject.registerLazySingleton<ReviewSourceImpl>(
