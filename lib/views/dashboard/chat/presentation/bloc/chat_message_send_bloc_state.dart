@@ -1,23 +1,28 @@
 part of 'chat_message_send_bloc_bloc.dart';
 
-abstract class ChatMessageSendBlocState extends Equatable {
-  const ChatMessageSendBlocState();
+abstract class ChatBlocState extends Equatable {
+  const ChatBlocState();
 
   @override
   List<Object> get props => [];
 }
 
-class ChatMessageSendBlocInitial extends ChatMessageSendBlocState {}
+class ChatBlocInitial extends ChatBlocState {}
 
-class ChatMessageSendBlocLoading extends ChatMessageSendBlocState {}
+class ChatBlocLoading extends ChatBlocState {}
 
-class ChatMessageSendBlocFailed extends ChatMessageSendBlocState {
+class ChatBlocFailed extends ChatBlocState {
   final String message;
 
-  ChatMessageSendBlocFailed({required this.message});
+  ChatBlocFailed({required this.message});
 }
 
-class ChatMessageSendBlocSuccess extends ChatMessageSendBlocState {
-  dynamic response;
+class ChatMessageSendBlocSuccess extends ChatBlocState {
+  final dynamic response;
   ChatMessageSendBlocSuccess({required this.response});
+}
+
+class ChatInitiateBlocSuccess extends ChatBlocState {
+  final dynamic response;
+  ChatInitiateBlocSuccess({required this.response});
 }

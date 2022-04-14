@@ -2,8 +2,9 @@ import 'package:client/core/network/network_service.dart';
 import 'package:client/core/network/url_config.dart';
 import 'package:client/views/dashboard/chat/data/model/chat_list_response/chat_list_response.dart';
 import 'package:client/views/dashboard/chat/data/model/mesage_response/mesage_response.dart';
-import 'package:client/views/dashboard/chat/domain/entity/chat_message_entity.dart';
 import 'package:dio/dio.dart';
+
+import '../../../views/dashboard/chat/domain/entity/chat_entity.dart';
 
 class ChatApi {
   final NetworkService _networkService;
@@ -21,7 +22,7 @@ class ChatApi {
     }
   }
 
-  Future<MesageResponse> chatMessageList(MessageEntity entity) async {
+  Future<MesageResponse> chatMessageList(ChatEntity entity) async {
     try {
       final _response = await _networkService.call(
           UrlConfig.chatMessageList, RequestMethod.get,
@@ -32,21 +33,23 @@ class ChatApi {
     }
   }
 
-  Future<MesageResponse> chatMessageSend(MessageEntity entity) async {
+  Future<MesageResponse> chatMessageSend(ChatEntity entity) async {
     try {
       final _response = await _networkService.call(
           UrlConfig.chatMessageSend, RequestMethod.upload,
-          formData:FormData.fromMap(entity.toMessageSend()));
+          formData: FormData.fromMap(entity.toMessageSend()));
       return MesageResponse.fromJson(_response.data);
     } catch (e) {
       rethrow;
     }
   }
 
-  Future<dynamic> chatInitiate() async {
+  Future<dynamic> chatInitiate(ChatEntity entity) async {
     try {
-      await _networkService.call(UrlConfig.chatList, RequestMethod.get);
-      return;
+      final _response = await _networkService.call(
+          UrlConfig.chatList, RequestMethod.post,
+          formData: FormData.fromMap(entity.initiateMessage()));
+      return _response.data;
     } catch (e) {
       rethrow;
     }

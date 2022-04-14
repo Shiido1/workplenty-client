@@ -1,10 +1,10 @@
 // ignore_for_file: must_be_immutable
 
 
-import '../../../domain/entity/chat_message_entity.dart';
+import '../../../domain/entity/chat_entity.dart';
 import 'data.dart';
 
-class MesageResponse extends MessageEntity{
+class MesageResponse extends ChatEntity{
   String? msg;
   Data? data;
   bool? success;

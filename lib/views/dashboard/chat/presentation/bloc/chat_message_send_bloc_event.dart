@@ -8,7 +8,13 @@ abstract class ChatMessageSendBlocEvent extends Equatable {
 }
 
 class ChatMessageSend extends ChatMessageSendBlocEvent {
-  final MessageEntity entity;
+  final ChatEntity entity;
 
   const ChatMessageSend(this.entity);
+}
+
+class ChatInitiate extends ChatMessageSendBlocEvent {
+  final ChatEntity entity;
+
+  const ChatInitiate(this.entity);
 }
