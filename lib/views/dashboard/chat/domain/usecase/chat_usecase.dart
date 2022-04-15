@@ -6,7 +6,9 @@ import 'package:client/views/dashboard/chat/domain/entity/chat_entity.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 
-class ChatUseCase extends UseCase {
+import '../../data/model/mesage_response/mesage_response.dart';
+
+class ChatUseCase extends UseCase <ChatEntity,Params>{
   final ChatContractImpl _chatContractImpl;
 
   ChatUseCase(this._chatContractImpl);
@@ -14,6 +16,17 @@ class ChatUseCase extends UseCase {
   @override
   Future<Either<Failure, ChatListResponse>>? chatListUseCase() async {
     return await _chatContractImpl.chatList();
+  }
+
+  Future<Either<Failure, MesageResponse>> chatMessageListUseCase(
+      Params params) async {
+    return await _chatContractImpl.chatMessageList(params.entity!);
+  }
+
+  @override
+  Future<Either<Failure, MesageResponse>> chatMessageSendUseCase(
+      Params params) async {
+    return await _chatContractImpl.chatMessageSend(params.entity!);
   }
 }
 

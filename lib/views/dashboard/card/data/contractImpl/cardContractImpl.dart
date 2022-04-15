@@ -23,7 +23,8 @@ class CardContractImpl implements CardContract {
   }
 
   @override
-  Future<Either<Failure, SaveAndRemoveCardResponse>> removeCard(CardEntity entity) async {
+  Future<Either<Failure, SaveAndRemoveCardResponse>> removeCard(
+      CardEntity entity) async {
     try {
       final _response = await _impl.removeCard(entity);
       return Right(_response);
@@ -33,7 +34,8 @@ class CardContractImpl implements CardContract {
   }
 
   @override
-  Future<Either<Failure, SaveAndRemoveCardResponse>> saveCard(CardEntity entity) async {
+  Future<Either<Failure, SaveAndRemoveCardResponse>> saveCard(
+      CardEntity entity) async {
     try {
       final _response = await _impl.saveCard(entity);
       return Right(_response);

@@ -33,8 +33,9 @@ class CardApi {
 
   Future<SaveAndRemoveCardResponse> removeCard(CardEntity entity) async {
     try {
-      final _response = await _networkService
-          .call(UrlConfig.removeCard, RequestMethod.post, data: entity.toRemove());
+      final _response = await _networkService.call(
+          UrlConfig.removeCard, RequestMethod.post,
+          data: entity.toRemove());
       return SaveAndRemoveCardResponse.fromJson(_response.data);
     } catch (e) {
       rethrow;

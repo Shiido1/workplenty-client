@@ -17,12 +17,16 @@ class CardUseCase extends UseCase<CardEntity, Params> {
   Future<Either<Failure, CardResponse>>? getAllCardUseCase() async {
     return await _cardContractImpl.listCard();
   }
+
   @override
-  Future<Either<Failure, SaveAndRemoveCardResponse>>? saveCardUseCase(Params params) async {
+  Future<Either<Failure, SaveAndRemoveCardResponse>>? saveCardUseCase(
+      Params params) async {
     return await _cardContractImpl.saveCard(params.entity!);
   }
+
   @override
-  Future<Either<Failure, SaveAndRemoveCardResponse>>? removeCardUseCase(Params params) async {
+  Future<Either<Failure, SaveAndRemoveCardResponse>>? removeCardUseCase(
+      Params params) async {
     return await _cardContractImpl.removeCard(params.entity!);
   }
 }

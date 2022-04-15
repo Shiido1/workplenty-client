@@ -2,7 +2,7 @@
 
 import 'package:client/views/dashboard/card/domain/entity/card_entity.dart';
 
-class SaveAndRemoveCardResponse extends CardEntity{
+class SaveAndRemoveCardResponse extends CardEntity {
   String? msg;
   dynamic data;
   bool? success;

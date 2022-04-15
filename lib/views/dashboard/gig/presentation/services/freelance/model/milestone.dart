@@ -1,4 +1,3 @@
-
 class MilestoneModel {
   String? description;
   String? dueDate;

@@ -9,7 +9,7 @@ class UrlConfig {
   static const String verificationPinConfirm = 'verification-pin/confirm';
 
   static const String saveIndustry = 'client/industry/save';
-  static const String listIndustry = 'client/industry/list';
+  static const String listIndustry = 'clie  nt/industry/list';
   static const String deleteIndustry = 'client/industry/delete';
   static const String overviewPayment = 'client/payment/overview';
   static const String transactionPayment = 'client/payment/transactions';
@@ -32,6 +32,8 @@ class UrlConfig {
   static const String listBid = 'client/gig/bids/list';
   static const String acceptOrDeclineBid = 'client/bids/accept-or-decline';
   static const String chatList = 'chat/list';
+  static const String chatMessageList = 'chat/message/list';
+  static const String chatMessageSend = 'chat/message/send';
   static const String savedGig = 'saved-gigs/list';
   static const String savedGigSave = 'saved-gigs/save';
   static const String savedProfile = 'saved-profiles/save';
