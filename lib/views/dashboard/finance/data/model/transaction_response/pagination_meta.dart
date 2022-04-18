@@ -1,0 +1,61 @@
+class PaginationMeta {
+  int? currentPage;
+  String? firstPageUrl;
+  dynamic from;
+  int? lastPage;
+  String? lastPageUrl;
+  dynamic nextPageUrl;
+  String? path;
+  int? perPage;
+  dynamic prevPageUrl;
+  dynamic to;
+  int? total;
+  bool? canLoadMore;
+
+  PaginationMeta({
+    this.currentPage,
+    this.firstPageUrl,
+    this.from,
+    this.lastPage,
+    this.lastPageUrl,
+    this.nextPageUrl,
+    this.path,
+    this.perPage,
+    this.prevPageUrl,
+    this.to,
+    this.total,
+    this.canLoadMore,
+  });
+
+  factory PaginationMeta.fromJson(Map<String, dynamic> json) {
+    return PaginationMeta(
+      currentPage: json['current_page'] as int?,
+      firstPageUrl: json['first_page_url'] as String?,
+      from: json['from'] as dynamic,
+      lastPage: json['last_page'] as int?,
+      lastPageUrl: json['last_page_url'] as String?,
+      nextPageUrl: json['next_page_url'] as dynamic,
+      path: json['path'] as String?,
+      perPage: json['per_page'] as int?,
+      prevPageUrl: json['prev_page_url'] as dynamic,
+      to: json['to'] as dynamic,
+      total: json['total'] as int?,
+      canLoadMore: json['can_load_more'] as bool?,
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        'current_page': currentPage,
+        'first_page_url': firstPageUrl,
+        'from': from,
+        'last_page': lastPage,
+        'last_page_url': lastPageUrl,
+        'next_page_url': nextPageUrl,
+        'path': path,
+        'per_page': perPage,
+        'prev_page_url': prevPageUrl,
+        'to': to,
+        'total': total,
+        'can_load_more': canLoadMore,
+      };
+}

@@ -1,5 +1,3 @@
-
-
 import 'package:client/views/dashboard/chat/data/model/chat_list_response/chat_list_response.dart';
 
 import '../../data/model/mesage_response/mesage_response.dart';

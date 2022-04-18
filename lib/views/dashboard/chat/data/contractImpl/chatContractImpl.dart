@@ -28,26 +28,27 @@ class ChatContractImpl implements ChatContract {
       final _response = await _impl.chatMessageList(entity);
       return Right(_response);
     } catch (e) {
-      return Left(AppFailure(e.toString()));}
+      return Left(AppFailure(e.toString()));
+    }
   }
 
   @override
-  Future<Either<Failure, MesageResponse>> chatMessageSend(entity) async{
+  Future<Either<Failure, MesageResponse>> chatMessageSend(entity) async {
     try {
       final _response = await _impl.chatMeesageSend(entity);
       return Right(_response);
     } catch (e) {
-      return Left(AppFailure(e.toString()));}
+      return Left(AppFailure(e.toString()));
+    }
   }
 
   @override
-  Future<Either<Failure, dynamic>> chatInitiate(ChatEntity entity) async{
+  Future<Either<Failure, dynamic>> chatInitiate(ChatEntity entity) async {
     try {
       final _response = await _impl.chatInitiate(entity);
       return Right(_response);
     } catch (e) {
-      return Left(AppFailure(e.toString()));}
+      return Left(AppFailure(e.toString()));
+    }
   }
-
-
 }

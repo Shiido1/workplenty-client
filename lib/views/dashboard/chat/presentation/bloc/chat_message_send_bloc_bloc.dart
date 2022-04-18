@@ -17,11 +17,10 @@ class ChatMessageSendBlocBloc
       if (event is ChatMessageSend) {
         try {
           emit(ChatBlocLoading());
-          final _response =
-              await _useCase.chatMessageSendUseCase(Params(entity:event.entity));
+          final _response = await _useCase
+              .chatMessageSendUseCase(Params(entity: event.entity));
           _response.fold(
-              (l) =>
-                  emit(ChatBlocFailed(message: l.errorMessage(l)!)),
+              (l) => emit(ChatBlocFailed(message: l.errorMessage(l)!)),
               (r) => emit(ChatMessageSendBlocSuccess(response: r)));
         } catch (e) {
           emit(ChatBlocFailed(message: e.toString()));
@@ -32,11 +31,10 @@ class ChatMessageSendBlocBloc
       if (event is ChatInitiate) {
         try {
           emit(ChatBlocLoading());
-          final _response =
-              await _useCase.chatMessageSendUseCase(Params(entity:event.entity));
+          final _response = await _useCase
+              .chatMessageSendUseCase(Params(entity: event.entity));
           _response.fold(
-              (l) =>
-                  emit(ChatBlocFailed(message: l.errorMessage(l)!)),
+              (l) => emit(ChatBlocFailed(message: l.errorMessage(l)!)),
               (r) => emit(ChatInitiateBlocSuccess(response: r)));
         } catch (e) {
           emit(ChatBlocFailed(message: e.toString()));

@@ -15,19 +15,18 @@ class ChatSourcesImpl implements ChatSource {
     return await _api.chatList();
   }
 
-   @override
-  Future<MesageResponse> chatMeesageSend(ChatEntity entity) async{
+  @override
+  Future<MesageResponse> chatMeesageSend(ChatEntity entity) async {
     return await _api.chatMessageSend(entity);
   }
 
   @override
-  Future<MesageResponse> chatMessageList(ChatEntity entity) async{
+  Future<MesageResponse> chatMessageList(ChatEntity entity) async {
     return await _api.chatMessageList(entity);
   }
 
   @override
-  Future chatInitiate(entity) async{
+  Future chatInitiate(entity) async {
     return await _api.chatInitiate(entity);
   }
-
 }
