@@ -9,10 +9,11 @@ class ChatEntity extends DefaultResponse {
   final String? cardId;
   final MultipartFile? file;
 
-  ChatEntity({this.cardId, this.file, this.recipientId, this.gigId, this.message});
+  ChatEntity(
+      {this.cardId, this.file, this.recipientId, this.gigId, this.message});
 
   @override
-  List<Object?> get props => [recipientId!,gigId!,message!,cardId!,file!];
+  List<Object?> get props => [recipientId!, gigId!, message!, cardId!, file!];
 
   Map<String, dynamic> toMessageList() {
     return {
@@ -21,11 +22,7 @@ class ChatEntity extends DefaultResponse {
   }
 
   Map<String, dynamic> toMessageSend() {
-    return {
-      'card_id': '6',
-      'message': 'test',
-      'file':file
-    };
+    return {'card_id': '6', 'message': 'test', 'file': file};
   }
 
   Map<String, dynamic> initiateMessage() {

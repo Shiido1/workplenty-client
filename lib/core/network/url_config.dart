@@ -32,6 +32,9 @@ class UrlConfig {
   static const String listBid = 'client/gig/bids/list';
   static const String acceptOrDeclineBid = 'client/bids/accept-or-decline';
   static const String chatList = 'chat/list';
+  static const String walletBalance = 'wallet/balance';
+  static const String walletTransaction = 'wallet/transactions';
+  static const String walletTopup = 'wallet/topup';
   static const String chatMessageList = 'chat/message/list';
   static const String chatMessageSend = 'chat/message/send';
   static const String savedGig = 'saved-gigs/list';

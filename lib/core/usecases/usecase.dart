@@ -44,6 +44,9 @@ class UseCase<Type, Params> {
   Future<Either<Failure, Type>>? countries() {}
   Future<Either<Failure, Type>>? states(Params p) {}
   Future<Either<Failure, Type>>? depositPayment(Params p) {}
+  Future<Either<Failure, Type>>? walletTopupUseCase(Params p) {}
+  Future<Either<Failure, Type>>? walletBalanceUseCase() {}
+  Future<Either<Failure, Type>>? walletTransactionUseCase() {}
   Future<Either<Failure, Type>>? transactionPayment() {}
 }
 

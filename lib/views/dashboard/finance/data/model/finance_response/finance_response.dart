@@ -1,18 +1,19 @@
 // ignore_for_file: must_be_immutable
 
-import '../../../domain/entity/chat_entity.dart';
+import 'package:client/views/dashboard/finance/domain/entity/finance_entity.dart';
+
 import 'data.dart';
 
-class MesageResponse extends ChatEntity {
+class FinanceResponse extends FinanceEntity{
   String? msg;
   Data? data;
   bool? success;
   int? code;
 
-  MesageResponse({this.msg, this.data, this.success, this.code});
+  FinanceResponse({this.msg, this.data, this.success, this.code});
 
-  factory MesageResponse.fromJson(Map<String, dynamic> json) {
-    return MesageResponse(
+  factory FinanceResponse.fromJson(Map<String, dynamic> json) {
+    return FinanceResponse(
       msg: json['msg'] as String?,
       data: json['data'] == null
           ? null
