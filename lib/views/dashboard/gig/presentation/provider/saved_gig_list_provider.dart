@@ -12,8 +12,10 @@ class SavedGigListProvider extends BaseModel {
   Future<void> savedGigList() async {
     try {
       final _response = await _useCase.listOfSavedGigs();
-      _response!.fold((l) => logger.e(l.errorMessage(l)),
-          (r) => savedGigDao?.savedGigList(r.data?.data ?? []));
+      _response!.fold((l) => logger.e(l.errorMessage(l)), (r) {
+        savedGigDao?.savedGigList(r.data?.data ?? []);
+        logger.d(r.data?.data?.length ?? []);
+      });
     } catch (e) {
       logger.e('An error occurred: $e');
     }

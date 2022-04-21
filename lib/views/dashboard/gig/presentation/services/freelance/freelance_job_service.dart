@@ -480,8 +480,8 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
     if (_validate()) {
       _bloc.add(ServiceEvent(
         GigEntity(
-            id: '${artisanProvider.datum?.id}',
-            industryId: '${artisanProvider.datum?.industry?.id}',
+            id: '${2}',
+            industryId: '${2}',
             type: GigType.FREELANCE,
             privateMessage: privateMessageController.text,
             title: titleController.text,
@@ -500,6 +500,9 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
                 _paymentTypeIndex == 0 ? 'Milestone' : 'Project-Completion'),
       ));
     }
+    logger.d(artisanProvider.datum?.id);
+    logger.d(artisanProvider.datum?.industry?.id);
+    logger.d(_paymentTypeIndex);
   }
 
   bool _validate() {

@@ -2,6 +2,7 @@
 
 import 'package:client/core/di/injector.dart';
 import 'package:client/core/enums/gig_type.dart';
+import 'package:client/core/helper/configs/instances.dart';
 import 'package:client/core/helper/helper_handler.dart';
 import 'package:client/core/helper/utils/images.dart';
 import 'package:client/core/helper/utils/pallets.dart';
@@ -141,6 +142,7 @@ class HomeCard extends StatelessWidget {
     WorkPlenty.success('Saved successfully');
     _bloc.add(SavedProfileEvent(SavedProfileEntity(
         profileId: datum!.user!.id, type: GigType.FREELANCE)));
+    logger.d('loggeer artisan id ${datum!.user!.id}');
   }
 
   Expanded _buildWidget(String image, String value) {

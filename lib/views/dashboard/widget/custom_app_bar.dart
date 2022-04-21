@@ -18,7 +18,7 @@ getCustomAppBar(BuildContext context, String title,
         ? ImageLoader(path: AppImages.whiteLogo, height: 24.h, width: 24.w)
         : IconButton(
             onPressed: () {
-              PageRouter.goBack(context);
+              // PageRouter.goBack(context);
             },
             icon: Icon(
               Icons.arrow_back,
