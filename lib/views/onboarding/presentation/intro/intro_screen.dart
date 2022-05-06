@@ -47,7 +47,7 @@ class _IntroOneScreenState extends State<IntroOneScreen> {
                   },
                   children: _dataModel
                       .map((data) =>
-                          Image.asset(data.image ?? '', fit: BoxFit.cover))
+                          Image.asset(data.image?? '', fit: BoxFit.cover))
                       .toList(),
                 ),
               ),

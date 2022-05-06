@@ -142,7 +142,6 @@ class HomeCard extends StatelessWidget {
     WorkPlenty.success('Saved successfully');
     _bloc.add(SavedProfileEvent(SavedProfileEntity(
         profileId: datum!.user!.id, type: GigType.FREELANCE)));
-    logger.d('loggeer artisan id ${datum!.user!.id}');
   }
 
   Expanded _buildWidget(String image, String value) {
