@@ -7,11 +7,9 @@ abstract class AuthblocEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class SocialAuthEvent extends AuthblocEvent {
-  final AuthEntity entity;
+class GoogleAuthEvent extends AuthblocEvent {}
 
-  const SocialAuthEvent(this.entity);
-}
+class FacebookAuthEvent extends AuthblocEvent {}
 
 class RegisterEvent extends AuthblocEvent {
   final AuthEntity entity;

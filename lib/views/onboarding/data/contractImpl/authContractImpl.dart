@@ -20,6 +20,7 @@ class AuthContractImpl implements AuthContract {
       return Left(AppFailure(e.toString()));
     }
   }
+
   @override
   Future<Either<Failure, AuthResponse>> resetPassword(entity) async {
     try {
@@ -79,10 +80,19 @@ class AuthContractImpl implements AuthContract {
   }
 
   @override
-  Future<Either<Failure, AuthResponse>> socialAuthentication(
-      AuthEntity entity) async {
+  Future<Either<Failure, AuthResponse>> googleAuth() async {
     try {
-      final _response = await _impl.socialAuthentication(entity);
+      final _response = await _impl.googleAuth();
+      return Right(_response);
+    } catch (e) {
+      return Left(AppFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, AuthResponse>> facebookAuth() async {
+    try {
+      final _response = await _impl.facebookAuth();
       return Right(_response);
     } catch (e) {
       return Left(AppFailure(e.toString()));

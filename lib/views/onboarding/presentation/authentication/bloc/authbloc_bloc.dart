@@ -11,8 +11,31 @@ class AuthblocBloc extends Bloc<AuthblocEvent, AuthblocState> {
 
   AuthblocBloc(this._useCase) : super(AuthblocInitial()) {
     on<AuthblocEvent>((event, emit) async {
-      // / Social Event
-      if (event is SocialAuthEvent) {}
+      /// Google Social Event
+      if (event is GoogleAuthEvent) {
+        try {
+          emit(AuthblocLoading());
+          final _response = await _useCase.googleAuth();
+          _response!.fold(
+              (l) => emit(AuthblocFailed(message: l.errorMessage(l)!)),
+              (r) => emit(AuthblocSuccess(response: r)));
+        } catch (e) {
+          emit(AuthblocFailed(message: e.toString()));
+        }
+      }
+
+      /// Facebook Social Event
+      if (event is FacebookAuthEvent) {
+        try {
+          emit(AuthblocLoading());
+          final _response = await _useCase.facebookAuth();
+          _response!.fold(
+              (l) => emit(AuthblocFailed(message: l.errorMessage(l)!)),
+              (r) => emit(AuthblocSuccess(response: r)));
+        } catch (e) {
+          emit(AuthblocFailed(message: e.toString()));
+        }
+      }
 
       // / Register Event
       if (event is RegisterEvent) {

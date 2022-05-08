@@ -133,7 +133,7 @@ class _WelcomeBackScreenState extends State<WelcomeBackScreen> {
                     primary: Pallets.skyBlue,
                     borderColor: Pallets.skyBlue,
                     icon: AppImages.google,
-                    onPressed: () {}),
+                    onPressed: () => _bloc.add(GoogleAuthEvent())),
                 SizedBox(height: 18.h),
                 ButtonWidget(
                     buttonText: 'Continue with Meta',
@@ -142,7 +142,7 @@ class _WelcomeBackScreenState extends State<WelcomeBackScreen> {
                     primary: Pallets.skyBlue,
                     borderColor: Pallets.skyBlue,
                     icon: AppImages.meta,
-                    onPressed: () => null),
+                    onPressed: () => _bloc.add(FacebookAuthEvent())),
                 SizedBox(height: 16.h),
                 Container(
                   alignment: Alignment.bottomCenter,

@@ -124,7 +124,7 @@ class GigEntity extends DefaultResponse {
 
   Map<String, dynamic> savedGigsSave() {
     return {'id': id};
-  }
+  } 
 
   Map<String, dynamic> getDetailsOfGig() {
     return {'id': id};

@@ -12,43 +12,39 @@ class AuthUsesCases extends UseCase<AuthEntity, Params> {
   AuthUsesCases(this._repository);
 
   @override
-  Future<Either<Failure, AuthResponse>> registerUseCase(Params params) async {
-    return await _repository.register(params.entity!);
-  }
+  Future<Either<Failure, AuthResponse>> registerUseCase(Params params) async =>
+      await _repository.register(params.entity!);
 
   @override
-  Future<Either<Failure, AuthResponse>> loginUseCase(Params params) async {
-    return await _repository.login(params.entity!);
-  }
+  Future<Either<Failure, AuthResponse>> loginUseCase(Params params) async =>
+      await _repository.login(params.entity!);
 
   @override
-  Future<Either<Failure, AuthResponse>>? socialAuthentication(
-      Params params) async {
-    return await _repository.socialAuthentication(params.entity!);
-  }
+  Future<Either<Failure, AuthResponse>>? googleAuth() async =>
+      await _repository.googleAuth();
+
+  @override
+  Future<Either<Failure, AuthResponse>>? facebookAuth() async =>
+      await _repository.facebookAuth();
 
   @override
   Future<Either<Failure, AuthResponse>>? forgotPasswordUseCase(
-      Params params) async {
-    return await _repository.forgotPassword(params.entity!);
-  }
+          Params params) async =>
+      await _repository.forgotPassword(params.entity!);
 
   @override
   Future<Either<Failure, AuthResponse>>? pinVerificationConfirmation(
-      Params params) async {
-    return await _repository.verificationPinConfirm(params.entity!);
-  }
+          Params params) async =>
+      await _repository.verificationPinConfirm(params.entity!);
 
   @override
-  Future<Either<Failure, AuthEntity>>? requestVerificationPinUseCase() async {
-    return await _repository.verificationPinRequest();
-  }
-
+  Future<Either<Failure, AuthEntity>>? requestVerificationPinUseCase() async =>
+      await _repository.verificationPinRequest();
 
   @override
-  Future<Either<Failure, AuthEntity>>? resetPasswordUseCase(Params params) async{
-    return await _repository.resetPassword(params.entity!);
-  }
+  Future<Either<Failure, AuthEntity>>? resetPasswordUseCase(
+          Params params) async =>
+      await _repository.resetPassword(params.entity!);
 }
 
 class Params extends Equatable {
