@@ -2,6 +2,8 @@ import 'package:client/core/di/injector.dart';
 import 'package:client/core/entity/skills/skill.dart';
 import 'package:client/core/entity/user/user.dart';
 import 'package:client/core/enums/gig_type.dart';
+import 'package:client/core/enums/payment_type.dart';
+import 'package:client/core/enums/project_type.dart';
 import 'package:client/core/helper/configs/instances.dart';
 import 'package:client/core/helper/routes/navigation.dart';
 import 'package:client/core/helper/utils/image_picker.dart';
@@ -58,13 +60,12 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
   List<Skill>? _skillList = [];
 
   final _image = ImagePickerHandler();
-  // File? _file;
-  // List<File> _fileList = [];
   List<User> _artisans = [];
 
   int _checkboxIndex = 0;
-  int _paymentTypeIndex = 0;
   int? _experienceIndex;
+
+  ProjectType _projectType = ProjectType.Milestone;
 
   final TextEditingController privateMessageController =
       TextEditingController();
@@ -113,10 +114,13 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
                           First(),
                           SizedBox(height: 23.h),
                           SecondBadgeWidget(
-                              privateMessageController:
-                                  privateMessageController,
-                              titleController: titleController,
-                              descriptionController: descriptionController),
+                            privateMessageController: privateMessageController,
+                            titleController: titleController,
+                            descriptionController: descriptionController,
+                            title: 'Project Title',
+                            description:
+                                'Describe your project and other specific details',
+                          ),
                           ReviewBgCard(
                             Column(
                               mainAxisSize: MainAxisSize.min,
@@ -277,23 +281,27 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
                               children: [
                                 RowContainer(
                                     image: AppImages.wallet,
-                                    text: 'Payment Type'),
+                                    text: 'Project Type'),
                                 SizedBox(height: 10.h),
                                 Row(
                                   children: [
                                     ButtonW(
                                         title: 'Milestone',
-                                        defaultValue: 0,
-                                        index: _paymentTypeIndex,
-                                        onTap: () => setState(
-                                            () => _paymentTypeIndex = 0)),
+                                        defaultProjectType:
+                                            ProjectType.Milestone,
+                                        projectType: _projectType,
+                                        onTap: () => setState(() =>
+                                            _projectType =
+                                                ProjectType.Milestone)),
                                     SizedBox(width: 10.w),
                                     ButtonW(
                                         title: 'Project Completion',
-                                        defaultValue: 1,
-                                        index: _paymentTypeIndex,
-                                        onTap: () => setState(
-                                            () => _paymentTypeIndex = 1)),
+                                        defaultProjectType:
+                                            ProjectType.Project_Completion,
+                                        projectType: _projectType,
+                                        onTap: () => setState(() =>
+                                            _projectType = ProjectType
+                                                .Project_Completion)),
                                   ],
                                 ),
                                 SizedBox(
@@ -303,7 +311,7 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
                             ),
                           ),
                           Third(
-                            paymentTypeIndex: _paymentTypeIndex,
+                            projectType: _projectType,
                             list: (miles, val) {
                               _miles = miles;
                               if (val!) setState(() {});
@@ -453,20 +461,18 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
                             ),
                           ),
                           SizedBox(height: 23.h),
-                          Padding(
-                            padding: const EdgeInsets.all(12.0),
-                            child: ButtonWidget(
-                              buttonText: 'Post Freelance Job & Invite',
-                              fontSize: 18.sp,
-                              fontWeight: FontWeight.w700,
-                              onPressed: () => _proceed(value),
-                            ),
+                          ButtonWidget(
+                            buttonText: 'Post Freelance Job & Invite',
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.w700,
+                            onPressed: () => _proceed(value),
                           ),
                           SizedBox(
                             height: 40,
                           ),
                         ]),
                   );
+                
                 },
               ),
             ),
@@ -479,32 +485,34 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
 
   void _proceed(ArtisanProvider artisanProvider) {
     if (_validate()) {
-      _bloc.add(ServiceEvent(
-        GigEntity(
-            id: '${artisanProvider.datum?.id}',
-            industryId: '${artisanProvider.datum?.industry?.id}',
-            type: GigType.FREELANCE,
-            privateMessage: privateMessageController.text,
-            title: titleController.text,
-            description: descriptionController.text,
-            timeline: _timeController.text,
-            paymentType: 'Cash',
-            isPublished: '1',
-            experienceLevel: '$_experienceIndex',
-            coverLetterRequired: '$_checkboxIndex',
-            totalBudget: _budgetController.text,
-            skill: _selectedSkills,
-            attachments: _files,
-            invited_artisan_ids: _artisansId,
-            milestones: _miles,
-            projectType:
-                _paymentTypeIndex == 0 ? 'Milestone' : 'Project-Completion'),
-      ));
+      _bloc.add(ServiceEvent(GigEntity(
+          id: '${artisanProvider.datum?.id}',
+          industryId: '${artisanProvider.datum?.industry?.id}',
+          type: GigType.FREELANCE,
+          privateMessage: privateMessageController.text,
+          title: titleController.text,
+          description: descriptionController.text,
+          timeline: _timeController.text,
+          paymentType: PaymentType.cash,
+          isPublished: '1',
+          experienceLevel: '$_experienceIndex',
+          coverLetterRequired: '$_checkboxIndex',
+          totalBudget: _budgetController.text,
+          skill: _selectedSkills,
+          attachments: _files,
+          invited_artisan_ids: _artisansId,
+          milestones: _miles,
+          projectType: _projectType)));
     }
   }
 
   bool _validate() {
     if (!_globalFormKey.currentState!.validate()) {
+      return false;
+    }
+
+    if (_files.isEmpty) {
+      WorkPlenty.error('Please select a file');
       return false;
     }
 

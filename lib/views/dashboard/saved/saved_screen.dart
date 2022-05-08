@@ -104,12 +104,12 @@ class _SavedScreenState extends State<SavedScreen> {
                         FreelanceTab(
                             datum: _savedGigList
                                 .where(
-                                    (element) => element.type == GigType.HOME)
+                                    (element) => element.type == GigType.HOME_SERVICE)
                                 .toList()),
                         FreelanceTab(
                             datum: _savedGigList
                                 .where(
-                                    (element) => element.type == GigType.LIVE)
+                                    (element) => element.type == GigType.LIVE_SESSION)
                                 .toList()),
                       ],
                     );

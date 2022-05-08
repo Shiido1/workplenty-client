@@ -3,6 +3,7 @@
 import 'package:client/core/di/injector.dart';
 import 'package:client/core/enums/gig_type.dart';
 import 'package:client/core/helper/helper_handler.dart';
+import 'package:client/core/helper/routes/navigation.dart';
 import 'package:client/core/helper/utils/images.dart';
 import 'package:client/core/helper/utils/pallets.dart';
 import 'package:client/core/helper/utils/workplenty_dialog.dart';
@@ -20,6 +21,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/entity/datum/datum.model.dart';
+import '../../widgets/bottom_sheet.dart';
+import '../gig/modal/select_service_modal.dart';
 
 class HomeCard extends StatelessWidget {
   final Datum? datum;
@@ -115,7 +118,8 @@ class HomeCard extends StatelessWidget {
                   SizedBox(width: 10.w),
                   _buildWidget(AppImages.emptyWallet, 'Top Earner'),
                   SizedBox(width: 10.w),
-                  _buildWidget(AppImages.graph, '99%'),
+                  _buildWidget(
+                      AppImages.graph, '${datum?.profile?.avgRating ?? 0}%'),
                 ],
               ),
               SizedBox(height: 16.h),
@@ -124,7 +128,9 @@ class HomeCard extends StatelessWidget {
                 onPressed: () {
                   Provider.of<ArtisanProvider>(context, listen: false)
                       .setArtisan(datum);
-                  showFloatingActionModal(context, 'Select a Service');
+
+                  BottomSheets.showSheet<String>(context,
+                      child: SelectServiceModal('Select a Service'));
                 },
                 fontSize: 14,
                 fontWeight: FontWeight.w700,

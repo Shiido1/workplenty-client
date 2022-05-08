@@ -1,13 +1,11 @@
-import 'package:client/core/helper/configs/instances.dart';
+import 'package:client/core/enums/project_type.dart';
 import 'package:client/core/helper/utils/pallets.dart';
 import 'package:client/views/widgets/text_views.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../../core/helper/utils/images.dart';
-import '../../../../../../widgets/edit_form_widget.dart';
 import '../../../../../../widgets/review_bg_card.dart';
-import '../../../../../milestone/milestone.dart';
 import '../../../widget/row_container_widget.dart';
 import '../model/milestone.dart';
 import 'mile_stone_widget.dart';
@@ -15,12 +13,12 @@ import 'mile_stone_widget.dart';
 class Third extends StatefulWidget {
   const Third({
     Key? key,
-    required int paymentTypeIndex,
+    required ProjectType projectType,
     required this.list,
-  })  : _paymentTypeIndex = paymentTypeIndex,
+  })  : _projectType = projectType,
         super(key: key);
 
-  final int _paymentTypeIndex;
+  final ProjectType _projectType;
   final Function(List<MilestoneModel>, bool? notify) list;
 
   @override
@@ -39,7 +37,7 @@ class _ThirdState extends State<Third> {
   @override
   Widget build(BuildContext context) {
     return Visibility(
-      visible: widget._paymentTypeIndex == 0,
+      visible: widget._projectType == ProjectType.Milestone,
       child: ReviewBgCard(
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,7 +57,7 @@ class _ThirdState extends State<Third> {
             SizedBox(height: 16.h),
             TextView(
               text: 'Add Milestone +',
-              fontSize: 18.sp,
+              fontSize: 14.sp,
               fontWeight: FontWeight.w600,
               textAlign: TextAlign.left,
               color: Pallets.primary100,

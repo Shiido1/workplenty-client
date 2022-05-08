@@ -35,73 +35,69 @@ class _JobCategoryModalState extends State<JobCategoryModal> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: Utils.getDeviceHeight(context) * .8,
-      child: Scaffold(
-        appBar: defaultAppBar(context,
-            title: 'Job Categories', centerTitle: true, showClearButton: false),
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w),
-          child: Column(
-            children: [
-              SizedBox(height: 23.h),
-              SearchAndFilter(
-                  showFilter: false,
-                  hint: 'Search for job category',
-                  onChanged: (value) {
-                    setState(() => _search = value);
-                  }),
-              SizedBox(height: 11.h),
-              ValueListenableBuilder(
-                  valueListenable: categoryDao!.getListenable()!,
-                  builder: (_, Box<dynamic> box, __) {
-                    final _categoryList = categoryDao!
-                        .getConvertedData(categoryDao!.box!)
-                        .toList();
-                    return Consumer<GigProvider>(
-                        builder: (context, provider, child) {
-                      return Expanded(
-                        child: SafeArea(
-                          child: Stack(
-                            children: [
-                              Container(
-                                height: Utils.getDeviceHeight(context),
-                                margin: EdgeInsets.only(bottom: 50.h),
-                                child: ListView(shrinkWrap: true, children: [
-                                  Visibility(
-                                      visible: provider.state == ViewState.busy,
-                                      child: LinearProgressIndicator()),
-                                  ..._categoryList
-                                      .map(
-                                        (element) => element.name!
-                                                .toLowerCase()
-                                                .contains(_search.toLowerCase())
-                                            ? ListTile(
-                                                contentPadding: EdgeInsets.zero,
-                                                onTap: () {
-                                                  widget.callBack!(element);
-                                                  PageRouter.goBack(context);
-                                                },
-                                                title: TextView(
-                                                  text: element.name ?? '',
-                                                  textAlign: TextAlign.left,
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: 16.sp,
-                                                ),
-                                              )
-                                            : Container(),
-                                      )
-                                      .toList()
-                                ]),
-                              ),
-                            ],
-                          ),
+    return Scaffold(
+      appBar: defaultAppBar(context,
+          title: 'Job Categories', centerTitle: true, showClearButton: false),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16.w),
+        child: Column(
+          children: [
+            SizedBox(height: 23.h),
+            SearchAndFilter(
+                showFilter: false,
+                hint: 'Search for job category',
+                onChanged: (value) {
+                  setState(() => _search = value);
+                }),
+            SizedBox(height: 11.h),
+            ValueListenableBuilder(
+                valueListenable: categoryDao!.getListenable()!,
+                builder: (_, Box<dynamic> box, __) {
+                  final _categoryList =
+                      categoryDao!.getConvertedData(categoryDao!.box!).toList();
+                  return Consumer<GigProvider>(
+                      builder: (context, provider, child) {
+                    return Expanded(
+                      child: SafeArea(
+                        child: Stack(
+                          children: [
+                            Container(
+                              height: Utils.getDeviceHeight(context),
+                              margin: EdgeInsets.only(bottom: 50.h),
+                              child: ListView(shrinkWrap: true, children: [
+                                Visibility(
+                                    visible: provider.state == ViewState.busy,
+                                    child: LinearProgressIndicator()),
+                                ..._categoryList
+                                    .map(
+                                      (element) => element.name!
+                                              .toLowerCase()
+                                              .contains(_search.toLowerCase())
+                                          ? ListTile(
+                                              contentPadding: EdgeInsets.zero,
+                                              onTap: () {
+                                                widget.callBack!(element);
+                                                PageRouter.goBack(context);
+                                              },
+                                              title: TextView(
+                                                text: element.name ?? '',
+                                                textAlign: TextAlign.left,
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 16.sp,
+                                              ),
+                                            )
+                                          : Container(),
+                                    )
+                                    .toList()
+                              ]),
+                            ),
+                          ],
                         ),
-                      );
-                    });
-                  })
-            ],
-          ),
+                      ),
+                    );
+                  });
+                })
+          ],
         ),
       ),
     );

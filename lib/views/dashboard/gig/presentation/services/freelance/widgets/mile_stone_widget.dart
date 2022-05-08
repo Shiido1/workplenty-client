@@ -1,4 +1,3 @@
-import 'package:client/core/entity/milestone/milestone.dart';
 import 'package:client/core/helper/utils/pallets.dart';
 import 'package:client/core/helper/utils/validators.dart';
 import 'package:flutter/material.dart';
@@ -64,7 +63,10 @@ class MilestoneWidget extends StatelessWidget {
                 onTapped: () => pickDate(
                     dateOptions: DateOptions.future,
                     context: context,
-                    onChange: (v) => onDueDate!(v)),
+                    onChange: (v) {
+                      _dueDateController.text = v;
+                      onDueDate!(v);
+                    }),
                 validator: Validators.validateString(),
                 keyboardType: TextInputType.text,
               ),

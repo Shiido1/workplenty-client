@@ -90,7 +90,7 @@ Map<String, dynamic> _$DatumToJson(Datum instance) => <String, dynamic>{
 
 const _$GigTypeEnumMap = {
   GigType.FREELANCE: 'FREELANCE',
-  GigType.HOME: 'HOME',
-  GigType.LIVE: 'LIVE',
+  GigType.HOME_SERVICE: 'HOME',
+  GigType.LIVE_SESSION: 'LIVE',
   GigType.UNKNOWN: 'UNKNOWN',
 };

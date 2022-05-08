@@ -15,11 +15,15 @@ class SecondBadgeWidget extends StatelessWidget {
     required this.privateMessageController,
     required this.titleController,
     required this.descriptionController,
+    required this.title,
+    required this.description,
   }) : super(key: key);
 
   final TextEditingController privateMessageController;
   final TextEditingController titleController;
   final TextEditingController descriptionController;
+  final String? title;
+  final String? description;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +45,7 @@ class SecondBadgeWidget extends StatelessWidget {
                   validator: Validators.validateString(),
                 ),
                 SizedBox(height: 23.h),
-                RowContainer(image: AppImages.t_message, text: 'Project Title'),
+                RowContainer(image: AppImages.t_message, text: title),
                 SizedBox(height: 10.h),
                 EditFormField(
                   controller: titleController,
@@ -49,16 +53,13 @@ class SecondBadgeWidget extends StatelessWidget {
                   label: 'Type here..',
                 ),
                 SizedBox(height: 23.h),
-                RowContainer(
-                    image: AppImages.brief_case,
-                    text: 'Describe your project and other specific details'),
+                RowContainer(image: AppImages.brief_case, text: description),
                 SizedBox(height: 10.h),
                 EditFormField(
-                  height: 150.h,
-                  label: 'Type here..',
-                  controller: descriptionController,
-                  validator: Validators.validateString(),
-                ),
+                    height: 150.h,
+                    label: 'Type here..',
+                    controller: descriptionController,
+                    validator: Validators.validateString()),
               ],
             ),
             borderRadiusGeometry: BorderRadius.zero,
