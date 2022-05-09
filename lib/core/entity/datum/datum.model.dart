@@ -11,7 +11,7 @@ import '../../../../../../core/entity/user/user.dart';
 import '../../enums/gig_type.dart';
 part 'datum.model.g.dart';
 
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake )
 @HiveType(typeId: 0)
 class Datum {
   @HiveField(0)

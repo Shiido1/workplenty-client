@@ -45,6 +45,7 @@ class _SearchTabState extends State<SearchTab> {
             SizedBox(height: 23.h),
             SearchAndFilter(
               hint: 'Search for talents',
+              showFilter: false,
               onFilter: () => eventBus.fire(DrawerEvent(context, true)),
               onChanged: (v) => _delay.run(() => _artisanProvider
                   ?.listOfArtisan(entity: GigEntity(searchKeyWord: v))),

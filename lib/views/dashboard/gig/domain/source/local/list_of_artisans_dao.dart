@@ -8,6 +8,7 @@ import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../../../../../core/entity/datum/datum.model.dart';
+import '../../../../../../core/helper/configs/instances.dart';
 
 ListOfArtisansDao? listOfArtisansDao;
 
@@ -24,10 +25,12 @@ class ListOfArtisansDao {
       HiveBoxes.openBox<Map>(HiveBoxes.listOfArtisans);
 
   Future<void> saveListOfArtisans(List<Datum>? data) async {
-    if (data!.isNotEmpty) await _box?.clear();
+    // if (data!.isNotEmpty) await _box?.clear();
+
+    await clearDb();
 
     final map = Map<String, Map>.fromIterable(
-      data,
+      data!,
       key: (g) => (g as Datum).user!.id.toString(),
       value: (g) => (g as Datum).toJson(),
     );

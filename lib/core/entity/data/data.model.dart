@@ -4,7 +4,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'data.model.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake)
 class Data {
   @JsonKey(name: 'pagination_meta')
   PaginationMeta? paginationMeta;

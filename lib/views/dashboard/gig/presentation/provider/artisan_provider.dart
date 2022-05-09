@@ -24,7 +24,7 @@ class ArtisanProvider extends BaseModel {
       _response!.fold((l) => logger.e(l.errorMessage(l)),
           (r) => listOfArtisansDao!.saveListOfArtisans(r.data?.data ?? []));
     } catch (e) {
-      logger.e('An error occurred while fetching artisans: $e');
+      logger.e('An error occurred while fetching artisan: $e');
     }
     setState(ViewState.idle);
   }

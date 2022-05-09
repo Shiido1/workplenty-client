@@ -5,7 +5,7 @@ import '../../../../../../core/entity/data/data.model.dart';
 
 part 'gigs_response.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake)
 class GigsResponse extends GigEntity {
   String? msg;
   Data? data;
