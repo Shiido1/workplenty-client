@@ -1,10 +1,8 @@
 import 'package:client/core/enums/gig_type.dart';
-import 'package:client/core/helper/configs/instances.dart';
 import 'package:client/core/helper/utils/pallets.dart';
 import 'package:client/views/dashboard/gig/domain/source/local/saved_gig_dao.dart';
 import 'package:client/views/dashboard/gig/presentation/provider/saved_gig_list_provider.dart';
 import 'package:client/views/dashboard/saved/tabs/freelance.dart';
-import 'package:client/views/dashboard/saved/tabs/service.dart';
 import 'package:client/views/dashboard/widget/custom_app_bar.dart';
 import 'package:client/views/widgets/text_views.dart';
 import 'package:flutter/material.dart';
@@ -49,6 +47,7 @@ class _SavedScreenState extends State<SavedScreen> {
       length: 3,
       child: Scaffold(
         appBar: getCustomAppBar(context, 'Saved',
+            isHome: true,
             bottom: TabBar(
               tabs: [
                 Container(
@@ -70,7 +69,7 @@ class _SavedScreenState extends State<SavedScreen> {
                 Container(
                     margin: EdgeInsets.only(bottom: 10.h),
                     child: TextView(
-                      text: 'Live Consultancy',
+                      text: 'Live',
                       color: Pallets.white,
                       maxLines: 1,
                       textOverflow: TextOverflow.ellipsis,
@@ -103,13 +102,13 @@ class _SavedScreenState extends State<SavedScreen> {
                                 .toList()),
                         FreelanceTab(
                             datum: _savedGigList
-                                .where(
-                                    (element) => element.type == GigType.HOME_SERVICE)
+                                .where((element) =>
+                                    element.type == GigType.HOME_SERVICE)
                                 .toList()),
                         FreelanceTab(
                             datum: _savedGigList
-                                .where(
-                                    (element) => element.type == GigType.LIVE_SESSION)
+                                .where((element) =>
+                                    element.type == GigType.LIVE_SESSION)
                                 .toList()),
                       ],
                     );

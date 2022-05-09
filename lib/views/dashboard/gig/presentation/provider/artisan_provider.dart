@@ -6,6 +6,8 @@ import 'package:client/views/dashboard/gig/domain/usecase/artisan_usecase.dart';
 
 import 'package:client/core/entity/datum/datum.model.dart';
 
+import '../../domain/entity/gig/gig_entity.dart';
+
 class ArtisanProvider extends BaseModel {
   final ArtisanUseCase _useCase;
 
@@ -14,15 +16,15 @@ class ArtisanProvider extends BaseModel {
 
   ArtisanProvider(this._useCase);
 
-  Future<void> listOfArtisan() async {
+  Future<void> listOfArtisan({GigEntity? entity}) async {
     try {
       if (listOfArtisansDao!.box!.isEmpty)
         setState(ViewState.busy, triggerListener: false);
-      final _response = await _useCase.listOfArtisan();
+      final _response = await _useCase.listOfArtisan(Params(entity: entity));
       _response!.fold((l) => logger.e(l.errorMessage(l)),
           (r) => listOfArtisansDao!.saveListOfArtisans(r.data?.data ?? []));
     } catch (e) {
-      logger.e('An error occurred: $e');
+      logger.e('An error occurred while fetching artisans: $e');
     }
     setState(ViewState.idle);
   }

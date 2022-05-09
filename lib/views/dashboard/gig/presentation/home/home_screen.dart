@@ -1,5 +1,6 @@
 import 'package:client/core/helper/routes/navigation.dart';
 import 'package:client/core/helper/utils/pallets.dart';
+import 'package:client/views/dashboard/gig/domain/entity/gig/gig_entity.dart';
 import 'package:client/views/dashboard/gig/domain/source/local/list_of_artisans_dao.dart';
 import 'package:client/views/dashboard/gig/presentation/provider/artisan_provider.dart';
 import 'package:client/views/dashboard/milestone/milestone.dart';

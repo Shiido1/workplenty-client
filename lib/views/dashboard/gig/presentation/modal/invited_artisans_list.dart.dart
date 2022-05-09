@@ -2,6 +2,7 @@ import 'package:client/core/enums/viewstate.dart';
 import 'package:client/core/helper/configs/instances.dart';
 import 'package:client/core/helper/helper_handler.dart';
 import 'package:client/core/helper/routes/navigation.dart';
+import 'package:client/views/dashboard/gig/domain/entity/gig/gig_entity.dart';
 import 'package:client/views/widgets/default_appbar.dart';
 import 'package:client/views/widgets/search_field.dart';
 import 'package:client/views/widgets/text_views.dart';

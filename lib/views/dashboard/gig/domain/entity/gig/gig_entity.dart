@@ -23,6 +23,7 @@ class GigEntity extends DefaultResponse {
   final List<int>? invited_artisan_ids;
   final ProjectType? projectType;
   final List<MilestoneModel>? milestones;
+  final String? searchKeyWord;
 
   GigEntity(
       {this.privateMessage,
@@ -41,6 +42,7 @@ class GigEntity extends DefaultResponse {
       this.attachments,
       this.invited_artisan_ids,
       this.projectType,
+      this.searchKeyWord,
       this.milestones});
 
   @override
@@ -91,6 +93,8 @@ class GigEntity extends DefaultResponse {
   Map<String, dynamic> availableListQuery() {
     return {};
   }
+
+  Map<String, dynamic> filterArtisan() => {'search_keywords': searchKeyWord};
 
   Map<String, dynamic> saveClientsGig() {
     return {

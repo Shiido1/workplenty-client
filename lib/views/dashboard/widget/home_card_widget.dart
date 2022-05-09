@@ -146,7 +146,7 @@ class HomeCard extends StatelessWidget {
   void saveProfile(BuildContext context) {
     WorkPlenty.success('Saved successfully');
     _bloc.add(SavedProfileEvent(SavedProfileEntity(
-        profileId: datum!.user!.id, type: GigType.FREELANCE)));
+        profileId: datum!.profile!.id, type: GigType.FREELANCE)));
   }
 
   Expanded _buildWidget(String image, String value) {

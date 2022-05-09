@@ -74,7 +74,7 @@ class _MainBoardState extends State<MainBoard> {
     _body = [Home(), SavedScreen(), SearchTab(), Profile(), MessageScreen()];
     _bodyTitle = ["Dashboard", "Saved", "Explore", "Profile", "Message"];
     return Scaffold(
-      appBar: index == 1 || index == 3
+      appBar: index == 1 || index == 2 || index == 3 || index == 4
           ? null
           : getCustomAppBar(context, _bodyTitle[index!], isHome: index == 0),
       endDrawer: MessageDrawerWidget(),

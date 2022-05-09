@@ -30,7 +30,7 @@ class UseCase<Type, Params> {
   Future<Either<Failure, Type>>? getDetailsOfGig(Params params) {}
   Future<Either<Failure, Type>>? categoriesOfGig() {}
   Future<Either<Failure, Type>>? listOfSkills() {}
-  Future<Either<Failure, Type>>? listOfArtisan() {}
+  Future<Either<Failure, Type>>? listOfArtisan(Params p) {}
   Future<Either<Failure, Type>>? listOfSavedGigs() {}
   Future<Either<Failure, Type>>? savedProfile(Params params) {}
   Future<Either<Failure, Type>>? savedProfileList() {}

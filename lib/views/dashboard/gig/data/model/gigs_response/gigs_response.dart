@@ -1,3 +1,4 @@
+import 'package:client/views/dashboard/gig/domain/entity/gig/gig_entity.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../../../../../core/entity/data/data.model.dart';
@@ -5,7 +6,7 @@ import '../../../../../../core/entity/data/data.model.dart';
 part 'gigs_response.g.dart';
 
 @JsonSerializable()
-class GigsResponse {
+class GigsResponse extends GigEntity {
   String? msg;
   Data? data;
   bool? success;
