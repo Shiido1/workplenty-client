@@ -19,7 +19,7 @@ Profile _$ProfileFromJson(Map<String, dynamic> json) => Profile(
       apartment: json['apartment'],
       zipcode: json['zipcode'],
       experienceLevel: json['experience_level'] as int?,
-      approvalStatus: json['approval_status'] as int?,
+      approvalStatus: json['approval_status'] as String?,
       weeklyHours: json['weekly_hours'],
       reviews: json['reviews'] as int?,
       avgRating: json['avg_rating'] as int?,

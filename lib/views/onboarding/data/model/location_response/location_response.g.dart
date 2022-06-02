@@ -14,10 +14,11 @@ LocationResponse _$LocationResponseFromJson(Map<String, dynamic> json) =>
           .toList(),
       success: json['success'] as bool?,
       code: json['code'] as int?,
-    );
+    )..errorDebug = json['errorDebug'];
 
 Map<String, dynamic> _$LocationResponseToJson(LocationResponse instance) =>
     <String, dynamic>{
+      'errorDebug': instance.errorDebug,
       'msg': instance.msg,
       'data': instance.data,
       'success': instance.success,

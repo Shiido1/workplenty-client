@@ -18,7 +18,7 @@ class Profile {
   @JsonKey(name: 'experience_level')
   int? experienceLevel;
   @JsonKey(name: 'approval_status')
-  int? approvalStatus;
+  String? approvalStatus;
   @JsonKey(name: 'weekly_hours')
   dynamic weeklyHours;
   int? reviews;
