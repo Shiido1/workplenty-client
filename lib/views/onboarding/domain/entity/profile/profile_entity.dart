@@ -29,11 +29,7 @@ class ProfileEntity extends DefaultResponse {
   });
 
   Map<String, dynamic> toMap() {
-    return {
-      'title': title,
-      'description': description,
-      'gender': gender,
-    };
+    return {'title': title, 'description': description};
   }
 
   Map<String, dynamic> toAvatar() {

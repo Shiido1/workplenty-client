@@ -5,6 +5,8 @@ import 'package:client/views/onboarding/data/sourceImpl/profileSourceImpl.dart';
 import 'package:client/views/onboarding/domain/contract/profile_contract.dart';
 import 'package:dartz/dartz.dart';
 
+import '../../../../core/database/session_manager.dart';
+
 class ProfileContractImpl implements ProfileContract {
   final ProfileSourceImpl _impl;
 
@@ -14,6 +16,8 @@ class ProfileContractImpl implements ProfileContract {
   Future<Either<Failure, DefaultResponse>> profileAvatarUpdate(entity) async {
     try {
       final _response = await _impl.profileAvatarUpdate(entity);
+      final _user = await _impl.profileInfo();
+      SessionManager.instance.usersData = _user.toJson();
       return Right(_response);
     } catch (e) {
       return Left(AppFailure(e.toString()));
@@ -24,6 +28,8 @@ class ProfileContractImpl implements ProfileContract {
   Future<Either<Failure, DefaultResponse>> profileBioUpdate(entity) async {
     try {
       final _response = await _impl.profileBioUpdate(entity);
+      final _user = await _impl.profileInfo();
+      SessionManager.instance.usersData = _user.toJson();
       return Right(_response);
     } catch (e) {
       return Left(AppFailure(e.toString()));
@@ -34,6 +40,8 @@ class ProfileContractImpl implements ProfileContract {
   Future<Either<Failure, DefaultResponse>> profileLocationUpdate(entity) async {
     try {
       final _response = await _impl.profileLocationUpdate(entity);
+      final _user = await _impl.profileInfo();
+      SessionManager.instance.usersData = _user.toJson();
       return Right(_response);
     } catch (e) {
       return Left(AppFailure(e.toString()));

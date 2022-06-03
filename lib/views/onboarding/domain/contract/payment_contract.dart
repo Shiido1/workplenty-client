@@ -5,8 +5,10 @@ import 'package:client/views/onboarding/data/model/payment/transaction_response/
 import 'package:client/views/onboarding/domain/entity/payment/deposit_entity.dart';
 import 'package:dartz/dartz.dart';
 
+import '../../../dashboard/profile/payout/data/model/overview_response/overview_response.dart';
+
 abstract class PaymentContract {
-  Future<Either<Failure, OverViewPaymentResponse>> overviewPayment();
+  Future<Either<Failure, OverviewResponse>> overviewPayment();
   Future<Either<Failure, DepositResponse>> depositPayment(DepositEntity entity);
   Future<Either<Failure, TransactionResponse>> transactionPayment();
 }

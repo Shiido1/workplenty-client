@@ -7,6 +7,7 @@ import 'package:client/views/widgets/text_views.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'update/bio_update.dart';
 import 'widget/clicks_two.dart';
 import 'widget/profile_image_two.dart';
 
@@ -33,7 +34,8 @@ class EditProfile extends StatelessWidget {
                           text:
                               '''WorkPlenty Inc\nLorem ipsum dolor sit amet, consectetur adipiscing 
 elit. Euismod eu eu erat nisl consectetur adipiscing.'''),
-                      onTap: () {}),
+                      onTap: () =>
+                          PageRouter.gotoWidget(const UpdateBio(), context)),
                   SizedBox(height: 32.h),
                   ClickTwo(
                       image: AppImages.edit_circle,

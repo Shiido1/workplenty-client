@@ -5,6 +5,7 @@ import 'package:client/views/onboarding/domain/entity/profile/profile_entity.dar
 import 'package:dio/dio.dart';
 
 import '../../../views/onboarding/data/model/location_response/location_response.dart';
+import '../../entity/user/user.dart';
 
 class ProfileApi {
   final NetworkService _networkService;
@@ -60,6 +61,16 @@ class ProfileApi {
       final _response =
           await _networkService.call(UrlConfig.countries, RequestMethod.get);
       return LocationResponse.fromJson(_response.data);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<User> profileInfo() async {
+    try {
+      final _response = await _networkService.call(
+          UrlConfig.clientProfile, RequestMethod.get);
+      return User.fromJson(_response.data['data']);
     } catch (e) {
       rethrow;
     }

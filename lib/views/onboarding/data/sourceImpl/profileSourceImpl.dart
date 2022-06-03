@@ -4,6 +4,8 @@ import 'package:client/views/onboarding/data/model/location_response/location_re
 import 'package:client/views/onboarding/domain/entity/profile/profile_entity.dart';
 import 'package:client/views/onboarding/domain/source/profile_source.dart';
 
+import '../../../../core/entity/user/user.dart';
+
 class ProfileSourceImpl implements ProfileSource {
   final ProfileApi _api;
 
@@ -23,6 +25,9 @@ class ProfileSourceImpl implements ProfileSource {
   Future<DefaultResponse> profileLocationUpdate(ProfileEntity entity) async {
     return await _api.profileLocationUpdate(entity);
   }
+
+  @override
+  Future<User> profileInfo() async => await _api.profileInfo();
 
   @override
   Future<LocationResponse> countries() async {

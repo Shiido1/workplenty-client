@@ -19,7 +19,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
           final _response =
               await _useCase.updateProfileBio(Params(entity: event.entity));
           _response!.fold(
-              (l) => logger.e(l), (r) => emit(ProfileSuccess(response: r)));
+              (l) => emit(ProfileFailed(message: l.errorMessage(l)!)),
+              (r) => emit(ProfileSuccess(response: r)));
         } catch (e) {
           emit(ProfileFailed(message: e.toString()));
         }

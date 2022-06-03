@@ -4,6 +4,8 @@ import 'package:client/core/api/card/card_api.dart';
 import 'package:client/core/api/chat/chat_api.dart';
 import 'package:client/core/api/gig/gig_api.dart';
 import 'package:client/core/api/industry/industry_api.dart';
+import 'package:client/core/api/payment/payment_api.dart';
+import 'package:client/core/api/profile/profile_api.dart';
 import 'package:client/core/api/review/review_api.dart';
 import 'package:client/core/database/hive_database.dart';
 import 'package:client/core/network/network_service.dart';
@@ -28,10 +30,16 @@ import 'package:client/views/dashboard/saved/domain/usecase/saved_profile_list_u
 import 'package:client/views/dashboard/saved/presentation/bloc/saved_profile_bloc_bloc.dart';
 import 'package:client/views/onboarding/data/contractImpl/authContractImpl.dart';
 import 'package:client/views/onboarding/data/contractImpl/industryContractImpl.dart';
+import 'package:client/views/onboarding/data/contractImpl/paymentContractImpl.dart';
+import 'package:client/views/onboarding/data/contractImpl/profileContractImpl.dart';
 import 'package:client/views/onboarding/data/sourceImpl/authSourceImpl.dart';
 import 'package:client/views/onboarding/data/sourceImpl/industrySourceImpl.dart';
+import 'package:client/views/onboarding/data/sourceImpl/paymentSourceImpl.dart';
+import 'package:client/views/onboarding/data/sourceImpl/profileSourceImpl.dart';
 import 'package:client/views/onboarding/domain/usecases/auth_usecases.dart';
+import 'package:client/views/onboarding/domain/usecases/profile_usecases.dart';
 import 'package:client/views/onboarding/presentation/authentication/bloc/authbloc_bloc.dart';
+import 'package:client/views/onboarding/presentation/profile/bloc/profile_bloc.dart';
 import 'package:client/views/review/data/contractImpl/review_contract_impl.dart';
 import 'package:client/views/review/data/source/fetch_industry_source_impl.dart';
 import 'package:client/views/review/domain/usecase/review_save_usecase.dart';
@@ -40,6 +48,7 @@ import 'package:client/views/review/presentation/bloc/bloc/review_bloc_bloc.dart
 import 'package:get_it/get_it.dart';
 import '../../views/dashboard/saved/data/sourceImpl/saved_profile_source_impl.dart';
 import '../../views/dashboard/saved/domain/usecase/saved_profile_usecase.dart';
+import '../../views/onboarding/domain/usecases/payment_usecase.dart';
 import '../api/saved_profile/saved_profile_api.dart';
 import '../database/session_manager.dart';
 import '../network/app_config.dart';
@@ -78,6 +87,7 @@ void _initBloc() {
   inject.registerLazySingleton<SavedProfileBlocBloc>(
       () => SavedProfileBlocBloc(inject()));
   inject.registerLazySingleton<ReviewBlocBloc>(() => ReviewBlocBloc(inject()));
+  inject.registerLazySingleton<ProfileBloc>(() => ProfileBloc(inject()));
 }
 
 /// Initialize data sources implementations
@@ -100,6 +110,10 @@ void _initDataSources() {
       () => ReviewSourceImpl(api: inject()));
   inject.registerLazySingleton<SavedGigListSourceImpl>(
       () => SavedGigListSourceImpl(api: inject()));
+  inject.registerLazySingleton<ProfileSourceImpl>(
+      () => ProfileSourceImpl(api: inject()));
+  inject.registerLazySingleton<PaymentSourceImpl>(
+      () => PaymentSourceImpl(api: inject()));
 }
 
 /// Initialize data repositories implementations
@@ -122,6 +136,10 @@ void _initDataContracts() {
       () => ReviewContractImpl(inject()));
   inject.registerLazySingleton<SavedGigListContractImpl>(
       () => SavedGigListContractImpl(inject()));
+  inject.registerLazySingleton<ProfileContractImpl>(
+      () => ProfileContractImpl(inject()));
+  inject.registerLazySingleton<PaymentContractImpl>(
+      () => PaymentContractImpl(inject()));
 }
 
 /// Initialize services's here
@@ -143,6 +161,10 @@ void _initServices() {
       () => ReviewApi(networkService: inject()));
   inject.registerLazySingleton<IndustryApi>(
       () => IndustryApi(networkService: inject()));
+  inject.registerLazySingleton<ProfileApi>(
+      () => ProfileApi(networkService: inject()));
+  inject.registerLazySingleton<PaymentApi>(
+      () => PaymentApi(networkService: inject()));
 }
 
 /// Initialize usecases here
@@ -162,4 +184,6 @@ void _initializeUsecase() {
       () => SaveReviewUsesCases(inject()));
   inject.registerLazySingleton<SavedGigListUseCase>(
       () => SavedGigListUseCase(inject()));
+  inject.registerLazySingleton<ProfileUseCases>(() => ProfileUseCases(inject()));
+  inject.registerLazySingleton<PaymentUsecase>(() => PaymentUsecase(inject()));
 }

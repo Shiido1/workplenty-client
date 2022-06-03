@@ -4,17 +4,18 @@ import 'package:client/core/helper/routes/routes.dart';
 import 'package:client/core/helper/utils/images.dart';
 import 'package:client/core/helper/utils/pallets.dart';
 import 'package:client/views/dashboard/profile/manage/manage.dart';
-import 'package:client/views/dashboard/profile/payout/payout_screen.dart';
 import 'package:client/views/dashboard/profile/request/requests.dart';
 import 'package:client/views/dashboard/profile/statistics/statistics.dart';
 import 'package:client/views/dashboard/profile/widget/clicks_one.dart';
-import 'package:client/views/dashboard/profile/widget/profile_image.dart';
 import 'package:client/views/widgets/text_views.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../core/helper/helper_handler.dart';
 import 'bids/presentation/bids.dart';
 import 'edit_profile.dart';
+import 'payout/presentation/payout.dart';
+import 'widget/profile_image_one.dart';
 
 class Profile extends StatelessWidget {
   const Profile({Key? key}) : super(key: key);
@@ -43,9 +44,10 @@ class Profile extends StatelessWidget {
                     SizedBox(width: 44.w),
                     Expanded(
                       child: ClickOne(
-                          image: AppImages.share,
-                          color: Pallets.primary100,
-                          text: 'Share'),
+                        image: AppImages.share,
+                        text: 'Share Profile',
+                        onTap: () => Utils.share('What are we sharing?'),
+                      ),
                     ),
                   ],
                 ),
@@ -80,8 +82,7 @@ class Profile extends StatelessWidget {
                     image: AppImages.payout,
                     text: 'Payout',
                     trailing: true,
-                    onTap: () =>
-                        PageRouter.gotoWidget(PayoutScreen(), context)),
+                    onTap: () => PageRouter.gotoWidget(Payouts(), context)),
                 SizedBox(height: 16.h),
                 ClickOne(
                     image: AppImages.manage,

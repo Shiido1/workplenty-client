@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../../core/helper/helper_handler.dart';
+import '../../../../core/helper/helper_handler.dart';
 import '../../../../core/helper/routes/navigation.dart';
 import '../../../../core/helper/utils/images.dart';
 import '../../../../core/helper/utils/pallets.dart';
@@ -11,8 +11,8 @@ import '../../../widgets/image_loader.dart';
 import '../../../widgets/text_views.dart';
 import '../stateManagers/provider/profile_provider.dart';
 
-class ProfileImageCardThree extends StatelessWidget {
-  const ProfileImageCardThree({Key? key}) : super(key: key);
+class ProfileImageCardOne extends StatelessWidget {
+  const ProfileImageCardOne({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Consumer<ProfileProvider>(
@@ -34,19 +34,18 @@ class ProfileImageCardThree extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  IconButton(
-                      padding: EdgeInsets.zero,
-                      onPressed: () => PageRouter.goBack(context),
-                      icon: Icon(Icons.arrow_back, color: Pallets.white)),
+                  ImageLoader(
+                      path: AppImages.whiteLogo, height: 24.h, width: 24.w),
                   TextView(
-                      text: 'Manage Profile',
+                      text: 'Profile',
                       fontWeight: FontWeight.w700,
                       fontSize: 22,
                       color: Pallets.white,
                       textAlign: TextAlign.center),
-                  SizedBox(
-                    height: 50.h,
-                    width: 50.w,
+                  ImageLoader(
+                    path: AppImages.bell,
+                    /*   onTap: () =>
+                        PageRouter.gotoWidget(NotificationScreen(), context), */
                   )
                 ],
               ),
@@ -54,7 +53,7 @@ class ProfileImageCardThree extends StatelessWidget {
               CircularImage(
                 path: profile.user?.avatar,
                 radius: 60.r,
-                initial: Utils.getInitials(profile.user?.firstName ?? ''),
+                initial: Utils.getInitials(profile.user?.firstName ?? 'WP'),
               ),
               SizedBox(height: 16.h),
               Row(
@@ -92,7 +91,7 @@ class ProfileImageCardThree extends StatelessWidget {
                   SvgPicture.asset(AppImages.map),
                   SizedBox(width: 4.w),
                   TextView(
-                      text: 'Abuja, Nigeria',
+                      text: '${profile.user?.firstName}',
                       fontWeight: FontWeight.w500,
                       fontSize: 14,
                       color: Pallets.grey100,

@@ -472,7 +472,6 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
                           ),
                         ]),
                   );
-                
                 },
               ),
             ),

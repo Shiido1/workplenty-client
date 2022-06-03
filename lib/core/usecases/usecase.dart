@@ -40,6 +40,10 @@ class UseCase<Type, Params> {
   Future<Either<Failure, Type>>? generalIndustryList() {}
   Future<Either<Failure, Type>>? countries() {}
   Future<Either<Failure, Type>>? states(Params p) {}
+
+  Future<Either<Failure, Type>>? depositPayment(Params p) {}
+  Future<Either<Failure, Type>>? overviewPayment() {}
+  Future<Either<Failure, Type>>? transactionPayment() {}
 }
 
 class NoParams extends Equatable {
