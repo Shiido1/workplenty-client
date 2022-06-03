@@ -38,6 +38,10 @@ class ProfileUseCases extends UseCase<DefaultResponse, Params> {
   Future<Either<Failure, LocationResponse>>? states(Params p) async {
     return await _repository.state(p.entity!);
   }
+
+  @override
+  Future<Either<Failure, DefaultResponse>>? updateAccount(Params p) async =>
+      await _repository.updateAccount(p.entity!);
 }
 
 class Params extends Equatable {

@@ -38,4 +38,8 @@ class ProfileSourceImpl implements ProfileSource {
   Future<LocationResponse> states(int entity) async {
     return await _api.getListOfStates(entity);
   }
+
+  @override
+  Future<DefaultResponse> updateAccount(ProfileEntity entity) async =>
+      await _api.updateAccount(entity);
 }

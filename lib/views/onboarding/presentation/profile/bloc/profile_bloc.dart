@@ -26,6 +26,20 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         }
       }
 
+      /// Updates  account
+      if (event is UpdateAccount) {
+        try {
+          emit(ProfileLoading());
+          final _response =
+              await _useCase.updateAccount(Params(entity: event.entity));
+          _response!.fold(
+              (l) => emit(ProfileFailed(message: l.errorMessage(l)!)),
+              (r) => emit(ProfileSuccess(response: r)));
+        } catch (e) {
+          emit(ProfileFailed(message: e.toString()));
+        }
+      }
+
       /// Location event
       if (event is LocationProfileUpdate) {
         try {

@@ -75,4 +75,15 @@ class ProfileApi {
       rethrow;
     }
   }
+
+  Future<DefaultResponse> updateAccount(ProfileEntity entity) async {
+    try {
+      final _response = await _networkService.call(
+          UrlConfig.updateAccount, RequestMethod.post,
+          data: entity.updateAccount());
+      return DefaultResponse.fromJson(_response.data);
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

@@ -13,6 +13,12 @@ class BioProfileUpdate extends ProfileEvent {
   const BioProfileUpdate(this.entity);
 }
 
+class UpdateAccount extends ProfileEvent {
+  final ProfileEntity entity;
+
+  const UpdateAccount(this.entity);
+}
+
 class LocationProfileUpdate extends ProfileEvent {
   final ProfileEntity entity;
 

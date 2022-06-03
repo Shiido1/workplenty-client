@@ -11,4 +11,5 @@ abstract class ProfileSource {
   Future<LocationResponse> countries();
   Future<LocationResponse> states(int entity);
   Future<User> profileInfo();
+  Future<DefaultResponse> updateAccount(ProfileEntity entity);
 }

@@ -26,17 +26,19 @@ class User extends HiveObject {
   @JsonKey(name: 'created_at')
   @HiveField(8)
   String? createdAt;
+  @HiveField(8)
+  String? username;
 
-  User({
-    this.id,
-    this.avatar,
-    this.firstName,
-    this.lastName,
-    this.email,
-    this.phone,
-    this.role,
-    this.createdAt,
-  });
+  User(
+      {this.id,
+      this.avatar,
+      this.firstName,
+      this.lastName,
+      this.email,
+      this.phone,
+      this.role,
+      this.createdAt,
+      this.username});
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
