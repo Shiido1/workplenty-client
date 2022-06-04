@@ -6,6 +6,7 @@ import 'package:client/views/onboarding/domain/contract/profile_contract.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/database/session_manager.dart';
+import '../../domain/entity/address/address_entity.dart';
 import '../../domain/entity/profile/profile_entity.dart';
 
 class ProfileContractImpl implements ProfileContract {
@@ -76,6 +77,20 @@ class ProfileContractImpl implements ProfileContract {
       final _response = await _impl.updateAccount(entity);
       final _user = await _impl.profileInfo();
       SessionManager.instance.usersData = _user.toJson();
+      return Right(_response);
+    } catch (e) {
+      return Left(AppFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, DefaultResponse>> updateAddress(
+      AddressEntity entity) async {
+    try {
+      final _response = await _impl.updateAddress(entity);
+      final _address = await _impl.profileAddress();
+
+      // SessionManager.instance.artisanAddress = _address.data?.toJson();
       return Right(_response);
     } catch (e) {
       return Left(AppFailure(e.toString()));

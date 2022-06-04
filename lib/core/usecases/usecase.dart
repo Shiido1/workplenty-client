@@ -23,6 +23,7 @@ class UseCase<Type, Params> {
   Future<Either<Failure, Type>>? getAllCardUseCase() {}
   Future<Either<Failure, Type>>? chatListUseCase() {}
   Future<Either<Failure, Type>>? updateAccount(Params p) {}
+  Future<Either<Failure, Type>>? updateAddress(Params p) {}
   Future<Either<Failure, Type>>? saveClientsGig(Params params) {}
   Future<Either<Failure, Type>>? removeAttachment(Params params) {}
   Future<Either<Failure, Type>>? savedGigsSave(Params params) {}

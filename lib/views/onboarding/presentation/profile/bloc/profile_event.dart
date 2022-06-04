@@ -19,6 +19,12 @@ class UpdateAccount extends ProfileEvent {
   const UpdateAccount(this.entity);
 }
 
+class UpdateAddress extends ProfileEvent {
+  final AddressEntity entity;
+
+  const UpdateAddress(this.entity);
+}
+
 class LocationProfileUpdate extends ProfileEvent {
   final ProfileEntity entity;
 

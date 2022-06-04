@@ -4,6 +4,8 @@ import 'package:client/views/onboarding/domain/entity/profile/profile_entity.dar
 import 'package:client/views/onboarding/domain/usecases/profile_usecases.dart';
 import 'package:equatable/equatable.dart';
 
+import '../../../domain/entity/address/address_entity.dart';
+
 part 'profile_event.dart';
 part 'profile_state.dart';
 
@@ -32,6 +34,20 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
           emit(ProfileLoading());
           final _response =
               await _useCase.updateAccount(Params(entity: event.entity));
+          _response!.fold(
+              (l) => emit(ProfileFailed(message: l.errorMessage(l)!)),
+              (r) => emit(ProfileSuccess(response: r)));
+        } catch (e) {
+          emit(ProfileFailed(message: e.toString()));
+        }
+      }
+
+      /// Updates artisans address
+      if (event is UpdateAddress) {
+        try {
+          emit(ProfileLoading());
+          final _response =
+              await _useCase.updateAddress(Params(entity: event.entity));
           _response!.fold(
               (l) => emit(ProfileFailed(message: l.errorMessage(l)!)),
               (r) => emit(ProfileSuccess(response: r)));

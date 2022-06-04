@@ -5,6 +5,7 @@ import 'package:client/views/onboarding/domain/entity/profile/profile_entity.dar
 import 'package:dio/dio.dart';
 
 import '../../../views/onboarding/data/model/location_response/location_response.dart';
+import '../../../views/onboarding/domain/entity/address/address_entity.dart';
 import '../../entity/user/user.dart';
 
 class ProfileApi {
@@ -82,6 +83,27 @@ class ProfileApi {
           UrlConfig.updateAccount, RequestMethod.post,
           data: entity.updateAccount());
       return DefaultResponse.fromJson(_response.data);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<DefaultResponse> updateAddress(AddressEntity entity) async {
+    try {
+      final _response = await _networkService.call(
+          UrlConfig.updateAddress, RequestMethod.post,
+          data: entity.toMap());
+      return DefaultResponse.fromJson(_response.data);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<dynamic> profileAddress() async {
+    try {
+      final _response = await _networkService.call(
+          UrlConfig.artisanAddress, RequestMethod.get);
+      return;
     } catch (e) {
       rethrow;
     }

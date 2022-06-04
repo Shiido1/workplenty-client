@@ -16,6 +16,8 @@ class UrlConfig {
   static const String depositPayment = 'client/payment/deposit';
   static const String clientProfile = 'client/profile/information';
   static const String updateAccount = 'account/account/update';
+  static const String artisanAddress = 'account/address/get';
+  static const String updateAddress = 'account/address/update';
 
   static const String listCard = 'client/payment/card/list';
   static const String saveCard = 'client/card/save';

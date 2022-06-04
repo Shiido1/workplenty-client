@@ -5,6 +5,7 @@ import 'package:client/views/onboarding/domain/entity/profile/profile_entity.dar
 import 'package:client/views/onboarding/domain/source/profile_source.dart';
 
 import '../../../../core/entity/user/user.dart';
+import '../../domain/entity/address/address_entity.dart';
 
 class ProfileSourceImpl implements ProfileSource {
   final ProfileApi _api;
@@ -42,4 +43,11 @@ class ProfileSourceImpl implements ProfileSource {
   @override
   Future<DefaultResponse> updateAccount(ProfileEntity entity) async =>
       await _api.updateAccount(entity);
+
+  @override
+  Future<DefaultResponse> updateAddress(AddressEntity entity) async =>
+      await _api.updateAddress(entity);
+
+  @override
+  Future<dynamic> profileAddress() async => await _api.profileAddress();
 }
