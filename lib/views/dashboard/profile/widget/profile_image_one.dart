@@ -4,7 +4,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/helper/helper_handler.dart';
-import '../../../../core/helper/routes/navigation.dart';
 import '../../../../core/helper/utils/images.dart';
 import '../../../../core/helper/utils/pallets.dart';
 import '../../../widgets/image_loader.dart';

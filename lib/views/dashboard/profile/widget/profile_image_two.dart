@@ -135,7 +135,10 @@ class ProfileImageCardTwo extends StatelessWidget {
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    SvgPicture.asset(AppImages.map),
+                    SvgPicture.asset(
+                      AppImages.map,
+                      color: Pallets.white,
+                    ),
                     SizedBox(width: 4.w),
                     TextView(
                         text: 'Abuja, Nigeria',
