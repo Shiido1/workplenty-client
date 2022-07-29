@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_if_null_operators
 
 import 'package:client/core/helper/utils/pallets.dart';
+import 'package:client/views/widgets/text_views.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -134,7 +135,6 @@ class EditFormField extends StatelessWidget {
       onSaved: onSaved,
       onChanged: onChange,
       maxLines: maxLines,
-
       // autovalidate: autoValidate,
       style: GoogleFonts.dmSans(
           fontWeight: FontWeight.w400,
@@ -161,8 +161,8 @@ class EditFormField extends StatelessWidget {
               floatingLabelBehavior: floatingLabelBehavior,
               alignLabelWithHint: alignLabelWithHint,
               errorStyle: const TextStyle(color: Colors.red),
-              contentPadding: edgeInsetsGeometry ??
-                  EdgeInsets.symmetric(vertical: 16.h, horizontal: 16.w),
+              contentPadding:
+                  edgeInsetsGeometry ?? EdgeInsets.symmetric(horizontal: 16.w),
               hintText: hint,
               hintStyle: hintStyle ??
                   GoogleFonts.dmSans(

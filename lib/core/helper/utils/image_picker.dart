@@ -55,8 +55,8 @@ class ImagePickerHandler {
                           onTap: () => Navigator.pop(
                               context, ProfileOptionAction.profileCamera)),
                       InkWell(
-                        onTap: () => Navigator.pop(context,
-                            ProfileOptionAction.remove),
+                        onTap: () =>
+                            Navigator.pop(context, ProfileOptionAction.remove),
                         child: Container(
                           width: MediaQuery.of(context).size.width,
                           padding: EdgeInsets.all(12.0),
@@ -126,13 +126,12 @@ class ImagePickerHandler {
             ? [CropAspectRatioPreset.square]
             : [CropAspectRatioPreset.square],
         androidUiSettings: AndroidUiSettings(
-            toolbarTitle: 'LifeStyleHub',
-            toolbarColor: Pallets.orange600
-            toolbarWidgetColor: Colors.white,
+            toolbarTitle: 'Workplenty',
+            toolbarColor: Pallets.orange600,
             initAspectRatio: CropAspectRatioPreset.original,
             lockAspectRatio: false),
         iosUiSettings: IOSUiSettings(
-          title: 'LifeStyleHub',
+          title: 'Workplenty',
         ));
     final _response = await _compressImageFiles(croppedFile!);
 
@@ -164,10 +163,10 @@ class ImagePickerHandler {
   String _generateKey(int length) => String.fromCharCodes(Iterable.generate(
       length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
 
-/// Convert image to Multipath
-MultipartFile multiPathFile(File file){
-  return MultipartFile.fromBytes(file.readAsBytesSync(),
-              filename: file.path.split("/").last,
-              contentType:
-                  MediaType("image", file.path.split("/").last));
-}}
+  /// Convert image to Multipath
+  MultipartFile multiPathFile(File file) {
+    return MultipartFile.fromBytes(file.readAsBytesSync(),
+        filename: file.path.split("/").last,
+        contentType: MediaType("image", file.path.split("/").last));
+  }
+}

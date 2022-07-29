@@ -1,6 +1,12 @@
+// ignore_for_file: must_be_immutable, unused_field
+
+import 'package:client/core/enums/payment_type.dart';
+import 'package:client/core/helper/helper_handler.dart';
 import 'package:client/core/helper/routes/navigation.dart';
+import 'package:client/core/helper/utils/date_picker.dart';
 import 'package:client/core/helper/utils/images.dart';
 import 'package:client/core/helper/utils/pallets.dart';
+import 'package:client/core/helper/utils/validators.dart';
 import 'package:client/views/dashboard/gig/presentation/widget/row_container_widget.dart';
 import 'package:client/views/widgets/body_widget.dart';
 import 'package:client/views/widgets/buttons.dart';
@@ -12,8 +18,40 @@ import 'package:client/views/widgets/text_views.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class LiveConsultancy extends StatelessWidget {
-  const LiveConsultancy({Key? key}) : super(key: key);
+import '../../../../../core/entity/skills/skill.dart';
+import '../../../../../core/entity/user/user.dart';
+import '../../../../widgets/bottom_sheet.dart';
+import '../modal/invited_artisans_list.dart.dart';
+import '../modal/job_category_modal.dart';
+import 'freelance/widgets/first.dart';
+import 'freelance/widgets/second.dart';
+
+class LiveConsultancy extends StatefulWidget {
+  LiveConsultancy({Key? key}) : super(key: key);
+
+  @override
+  State<LiveConsultancy> createState() => _LiveConsultancyState();
+}
+
+class _LiveConsultancyState extends State<LiveConsultancy> {
+  final TextEditingController privateMessageController =
+      TextEditingController();
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController _jobCategoryController = TextEditingController();
+  final TextEditingController _experienceController = TextEditingController();
+  final TextEditingController _budgetController = TextEditingController();
+  final TextEditingController _timeController = TextEditingController();
+  final TextEditingController _addressController = TextEditingController();
+  final TextEditingController _fromDateController = TextEditingController();
+  final TextEditingController _toDateController = TextEditingController();
+
+  PaymentType _paymentType = PaymentType.cash;
+  List<Skill>? _skillList = [];
+  int? _experienceIndex;
+  List<int> _artisansId = [];
+  List<String> _selectedSkills = [];
+  List<User> _artisans = [];
 
   @override
   Widget build(BuildContext context) {
@@ -25,88 +63,71 @@ class LiveConsultancy extends StatelessWidget {
               onPressed: () => PageRouter.goBack(context),
             ),
             textColor: Pallets.white,
-            title: 'Live Consultancy'),
+            title: 'Live Consultancy',
+            centerTitle: true),
         body: BodyWidget(
           child: ListView(children: [
             SizedBox(
               height: 10.h,
             ),
-            ReviewBgCard(
-              Row(children: [
-                ImageLoader(
-                  path: AppImages.pickie,
-                ),
-                SizedBox(
-                  width: 13.w,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    TextView(
-                      text: 'Charles Damien',
-                      maxLines: 1,
-                      fontSize: 17,
-                      fontWeight: FontWeight.w800,
-                      textAlign: TextAlign.left,
-                    ),
-                    TextView(
-                      text: 'Technical Writer',
-                      maxLines: 1,
-                      fontWeight: FontWeight.w500,
-                      textAlign: TextAlign.left,
-                    ),
-                  ],
-                )
-              ]),
+            First(),
+            SizedBox(height: 23.h),
+            SecondBadgeWidget(
+              privateMessageController: privateMessageController,
+              titleController: titleController,
+              descriptionController: descriptionController,
+              title: 'Live Consultancy Title',
+              description: 'Describe your live consultancy details',
             ),
             SizedBox(
-              height: 10.h,
+              height: 20.h,
             ),
-            ReviewBgCard(
-              Column(
-                children: [
-                  RowContainer(
-                      image: AppImages.message,
-                      text: 'Private Message to Charles Damien'),
-                  EditFormField(
-                    height: 150.h,
-                    label: 'Type here..',
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  RowContainer(
-                      image: AppImages.t_message, text: 'Project Title'),
-                  EditFormField(),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  RowContainer(
-                      image: AppImages.t_message,
-                      text: 'Describe your project and specific details'),
-                  EditFormField(
-                    height: 150.h,
-                    label: 'Type here..',
-                  ),
-                ],
-              ),
-            ),
+            ReviewBgCard(Column(
+              children: [
+                RowContainer(
+                    image: AppImages.brief_case, text: 'Session Category'),
+                EditFormField(
+                  label: 'Web Development',
+                  suffixWidget: ImageLoader(path: AppImages.vector),
+                  readOnly: true,
+                  controller: _jobCategoryController,
+                  validator: Validators.validateString(),
+                  onTapped: () {
+                    BottomSheets.showSheet<String>(
+                      context,
+                      child: JobCategoryModal(callBack: (data) {
+                        _jobCategoryController.text = data?.name ?? '';
+                        setState(() {});
+                      }),
+                    );
+                  },
+                ),
+              ],
+            )),
             SizedBox(
-              height: 60.h,
+              height: 40.h,
             ),
-            ReviewBgCard(
-              Column(
-                children: [
-                  RowContainer(
-                      image: AppImages.brief_case, text: 'Session Category'),
-                  EditFormField(
-                      label: 'Wed Development',
-                      suffixWidget: ImageLoader(
-                        path: AppImages.vector,
-                      )),
-                ],
-              ),
-            ),
+            ReviewBgCard(Column(
+              children: [
+                RowContainer(
+                    image: AppImages.calender, text: 'Session Date & Time'),
+                EditFormField(
+                  suffixWidget: ImageLoader(path: AppImages.vector),
+                  label: 'From',
+                  readOnly: true,
+                  controller: _fromDateController,
+                  validator: Validators.validateString(),
+                  onTapped: () => pickDate(
+                      context: context,
+                      dateOptions: DateOptions.future,
+                      showTime: true,
+                      onChange: (d) {
+                        _fromDateController.text = d;
+                        setState(() {});
+                      }),
+                ),
+              ],
+            )),
             SizedBox(
               height: 20.h,
             ),
@@ -114,24 +135,17 @@ class LiveConsultancy extends StatelessWidget {
               Column(
                 children: [
                   RowContainer(
-                      image: AppImages.calender, text: 'Session Date & Time'),
-                  EditFormField(
-                    label: 'Now',
-                  ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  RowContainer(
                       image: AppImages.emptyWallet, text: 'Budget per hour'),
                   EditFormField(
                     label: 'NGN',
+                    controller: _budgetController,
+                    validator: Validators.validateInt(),
+                    keyboardType: TextInputType.number,
                   ),
                 ],
               ),
             ),
-            SizedBox(
-              height: 50.h,
-            ),
+            SizedBox(height: 23.h),
             ReviewBgCard(
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -140,53 +154,58 @@ class LiveConsultancy extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Expanded(
-                        child: RowContainer(
-                            image: AppImages.arrange, text: 'Invite Artisan'),
-                      ),
+                          child: RowContainer(
+                              image: AppImages.arrange,
+                              text: 'Invite Artisan')),
                       Expanded(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            TextView(
-                              text: 'Invite',
-                              maxLines: 1,
-                              fontWeight: FontWeight.w700,
-                              textAlign: TextAlign.left,
-                            ),
-                            SizedBox(
-                              width: 8.w,
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(5)),
-                                  border: Border.all(color: Pallets.grey)),
-                              child: Icon(
-                                Icons.add,
-                                size: 13,
+                        child: InkWell(
+                          onTap: () {
+                            BottomSheets.showSheet<String>(
+                              context,
+                              child: InviteArtisansModal(callBack: (l) {
+                                _artisans = l ?? [];
+                                setState(() {});
+                              }),
+                            );
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              TextView(
+                                text: 'Invite',
+                                maxLines: 1,
+                                fontWeight: FontWeight.w700,
+                                textAlign: TextAlign.left,
                               ),
-                            )
-                          ],
+                              SizedBox(width: 10.w),
+                              Container(
+                                decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5)),
+                                    border: Border.all(color: Pallets.grey)),
+                                child: Icon(
+                                  Icons.add,
+                                  size: 13,
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       )
                     ],
-                  ),
-                  TextView(
-                    text: 'Charles Damien',
-                    color: Pallets.grey,
                   ),
                 ],
               ),
             ),
             SizedBox(
-              height: 30.h,
+              height: 10.h,
             ),
             ButtonWidget(
               buttonText: 'Start Session & Invite Artisan',
               fontSize: 18.sp,
               fontWeight: FontWeight.w700,
               onPressed: () {},
-              height: 50.h,
+              width: Utils.getDeviceWidth(context),
             ),
             SizedBox(
               height: 40,
@@ -194,4 +213,16 @@ class LiveConsultancy extends StatelessWidget {
           ]),
         ));
   }
+
+  tap(String value) => Container(
+        padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 7.h),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5.r),
+            color: Pallets.primary100),
+        child: TextView(
+            color: Pallets.white,
+            text: value,
+            fontWeight: FontWeight.w500,
+            textAlign: TextAlign.center),
+      );
 }

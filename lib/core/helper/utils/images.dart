@@ -78,4 +78,6 @@ class AppImages {
   static String profile_hire = 'assets/svgs/profile-hire.svg';
   static String master = 'assets/svgs/master_card.svg';
   static String webgroup = 'assets/svgs/web-group.svg';
+  static String layer = 'assets/svgs/layer.svg';
+  static String video = 'assets/svgs/video.svg';
 }

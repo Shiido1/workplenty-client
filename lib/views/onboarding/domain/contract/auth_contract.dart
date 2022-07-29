@@ -4,7 +4,8 @@ import 'package:client/views/onboarding/domain/entity/auth/auth_entity.dart';
 import 'package:dartz/dartz.dart';
 
 abstract class AuthContract {
-  Future<Either<Failure, AuthResponse>> socialAuthentication(AuthEntity entity);
+  Future<Either<Failure, AuthResponse>> googleAuth();
+  Future<Either<Failure, AuthResponse>> facebookAuth();
   Future<Either<Failure, AuthResponse>> login(AuthEntity entity);
   Future<Either<Failure, AuthResponse>> register(AuthEntity entity);
   Future<Either<Failure, AuthResponse>> forgotPassword(AuthEntity entity);

@@ -1,112 +1,177 @@
-import 'package:client/core/helper/routes/navigation.dart';
-import 'package:client/core/helper/utils/images.dart';
-import 'package:client/core/helper/utils/pallets.dart';
-import 'package:client/views/widgets/image_loader.dart';
-import 'package:client/views/widgets/text_views.dart';
+// ignore_for_file: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
+
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../core/di/injector.dart';
+import '../../../../core/helper/helper_handler.dart';
+import '../../../../core/helper/routes/navigation.dart';
+import '../../../../core/helper/utils/image_picker.dart';
+import '../../../../core/helper/utils/images.dart';
+import '../../../../core/helper/utils/pallets.dart';
+import '../../../../core/helper/utils/workplenty_dialog.dart';
+import '../../../onboarding/domain/entity/profile/profile_entity.dart';
+import '../../../onboarding/presentation/profile/bloc/profile_bloc.dart';
+import '../../../widgets/image_loader.dart';
+import '../../../widgets/text_views.dart';
+import '../stateManagers/provider/profile_provider.dart';
+
+final _bloc = ProfileBloc(inject());
+final _pickImage = ImagePickerHandler();
+File? _imageFile;
+final _loadingKey = GlobalKey<FormState>();
 
 class ProfileImageCardTwo extends StatelessWidget {
   const ProfileImageCardTwo({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding:
-          EdgeInsets.only(top: 80.h, left: 16.w, right: 16.w, bottom: 16.w),
-      decoration: new BoxDecoration(
-          color: Pallets.primary100,
-          image: new DecorationImage(
-            fit: BoxFit.cover,
-            image: new AssetImage(AppImages.union),
-          ),
-          borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(30.r),
-              bottomRight: Radius.circular(30.r))),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              IconButton(
-                  padding: EdgeInsets.zero,
-                  onPressed: () => PageRouter.goBack(context),
-                  icon: Icon(Icons.arrow_back, color: Pallets.white)),
-              TextView(
-                  text: 'Edit Profile',
-                  fontWeight: FontWeight.w700,
-                  fontSize: 22,
-                  color: Pallets.white,
-                  textAlign: TextAlign.center),
-              ImageLoader(
-                path: AppImages.bell,
-                // onTap: () =>
-                //     PageRouter.gotoWidget(NotificationScreen(), context),
-              )
-            ],
-          ),
-          SizedBox(height: 55.h),
-          Stack(
-            children: [
-              Container(
-                padding: EdgeInsets.all(23),
-                child: CircleAvatar(radius: 60.r),
-              ),
-              Positioned(
-                  left: 110.w,
-                  top: 20.h,
-                  child: ImageLoader(path: AppImages.pen))
-            ],
-          ),
-          SizedBox(height: 16.h),
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextView(
-                  text: 'Daniel James',
-                  fontWeight: FontWeight.w700,
-                  fontSize: 18,
-                  color: Pallets.white,
-                  maxLines: 1,
-                  textOverflow: TextOverflow.ellipsis,
-                  textAlign: TextAlign.left),
-              SizedBox(width: 8.w),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 4.h),
-                decoration: BoxDecoration(
-                    color: Pallets.orange600,
-                    borderRadius: BorderRadius.circular(10.r),
-                    border: Border.all(color: Pallets.orange600)),
-                child: TextView(
-                    text: 'Client',
-                    fontSize: 10,
-                    fontWeight: FontWeight.w400,
-                    color: Pallets.white,
-                    textAlign: TextAlign.center),
-              )
-            ],
-          ),
-          SizedBox(height: 22.h),
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              SvgPicture.asset(
-                AppImages.location,
-                color: Pallets.white,
-              ),
-              SizedBox(width: 4.w),
-              TextView(
-                  text: 'Abuja, Nigeria',
-                  fontWeight: FontWeight.w700,
-                  fontSize: 16,
-                  color: Pallets.grey100,
-                  maxLines: 1,
-                  textOverflow: TextOverflow.ellipsis,
-                  textAlign: TextAlign.left),
-            ],
-          ),
-        ],
+    return BlocListener<ProfileBloc, ProfileState>(
+      bloc: _bloc,
+      listener: (context, state) {
+        if (state is ProfileLoading) {
+          WorkPlenty.showLoading(context, _loadingKey, '');
+        }
+        if (state is ProfileSuccess) {
+          WorkPlenty.hideLoading(_loadingKey);
+          Provider.of<ProfileProvider>(context, listen: false).getMyProfile();
+        }
+        if (state is ProfileFailed) {
+          WorkPlenty.hideLoading(_loadingKey);
+          WorkPlenty.error(state.message);
+        }
+      },
+      child: Consumer<ProfileProvider>(
+        builder: (context, profile, child) {
+          return Container(
+            padding: EdgeInsets.only(
+                top: 50.h, left: 16.w, right: 16.w, bottom: 16.w),
+            decoration: new BoxDecoration(
+                color: Pallets.primary100,
+                image: new DecorationImage(
+                  fit: BoxFit.cover,
+                  image: new AssetImage(AppImages.union),
+                ),
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(30.r),
+                    bottomRight: Radius.circular(30.r))),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                        padding: EdgeInsets.zero,
+                        onPressed: () => PageRouter.goBack(context),
+                        icon: Icon(Icons.arrow_back, color: Pallets.white)),
+                    TextView(
+                        text: 'Edit Profile',
+                        fontWeight: FontWeight.w700,
+                        fontSize: 22,
+                        color: Pallets.white,
+                        textAlign: TextAlign.center),
+                    SizedBox(
+                      height: 50.h,
+                      width: 50.w,
+                    )
+                  ],
+                ),
+                SizedBox(height: 55.h),
+                Stack(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.all(23),
+                      child: CircularImage(
+                        file: _imageFile,
+                        path: profile.user?.avatar,
+                        radius: 60.r,
+                        initial:
+                            Utils.getInitials(profile.user?.firstName ?? ''),
+                      ),
+                    ),
+                    Positioned(
+                        left: 110.w,
+                        top: 20.h,
+                        child: ImageLoader(
+                            path: AppImages.pen,
+                            onTap: () => _getImage(context, profile)))
+                  ],
+                ),
+                SizedBox(height: 16.h),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    TextView(
+                        text:
+                            '${profile.user?.firstName ?? ''} ${profile.user?.lastName ?? ''} ',
+                        fontWeight: FontWeight.w700,
+                        fontSize: 18,
+                        color: Pallets.white,
+                        maxLines: 1,
+                        textOverflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center),
+                    SizedBox(width: 8.w),
+                    Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 16.w, vertical: 4.h),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10.r),
+                          color: Pallets.orange1,
+                          border: Border.all(color: Pallets.orange1)),
+                      child: TextView(
+                          text: '${profile.user?.role ?? ''}',
+                          fontWeight: FontWeight.w400,
+                          color: Pallets.white,
+                          fontSize: 8,
+                          textAlign: TextAlign.center),
+                    )
+                  ],
+                ),
+                SizedBox(height: 18.h),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SvgPicture.asset(AppImages.map),
+                    SizedBox(width: 4.w),
+                    TextView(
+                        text: 'Abuja, Nigeria',
+                        fontWeight: FontWeight.w500,
+                        fontSize: 14,
+                        color: Pallets.grey100,
+                        maxLines: 1,
+                        textOverflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.left),
+                  ],
+                ),
+                SizedBox(height: 30.h),
+              ],
+            ),
+          );
+        },
       ),
     );
+  }
+
+  Future<void> _getImage(BuildContext context, ProfileProvider p) async {
+    try {
+      await _pickImage.pickImage(
+          context: context,
+          file: (file) {
+            _imageFile = file;
+            p.notifyListeners();
+            _uploadImage();
+          });
+    } catch (e) {
+      WorkPlenty.showSnackBar(context, 'You cancelled the operation.');
+    }
+  }
+
+  void _uploadImage() {
+    _bloc.add(AvatarProfileUpdate(
+        ProfileEntity(avatar: _pickImage.multiPathFile(_imageFile!))));
   }
 }

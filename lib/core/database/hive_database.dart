@@ -1,3 +1,4 @@
+import 'package:client/views/dashboard/gig/domain/source/local/gig_category.dart';
 import 'package:client/views/dashboard/gig/domain/source/local/gig_dao.dart';
 import 'package:client/views/dashboard/gig/domain/source/local/list_of_artisans_dao.dart';
 import 'package:client/views/dashboard/gig/domain/source/local/saved_gig_dao.dart';
@@ -29,6 +30,7 @@ class HiveBoxes {
   static const listOfSavedProfile = 'listOfSavedProfile';
   static const skill = 'skill';
   static const savedGig = 'savedGig';
+  static const categoriesOfGig = 'categoriesOfGig';
 
   static Future openAllBox() async {
     availableGigsDao = AvailableGigsDao();
@@ -36,6 +38,7 @@ class HiveBoxes {
     savedProfileListDao = SavedProfileListDao();
     skillDao = SkillDao();
     savedGigDao = SavedGigDao();
+    categoryDao = GigCategoryDao();
   }
 
   static Future clearAllBox() async {
@@ -44,6 +47,7 @@ class HiveBoxes {
     await savedProfileListDao!.clearDb();
     await skillDao!.clearDb();
     await savedGigDao!.clearDb();
+    await categoryDao!.clearDb();
   }
 
   static Future<Box<T>> openBox<T>(String boxName) async {

@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'user.g.dart';
 
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake)
 @HiveType(typeId: 0)
 class User extends HiveObject {
   @HiveField(0)
@@ -26,17 +26,19 @@ class User extends HiveObject {
   @JsonKey(name: 'created_at')
   @HiveField(8)
   String? createdAt;
+  @HiveField(8)
+  String? username;
 
-  User({
-    this.id,
-    this.avatar,
-    this.firstName,
-    this.lastName,
-    this.email,
-    this.phone,
-    this.role,
-    this.createdAt,
-  });
+  User(
+      {this.id,
+      this.avatar,
+      this.firstName,
+      this.lastName,
+      this.email,
+      this.phone,
+      this.role,
+      this.createdAt,
+      this.username});
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 

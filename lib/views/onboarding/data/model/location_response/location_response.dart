@@ -6,7 +6,7 @@ import 'datum.dart';
 part 'location_response.g.dart';
 
 @JsonSerializable()
-class LocationResponse extends DefaultResponse{
+class LocationResponse extends DefaultResponse {
   String? msg;
   List<Datum>? data;
   bool? success;

@@ -3,6 +3,7 @@ import 'package:client/views/dashboard/gig/data/sourceImpl/artisanSourceImpl.dar
 import 'package:client/views/dashboard/gig/domain/contract/artisan_contract.dart';
 import 'package:dartz/dartz.dart';
 
+import '../../domain/entity/gig/gig_entity.dart';
 import '../model/gigs_response/gigs_response.dart';
 
 class ArtisanContractImpl implements ArtisanContract {
@@ -11,9 +12,10 @@ class ArtisanContractImpl implements ArtisanContract {
   ArtisanContractImpl(this._impl);
 
   @override
-  Future<Either<Failure, GigsResponse>> listOfArtisans() async {
+  Future<Either<Failure, GigsResponse>> listOfArtisans(
+      {required GigEntity? entity}) async {
     try {
-      final _response = await _impl.listOfArtisans();
+      final _response = await _impl.listOfArtisans(entity: entity);
       return Right(_response);
     } catch (e) {
       return Left(AppFailure(e.toString()));

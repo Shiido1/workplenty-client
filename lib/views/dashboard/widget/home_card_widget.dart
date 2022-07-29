@@ -3,6 +3,7 @@
 import 'package:client/core/di/injector.dart';
 import 'package:client/core/enums/gig_type.dart';
 import 'package:client/core/helper/helper_handler.dart';
+import 'package:client/core/helper/routes/navigation.dart';
 import 'package:client/core/helper/utils/images.dart';
 import 'package:client/core/helper/utils/pallets.dart';
 import 'package:client/core/helper/utils/workplenty_dialog.dart';
@@ -20,6 +21,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/entity/datum/datum.model.dart';
+import '../../widgets/bottom_sheet.dart';
+import '../gig/modal/select_service_modal.dart';
 
 class HomeCard extends StatelessWidget {
   final Datum? datum;
@@ -115,7 +118,8 @@ class HomeCard extends StatelessWidget {
                   SizedBox(width: 10.w),
                   _buildWidget(AppImages.emptyWallet, 'Top Earner'),
                   SizedBox(width: 10.w),
-                  _buildWidget(AppImages.graph, '99%'),
+                  _buildWidget(
+                      AppImages.graph, '${datum?.profile?.avgRating ?? 0}%'),
                 ],
               ),
               SizedBox(height: 16.h),
@@ -123,8 +127,10 @@ class HomeCard extends StatelessWidget {
                 buttonText: 'Invite Artisan',
                 onPressed: () {
                   Provider.of<ArtisanProvider>(context, listen: false)
-                      .setArtisan(datum?.user);
-                  showFloatingActionModal(context, 'Select a Service');
+                      .setArtisan(datum);
+
+                  BottomSheets.showSheet<String>(context,
+                      child: SelectServiceModal('Select a Service'));
                 },
                 fontSize: 14,
                 fontWeight: FontWeight.w700,
@@ -140,7 +146,7 @@ class HomeCard extends StatelessWidget {
   void saveProfile(BuildContext context) {
     WorkPlenty.success('Saved successfully');
     _bloc.add(SavedProfileEvent(SavedProfileEntity(
-        profileId: datum!.user!.id, type: GigType.FREELANCE)));
+        profileId: datum?.profile?.id, type: GigType.FREELANCE)));
   }
 
   Expanded _buildWidget(String image, String value) {

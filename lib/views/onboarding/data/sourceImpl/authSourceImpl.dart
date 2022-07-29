@@ -9,37 +9,32 @@ class AuthSourceImpl implements AuthSource {
   AuthSourceImpl({required AuthApi api}) : _authApi = api;
 
   @override
-  Future<AuthResponse> forgotPassword(AuthEntity entity) async {
-    return await _authApi.forgotPassword(entity);
-  }
+  Future<AuthResponse> forgotPassword(AuthEntity entity) async =>
+      await _authApi.forgotPassword(entity);
 
   @override
-  Future<AuthResponse> resetPassword(AuthEntity entity) async {
-    return await _authApi.resetPassword(entity);
-  }
+  Future<AuthResponse> resetPassword(AuthEntity entity) async =>
+      await _authApi.resetPassword(entity);
 
   @override
-  Future<AuthResponse> login(AuthEntity entity) async {
-    return await _authApi.login(entity);
-  }
+  Future<AuthResponse> login(AuthEntity entity) async =>
+      await _authApi.login(entity);
 
   @override
-  Future<AuthResponse> register(AuthEntity entity) async {
-    return await _authApi.register(entity);
-  }
+  Future<AuthResponse> register(AuthEntity entity) async =>
+      await _authApi.register(entity);
 
   @override
-  Future<AuthResponse> verificationPinConfirm(entity) async {
-    return await _authApi.verificationPinConfirm(entity);
-  }
+  Future<AuthResponse> verificationPinConfirm(entity) async =>
+      await _authApi.verificationPinConfirm(entity);
 
   @override
-  Future<AuthResponse> verificationPinRequest() async {
-    return await _authApi.verificationPinRequest();
-  }
+  Future<AuthResponse> verificationPinRequest() async =>
+      await _authApi.verificationPinRequest();
 
   @override
-  Future<AuthResponse> socialAuthentication(AuthEntity entity) async {
-    return await _authApi.socialAuthentication(entity);
-  }
+  Future<AuthResponse> googleAuth() async => await _authApi.googleAuth();
+
+  @override
+  Future<AuthResponse> facebookAuth() async => await _authApi.facebookAuth();
 }

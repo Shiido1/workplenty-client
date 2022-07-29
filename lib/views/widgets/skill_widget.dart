@@ -13,7 +13,7 @@ class SkillsWidget extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 7.h),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5.r),
-          color: Pallets.lowkeygrey.withOpacity(.2)),
+          color: Color.fromRGBO(16, 55, 92, .1)),
       child: TextView(
           text: value.name ?? '',
           fontSize: 10.sp,

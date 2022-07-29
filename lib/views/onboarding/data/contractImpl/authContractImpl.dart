@@ -1,5 +1,6 @@
 import 'package:client/core/database/session_manager.dart';
 import 'package:client/core/error/failures.dart';
+import 'package:client/core/helper/configs/instances.dart';
 import 'package:client/views/onboarding/data/model/auth/auth_response/auth_response.dart';
 import 'package:client/views/onboarding/data/sourceImpl/authSourceImpl.dart';
 import 'package:client/views/onboarding/domain/contract/auth_contract.dart';
@@ -20,6 +21,7 @@ class AuthContractImpl implements AuthContract {
       return Left(AppFailure(e.toString()));
     }
   }
+
   @override
   Future<Either<Failure, AuthResponse>> resetPassword(entity) async {
     try {
@@ -79,10 +81,19 @@ class AuthContractImpl implements AuthContract {
   }
 
   @override
-  Future<Either<Failure, AuthResponse>> socialAuthentication(
-      AuthEntity entity) async {
+  Future<Either<Failure, AuthResponse>> googleAuth() async {
     try {
-      final _response = await _impl.socialAuthentication(entity);
+      final _response = await _impl.googleAuth();
+      return Right(_response);
+    } catch (e) {
+      return Left(AppFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, AuthResponse>> facebookAuth() async {
+    try {
+      final _response = await _impl.facebookAuth();
       return Right(_response);
     } catch (e) {
       return Left(AppFailure(e.toString()));

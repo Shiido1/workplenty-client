@@ -14,7 +14,7 @@ class Pallets {
   static Color shade100 = const Color(0xff035584);
   static Color shade200 = const Color(0xff035584);
   static Color chipBackground = const Color(0xffC4E2FE);
-  static Color grey = const Color(0xff4F4F4F);
+  static Color grey = const Color(0xffC4C4C4);
   static Color lowkeygrey = Color.fromARGB(255, 83, 116, 150);
   static Color grey100 = const Color(0xffD0D3D9);
   static Color mildGrey100 = const Color(0xff9E9C9C);
@@ -85,4 +85,5 @@ class Pallets {
   static Color borderStroke = const Color(0xffD0D5DD);
 
   static Color drawerColor = const Color(0xffF3F3F3);
+  static Color orange1 = const Color(0xffFF5722);
 }

@@ -2,7 +2,8 @@ import 'package:client/views/onboarding/data/model/auth/auth_response/auth_respo
 import 'package:client/views/onboarding/domain/entity/auth/auth_entity.dart';
 
 abstract class AuthSource {
-  Future<AuthResponse> socialAuthentication(AuthEntity entity);
+  Future<AuthResponse> googleAuth();
+  Future<AuthResponse> facebookAuth();
   Future<AuthResponse> login(AuthEntity entity);
   Future<AuthResponse> register(AuthEntity entity);
   Future<AuthResponse> forgotPassword(AuthEntity entity);

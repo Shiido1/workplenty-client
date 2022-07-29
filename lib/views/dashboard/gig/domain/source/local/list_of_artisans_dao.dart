@@ -8,6 +8,7 @@ import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../../../../../core/entity/datum/datum.model.dart';
+import '../../../../../../core/helper/configs/instances.dart';
 
 ListOfArtisansDao? listOfArtisansDao;
 
@@ -24,10 +25,12 @@ class ListOfArtisansDao {
       HiveBoxes.openBox<Map>(HiveBoxes.listOfArtisans);
 
   Future<void> saveListOfArtisans(List<Datum>? data) async {
-    if (data!.isNotEmpty) await _box?.clear();
+    // if (data!.isNotEmpty) await _box?.clear();
+
+    await clearDb();
 
     final map = Map<String, Map>.fromIterable(
-      data,
+      data!,
       key: (g) => (g as Datum).user!.id.toString(),
       value: (g) => (g as Datum).toJson(),
     );
@@ -38,13 +41,15 @@ class ListOfArtisansDao {
     Map<String, dynamic> raw = Map<String, dynamic>.from(box.toMap());
     return raw.values
         .map((e) => Datum.fromJson(jsonDecode(jsonEncode(e))))
-        .toList()
-        .reversed
         .toList();
   }
 
   Future<ValueListenable<Box>?> getListenable({List<String>? keys}) async {
     await openBox();
+    return keys == null ? _box?.listenable() : _box?.listenable(keys: keys);
+  }
+
+  ValueListenable<Box>? getListenableWithoutFuture({List<String>? keys}) {
     return keys == null ? _box?.listenable() : _box?.listenable(keys: keys);
   }
 

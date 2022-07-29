@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
+import '../../core/helper/helper_handler.dart';
+
 class BottomSheets {
   static Future<T?> showSheet<T>(BuildContext context,
-      {required Widget child, bool isDismissible = true}) {
+      {required Widget child, bool isDismissible = true, double? value = .7}) {
     return showModalBottomSheet<T>(
         isDismissible: isDismissible,
         isScrollControlled: true,
-        // backgroundColor: Colors.white.withOpacity(0.8),
         enableDrag: true,
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
@@ -17,7 +18,10 @@ class BottomSheets {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               // Icon(Icons.maximize),
-              Flexible(child: child),
+              Flexible(
+                  child: SizedBox(
+                      height: Utils.getDeviceHeight(context) * value!,
+                      child: child)),
             ],
           );
         });

@@ -24,7 +24,7 @@ class LocationProvider extends BaseModel {
   /// FETCH countries
   void fetchCountries() async {
     try {
-      setState(ViewState.busy);
+      setState(ViewState.busy, triggerListener: false);
       final _response = await _useCases?.countries();
       _response!.fold((l) => null, (r) {
         countries = r.data ?? [];
@@ -38,12 +38,13 @@ class LocationProvider extends BaseModel {
 
   /// FETCH states
   void fetchStates() async {
-    if (_datum == null) return;
+    // if (_datum == null) return;
     try {
       setState(ViewState.busy);
       final _response = await _useCases?.states(Params(entity: _datum?.id));
       _response!.fold((l) => null, (r) {
-        countries = r.data ?? [];
+        // countries = r.data ?? [];
+        logger.d(r.toJson());
         setState(ViewState.idle, triggerListener: true);
       });
     } catch (e) {

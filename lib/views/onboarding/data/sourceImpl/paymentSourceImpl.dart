@@ -5,6 +5,9 @@ import 'package:client/views/onboarding/data/model/payment/transaction_response/
 import 'package:client/views/onboarding/domain/entity/payment/deposit_entity.dart';
 import 'package:client/views/onboarding/domain/source/payment_source.dart';
 
+import '../../../dashboard/profile/payout/data/model/overview_response/overview_response.dart';
+import '../model/payment/deposit_response/deposit_response.dart';
+
 class PaymentSourceImpl implements PaymentSource {
   final PaymentApi _api;
 
@@ -16,7 +19,7 @@ class PaymentSourceImpl implements PaymentSource {
   }
 
   @override
-  Future<OverViewPaymentResponse> overviewPayment() async {
+  Future<OverviewResponse> overviewPayment() async {
     return await _api.overviewPayment();
   }
 

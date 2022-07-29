@@ -10,6 +10,7 @@ import 'package:intl/intl.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:share/share.dart';
 
 import 'utils/pallets.dart';
 
@@ -60,6 +61,13 @@ class Utils {
   /// format currency
   static String formatCurrency(dynamic i) {
     return NumberFormat.simpleCurrency().format(i).replaceAll('.00', '');
+  }
+
+  /// format currency
+  static String currency(num amount) {
+    final _format =
+        NumberFormat.simpleCurrency(locale: Platform.localeName, name: '');
+    return 'NGN ${_format.currencySymbol}$amount';
   }
 
 //* getting local path
@@ -187,5 +195,10 @@ class Utils {
     } catch (e) {
       return '';
     }
+  }
+
+  ///Share
+  static void share(String text) {
+    Share.share(text);
   }
 }

@@ -14,6 +14,12 @@ class ProfileEntity extends DefaultResponse {
   final String? zipcode;
   final String? address;
   final String? appartment;
+  final String? role;
+  final String? firstName;
+  final String? lastName;
+  final String? email;
+  final String? username;
+  final String? phone;
 
   ProfileEntity({
     this.title,
@@ -26,14 +32,16 @@ class ProfileEntity extends DefaultResponse {
     this.zipcode,
     this.address,
     this.appartment,
+    this.firstName,
+    this.lastName,
+    this.email,
+    this.username,
+    this.phone,
+    this.role,
   });
 
   Map<String, dynamic> toMap() {
-    return {
-      'title': title,
-      'description': description,
-      'gender': gender,
-    };
+    return {'title': title, 'description': description};
   }
 
   Map<String, dynamic> toAvatar() {
@@ -50,4 +58,13 @@ class ProfileEntity extends DefaultResponse {
       'appartment': appartment
     };
   }
+
+  Map<String, dynamic> updateAccount() => {
+        'first_name': firstName,
+        'last_name': lastName,
+        'email': email,
+        'username': username,
+        'role': role,
+        'phone': phone,
+      };
 }

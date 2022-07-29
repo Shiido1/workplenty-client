@@ -1,13 +1,13 @@
-enum GigType { FREELANCE, HOME, LIVE, UNKNOWN }
+enum GigType { FREELANCE, HOME_SERVICE, UNKNOWN, LIVE_SESSION }
 
 String? fromGigType(GigType? type) {
   switch (type) {
     case GigType.FREELANCE:
       return 'FREELANCE';
-    case GigType.HOME:
+    case GigType.HOME_SERVICE:
       return 'HOME';
-    case GigType.LIVE:
-      return 'Live';
+    case GigType.LIVE_SESSION:
+      return 'LIVE_SESSION';
     default:
       return '';
   }
@@ -18,9 +18,9 @@ GigType? toGigType(String? type) {
     case 'FREELANCE':
       return GigType.FREELANCE;
     case 'HOME':
-      return GigType.HOME;
-    case 'LIVE':
-      return GigType.LIVE;
+      return GigType.HOME_SERVICE;
+    case 'LIVE_SESSION':
+      return GigType.LIVE_SESSION;
     default:
       return GigType.UNKNOWN;
   }

@@ -1,6 +1,10 @@
+import 'package:client/core/entity/default_response.dart';
 import 'package:client/core/network/network_service.dart';
 import 'package:client/core/network/url_config.dart';
 import 'package:client/views/onboarding/domain/entity/payment/deposit_entity.dart';
+
+import '../../../views/dashboard/profile/payout/data/model/overview_response/overview_response.dart';
+import '../../../views/onboarding/data/model/payment/deposit_response/deposit_response.dart';
 
 class PaymentApi {
   final NetworkService _networkService;
@@ -8,20 +12,21 @@ class PaymentApi {
   PaymentApi({required NetworkService networkService})
       : _networkService = networkService;
 
-  Future<dynamic> overviewPayment() async {
+  Future<OverviewResponse> overviewPayment() async {
     try {
-      await _networkService.call(UrlConfig.overviewPayment, RequestMethod.get);
-      return;
+      final _response = await _networkService.call(
+          UrlConfig.overviewPayment, RequestMethod.get);
+      return OverviewResponse.fromJson(_response.data);
     } catch (e) {
       rethrow;
     }
   }
 
-  Future<dynamic> depositPayment(DepositEntity entity) async {
+  Future<DepositResponse> depositPayment(DepositEntity entity) async {
     try {
-      await _networkService
+      final _response = await _networkService
           .call(UrlConfig.depositPayment, RequestMethod.post, data: {});
-      return;
+      return DepositResponse.fromJson(_response.data);
     } catch (e) {
       rethrow;
     }

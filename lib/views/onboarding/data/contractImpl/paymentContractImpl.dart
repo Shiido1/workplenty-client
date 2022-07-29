@@ -6,6 +6,8 @@ import 'package:client/views/onboarding/data/sourceImpl/paymentSourceImpl.dart';
 import 'package:client/views/onboarding/domain/contract/payment_contract.dart';
 import 'package:dartz/dartz.dart';
 
+import '../../../dashboard/profile/payout/data/model/overview_response/overview_response.dart';
+
 class PaymentContractImpl implements PaymentContract {
   final PaymentSourceImpl _impl;
 
@@ -22,7 +24,7 @@ class PaymentContractImpl implements PaymentContract {
   }
 
   @override
-  Future<Either<Failure, OverViewPaymentResponse>> overviewPayment() async {
+  Future<Either<Failure, OverviewResponse>> overviewPayment() async {
     try {
       final _response = await _impl.overviewPayment();
       return Right(_response);
