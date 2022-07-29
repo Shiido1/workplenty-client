@@ -15,6 +15,7 @@ abstract class ProfileContract {
       ProfileEntity entity);
   Future<Either<Failure, LocationResponse>> countries();
   Future<Either<Failure, LocationResponse>> state(int id);
+  Future<Either<Failure, LocationResponse>> cities(int id);
   Future<Either<Failure, DefaultResponse>> updateAccount(ProfileEntity entity);
   Future<Either<Failure, DefaultResponse>> updateAddress(AddressEntity entity);
   Future<Either<Failure, User>> profileInfo();

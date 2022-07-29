@@ -41,6 +41,7 @@ class UseCase<Type, Params> {
   Future<Either<Failure, Type>>? generalIndustryList() {}
   Future<Either<Failure, Type>>? countries() {}
   Future<Either<Failure, Type>>? states(Params p) {}
+  Future<Either<Failure, Type>>? cities(Params p) {}
 
   Future<Either<Failure, Type>>? depositPayment(Params p) {}
   Future<Either<Failure, Type>>? overviewPayment() {}

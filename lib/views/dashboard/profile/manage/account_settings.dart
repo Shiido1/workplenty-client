@@ -6,6 +6,7 @@ import '../../../../../../core/helper/utils/workplenty_dialog.dart';
 import '../../../../core/database/session_manager.dart';
 import '../../../../core/di/injector.dart';
 import '../../../../core/entity/user/user.dart';
+import '../../../../core/helper/configs/instances.dart';
 import '../../../../core/helper/utils/pallets.dart';
 import '../../../../core/helper/utils/validators.dart';
 import '../../../onboarding/domain/entity/profile/profile_entity.dart';
@@ -156,6 +157,7 @@ class _AccountSettingsState extends State<AccountSettings> {
       username: _usernameController!.text,
       role: _userTypeController!.text.toLowerCase(),
       email: _emailController!.text,
+      phone: _phoneController!.text,
     )));
   }
 }

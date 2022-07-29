@@ -7,7 +7,6 @@ import 'dart:math';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
@@ -133,19 +132,19 @@ class ImagePickerHandler {
         iosUiSettings: IOSUiSettings(
           title: 'Workplenty',
         ));
-    final _response = await _compressImageFiles(croppedFile!);
+    // final _response = await _compressImageFiles(croppedFile!);
 
-    return _response;
+    // return _response;
   }
 
-  Future<File?> _compressImageFiles(File mFile) async {
-    final _dir = await _findLocalPath();
-    final _targetPath = _dir.absolute.path + "/${_generateKey(15)}.jpg";
-    File? _result = await FlutterImageCompress.compressAndGetFile(
-        mFile.path, _targetPath,
-        quality: 10);
-    return _result;
-  }
+  // Future<File?> _compressImageFiles(File mFile) async {
+  //   final _dir = await _findLocalPath();
+  //   final _targetPath = _dir.absolute.path + "/${_generateKey(15)}.jpg";
+  //   File? _result = await FlutterImageCompress.compressAndGetFile(
+  //       mFile.path, _targetPath,
+  //       quality: 10);
+  //   return _result;
+  // }
 
 //* getting local path
   Future<Directory> _findLocalPath() async {

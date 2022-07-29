@@ -2,6 +2,7 @@ import 'package:client/core/database/session_manager.dart';
 import 'package:client/core/entity/default_response.dart';
 import 'package:client/core/network/network_service.dart';
 import 'package:client/core/network/url_config.dart';
+import 'package:client/views/onboarding/data/model/address_model.dart';
 import 'package:client/views/onboarding/domain/entity/profile/profile_entity.dart';
 import 'package:dio/dio.dart';
 
@@ -51,7 +52,17 @@ class ProfileApi {
   Future<LocationResponse> getListOfStates(int id) async {
     try {
       final _response = await _networkService
-          .call(UrlConfig.states, RequestMethod.get, data: {'country_id': id});
+          .call(UrlConfig.states, RequestMethod.get, queryParams: {'country_id': id});
+      return LocationResponse.fromJson(_response.data);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<LocationResponse> getListOfCity(int id) async {
+    try {
+      final _response = await _networkService
+          .call(UrlConfig.states, RequestMethod.get, queryParams: {'state_id': id});
       return LocationResponse.fromJson(_response.data);
     } catch (e) {
       rethrow;
@@ -101,11 +112,11 @@ class ProfileApi {
     }
   }
 
-  Future<dynamic> profileAddress() async {
+  Future<AddressModel> profileAddress() async {
     try {
       final _response = await _networkService.call(
           UrlConfig.artisanAddress, RequestMethod.get);
-      return;
+      return AddressModel.fromJson(_response.data);
     } catch (e) {
       rethrow;
     }

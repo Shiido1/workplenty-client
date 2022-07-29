@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:client/core/di/injector.dart';
 import 'package:client/core/entity/skills/skill.dart';
 import 'package:client/core/entity/user/user.dart';
@@ -76,6 +78,13 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
   final TextEditingController _budgetController = TextEditingController();
   final TextEditingController _timeController = TextEditingController();
   List<MilestoneModel> _miles = [];
+
+  @override
+  void initState() {
+    Provider.of<ArtisanProvider>(context, listen: false).listOfArtisan();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -485,8 +494,10 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
   void _proceed(ArtisanProvider artisanProvider) {
     if (_validate()) {
       _bloc.add(ServiceEvent(GigEntity(
-          id: '${artisanProvider.datum?.id}',
-          industryId: '${artisanProvider.datum?.industry?.id}',
+          // id: '${artisanProvider.datum?.id}',
+          id: '2',
+          // industryId: '${artisanProvider.datum?.industry?.id}',
+          industryId: '1',
           type: GigType.FREELANCE,
           privateMessage: privateMessageController.text,
           title: titleController.text,
@@ -499,10 +510,12 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
           totalBudget: _budgetController.text,
           skill: _selectedSkills,
           attachments: _files,
-          invited_artisan_ids: _artisansId,
+          // invited_artisan_ids: _artisansId,
+          invited_artisan_ids: [2],
           milestones: _miles,
           projectType: _projectType)));
     }
+    print('object file$_files');
   }
 
   bool _validate() {
@@ -519,13 +532,13 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
       WorkPlenty.error('Please select at least one skill');
       return false;
     }
-    if (_artisans.isEmpty) {
-      WorkPlenty.error('Please select at least one artisan');
-      return false;
-    }
+    // if (_artisans.isEmpty) {
+    //   WorkPlenty.error('Please select at least one artisan');
+    //   return false;
+    // }
 
     _skillList!.map((e) => _selectedSkills.add(e.name!)).toList();
-    _artisans.map((e) => _artisansId.add(e.id!)).toList();
+    // _artisans.map((e) => _artisansId.add(e.id!)).toList();
     setState(() {});
     return true;
   }

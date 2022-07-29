@@ -110,7 +110,7 @@ class GigEntity extends DefaultResponse {
       'experience_level': experienceLevel,
       'cover_letter_required': coverLetterRequired,
       'total_budget': totalBudget,
-      'skill': skill,
+      'skill[]': skill,
       'attachments[]': attachments,
       'invited_artisan_ids[]': invited_artisan_ids,
       'project_type': fromProjectType(projectType),

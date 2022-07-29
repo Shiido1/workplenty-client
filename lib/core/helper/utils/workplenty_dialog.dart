@@ -4,6 +4,7 @@ import 'package:client/views/widgets/text_views.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:intl/intl.dart';
 import 'package:overlay_support/overlay_support.dart';
 
 import 'pallets.dart';
@@ -200,5 +201,15 @@ class WorkPlenty {
           ],
         ),
         background: Colors.redAccent);
+  }
+
+  /// Plural function
+  static String plural(int? number, {String? text = ''}) {
+    return Intl.plural(
+      number ?? 0,
+      zero: "$number $text",
+      one: "$number $text",
+      other: "$number ${text}s",
+    );
   }
 }

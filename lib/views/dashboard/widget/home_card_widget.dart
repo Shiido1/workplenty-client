@@ -3,7 +3,6 @@
 import 'package:client/core/di/injector.dart';
 import 'package:client/core/enums/gig_type.dart';
 import 'package:client/core/helper/helper_handler.dart';
-import 'package:client/core/helper/routes/navigation.dart';
 import 'package:client/core/helper/utils/images.dart';
 import 'package:client/core/helper/utils/pallets.dart';
 import 'package:client/core/helper/utils/workplenty_dialog.dart';
@@ -12,7 +11,6 @@ import 'package:client/views/dashboard/saved/domain/entity/saved_profile_entity.
 import 'package:client/views/dashboard/saved/presentation/bloc/saved_profile_bloc_bloc.dart';
 import 'package:client/views/widgets/buttons.dart';
 import 'package:client/views/widgets/image_loader.dart';
-import 'package:client/views/widgets/modal_bottom.dart';
 import 'package:client/views/widgets/text_views.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -145,8 +143,9 @@ class HomeCard extends StatelessWidget {
 
   void saveProfile(BuildContext context) {
     WorkPlenty.success('Saved successfully');
+    
     _bloc.add(SavedProfileEvent(SavedProfileEntity(
-        profileId: datum?.profile?.id, type: GigType.FREELANCE)));
+        profileId: datum?.profile?.id, type: datum?.type)));
   }
 
   Expanded _buildWidget(String image, String value) {

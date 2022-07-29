@@ -72,6 +72,16 @@ class ProfileContractImpl implements ProfileContract {
   }
 
   @override
+  Future<Either<Failure, LocationResponse>> cities(int id) async {
+    try {
+      final _response = await _impl.cities(id);
+      return Right(_response);
+    } catch (e) {
+      return Left(AppFailure(e.toString()));
+    }
+  }
+
+  @override
   Future<Either<Failure, DefaultResponse>> updateAccount(
       ProfileEntity entity) async {
     try {
@@ -102,7 +112,7 @@ class ProfileContractImpl implements ProfileContract {
       final _response = await _impl.updateAddress(entity);
       final _address = await _impl.profileAddress();
 
-      // SessionManager.instance.artisanAddress = _address.data?.toJson();
+      SessionManager.instance.addressData = _address.data?.toJson();
       return Right(_response);
     } catch (e) {
       return Left(AppFailure(e.toString()));

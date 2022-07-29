@@ -11,6 +11,7 @@ abstract class ProfileSource {
   Future<DefaultResponse> profileAvatarUpdate(ProfileEntity entity);
   Future<LocationResponse> countries();
   Future<LocationResponse> states(int entity);
+  Future<LocationResponse> cities(int entity);
   Future<User> profileInfo();
   Future<DefaultResponse> updateAccount(ProfileEntity entity);
   Future<DefaultResponse> updateAddress(AddressEntity entity);

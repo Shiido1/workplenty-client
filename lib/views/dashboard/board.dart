@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:client/core/bus/event_bus.dart';
 import 'package:client/core/database/session_manager.dart';
-import 'package:client/core/helper/configs/instances.dart';
 import 'package:client/core/helper/routes/navigation.dart';
 import 'package:client/core/helper/routes/routes.dart';
 import 'package:client/core/helper/utils/images.dart';
@@ -85,7 +84,9 @@ class _MainBoardState extends State<MainBoard> {
           ? null
           : getCustomAppBar(context, _bodyTitle[index!], isHome: index == 0),
       endDrawer: MessageDrawerWidget(),
-      body: _body[index!],
+      body: AnimatedSwitcher(
+        duration: Duration(milliseconds: 400),
+        child: _body[index!]),
       bottomNavigationBar: _bottomNavigationBar(context),
     );
   }

@@ -36,7 +36,7 @@ class SecondBadgeWidget extends StatelessWidget {
                 RowContainer(
                     image: AppImages.message,
                     text:
-                        'Private Message to  ${value.datum?.user?.firstName ?? ''} ${value.datum?.user?.lastName}'),
+                        'Private Message to  ${value.datum?.user?.firstName ?? ''} ${value.datum?.user?.lastName ?? ''}'),
                 SizedBox(height: 10.h),
                 EditFormField(
                   height: 150.h,

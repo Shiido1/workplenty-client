@@ -25,6 +25,7 @@ class SessionManager {
   static const String keyAuthTokenType = 'token_type';
   static const String keyUserData = 'users_data';
   static const String logginKey = 'loggin';
+  static const String addressKey = 'address_key';
 
   String get authTokenType =>
       sharedPreferences!.getString(keyAuthTokenType) ?? '';
@@ -44,8 +45,14 @@ class SessionManager {
   Map<String, dynamic> get usersData =>
       json.decode(sharedPreferences!.getString(keyUserData) ?? '');
 
+  Map<String, dynamic> get addressData =>
+      json.decode(sharedPreferences!.getString(addressKey) ?? '');
+
   set usersData(Map<String, dynamic>? map) =>
       sharedPreferences!.setString(keyUserData, json.encode(map));
+
+  set addressData(Map<String, dynamic>? map) =>
+      sharedPreferences!.setString(addressKey, json.encode(map));
 
   Future<bool> logOut() async {
     await sharedPreferences!.clear();

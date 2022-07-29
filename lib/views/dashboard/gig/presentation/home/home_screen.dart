@@ -1,9 +1,7 @@
-import 'package:client/core/helper/routes/navigation.dart';
 import 'package:client/core/helper/utils/pallets.dart';
-import 'package:client/views/dashboard/gig/domain/entity/gig/gig_entity.dart';
+import 'package:client/core/helper/utils/workplenty_dialog.dart';
 import 'package:client/views/dashboard/gig/domain/source/local/list_of_artisans_dao.dart';
 import 'package:client/views/dashboard/gig/presentation/provider/artisan_provider.dart';
-import 'package:client/views/dashboard/milestone/milestone.dart';
 import 'package:client/views/dashboard/widget/home_card_widget.dart';
 import 'package:client/views/widgets/body_widget.dart';
 import 'package:client/views/widgets/empty_widget.dart';
@@ -17,9 +15,10 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 import '../../../../../core/enums/viewstate.dart';
+import '../../../../../core/helper/routes/navigation.dart';
+import '../../../../../core/helper/routes/routes.dart';
 import '../../../../../core/helper/utils/images.dart';
 
 class Home extends StatefulWidget {
@@ -73,7 +72,7 @@ class _HomeState extends State<Home> {
               label: 'Post a Gig',
               labelStyle: TextStyle(fontSize: 14.sp),
               child: Icon(Icons.add, color: Colors.white),
-              onTap: () => print('FIRST CHILD'),
+              onTap: () => PageRouter.gotoNamed(Routes.freelance, context),
             ),
             SpeedDialChild(
               backgroundColor: Pallets.primary100,
@@ -89,7 +88,7 @@ class _HomeState extends State<Home> {
               label: 'Live Consultancy',
               labelStyle: TextStyle(fontSize: 14.sp),
               child: ImageLoader(path: AppImages.video),
-              onTap: () => print('FIRST CHILD'),
+              onTap: () => PageRouter.gotoNamed(Routes.consultancy, context),
             ),
           ],
         ),
@@ -109,6 +108,7 @@ class _HomeState extends State<Home> {
                   final _jobList = listOfArtisansDao!
                       .getConvertedData(listOfArtisansDao!.box!)
                       .toList();
+                  print('artisan $_jobList');
                   return Consumer<ArtisanProvider>(
                     builder: (context, provider, child) {
                       if (provider.state == ViewState.busy) {
@@ -129,7 +129,7 @@ class _HomeState extends State<Home> {
                                     Expanded(
                                       child: TextView(
                                           text:
-                                              '${_jobList.length} Artisans Found',
+                                              '${WorkPlenty.plural(_jobList.length,text:'Artisan')} Found',
                                           maxLines: 1,
                                           textAlign: TextAlign.left,
                                           fontWeight: FontWeight.w500),
