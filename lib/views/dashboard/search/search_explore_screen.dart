@@ -1,6 +1,7 @@
 import 'package:client/core/helper/utils/delay.dart';
 import 'package:client/views/dashboard/gig/domain/entity/gig/gig_entity.dart';
 import 'package:client/views/dashboard/gig/presentation/provider/artisan_provider.dart';
+import 'package:client/views/widgets/empty_widget.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -77,9 +78,13 @@ class _SearchTabState extends State<SearchTab> {
                     final _jobList = listOfArtisansDao!
                         .getConvertedData(listOfArtisansDao!.box!)
                         .toList();
-                    return Column(mainAxisSize: MainAxisSize.min, children: [
-                      ..._jobList.map((job) => HomeCard(datum: job)).toList()
-                    ]);
+                    return _jobList.isEmpty
+                        ? EmptyWidget()
+                        : Column(mainAxisSize: MainAxisSize.min, children: [
+                            ..._jobList
+                                .map((job) => HomeCard(datum: job))
+                                .toList()
+                          ]);
                   },
                 );
               },

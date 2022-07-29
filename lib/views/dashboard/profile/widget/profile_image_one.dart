@@ -74,7 +74,8 @@ class ProfileImageCardOne extends StatelessWidget {
                         EdgeInsets.symmetric(horizontal: 16.w, vertical: 4.h),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.r),
-                        border: Border.all(color: Pallets.white)),
+                        color: Pallets.orange1,
+                        border: Border.all(color: Pallets.orange1)),
                     child: TextView(
                         text: '${profile.user?.role ?? ''}',
                         fontWeight: FontWeight.w400,

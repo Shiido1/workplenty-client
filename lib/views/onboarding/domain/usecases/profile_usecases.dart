@@ -1,4 +1,5 @@
 import 'package:client/core/entity/default_response.dart';
+import 'package:client/core/entity/user/user.dart';
 import 'package:client/core/error/failures.dart';
 import 'package:client/core/usecases/usecase.dart';
 import 'package:client/views/onboarding/data/contractImpl/profileContractImpl.dart';
@@ -6,7 +7,7 @@ import 'package:client/views/onboarding/data/model/location_response/location_re
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 
-class ProfileUseCases extends UseCase<DefaultResponse, Params> {
+class ProfileUseCases extends UseCase<dynamic, Params> {
   final ProfileContractImpl _repository;
 
   ProfileUseCases(this._repository);
@@ -15,6 +16,11 @@ class ProfileUseCases extends UseCase<DefaultResponse, Params> {
   Future<Either<Failure, DefaultResponse>>? updateProfileBio(
       Params params) async {
     return await _repository.profileBioUpdate(params.entity!);
+  }
+
+  @override
+  Future<Either<Failure, User>>? profileInfo() async {
+    return await _repository.profileInfo();
   }
 
   @override

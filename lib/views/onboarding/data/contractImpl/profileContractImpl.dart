@@ -6,6 +6,7 @@ import 'package:client/views/onboarding/domain/contract/profile_contract.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/database/session_manager.dart';
+import '../../../../core/entity/user/user.dart';
 import '../../domain/entity/address/address_entity.dart';
 import '../../domain/entity/profile/profile_entity.dart';
 
@@ -78,6 +79,17 @@ class ProfileContractImpl implements ProfileContract {
       final _user = await _impl.profileInfo();
       SessionManager.instance.usersData = _user.toJson();
       return Right(_response);
+    } catch (e) {
+      return Left(AppFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, User>> profileInfo() async {
+    try {
+      final _user = await _impl.profileInfo();
+      SessionManager.instance.usersData = _user.toJson();
+      return Right(_user);
     } catch (e) {
       return Left(AppFailure(e.toString()));
     }

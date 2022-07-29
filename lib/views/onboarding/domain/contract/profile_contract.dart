@@ -1,4 +1,5 @@
 import 'package:client/core/entity/default_response.dart';
+import 'package:client/core/entity/user/user.dart';
 import 'package:client/core/error/failures.dart';
 import 'package:client/views/onboarding/data/model/location_response/location_response.dart';
 import 'package:client/views/onboarding/domain/entity/address/address_entity.dart';
@@ -16,4 +17,5 @@ abstract class ProfileContract {
   Future<Either<Failure, LocationResponse>> state(int id);
   Future<Either<Failure, DefaultResponse>> updateAccount(ProfileEntity entity);
   Future<Either<Failure, DefaultResponse>> updateAddress(AddressEntity entity);
+  Future<Either<Failure, User>> profileInfo();
 }

@@ -14,6 +14,7 @@ import 'core/theme/theme.dart';
 import 'views/onboarding/presentation/intro/intro_screen.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await initializeCore(environment: Environment.staging);
   runApp(const MyApp());
 }

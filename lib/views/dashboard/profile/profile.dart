@@ -10,17 +10,20 @@ import 'package:client/views/dashboard/profile/widget/clicks_one.dart';
 import 'package:client/views/widgets/text_views.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 import '../../../core/helper/helper_handler.dart';
 import 'bids/presentation/bids.dart';
 import 'edit_profile.dart';
 import 'payout/presentation/payout.dart';
+import 'stateManagers/provider/profile_provider.dart';
 import 'widget/profile_image_one.dart';
 
 class Profile extends StatelessWidget {
   const Profile({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    Provider.of<ProfileProvider>(context, listen: false).getMyProfile();
     return SingleChildScrollView(
       child: Column(
         children: [

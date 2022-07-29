@@ -45,6 +45,8 @@ class UseCase<Type, Params> {
   Future<Either<Failure, Type>>? depositPayment(Params p) {}
   Future<Either<Failure, Type>>? overviewPayment() {}
   Future<Either<Failure, Type>>? transactionPayment() {}
+
+  Future<Either<Failure, Type>>? profileInfo() {}
 }
 
 class NoParams extends Equatable {

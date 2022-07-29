@@ -1,3 +1,5 @@
+import 'package:client/core/helper/configs/instances.dart';
+
 import '../../../../../core/database/session_manager.dart';
 import '../../../../../core/entity/user/user.dart';
 import '../../../../../core/viewmodels/base_model.dart';
@@ -15,5 +17,14 @@ class ProfileProvider extends BaseModel {
     _user = await User.fromJson(SessionManager.instance.usersData);
     // firebaseManager.saveUsersInformation(_user);
     notifyListeners();
+  }
+
+  void getUsersProfile() async {
+    try {
+      await _useCase.profileInfo();
+      getMyProfile();
+    } catch (e) {
+      logger.e(e);
+    }
   }
 }

@@ -1,4 +1,5 @@
 import 'package:client/core/di/injector.dart';
+import 'package:client/core/helper/configs/instances.dart';
 import 'package:client/core/helper/routes/navigation.dart';
 import 'package:client/core/helper/routes/routes.dart';
 import 'package:client/core/helper/utils/images.dart';

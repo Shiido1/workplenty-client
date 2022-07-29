@@ -45,6 +45,7 @@ import 'package:client/views/review/data/source/fetch_industry_source_impl.dart'
 import 'package:client/views/review/domain/usecase/review_save_usecase.dart';
 import 'package:client/views/review/domain/usecase/review_usecase.dart';
 import 'package:client/views/review/presentation/bloc/bloc/review_bloc_bloc.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:get_it/get_it.dart';
 import '../../views/dashboard/saved/data/sourceImpl/saved_profile_source_impl.dart';
 import '../../views/dashboard/saved/domain/usecase/saved_profile_usecase.dart';
@@ -59,6 +60,7 @@ final hiveManager = HiveManager();
 
 Future<void> initializeCore({required Environment environment}) async {
   AppConfig.environment = environment;
+  await Firebase.initializeApp();
   await _initializeCore();
   _initServices();
   _initProviders();
@@ -184,6 +186,7 @@ void _initializeUsecase() {
       () => SaveReviewUsesCases(inject()));
   inject.registerLazySingleton<SavedGigListUseCase>(
       () => SavedGigListUseCase(inject()));
-  inject.registerLazySingleton<ProfileUseCases>(() => ProfileUseCases(inject()));
+  inject
+      .registerLazySingleton<ProfileUseCases>(() => ProfileUseCases(inject()));
   inject.registerLazySingleton<PaymentUsecase>(() => PaymentUsecase(inject()));
 }

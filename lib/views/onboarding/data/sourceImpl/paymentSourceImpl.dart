@@ -6,6 +6,7 @@ import 'package:client/views/onboarding/domain/entity/payment/deposit_entity.dar
 import 'package:client/views/onboarding/domain/source/payment_source.dart';
 
 import '../../../dashboard/profile/payout/data/model/overview_response/overview_response.dart';
+import '../model/payment/deposit_response/deposit_response.dart';
 
 class PaymentSourceImpl implements PaymentSource {
   final PaymentApi _api;

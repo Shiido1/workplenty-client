@@ -1,3 +1,4 @@
+import 'package:client/core/database/session_manager.dart';
 import 'package:client/core/entity/default_response.dart';
 import 'package:client/core/network/network_service.dart';
 import 'package:client/core/network/url_config.dart';
@@ -69,9 +70,10 @@ class ProfileApi {
 
   Future<User> profileInfo() async {
     try {
-      final _response = await _networkService.call(
-          UrlConfig.clientProfile, RequestMethod.get);
-      return User.fromJson(_response.data['data']);
+      /// FIXME: return users information from users information API
+      /*   final _response = await _networkService.call(
+          UrlConfig.clientProfile, RequestMethod.get); */
+      return User.fromJson(SessionManager.instance.usersData);
     } catch (e) {
       rethrow;
     }
