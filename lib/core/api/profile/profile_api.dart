@@ -51,8 +51,9 @@ class ProfileApi {
 
   Future<LocationResponse> getListOfStates(int id) async {
     try {
-      final _response = await _networkService
-          .call(UrlConfig.states, RequestMethod.get, queryParams: {'country_id': id});
+      final _response = await _networkService.call(
+          UrlConfig.states, RequestMethod.get,
+          queryParams: {'country_id': id});
       return LocationResponse.fromJson(_response.data);
     } catch (e) {
       rethrow;
@@ -61,8 +62,9 @@ class ProfileApi {
 
   Future<LocationResponse> getListOfCity(int id) async {
     try {
-      final _response = await _networkService
-          .call(UrlConfig.states, RequestMethod.get, queryParams: {'state_id': id});
+      final _response = await _networkService.call(
+          UrlConfig.states, RequestMethod.get,
+          queryParams: {'state_id': id});
       return LocationResponse.fromJson(_response.data);
     } catch (e) {
       rethrow;

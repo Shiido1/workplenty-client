@@ -85,8 +85,7 @@ class _MainBoardState extends State<MainBoard> {
           : getCustomAppBar(context, _bodyTitle[index!], isHome: index == 0),
       endDrawer: MessageDrawerWidget(),
       body: AnimatedSwitcher(
-        duration: Duration(milliseconds: 400),
-        child: _body[index!]),
+          duration: Duration(milliseconds: 400), child: _body[index!]),
       bottomNavigationBar: _bottomNavigationBar(context),
     );
   }

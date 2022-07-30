@@ -143,9 +143,9 @@ class HomeCard extends StatelessWidget {
 
   void saveProfile(BuildContext context) {
     WorkPlenty.success('Saved successfully');
-    
-    _bloc.add(SavedProfileEvent(SavedProfileEntity(
-        profileId: datum?.profile?.id, type: datum?.type)));
+
+    _bloc.add(SavedProfileEvent(
+        SavedProfileEntity(profileId: datum?.profile?.id, type: datum?.type)));
   }
 
   Expanded _buildWidget(String image, String value) {

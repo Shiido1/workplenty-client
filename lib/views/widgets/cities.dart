@@ -1,5 +1,3 @@
-
-
 import 'package:client/views/onboarding/data/model/location_response/datum.dart';
 import 'package:client/views/widgets/text_views.dart';
 import 'package:flutter/material.dart';

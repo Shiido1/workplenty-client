@@ -1,5 +1,7 @@
+import 'package:client/core/helper/configs/instances.dart';
 import 'package:client/core/network/network_service.dart';
 import 'package:client/core/network/url_config.dart';
+import 'package:client/views/dashboard/card/data/model/card_response/card_response.dart';
 import 'package:client/views/dashboard/card/domain/entity/card_entity.dart';
 
 class CardApi {
@@ -8,30 +10,33 @@ class CardApi {
   CardApi({required NetworkService networkService})
       : _networkService = networkService;
 
-  Future<dynamic> listCard() async {
+  Future<CardResponse> listCard() async {
     try {
-      await _networkService.call(UrlConfig.listCard, RequestMethod.get);
-      return;
+      final _reseponse =
+          await _networkService.call(UrlConfig.listCard, RequestMethod.get);
+      return CardResponse.fromJson(_reseponse.data);
     } catch (e) {
       rethrow;
     }
   }
 
-  Future<dynamic> saveCard(CardEntity entity) async {
+  Future<CardResponse> saveCard(CardEntity entity) async {
     try {
-      await _networkService
-          .call(UrlConfig.saveCard, RequestMethod.post, data: {});
-      return;
+      final _response = await _networkService
+          .call(UrlConfig.saveCard, RequestMethod.post, data: entity.save());
+      logger.d(_response);
+      return CardResponse.fromJson(_response.data);
     } catch (e) {
       rethrow;
     }
   }
 
-  Future<dynamic> removeCard(CardEntity entity) async {
+  Future<CardResponse> removeCard(CardEntity entity) async {
     try {
-      await _networkService
-          .call(UrlConfig.removeCard, RequestMethod.post, data: {});
-      return;
+      final _response = await _networkService.call(
+          UrlConfig.removeCard, RequestMethod.post,
+          data: entity.remove());
+      return CardResponse.fromJson(_response.data);
     } catch (e) {
       rethrow;
     }

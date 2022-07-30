@@ -6,17 +6,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutterwave_standard/flutterwave.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../../../core/helper/routes/navigation.dart';
-import '../../../../../../../core/helper/utils/pallets.dart';
-import '../../../../../../../core/helper/utils/workplenty_dialog.dart';
 import '../../../../../../core/di/injector.dart';
 import '../../../../../../core/helper/helper_handler.dart';
 import '../../../../../../core/helper/utils/validators.dart';
 import '../../../../../../core/payment/flutter_wave.dart';
 import '../../../../../widgets/buttons.dart';
 import '../../../../../widgets/edit_form_widget.dart';
-import '../../../../../widgets/image_decoration.dart';
-import '../../../../../widgets/text_views.dart';
 import '../stateManager/bloc/payout_bloc.dart';
 
 class DepositWidget extends StatefulWidget {

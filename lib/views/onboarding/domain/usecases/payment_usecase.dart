@@ -1,10 +1,12 @@
 import 'package:client/core/error/failures.dart';
 import 'package:client/core/usecases/usecase.dart';
-import 'package:client/views/dashboard/profile/payout/data/model/overview_response/overview_response.dart';
 import 'package:client/views/onboarding/data/contractImpl/paymentContractImpl.dart';
 import 'package:client/views/onboarding/data/model/payment/deposit_response/deposit_response.dart';
+import 'package:client/views/onboarding/data/model/payment/payout_response/payout_response.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
+
+import '../../../dashboard/profile/payout/presentation/overview_response/overview_response.dart';
 
 class PaymentUsecase extends UseCase<dynamic, Params> {
   final PaymentContractImpl _repository;
@@ -22,6 +24,10 @@ class PaymentUsecase extends UseCase<dynamic, Params> {
   @override
   Future<Either<Failure, dynamic>>? transactionPayment() async =>
       await _repository.transactionPayment();
+
+  @override
+  Future<Either<Failure, PayoutResponse>>? payoutUsecase(Params p) async =>
+      await _repository.payout(p.entity);
 }
 
 class Params extends Equatable {

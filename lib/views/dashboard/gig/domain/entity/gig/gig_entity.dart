@@ -5,6 +5,8 @@ import 'package:client/core/enums/export_enums.dart';
 import 'package:client/views/dashboard/gig/presentation/services/freelance/model/milestone.dart';
 import 'package:dio/dio.dart';
 
+import '../../../../../../core/helper/configs/instances.dart';
+
 class GigEntity extends DefaultResponse {
   final String? id;
   final String? industryId;
@@ -97,6 +99,26 @@ class GigEntity extends DefaultResponse {
   Map<String, dynamic> filterArtisan() => {'search_keywords': searchKeyWord};
 
   Map<String, dynamic> saveClientsGig() {
+    logger.d({
+      'id': id,
+      'industry_id': industryId,
+      'type': fromGigType(type),
+      'title': title,
+      'private_message': privateMessage,
+      'description': description,
+      'timeline': timeline,
+      'payment_type': fromPaymentType(paymentType),
+      'is_published': isPublished,
+      'experience_level': experienceLevel,
+      'cover_letter_required': coverLetterRequired,
+      'total_budget': totalBudget,
+      'skill[]': skill,
+      'attachments[]': attachments,
+      'invited_artisan_ids[]': invited_artisan_ids,
+      'project_type': fromProjectType(projectType),
+      if (this.milestones != null)
+        "milestones[]": this.milestones?.map((e) => e.toMap()).toList()
+    });
     return {
       'id': id,
       'industry_id': industryId,

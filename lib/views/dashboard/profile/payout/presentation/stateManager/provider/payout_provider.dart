@@ -1,9 +1,9 @@
 import 'package:client/core/enums/viewstate.dart';
 import 'package:client/core/helper/configs/instances.dart';
 import 'package:client/core/viewmodels/base_model.dart';
-import 'package:client/views/dashboard/profile/payout/data/model/overview_response/data.dart';
 
 import '../../../../../../onboarding/domain/usecases/payment_usecase.dart';
+import '../../overview_response/data.dart';
 
 class PayoutProvider extends BaseModel {
   Data? overviewData;

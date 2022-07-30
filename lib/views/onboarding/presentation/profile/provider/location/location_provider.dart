@@ -38,10 +38,10 @@ class LocationProvider extends BaseModel {
   }
 
   /// FETCH states
-  void fetchStates({bool initialValue=false}) async {
+  void fetchStates({bool initialValue = false}) async {
     // if (_datum == null) return;
     try {
-      setState(ViewState.busy,triggerListener: initialValue);
+      setState(ViewState.busy, triggerListener: initialValue);
       final _response = await _useCases?.states(Params(entity: _datum?.id));
       _response!.fold((l) => null, (r) {
         states = r.data ?? [];
@@ -54,10 +54,10 @@ class LocationProvider extends BaseModel {
   }
 
   /// FETCH cities
-  void fetchCities({bool initialValue=false}) async {
+  void fetchCities({bool initialValue = false}) async {
     // if (_datum == null) return;
     try {
-      setState(ViewState.busy,triggerListener: initialValue);
+      setState(ViewState.busy, triggerListener: initialValue);
       final _response = await _useCases?.cities(Params(entity: _datum?.id));
       _response!.fold((l) => null, (r) {
         cities = r.data ?? [];

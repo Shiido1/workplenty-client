@@ -54,8 +54,6 @@ class _LiveConsultancyState extends State<LiveConsultancy> {
   List<String> _selectedSkills = [];
   List<User> _artisans = [];
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

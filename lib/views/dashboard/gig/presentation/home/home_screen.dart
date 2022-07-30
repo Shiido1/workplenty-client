@@ -129,7 +129,7 @@ class _HomeState extends State<Home> {
                                     Expanded(
                                       child: TextView(
                                           text:
-                                              '${WorkPlenty.plural(_jobList.length,text:'Artisan')} Found',
+                                              '${WorkPlenty.plural(_jobList.length, text: 'Artisan')} Found',
                                           maxLines: 1,
                                           textAlign: TextAlign.left,
                                           fontWeight: FontWeight.w500),

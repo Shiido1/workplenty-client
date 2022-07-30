@@ -44,7 +44,7 @@ class StatesLocation extends StatelessWidget {
                                 fontWeight: FontWeight.w500,
                                 onTap: () {
                                   onTap!(data);
-                                   Provider.of<LocationProvider>(context,
+                                  Provider.of<LocationProvider>(context,
                                           listen: false)
                                       .setStateValue(data);
                                   PageRouter.goBack(context);

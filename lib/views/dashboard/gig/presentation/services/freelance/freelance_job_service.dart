@@ -491,6 +491,8 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
   List<int> _artisansId = [];
   List<String> _selectedSkills = [];
 
+  ///TODO
+
   void _proceed(ArtisanProvider artisanProvider) {
     if (_validate()) {
       _bloc.add(ServiceEvent(GigEntity(
@@ -515,7 +517,6 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
           milestones: _miles,
           projectType: _projectType)));
     }
-    print('object file$_files');
   }
 
   bool _validate() {

@@ -10,14 +10,14 @@ class AddressEntity extends DefaultResponse {
   final String? zipCode;
   final String? city;
 
-  AddressEntity(
-      {required this.countryID,
-      required this.stateID,
-      required this.address,
-      required this.apartmentNo,
-      required this.zipCode,
-      required this.city,
-      });
+  AddressEntity({
+    required this.countryID,
+    required this.stateID,
+    required this.address,
+    required this.apartmentNo,
+    required this.zipCode,
+    required this.city,
+  });
 
   Map<String, dynamic> toMap() {
     return {

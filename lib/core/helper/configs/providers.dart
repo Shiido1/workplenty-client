@@ -27,7 +27,9 @@ class Providers {
         create: (_) => SavedGigListProvider(inject())),
     ChangeNotifierProvider<ProfileProvider>(
         create: (_) => ProfileProvider(inject())),
-    ChangeNotifierProvider<PayoutProvider>(create: (_) => PayoutProvider(inject())),
-    ChangeNotifierProvider<LocationProvider>(create: (_) => LocationProvider(inject())),
+    ChangeNotifierProvider<PayoutProvider>(
+        create: (_) => PayoutProvider(inject())),
+    ChangeNotifierProvider<LocationProvider>(
+        create: (_) => LocationProvider(inject())),
   ];
 }
