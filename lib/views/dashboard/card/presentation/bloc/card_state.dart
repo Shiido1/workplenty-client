@@ -19,6 +19,10 @@ class CardFailedState extends CardState {
 
 class CardSuccessState extends CardState {
   final dynamic response;
-
   CardSuccessState({required this.response});
+}
+
+class CardRemoveSuccessState extends CardState {
+  final dynamic response;
+  CardRemoveSuccessState({required this.response});
 }

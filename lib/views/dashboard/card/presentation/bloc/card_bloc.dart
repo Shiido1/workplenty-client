@@ -23,6 +23,19 @@ class CardBloc extends Bloc<CardEvent, CardState> {
           emit(CardFailedState(message: e.toString()));
         }
       }
+
+      if (event is StartCardRemoveEvent) {
+        try {
+          emit(CardLoadingState());
+          final _response =
+              await _usecase.removeCard(Params(entity: event.entity));
+          _response!.fold(
+              (l) => emit(CardFailedState(message: l.errorMessage(l)!)),
+              (r) => emit(CardRemoveSuccessState(response: r)));
+        } catch (e) {
+          emit(CardFailedState(message: e.toString()));
+        }
+      }
     });
   }
 }

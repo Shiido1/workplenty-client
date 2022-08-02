@@ -1,7 +1,6 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:client/core/di/injector.dart';
-import 'package:client/core/enums/gig_type.dart';
 import 'package:client/core/helper/helper_handler.dart';
 import 'package:client/core/helper/utils/images.dart';
 import 'package:client/core/helper/utils/pallets.dart';

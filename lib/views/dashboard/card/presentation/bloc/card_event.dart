@@ -12,3 +12,9 @@ class StartCardEvent extends CardEvent {
 
   StartCardEvent(this.entity);
 }
+
+class StartCardRemoveEvent extends CardEvent {
+  final CardEntity entity;
+
+  StartCardRemoveEvent(this.entity);
+}
