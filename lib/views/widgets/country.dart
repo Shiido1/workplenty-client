@@ -40,7 +40,7 @@ class Country extends StatelessWidget {
                               child: TextView(
                                 text: data.name ?? '',
                                 textAlign: TextAlign.left,
-                                fontSize: 14,
+                                fontSize: 17.4.sp,
                                 fontWeight: FontWeight.w500,
                                 onTap: () {
                                   onTap!(data);

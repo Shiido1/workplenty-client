@@ -4,7 +4,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/helper/helper_handler.dart';
-import '../../../../core/helper/routes/navigation.dart';
 import '../../../../core/helper/utils/images.dart';
 import '../../../../core/helper/utils/pallets.dart';
 import '../../../widgets/image_loader.dart';
@@ -89,7 +88,10 @@ class ProfileImageCardOne extends StatelessWidget {
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  SvgPicture.asset(AppImages.map),
+                  SvgPicture.asset(
+                    AppImages.map,
+                    color: Pallets.white,
+                  ),
                   SizedBox(width: 4.w),
                   TextView(
                       text: '${profile.user?.firstName}',

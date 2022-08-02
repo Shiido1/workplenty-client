@@ -3,7 +3,6 @@ import 'package:client/views/dashboard/gig/data/sourceImpl/savedSourceImpl.dart'
 import 'package:client/views/dashboard/gig/domain/contract/saved_contract.dart';
 import 'package:dartz/dartz.dart';
 
-import '../model/available_gig_response/available_gig_response.dart';
 import '../model/gigs_response/gigs_response.dart';
 
 class SavedGigListContractImpl implements SavedGigListContract {

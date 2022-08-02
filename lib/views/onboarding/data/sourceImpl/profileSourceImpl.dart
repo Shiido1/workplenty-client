@@ -1,5 +1,6 @@
 import 'package:client/core/api/profile/profile_api.dart';
 import 'package:client/core/entity/default_response.dart';
+import 'package:client/views/onboarding/data/model/address_model.dart';
 import 'package:client/views/onboarding/data/model/location_response/location_response.dart';
 import 'package:client/views/onboarding/domain/entity/profile/profile_entity.dart';
 import 'package:client/views/onboarding/domain/source/profile_source.dart';
@@ -49,5 +50,9 @@ class ProfileSourceImpl implements ProfileSource {
       await _api.updateAddress(entity);
 
   @override
-  Future<dynamic> profileAddress() async => await _api.profileAddress();
+  Future<AddressModel> profileAddress() async => await _api.profileAddress();
+
+  @override
+  Future<LocationResponse> cities(int entity) async =>
+      await _api.getListOfCity(entity);
 }

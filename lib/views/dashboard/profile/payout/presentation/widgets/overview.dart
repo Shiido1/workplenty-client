@@ -38,7 +38,7 @@ class GetOverviewWidget extends StatelessWidget {
                     SizedBox(height: 5.h),
                     TextView(
                       text: Utils.currency(
-                          provider.overviewData?.pendingSpendings ?? 0),
+                          provider.overviewData?.personalBalance ?? 0),
                       textAlign: TextAlign.left,
                       fontWeight: FontWeight.w700,
                       color: Pallets.white,
@@ -93,8 +93,8 @@ class GetOverviewWidget extends StatelessWidget {
                     ),
                     SizedBox(height: 5.h),
                     TextView(
-                      text: Utils.currency(
-                          provider.overviewData?.available ?? 0),
+                      text:
+                          Utils.currency(provider.overviewData?.available ?? 0),
                       textAlign: TextAlign.left,
                       fontWeight: FontWeight.w700,
                       color: Pallets.white,
@@ -110,8 +110,8 @@ class GetOverviewWidget extends StatelessWidget {
                     ),
                     SizedBox(height: 5.h),
                     TextView(
-                      text: Utils.currency(
-                          provider.overviewData?.inReview ?? 0),
+                      text:
+                          Utils.currency(provider.overviewData?.inReview ?? 0),
                       textAlign: TextAlign.left,
                       fontWeight: FontWeight.w700,
                       color: Pallets.white,
@@ -169,7 +169,6 @@ class GetOverviewWidget extends StatelessWidget {
               ],
             ),
             SizedBox(height: 12.h),
-            
             ...[1, 1, 1, 1]
                 .map(
                   (transaction) => Container(

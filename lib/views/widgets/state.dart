@@ -34,22 +34,24 @@ class StatesLocation extends StatelessWidget {
                   children: [
                     if (provider.state == ViewState.busy)
                       LinearProgressIndicator(color: Pallets.primary50),
-                  /*   ...provider.states!
+                    ...provider.states!
                         .map((data) => Padding(
                               padding: EdgeInsets.symmetric(vertical: 16.h),
                               child: TextView(
                                 text: data.name ?? '',
                                 textAlign: TextAlign.left,
-                                fontSize: 14,
+                                fontSize: 16,
                                 fontWeight: FontWeight.w500,
                                 onTap: () {
                                   onTap!(data);
-
+                                  Provider.of<LocationProvider>(context,
+                                          listen: false)
+                                      .setStateValue(data);
                                   PageRouter.goBack(context);
                                 },
                               ),
                             ))
-                        .toList() */
+                        .toList()
                   ],
                 ),
               ),

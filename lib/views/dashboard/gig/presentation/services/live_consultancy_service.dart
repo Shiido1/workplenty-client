@@ -23,6 +23,7 @@ import '../../../../../core/entity/user/user.dart';
 import '../../../../widgets/bottom_sheet.dart';
 import '../modal/invited_artisans_list.dart.dart';
 import '../modal/job_category_modal.dart';
+import '../provider/artisan_provider.dart';
 import 'freelance/widgets/first.dart';
 import 'freelance/widgets/second.dart';
 

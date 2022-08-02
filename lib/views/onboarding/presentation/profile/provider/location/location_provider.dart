@@ -1,4 +1,3 @@
-import 'package:client/core/entity/data/data.model.dart';
 import 'package:client/core/enums/viewstate.dart';
 import 'package:client/core/helper/configs/instances.dart';
 import 'package:client/core/viewmodels/base_model.dart';
@@ -12,6 +11,8 @@ class LocationProvider extends BaseModel {
   LocationProvider(this._useCases);
 
   List<Datum>? countries = [];
+  List<Datum>? states = [];
+  List<Datum>? cities = [];
 
   Datum? _datum;
 
@@ -37,14 +38,29 @@ class LocationProvider extends BaseModel {
   }
 
   /// FETCH states
-  void fetchStates() async {
+  void fetchStates({bool initialValue = false}) async {
     // if (_datum == null) return;
     try {
-      setState(ViewState.busy);
+      setState(ViewState.busy, triggerListener: initialValue);
       final _response = await _useCases?.states(Params(entity: _datum?.id));
       _response!.fold((l) => null, (r) {
-        // countries = r.data ?? [];
-        logger.d(r.toJson());
+        states = r.data ?? [];
+        setState(ViewState.idle, triggerListener: true);
+      });
+    } catch (e) {
+      logger.e(e);
+      setState(ViewState.idle, triggerListener: true);
+    }
+  }
+
+  /// FETCH cities
+  void fetchCities({bool initialValue = false}) async {
+    // if (_datum == null) return;
+    try {
+      setState(ViewState.busy, triggerListener: initialValue);
+      final _response = await _useCases?.cities(Params(entity: _datum?.id));
+      _response!.fold((l) => null, (r) {
+        cities = r.data ?? [];
         setState(ViewState.idle, triggerListener: true);
       });
     } catch (e) {

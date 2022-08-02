@@ -1,6 +1,4 @@
-import 'package:client/core/database/session_manager.dart';
 import 'package:client/core/entity/default_response.dart';
-import 'package:client/core/helper/configs/instances.dart';
 import 'package:client/core/network/network_service.dart';
 import 'package:client/core/network/url_config.dart';
 import 'package:client/views/dashboard/gig/data/model/available_gig_response/available_gig_response.dart';

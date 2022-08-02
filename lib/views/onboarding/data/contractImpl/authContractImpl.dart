@@ -1,10 +1,8 @@
 import 'package:client/core/database/session_manager.dart';
 import 'package:client/core/error/failures.dart';
-import 'package:client/core/helper/configs/instances.dart';
 import 'package:client/views/onboarding/data/model/auth/auth_response/auth_response.dart';
 import 'package:client/views/onboarding/data/sourceImpl/authSourceImpl.dart';
 import 'package:client/views/onboarding/domain/contract/auth_contract.dart';
-import 'package:client/views/onboarding/domain/entity/auth/auth_entity.dart';
 import 'package:dartz/dartz.dart';
 
 class AuthContractImpl implements AuthContract {

@@ -1,6 +1,8 @@
-import 'package:client/core/helper/configs/instances.dart';
+import 'package:client/core/database/session_manager.dart';
 import 'package:client/core/helper/routes/navigation.dart';
+import 'package:client/views/onboarding/data/model/address_model.dart';
 import 'package:client/views/onboarding/data/model/location_response/datum.dart';
+import 'package:client/views/widgets/cities.dart';
 import 'package:client/views/widgets/country.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -45,9 +47,14 @@ class _AddressSettingsState extends State<AddressSettings> {
   }
 
   void _address() {
-    // if(SessionManager.instance.contains(SessionManager.instance.artisanAddressData)){
-
-    // }
+    final _user = Data.fromJson(SessionManager.instance.addressData);
+    _countryController = TextEditingController(text: _user.country ?? '');
+    _stateController = TextEditingController(text: _user.state ?? '');
+    _streetController = TextEditingController(text: _user.address ?? '');
+    _suitController = TextEditingController(text: _user.apartmentNo ?? '');
+    _cityController = TextEditingController(text: _user.city ?? '');
+    _postalCodeController = TextEditingController(text: _user.zipCode ?? '');
+    setState(() {});
   }
 
   @override
@@ -81,7 +88,7 @@ class _AddressSettingsState extends State<AddressSettings> {
               children: [
                 ListView(
                   children: [
-                    SizedBox(height: 55.h),
+                    // SizedBox(height: 55.h),
                     EditFormField(
                       decoration: _getDecoration('Country', dropDown: true),
                       controller: _countryController,
@@ -106,7 +113,7 @@ class _AddressSettingsState extends State<AddressSettings> {
                     ),
                     SizedBox(height: 20.h),
                     EditFormField(
-                      controller: _stateController,
+                      controller: _streetController,
                       decoration:
                           _getDecoration('Street Address', dropDown: false),
                     ),
@@ -158,13 +165,11 @@ class _AddressSettingsState extends State<AddressSettings> {
 
   void _update() {
     _bloc.add(UpdateAddress(AddressEntity(
-        countryID: 1,
-        stateID: 20,
-        cityID: 404,
-        address: 'Abuja',
-        apartmentNo: "43",
-        zipCode: "200003",
-        phone: "08140288124",
-        country: "Nigeria")));
+        countryID: _country?.id,
+        stateID: _state?.id,
+        address: _streetController.text,
+        apartmentNo: _suitController.text,
+        zipCode: _postalCodeController.text,
+        city: _cityController.text)));
   }
 }

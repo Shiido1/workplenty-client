@@ -11,8 +11,8 @@ class UrlConfig {
   static const String saveIndustry = 'client/industry/save';
   static const String listIndustry = 'client/industry/list';
   static const String deleteIndustry = 'client/industry/delete';
-  static const String overviewPayment = 'client/payment/overview';
-  static const String transactionPayment = 'client/payment/transactions';
+  static const String overviewPayment = 'withdrawal/overview';
+  static const String transactionPayment = 'wallet/transactions';
   static const String depositPayment = 'client/payment/deposit';
   static const String clientProfile = 'client/profile/information';
   static const String updateAccount = 'account/account/update';
@@ -20,8 +20,8 @@ class UrlConfig {
   static const String updateAddress = 'account/address/update';
 
   static const String listCard = 'client/payment/card/list';
-  static const String saveCard = 'client/card/save';
-  static const String removeCard = 'client/card/remove';
+  static const String saveCard = 'client/payment/card/save';
+  static const String removeCard = 'client/payment/card/remove';
   static const String savedProfileList = 'saved-profiles/list';
 
   static const String profileBioUpdate = 'client/profile/update-bio';
@@ -50,4 +50,6 @@ class UrlConfig {
   static const String saveReview = 'review/save';
   static const String listOfArtisans = 'user/artisan/list';
   static const String generalIndustryList = 'industry/fetch';
+
+  static const String SaveBankAccount = 'bank-account/save';
 }

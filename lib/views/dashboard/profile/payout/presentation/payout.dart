@@ -54,6 +54,7 @@ class _PayoutsState extends State<Payouts> {
                       textAlign: TextAlign.right,
                       fontWeight: FontWeight.w700,
                       maxLines: 1,
+                      fontSize: 17.sp,
                     ),
                   ),
                 )

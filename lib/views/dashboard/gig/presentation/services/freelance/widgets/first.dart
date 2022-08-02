@@ -32,7 +32,7 @@ class First extends StatelessWidget {
                 children: [
                   TextView(
                     text:
-                        '${value.datum?.user?.firstName ?? ''} ${value.datum?.user?.lastName}',
+                        '${value.datum?.user?.firstName ?? ''} ${value.datum?.user?.lastName ?? ''}',
                     maxLines: 1,
                     fontSize: 17,
                     fontWeight: FontWeight.w800,

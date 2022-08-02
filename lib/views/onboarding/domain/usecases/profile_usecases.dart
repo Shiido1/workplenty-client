@@ -46,6 +46,11 @@ class ProfileUseCases extends UseCase<dynamic, Params> {
   }
 
   @override
+  Future<Either<Failure, LocationResponse>>? cities(Params p) async {
+    return await _repository.cities(p.entity!);
+  }
+
+  @override
   Future<Either<Failure, DefaultResponse>>? updateAccount(Params p) async =>
       await _repository.updateAccount(p.entity!);
 
