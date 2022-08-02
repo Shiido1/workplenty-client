@@ -9,6 +9,10 @@ import 'package:client/views/widgets/review_bg_card.dart';
 import 'package:client/views/widgets/text_views.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:provider/provider.dart';
+
+import '../../../card/presentation/provider/card_provider.dart';
 
 class PaymentSettings2 extends StatefulWidget {
   const PaymentSettings2({Key? key}) : super(key: key);
@@ -18,8 +22,17 @@ class PaymentSettings2 extends StatefulWidget {
 }
 
 class _PaymentSettings2State extends State<PaymentSettings2> {
+  getListOfCards() =>
+      Provider.of<CardProvider>(context, listen: false).getAllCards();
+  @override
+  void initState() {
+    getListOfCards();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    getListOfCards();
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: defaultAppBar2(context,
@@ -33,21 +46,43 @@ class _PaymentSettings2State extends State<PaymentSettings2> {
                 color: Pallets.white,
               )),
           textColor: Pallets.white),
-      body: BodyWidget(
-        child: Stack(
-          children: [
-            ListView(
+      body: Consumer<CardProvider>(
+        builder: ((context, value, child) {
+          if (value.cardData == null) {
+            return Center(
+              child: SpinKitCubeGrid(
+                color: Pallets.primary100,
+                size: 50.0,
+              ),
+            );
+          }
+
+          return BodyWidget(
+            child: Stack(
               children: [
-                ...[1, 1, 1].map((e) => widgetContainer()).toList()
+                ListView(
+                  children: [
+                    ...value.cardData!
+                        .map((e) => widgetContainer(
+                            cardType: e.type,
+                            date:
+                                '${e.expiryMonth ?? ''}/${e.expiryYear ?? ''}',
+                            firstDigit: e.firstDigits,
+                            name: e.name))
+                        .toList()
+                  ],
+                )
               ],
-            )
-          ],
-        ),
+            ),
+          );
+        }),
       ),
     );
   }
 
-  widgetContainer() => GestureDetector(
+  widgetContainer(
+          {String? cardType, String? firstDigit, String? date, String? name}) =>
+      GestureDetector(
         onTap: () => PageRouter.gotoWidget(PaymentSetting3(), context),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -70,17 +105,25 @@ class _PaymentSettings2State extends State<PaymentSettings2> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         TextView(
-                          text: 'Master Card Debit (5432)',
+                          text: firstDigit!.substring(0, 1) == '5'
+                              ? 'Master Card Debit(${firstDigit})'
+                              : '${cardType ?? ''}(${firstDigit})',
                           fontWeight: FontWeight.w400,
                           fontSize: 16,
                         ),
+                        SizedBox(
+                          height: 3.5.h,
+                        ),
                         TextView(
-                          text: '02 / 2023',
+                          text: date ?? '',
                           fontWeight: FontWeight.w400,
                           fontSize: 16,
                         ),
+                        SizedBox(
+                          height: 3.5.h,
+                        ),
                         TextView(
-                          text: 'Oluwafemi Allen',
+                          text: name ?? '',
                           fontWeight: FontWeight.w400,
                           fontSize: 16,
                         ),

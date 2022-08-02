@@ -1,6 +1,7 @@
 import 'package:client/core/database/session_manager.dart';
 import 'package:client/core/helper/configs/providers.dart';
 import 'package:client/views/dashboard/board.dart';
+import 'package:client/views/dashboard/profile/manage/payment/payment_settings2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,7 +15,7 @@ import 'core/theme/theme.dart';
 import 'views/onboarding/presentation/intro/intro_screen.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding?.ensureInitialized();
   await initializeCore(environment: Environment.staging);
   runApp(const MyApp());
 }
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
                   themeMode: ThemeMode.light,
                   routes: Routes.getRoutes,
                   home: SessionManager.instance.isLoggedIn
-                      ? MainBoard()
+                      ? PaymentSettings2()
                       : IntroOneScreen(),
                 )),
       ),
