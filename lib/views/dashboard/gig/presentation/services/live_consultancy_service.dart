@@ -16,19 +16,27 @@ import 'package:client/views/widgets/image_loader.dart';
 import 'package:client/views/widgets/review_bg_card.dart';
 import 'package:client/views/widgets/text_views.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../core/di/injector.dart';
 import '../../../../../core/entity/skills/skill.dart';
 import '../../../../../core/entity/user/user.dart';
+import '../../../../../core/enums/gig_type.dart';
+import '../../../../../core/helper/utils/workplenty_dialog.dart';
 import '../../../../widgets/bottom_sheet.dart';
+import '../../domain/entity/gig/gig_entity.dart';
 import '../modal/invited_artisans_list.dart.dart';
 import '../modal/job_category_modal.dart';
 import '../provider/artisan_provider.dart';
+import 'bloc/servicebloc_bloc.dart';
 import 'freelance/widgets/first.dart';
 import 'freelance/widgets/second.dart';
 
 class LiveConsultancy extends StatefulWidget {
-  LiveConsultancy({Key? key}) : super(key: key);
+  final bool? inVite;
+
+  LiveConsultancy({this.inVite = true, Key? key}) : super(key: key);
 
   @override
   State<LiveConsultancy> createState() => _LiveConsultancyState();
@@ -53,6 +61,10 @@ class _LiveConsultancyState extends State<LiveConsultancy> {
   List<int> _artisansId = [];
   List<String> _selectedSkills = [];
   List<User> _artisans = [];
+  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final _bloc = ServiceblocBloc(inject());
+  final _loadingKey = GlobalKey<FormState>();
+  int? industryId;
 
   @override
   Widget build(BuildContext context) {
@@ -67,151 +79,188 @@ class _LiveConsultancyState extends State<LiveConsultancy> {
             title: 'Live Consultancy',
             centerTitle: true),
         body: BodyWidget(
-          child: ListView(children: [
-            SizedBox(
-              height: 10.h,
-            ),
-            First(),
-            SizedBox(height: 23.h),
-            SecondBadgeWidget(
-              privateMessageController: privateMessageController,
-              titleController: titleController,
-              descriptionController: descriptionController,
-              title: 'Live Consultancy Title',
-              description: 'Describe your live consultancy details',
-            ),
-            SizedBox(
-              height: 20.h,
-            ),
-            ReviewBgCard(Column(
-              children: [
-                RowContainer(
-                    image: AppImages.brief_case, text: 'Session Category'),
-                EditFormField(
-                  label: 'Web Development',
-                  suffixWidget: ImageLoader(path: AppImages.vector),
-                  readOnly: true,
-                  controller: _jobCategoryController,
-                  validator: Validators.validateString(),
-                  onTapped: () {
-                    BottomSheets.showSheet<String>(
-                      context,
-                      child: JobCategoryModal(callBack: (data) {
-                        _jobCategoryController.text = data?.name ?? '';
-                        setState(() {});
-                      }),
-                    );
-                  },
+          child: Form(
+            key: _formKey,
+            child: BlocListener<ServiceblocBloc, ServiceblocState>(
+              bloc: _bloc,
+              listener: (context, state) {
+                if (state is ServiceblocLoading) {
+                  WorkPlenty.showLoading(context, _loadingKey, '');
+                }
+                if (state is ServiceblocSuccess) {
+                  WorkPlenty.hideLoading(_loadingKey);
+                  WorkPlenty.success(state.response?.msg ?? '');
+                  PageRouter.goBack(context);
+                }
+                if (state is ServiceblocFailed) {
+                  WorkPlenty.hideLoading(_loadingKey);
+                  WorkPlenty.error(state.message);
+                }
+              },
+              child: ListView(children: [
+                if (widget.inVite!) SizedBox(height: 10.h),
+                if (widget.inVite!) First(),
+                if (widget.inVite!) SizedBox(height: 23.h),
+                SecondBadgeWidget(
+                  isInvite: widget.inVite!,
+                  privateMessageController: privateMessageController,
+                  titleController: titleController,
+                  descriptionController: descriptionController,
+                  title: 'Live Consultancy Title',
+                  description: 'Describe your live consultancy details',
                 ),
-              ],
-            )),
-            SizedBox(
-              height: 40.h,
-            ),
-            ReviewBgCard(Column(
-              children: [
-                RowContainer(
-                    image: AppImages.calender, text: 'Session Date & Time'),
-                EditFormField(
-                  suffixWidget: ImageLoader(path: AppImages.vector),
-                  label: 'From',
-                  readOnly: true,
-                  controller: _fromDateController,
-                  validator: Validators.validateString(),
-                  onTapped: () => pickDate(
-                      context: context,
-                      dateOptions: DateOptions.future,
-                      showTime: true,
-                      onChange: (d) {
-                        _fromDateController.text = d;
-                        setState(() {});
-                      }),
+                SizedBox(height: 20.h),
+                ReviewBgCard(Column(
+                  children: [
+                    RowContainer(
+                        image: AppImages.brief_case, text: 'Session Category'),
+                    EditFormField(
+                      label: 'Web Development',
+                      suffixWidget: ImageLoader(path: AppImages.vector),
+                      readOnly: true,
+                      controller: _jobCategoryController,
+                      validator: Validators.validateString(),
+                      onTapped: () {
+                        BottomSheets.showSheet<String>(
+                          context,
+                          child: JobCategoryModal(callBack: (data) {
+                            _jobCategoryController.text = data?.name ?? '';
+                            industryId = data?.categoryId;
+                            setState(() {});
+                          }),
+                        );
+                      },
+                    ),
+                  ],
+                )),
+                SizedBox(
+                  height: 40.h,
                 ),
-              ],
-            )),
-            SizedBox(
-              height: 20.h,
-            ),
-            ReviewBgCard(
-              Column(
-                children: [
-                  RowContainer(
-                      image: AppImages.emptyWallet, text: 'Budget per hour'),
-                  EditFormField(
-                    label: 'NGN',
-                    controller: _budgetController,
-                    validator: Validators.validateInt(),
-                    keyboardType: TextInputType.number,
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 23.h),
-            ReviewBgCard(
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                ReviewBgCard(Column(
+                  children: [
+                    RowContainer(
+                        image: AppImages.calender, text: 'Session Date & Time'),
+                    EditFormField(
+                      suffixWidget: ImageLoader(path: AppImages.vector),
+                      label: 'From',
+                      readOnly: true,
+                      controller: _fromDateController,
+                      validator: Validators.validateString(),
+                      onTapped: () => pickDate(
+                          context: context,
+                          dateOptions: DateOptions.future,
+                          showTime: true,
+                          onChange: (d) {
+                            _fromDateController.text = d;
+                            setState(() {});
+                          }),
+                    ),
+                  ],
+                )),
+                SizedBox(
+                  height: 20.h,
+                ),
+                ReviewBgCard(
+                  Column(
                     children: [
-                      Expanded(
-                          child: RowContainer(
-                              image: AppImages.arrange,
-                              text: 'Invite Artisan')),
-                      Expanded(
-                        child: InkWell(
-                          onTap: () {
-                            BottomSheets.showSheet<String>(
-                              context,
-                              child: InviteArtisansModal(callBack: (l) {
-                                _artisans = l ?? [];
-                                setState(() {});
-                              }),
-                            );
-                          },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              TextView(
-                                text: 'Invite',
-                                maxLines: 1,
-                                fontWeight: FontWeight.w700,
-                                textAlign: TextAlign.left,
-                              ),
-                              SizedBox(width: 10.w),
-                              Container(
-                                decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(5)),
-                                    border: Border.all(color: Pallets.grey)),
-                                child: Icon(
-                                  Icons.add,
-                                  size: 13,
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      )
+                      RowContainer(
+                          image: AppImages.emptyWallet,
+                          text: 'Budget per hour'),
+                      EditFormField(
+                        label: 'NGN',
+                        controller: _budgetController,
+                        validator: Validators.validateInt(),
+                        keyboardType: TextInputType.number,
+                      ),
                     ],
                   ),
-                ],
-              ),
+                ),
+                SizedBox(height: 23.h),
+                ReviewBgCard(
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Expanded(
+                              child: RowContainer(
+                                  image: AppImages.arrange,
+                                  text: 'Invite Artisan')),
+                          Expanded(
+                            child: InkWell(
+                              onTap: () {
+                                BottomSheets.showSheet<String>(
+                                  context,
+                                  child: InviteArtisansModal(callBack: (l) {
+                                    _artisans = l ?? [];
+                                    setState(() {});
+                                  }),
+                                );
+                              },
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  TextView(
+                                    text: 'Invite',
+                                    maxLines: 1,
+                                    fontWeight: FontWeight.w700,
+                                    textAlign: TextAlign.left,
+                                  ),
+                                  SizedBox(width: 10.w),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(5)),
+                                        border:
+                                            Border.all(color: Pallets.grey)),
+                                    child: Icon(
+                                      Icons.add,
+                                      size: 13,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                      SizedBox(height: 13.h),
+                      ..._artisans
+                          .map(((user) => Row(
+                                children: [
+                                  Expanded(
+                                    child: TextView(
+                                        text:
+                                            '${user.firstName ?? ''} ${user.lastName ?? ''}  ',
+                                        color: Pallets.grey),
+                                  ),
+                                  IconButton(
+                                      onPressed: () {
+                                        _artisans.remove(user);
+                                        setState(() {});
+                                      },
+                                      icon: Icon(Icons.clear))
+                                ],
+                              )))
+                          .toList()
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 23.h,
+                ),
+                ButtonWidget(
+                  buttonText: 'Start Session & Invite Artisan',
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.w700,
+                  onPressed: () => _startSession(),
+                  width: Utils.getDeviceWidth(context),
+                ),
+                SizedBox(height: 40),
+              ]),
             ),
-            SizedBox(
-              height: 10.h,
-            ),
-            ButtonWidget(
-              buttonText: 'Start Session & Invite Artisan',
-              fontSize: 18.sp,
-              fontWeight: FontWeight.w700,
-              onPressed: () {},
-              width: Utils.getDeviceWidth(context),
-            ),
-            SizedBox(
-              height: 40,
-            ),
-          ]),
+          ),
         ));
   }
 
@@ -226,4 +275,28 @@ class _LiveConsultancyState extends State<LiveConsultancy> {
             fontWeight: FontWeight.w500,
             textAlign: TextAlign.center),
       );
+
+  void _startSession() {
+    if (_formKey.currentState!.validate()) {
+      if (_artisans.isEmpty) {
+        WorkPlenty.error('Please invite atleast one artisan');
+        return;
+      }
+
+      List<int> _artisansID = [];
+      if (_artisans.isNotEmpty) {
+        _artisans.map((e) => _artisansID.add(e.id!)).toList();
+      }
+      _bloc.add(ServiceEvent(GigEntity(
+          type: GigType.LIVE_SESSION,
+          title: titleController.text,
+          industryId: industryId?.toString(),
+          description: descriptionController.text,
+          serviceDate: _fromDateController.text.split(' ')[0],
+          serviceTime:
+              '${_fromDateController.text.split(' ')[1]}${_fromDateController.text.split(' ')[2]}',
+          hourlyBudget: _budgetController.text,
+          invited_artisan_ids: _artisansID)));
+    }
+  }
 }

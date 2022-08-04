@@ -8,7 +8,6 @@ class WorkplentyFilePicker {
         type: FileType.custom,
         allowedExtensions: ['pdf', 'doc'],
         allowMultiple: true);
-    _result!.files.map((e) => logger.d(e.path)).toList();
-    return _result.paths;
+    return _result!.paths;
   }
 }

@@ -48,7 +48,8 @@ import 'widgets/second.dart';
 
 // ignore: must_be_immutable
 class FreeLanceJobService extends StatefulWidget {
-  FreeLanceJobService({Key? key}) : super(key: key);
+  final bool isInvite;
+  FreeLanceJobService({this.isInvite = true, Key? key}) : super(key: key);
 
   @override
   State<FreeLanceJobService> createState() => _FreeLanceJobServiceState();
@@ -66,6 +67,7 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
 
   int _checkboxIndex = 0;
   int? _experienceIndex;
+  int? _industryId;
 
   ProjectType _projectType = ProjectType.Milestone;
 
@@ -108,6 +110,8 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
                 }
                 if (state is ServiceblocSuccess) {
                   WorkPlenty.hideLoading(_loadingKey);
+                  WorkPlenty.success(state.response?.msg ?? '');
+                  PageRouter.goBack(context);
                 }
                 if (state is ServiceblocFailed) {
                   WorkPlenty.hideLoading(_loadingKey);
@@ -120,9 +124,10 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          First(),
-                          SizedBox(height: 23.h),
+                          if (widget.isInvite) First(),
+                          if (widget.isInvite) SizedBox(height: 23.h),
                           SecondBadgeWidget(
+                            isInvite: widget.isInvite,
                             privateMessageController: privateMessageController,
                             titleController: titleController,
                             descriptionController: descriptionController,
@@ -188,6 +193,7 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
                                       child: JobCategoryModal(callBack: (data) {
                                         _jobCategoryController.text =
                                             data?.name ?? '';
+                                        _industryId = data?.categoryId;
                                         setState(() {});
                                       }),
                                     );
@@ -395,81 +401,82 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
                             ),
                           ),
                           SizedBox(height: 50.h),
-                          ReviewBgCard(
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Expanded(
-                                        child: RowContainer(
-                                            image: AppImages.arrange,
-                                            text: 'Invite Artisan')),
-                                    Expanded(
-                                      child: InkWell(
-                                        onTap: () {
-                                          BottomSheets.showSheet<String>(
-                                            context,
-                                            child: InviteArtisansModal(
-                                                callBack: (l) {
-                                              _artisans = l ?? [];
-                                              setState(() {});
-                                            }),
-                                          );
-                                        },
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                          children: [
-                                            TextView(
-                                              text: 'Invite',
-                                              maxLines: 1,
-                                              fontWeight: FontWeight.w700,
-                                              textAlign: TextAlign.left,
-                                            ),
-                                            SizedBox(width: 10.w),
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(5)),
-                                                  border: Border.all(
-                                                      color: Pallets.grey)),
-                                              child: Icon(
-                                                Icons.add,
-                                                size: 13,
+                          if (widget.isInvite)
+                            ReviewBgCard(
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Expanded(
+                                          child: RowContainer(
+                                              image: AppImages.arrange,
+                                              text: 'Invite Artisan')),
+                                      Expanded(
+                                        child: InkWell(
+                                          onTap: () {
+                                            BottomSheets.showSheet<String>(
+                                              context,
+                                              child: InviteArtisansModal(
+                                                  callBack: (l) {
+                                                _artisans = l ?? [];
+                                                setState(() {});
+                                              }),
+                                            );
+                                          },
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            children: [
+                                              TextView(
+                                                text: 'Invite',
+                                                maxLines: 1,
+                                                fontWeight: FontWeight.w700,
+                                                textAlign: TextAlign.left,
                                               ),
-                                            )
-                                          ],
+                                              SizedBox(width: 10.w),
+                                              Container(
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(5)),
+                                                    border: Border.all(
+                                                        color: Pallets.grey)),
+                                                child: Icon(
+                                                  Icons.add,
+                                                  size: 13,
+                                                ),
+                                              )
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                ..._artisans
-                                    .map(((user) => Row(
-                                          children: [
-                                            Expanded(
-                                              child: TextView(
-                                                  text:
-                                                      '${user.firstName ?? ''} ${user.lastName ?? ''}  ',
-                                                  color: Pallets.grey),
-                                            ),
-                                            IconButton(
-                                                onPressed: () {
-                                                  _files.remove(user);
-                                                  setState(() {});
-                                                },
-                                                icon: Icon(Icons.clear))
-                                          ],
-                                        )))
-                                    .toList()
-                              ],
+                                      )
+                                    ],
+                                  ),
+                                  ..._artisans
+                                      .map(((user) => Row(
+                                            children: [
+                                              Expanded(
+                                                child: TextView(
+                                                    text:
+                                                        '${user.firstName ?? ''} ${user.lastName ?? ''}  ',
+                                                    color: Pallets.grey),
+                                              ),
+                                              IconButton(
+                                                  onPressed: () {
+                                                    _files.remove(user);
+                                                    setState(() {});
+                                                  },
+                                                  icon: Icon(Icons.clear))
+                                            ],
+                                          )))
+                                      .toList()
+                                ],
+                              ),
                             ),
-                          ),
-                          SizedBox(height: 23.h),
+                          if (widget.isInvite) SizedBox(height: 23.h),
                           ButtonWidget(
                             buttonText: 'Post Freelance Job & Invite',
                             fontSize: 18.sp,
@@ -496,10 +503,7 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
   void _proceed(ArtisanProvider artisanProvider) {
     if (_validate()) {
       _bloc.add(ServiceEvent(GigEntity(
-          // id: '${artisanProvider.datum?.id}',
-          id: '2',
-          // industryId: '${artisanProvider.datum?.industry?.id}',
-          industryId: '1',
+          industryId: _industryId.toString(),
           type: GigType.FREELANCE,
           privateMessage: privateMessageController.text,
           title: titleController.text,
@@ -512,8 +516,8 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
           totalBudget: _budgetController.text,
           skill: _selectedSkills,
           attachments: _files,
-          // invited_artisan_ids: _artisansId,
-          invited_artisan_ids: [2],
+          dummyAttachments: _mFile,
+          invited_artisan_ids: _artisansId,
           milestones: _miles,
           projectType: _projectType)));
     }
@@ -533,23 +537,25 @@ class _FreeLanceJobServiceState extends State<FreeLanceJobService> {
       WorkPlenty.error('Please select at least one skill');
       return false;
     }
-    // if (_artisans.isEmpty) {
-    //   WorkPlenty.error('Please select at least one artisan');
-    //   return false;
-    // }
+    if (widget.isInvite && _artisans.isEmpty) {
+      WorkPlenty.error('Please select at least one artisan');
+      return false;
+    }
 
     _skillList!.map((e) => _selectedSkills.add(e.name!)).toList();
-    // _artisans.map((e) => _artisansId.add(e.id!)).toList();
+    _artisans.map((e) => _artisansId.add(e.id!)).toList();
     setState(() {});
     return true;
   }
 
   List<MultipartFile> _files = [];
+  List<File> _mFile = [];
 
   void _pickFiles() async {
     try {
       List<String?> _f = await WorkplentyFilePicker.returnPickedFiles();
       _files = _f.map((path) => MultipartFile.fromFileSync(path!)).toList();
+      _mFile = _f.map((path) => File(path!)).toList();
       setState(() {});
     } catch (e) {
       logger.e(e);

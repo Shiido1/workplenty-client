@@ -41,7 +41,8 @@ import 'freelance/widgets/second.dart';
 import 'widgets/add_skill_widget.dart';
 
 class HomeService extends StatefulWidget {
-  HomeService({Key? key}) : super(key: key);
+  final bool? isInvite;
+  HomeService({this.isInvite = true, Key? key}) : super(key: key);
 
   @override
   State<HomeService> createState() => _HomeServiceState();
@@ -69,6 +70,7 @@ class _HomeServiceState extends State<HomeService> {
   final _loadingKey = GlobalKey<FormState>();
   final _globalFormKey = GlobalKey<FormState>();
   final _bloc = ServiceblocBloc(inject());
+  int? _industryId;
 
   @override
   Widget build(BuildContext context) {
@@ -102,12 +104,11 @@ class _HomeServiceState extends State<HomeService> {
             child: Consumer<ArtisanProvider>(
               builder: (context, value, child) {
                 return ListView(children: [
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  First(),
-                  SizedBox(height: 23.h),
+                  if (widget.isInvite!) SizedBox(height: 10.h),
+                  if (widget.isInvite!) First(),
+                  if (widget.isInvite!) SizedBox(height: 23.h),
                   SecondBadgeWidget(
+                    isInvite: widget.isInvite!,
                     privateMessageController: privateMessageController,
                     titleController: titleController,
                     descriptionController: descriptionController,
@@ -125,7 +126,7 @@ class _HomeServiceState extends State<HomeService> {
                             'e.g. Hello World, Silicon Valley, Lagos, Nigeria',
                         validator: Validators.validateString(),
                         controller: _addressController,
-                        keyboardType: TextInputType.emailAddress,
+                        keyboardType: TextInputType.text,
                       ),
                     ],
                   )),
@@ -147,6 +148,7 @@ class _HomeServiceState extends State<HomeService> {
                             context,
                             child: JobCategoryModal(callBack: (data) {
                               _jobCategoryController.text = data?.name ?? '';
+                              _industryId = data?.categoryId;
                               setState(() {});
                             }),
                           );
@@ -349,7 +351,7 @@ class _HomeServiceState extends State<HomeService> {
                       ],
                     ),
                   ),
-                  SizedBox(height: 50.h),
+                  SizedBox(height: 23.h),
                   ReviewBgCard(
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -399,6 +401,25 @@ class _HomeServiceState extends State<HomeService> {
                             )
                           ],
                         ),
+                        SizedBox(height: 13.h),
+                        ..._artisans
+                            .map(((user) => Row(
+                                  children: [
+                                    Expanded(
+                                      child: TextView(
+                                          text:
+                                              '${user.firstName ?? ''} ${user.lastName ?? ''}  ',
+                                          color: Pallets.grey),
+                                    ),
+                                    IconButton(
+                                        onPressed: () {
+                                          _artisans.remove(user);
+                                          setState(() {});
+                                        },
+                                        icon: Icon(Icons.clear))
+                                  ],
+                                )))
+                            .toList()
                       ],
                     ),
                   ),
@@ -425,20 +446,17 @@ class _HomeServiceState extends State<HomeService> {
   void _proceed(ArtisanProvider artisanProvider) {
     if (_validate()) {
       _bloc.add(ServiceEvent(GigEntity(
-        id: '${artisanProvider.datum?.id}',
-        industryId: '${artisanProvider.datum?.industry?.id}',
-        type: GigType.HOME_SERVICE,
-        privateMessage: privateMessageController.text,
-        title: titleController.text,
-        description: descriptionController.text,
-        timeline: _timeController.text,
-        paymentType: _paymentType,
-        isPublished: '1',
-        experienceLevel: '$_experienceIndex',
-        totalBudget: _budgetController.text,
-        skill: _selectedSkills,
-        invited_artisan_ids: _artisansId,
-      )));
+          industryId: _industryId?.toString(),
+          type: GigType.HOME_SERVICE,
+          title: titleController.text,
+          description: descriptionController.text,
+          serviceAddress: _addressController.text,
+          paymentType: _paymentType,
+          experienceLevel: '$_experienceIndex',
+          hourlyBudget: _budgetController.text,
+          skill: _selectedSkills,
+          invited_artisan_ids: _artisansId,
+          serviceDuration: _timeController.text)));
     }
   }
 

@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:http/src/multipart_request.dart';
+
 class MilestoneModel {
   String? description;
   String? dueDate;
@@ -17,6 +19,13 @@ class MilestoneModel {
       'due_date': dueDate,
       'amount': amount,
     };
+  }
+
+  toMap1(MultipartRequest request) {
+    request.fields['description'] = description ?? '';
+    request.fields['due_date'] = dueDate ?? '';
+    request.fields['amount'] = amount ?? '';
+    return request;
   }
 
   factory MilestoneModel.fromMap(Map<String, dynamic> map) {

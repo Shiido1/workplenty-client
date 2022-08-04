@@ -5,7 +5,7 @@ String? fromGigType(GigType? type) {
     case GigType.FREELANCE:
       return 'FREELANCE';
     case GigType.HOME_SERVICE:
-      return 'HOME';
+      return 'HOME_SERVICE';
     case GigType.LIVE_SESSION:
       return 'LIVE_SESSION';
     default:
@@ -17,7 +17,7 @@ GigType? toGigType(String? type) {
   switch (type) {
     case 'FREELANCE':
       return GigType.FREELANCE;
-    case 'HOME':
+    case 'HOME_SERVICE':
       return GigType.HOME_SERVICE;
     case 'LIVE_SESSION':
       return GigType.LIVE_SESSION;
