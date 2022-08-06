@@ -138,7 +138,7 @@ void _buildCupertinoDatePicker(
           mode: showTime
               ? CupertinoDatePickerMode.dateAndTime
               : CupertinoDatePickerMode.date,
-          backgroundColor: Theme.of(context).cardColor,
+          backgroundColor: Pallets.primary100,
           initialDateTime: DateTime.now(),
           minimumYear: _getFirstIOSDate(dateOptions),
           maximumYear: _getLastIOSDate(dateOptions),

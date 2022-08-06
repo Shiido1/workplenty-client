@@ -15,7 +15,7 @@ class TimelineModal extends StatelessWidget {
       height: Utils.getDeviceHeight(context) * .4,
       child: Scaffold(
         appBar: defaultAppBar(context,
-            title: 'Experience Level',
+            title: 'Home Service Duration',
             centerTitle: true,
             showClearButton: false),
         body: Padding(

@@ -72,7 +72,8 @@ class _HomeState extends State<Home> {
               label: 'Post a Gig',
               labelStyle: TextStyle(fontSize: 14.sp),
               child: Icon(Icons.add, color: Colors.white),
-              onTap: () => PageRouter.gotoNamed(Routes.freelance, context),
+              onTap: () =>
+                  PageRouter.gotoNamed(Routes.freelance, context, args: false),
             ),
             SpeedDialChild(
               backgroundColor: Pallets.primary100,
@@ -80,7 +81,8 @@ class _HomeState extends State<Home> {
               label: 'Home Service',
               labelStyle: TextStyle(fontSize: 14.sp),
               child: ImageLoader(path: AppImages.layer),
-              onTap: () => print('FIRST CHILD'),
+              onTap: () => PageRouter.gotoNamed(Routes.home_service, context,
+                  args: false),
             ),
             SpeedDialChild(
               backgroundColor: Pallets.primary100,
@@ -88,7 +90,8 @@ class _HomeState extends State<Home> {
               label: 'Live Consultancy',
               labelStyle: TextStyle(fontSize: 14.sp),
               child: ImageLoader(path: AppImages.video),
-              onTap: () => PageRouter.gotoNamed(Routes.consultancy, context),
+              onTap: () => PageRouter.gotoNamed(Routes.consultancy, context,
+                  args: false),
             ),
           ],
         ),

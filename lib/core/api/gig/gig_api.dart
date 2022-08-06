@@ -1,3 +1,4 @@
+import 'package:client/core/api/file_uploads.dart';
 import 'package:client/core/entity/default_response.dart';
 import 'package:client/core/network/network_service.dart';
 import 'package:client/core/network/url_config.dart';
@@ -20,11 +21,12 @@ class GigApi {
 
   /// Saves a client gigs
   Future<SavedClientGigResponse> saveClientsGig(GigEntity entity) async {
+    final _data = FilesUploadApi();
+
     try {
-      final _response = await _networkService.call(
-          UrlConfig.saveGig, RequestMethod.upload,
-          formData: FormData.fromMap(entity.saveClientsGig()));
-      return SavedClientGigResponse.fromJson(_response.data);
+      final response =
+          await _data.uploadListOfFiles(await entity.saveClientsGig());
+      return SavedClientGigResponse.fromJson(response);
     } catch (e) {
       rethrow;
     }

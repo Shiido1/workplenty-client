@@ -30,15 +30,18 @@ class Routes {
         },
         freelance: (BuildContext context) {
           globalContext = context;
-          return FreeLanceJobService();
+          final args = ModalRoute.of(context)!.settings.arguments as bool;
+          return FreeLanceJobService(isInvite: args);
         },
         home_service: (BuildContext context) {
           globalContext = context;
-          return HomeService();
+          final args = ModalRoute.of(context)!.settings.arguments as bool;
+          return HomeService(isInvite: args);
         },
         consultancy: (BuildContext context) {
           globalContext = context;
-          return LiveConsultancy();
+          final args = ModalRoute.of(context)!.settings.arguments as bool;
+          return LiveConsultancy(inVite: args);
         },
         board: (BuildContext context) {
           return MainBoard();

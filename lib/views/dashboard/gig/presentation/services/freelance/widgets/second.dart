@@ -17,6 +17,7 @@ class SecondBadgeWidget extends StatelessWidget {
     required this.descriptionController,
     required this.title,
     required this.description,
+    this.isInvite = true,
   }) : super(key: key);
 
   final TextEditingController privateMessageController;
@@ -24,6 +25,7 @@ class SecondBadgeWidget extends StatelessWidget {
   final TextEditingController descriptionController;
   final String? title;
   final String? description;
+  final bool? isInvite;
 
   @override
   Widget build(BuildContext context) {
@@ -33,17 +35,19 @@ class SecondBadgeWidget extends StatelessWidget {
             Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                RowContainer(
-                    image: AppImages.message,
-                    text:
-                        'Private Message to  ${value.datum?.user?.firstName ?? ''} ${value.datum?.user?.lastName ?? ''}'),
-                SizedBox(height: 10.h),
-                EditFormField(
-                  height: 150.h,
-                  label: 'Type here..',
-                  controller: privateMessageController,
-                  validator: Validators.validateString(),
-                ),
+                if (isInvite!)
+                  RowContainer(
+                      image: AppImages.message,
+                      text:
+                          'Private Message to  ${value.datum?.user?.firstName ?? ''} ${value.datum?.user?.lastName ?? ''}'),
+                if (isInvite!) SizedBox(height: 10.h),
+                if (isInvite!)
+                  EditFormField(
+                    height: 150.h,
+                    label: 'Type here..',
+                    controller: privateMessageController,
+                    validator: Validators.validateString(),
+                  ),
                 SizedBox(height: 23.h),
                 RowContainer(image: AppImages.t_message, text: title),
                 SizedBox(height: 10.h),

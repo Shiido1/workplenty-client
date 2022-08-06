@@ -39,7 +39,7 @@ class SelectServiceModal extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     PageRouter.goBack(context);
-                    PageRouter.gotoNamed(Routes.freelance, context);
+                    PageRouter.gotoNamed(Routes.freelance, context, args: true);
                   },
                   child: TextView(
                     text: 'Freelance',
@@ -55,7 +55,8 @@ class SelectServiceModal extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     PageRouter.goBack(context);
-                    PageRouter.gotoNamed(Routes.home_service, context);
+                    PageRouter.gotoNamed(Routes.home_service, context,
+                        args: true);
                   },
                   child: TextView(
                     text: 'Home Service',
@@ -71,7 +72,8 @@ class SelectServiceModal extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     PageRouter.goBack(context);
-                    PageRouter.gotoNamed(Routes.consultancy, context);
+                    PageRouter.gotoNamed(Routes.consultancy, context,
+                        args: true);
                   },
                   child: TextView(
                     text: 'Live Consultancy',
