@@ -24,6 +24,7 @@ import 'package:provider/provider.dart';
 import '../../../../../core/di/injector.dart';
 import '../../../../../core/entity/skills/skill.dart';
 import '../../../../../core/entity/user/user.dart';
+import '../../../../../core/enums/export_enums.dart';
 import '../../../../../core/enums/gig_type.dart';
 import '../../../../../core/helper/utils/workplenty_dialog.dart';
 import '../../../../widgets/bottom_sheet.dart';
@@ -36,8 +37,10 @@ import '../modal/list_of_skills_modal.dart';
 import '../modal/timeline_modal.dart';
 import '../provider/artisan_provider.dart';
 import 'bloc/servicebloc_bloc.dart';
+import 'freelance/model/milestone.dart';
 import 'freelance/widgets/first.dart';
 import 'freelance/widgets/second.dart';
+import 'freelance/widgets/third.dart';
 import 'widgets/add_skill_widget.dart';
 
 class HomeService extends StatefulWidget {
@@ -71,6 +74,8 @@ class _HomeServiceState extends State<HomeService> {
   final _globalFormKey = GlobalKey<FormState>();
   final _bloc = ServiceblocBloc(inject());
   int? _industryId;
+  ProjectType _projectType = ProjectType.Project_Completion;
+  List<MilestoneModel> _miles = [];
 
   @override
   Widget build(BuildContext context) {
@@ -95,6 +100,8 @@ class _HomeServiceState extends State<HomeService> {
               }
               if (state is ServiceblocSuccess) {
                 WorkPlenty.hideLoading(_loadingKey);
+                WorkPlenty.success(state.response?.msg ?? '');
+                PageRouter.goBack(context);
               }
               if (state is ServiceblocFailed) {
                 WorkPlenty.hideLoading(_loadingKey);
@@ -165,7 +172,7 @@ class _HomeServiceState extends State<HomeService> {
                           image: AppImages.calender, text: 'Home Service Date'),
                       EditFormField(
                         suffixWidget: ImageLoader(path: AppImages.vector),
-                        label: 'From',
+                        label: 'Home Service Date',
                         readOnly: true,
                         controller: _fromDateController,
                         validator: Validators.validateString(),
@@ -177,29 +184,15 @@ class _HomeServiceState extends State<HomeService> {
                               setState(() {});
                             }),
                       ),
-                      SizedBox(
-                        height: 20.h,
-                      ),
-                      RowContainer(
-                          image: AppImages.clock, text: 'Home Service Date'),
-                      EditFormField(
-                        suffixWidget: ImageLoader(path: AppImages.vector),
-                        label: 'To',
-                        readOnly: true,
-                        controller: _toDateController,
-                        validator: Validators.validateString(),
-                        onTapped: () => pickDate(
-                            context: context,
-                            dateOptions: DateOptions.future,
-                            onChange: (d) {
-                              _toDateController.text = d;
-                              setState(() {});
-                            }),
-                      ),
                     ],
                   )),
-                  SizedBox(
-                    height: 20.h,
+                  SizedBox(height: 20.h),
+                  Third(
+                    projectType: _projectType,
+                    list: (miles, val) {
+                      _miles = miles;
+                      if (val!) setState(() {});
+                    },
                   ),
                   ReviewBgCard(
                     Column(
@@ -238,9 +231,7 @@ class _HomeServiceState extends State<HomeService> {
                       ],
                     ),
                   ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
+                  SizedBox(height: 20.h),
                   ReviewBgCard(Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -452,9 +443,13 @@ class _HomeServiceState extends State<HomeService> {
           description: descriptionController.text,
           serviceAddress: _addressController.text,
           paymentType: _paymentType,
+          serviceDate: _fromDateController.text,
           experienceLevel: '$_experienceIndex',
           hourlyBudget: _budgetController.text,
           skill: _selectedSkills,
+          isPublished: "1",
+          milestones: _miles,
+          projectType: _projectType,
           invited_artisan_ids: _artisansId,
           serviceDuration: _timeController.text)));
     }
@@ -469,13 +464,11 @@ class _HomeServiceState extends State<HomeService> {
       WorkPlenty.error('Please select at least one skill');
       return false;
     }
-    if (_artisans.isEmpty) {
-      WorkPlenty.error('Please select at least one artisan');
-      return false;
-    }
 
     _skillList!.map((e) => _selectedSkills.add(e.name!)).toList();
-    _artisans.map((e) => _artisansId.add(e.id!)).toList();
+    if (_artisans.isNotEmpty) {
+      _artisans.map((e) => _artisansId.add(e.id!)).toList();
+    }
     setState(() {});
     return true;
   }

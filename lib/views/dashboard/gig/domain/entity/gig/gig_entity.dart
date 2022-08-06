@@ -147,6 +147,7 @@ class GigEntity extends DefaultResponse {
       request.files.add(multipartFile);
     }
 
+    if (id != null) request.fields["id"] = id.toString();
     request.fields["industry_id"] = industryId.toString();
     request.fields["type"] = fromGigType(type) ?? '';
     request.fields["title"] = title ?? '';

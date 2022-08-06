@@ -22,16 +22,23 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/di/injector.dart';
 import '../../../../../core/entity/skills/skill.dart';
 import '../../../../../core/entity/user/user.dart';
+import '../../../../../core/enums/export_enums.dart';
 import '../../../../../core/enums/gig_type.dart';
 import '../../../../../core/helper/utils/workplenty_dialog.dart';
 import '../../../../widgets/bottom_sheet.dart';
+import '../../../../widgets/skill_widget.dart';
 import '../../domain/entity/gig/gig_entity.dart';
 import '../modal/invited_artisans_list.dart.dart';
 import '../modal/job_category_modal.dart';
+import '../modal/list_of_skills_modal.dart';
 import '../provider/artisan_provider.dart';
 import 'bloc/servicebloc_bloc.dart';
+import 'freelance/model/milestone.dart';
 import 'freelance/widgets/first.dart';
 import 'freelance/widgets/second.dart';
+import 'freelance/widgets/third.dart';
+import 'widgets/add_skill_widget.dart';
+import 'widgets/button_widget.dart';
 
 class LiveConsultancy extends StatefulWidget {
   final bool? inVite;
@@ -65,6 +72,8 @@ class _LiveConsultancyState extends State<LiveConsultancy> {
   final _bloc = ServiceblocBloc(inject());
   final _loadingKey = GlobalKey<FormState>();
   int? industryId;
+  ProjectType _projectType = ProjectType.Project_Completion;
+  List<MilestoneModel> _miles = [];
 
   @override
   Widget build(BuildContext context) {
@@ -133,9 +142,82 @@ class _LiveConsultancyState extends State<LiveConsultancy> {
                     ),
                   ],
                 )),
-                SizedBox(
-                  height: 40.h,
+                SizedBox(height: 23.h),
+                ReviewBgCard(
+                  Column(
+                    children: [
+                      RowContainer(
+                          image: AppImages.wallet, text: 'Project Type'),
+                      SizedBox(height: 10.h),
+                      Row(
+                        children: [
+                          ButtonW(
+                              title: 'Milestone',
+                              defaultProjectType: ProjectType.Milestone,
+                              projectType: _projectType,
+                              onTap: () => setState(
+                                  () => _projectType = ProjectType.Milestone)),
+                          SizedBox(width: 10.w),
+                          ButtonW(
+                              title: 'Project Completion',
+                              defaultProjectType:
+                                  ProjectType.Project_Completion,
+                              projectType: _projectType,
+                              onTap: () => setState(() => _projectType =
+                                  ProjectType.Project_Completion)),
+                        ],
+                      ),
+                      // SizedBox(height: 20.h),
+                    ],
+                  ),
                 ),
+                ReviewBgCard(Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    RowContainer(image: AppImages.cup, text: 'Skill'),
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Wrap(spacing: 5, runSpacing: 10, children: [
+                            ..._skillList!
+                                .map((element) => SkillsWidget(element))
+                                .toList(),
+                          ]),
+                          SizedBox(
+                            width: 5.w,
+                          ),
+                          AddSkillWidget(
+                              value: '+',
+                              onTap: () {
+                                BottomSheets.showSheet<String>(
+                                  context,
+                                  child: SkillsModal(
+                                      list: _skillList,
+                                      callBack: (List<Skill> l) {
+                                        _skillList = l;
+                                        setState(() {});
+                                      }),
+                                );
+                              })
+                        ],
+                      ),
+                    ),
+                  ],
+                )),
+                SizedBox(height: 23.h),
+                Third(
+                  projectType: _projectType,
+                  list: (miles, val) {
+                    _miles = miles;
+                    if (val!) setState(() {});
+                  },
+                ),
+                SizedBox(height: 23.h),
                 ReviewBgCard(Column(
                   children: [
                     RowContainer(
@@ -225,7 +307,6 @@ class _LiveConsultancyState extends State<LiveConsultancy> {
                           )
                         ],
                       ),
-                      SizedBox(height: 13.h),
                       ..._artisans
                           .map(((user) => Row(
                                 children: [
@@ -247,9 +328,7 @@ class _LiveConsultancyState extends State<LiveConsultancy> {
                     ],
                   ),
                 ),
-                SizedBox(
-                  height: 23.h,
-                ),
+                SizedBox(height: 23.h),
                 ButtonWidget(
                   buttonText: 'Start Session & Invite Artisan',
                   fontSize: 18.sp,
@@ -278,10 +357,11 @@ class _LiveConsultancyState extends State<LiveConsultancy> {
 
   void _startSession() {
     if (_formKey.currentState!.validate()) {
-      if (_artisans.isEmpty) {
-        WorkPlenty.error('Please invite atleast one artisan');
+      if (_skillList!.isEmpty) {
+        WorkPlenty.error('Please invite atleast one skills');
         return;
       }
+      _skillList!.map((e) => _selectedSkills.add(e.name!)).toList();
 
       List<int> _artisansID = [];
       if (_artisans.isNotEmpty) {
@@ -296,7 +376,11 @@ class _LiveConsultancyState extends State<LiveConsultancy> {
           serviceTime:
               '${_fromDateController.text.split(' ')[1]}${_fromDateController.text.split(' ')[2]}',
           hourlyBudget: _budgetController.text,
-          invited_artisan_ids: _artisansID)));
+          projectType: _projectType,
+          skill: _selectedSkills,
+          invited_artisan_ids: _artisansID,
+          milestones: _miles,
+          isPublished: '1')));
     }
   }
 }
